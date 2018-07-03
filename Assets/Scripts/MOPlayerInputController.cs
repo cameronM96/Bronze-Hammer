@@ -7,9 +7,9 @@ public class MOPlayerInputController : MonoBehaviour
 {
 
     public GameObject Player; // the player to be controlled
-    public Camera gameCamera; // the games main camera
 
-    private Vector3 gameCameraForward; // the forward direction of the game camera
+    private Transform gameCamera; // the transform of the main game camera
+    private Vector3 gameCameraForward; //the forward vector of the main game camera
     private Vector3 moveDirection; // the direction the player will be moved in
     private float moveSpeed; //the speed the player will move
     private float jumpHeight; //the height of the players jump
@@ -17,8 +17,18 @@ public class MOPlayerInputController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player"); // set the player var to be the player
+        //set the game camera
+        gameCamera = Camera.main.transform;
+        Debug.Log("game camera transform set for " + gameCamera.name);
+
+        // set the player var to be the player
+        Player = GameObject.FindGameObjectWithTag("Player");
+        Debug.Log("Player found " + Player.name);
+
+        //set the entitiy ID in the movemnt controller script, ID 1 = player
         gameObject.GetComponent<MOMovementController>().entityID = 1;
+
+        //set movemnt values
         moveSpeed = 5.0f;
         jumpHeight = 500.0f;
     }
@@ -49,14 +59,16 @@ public class MOPlayerInputController : MonoBehaviour
         }
     }
 
+    //called once per physics update
     private void FixedUpdate()
     {
         //get the input for horizontal and vertical axis through unity controls
         float hMov = CrossPlatformInputManager.GetAxis("Horizontal");
         float vMov = CrossPlatformInputManager.GetAxis("Vertical");
 
-        //calculate movement relative to the player
-        moveDirection = vMov * Vector3.forward + hMov * Vector3.right;
+        //calculate movement relative to the camera
+        gameCameraForward = Vector3.Scale(gameCamera.forward, new Vector3(1, 0, 1)).normalized;
+        moveDirection = vMov * gameCameraForward + hMov * gameCamera.right; 
 
         //call the method on the controller script sending the required vars
         Player.GetComponent<MOMovementController>().Move(moveDirection, moveSpeed);
