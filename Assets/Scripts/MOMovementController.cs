@@ -117,7 +117,7 @@ public class MOMovementController : MonoBehaviour
     }
 
     //called from input controller
-    public void Attack()
+    public void Attack(bool sprinting)
     {
         Debug.Log(scriptEntity.name + " attacking");
         if (timerA == 0)
@@ -140,7 +140,7 @@ public class MOMovementController : MonoBehaviour
                 timerA = 0.25f;
                 //put combo here
             }
-            else if (scriptEntity.GetComponent<Rigidbody>().velocity.x >=5.1)
+            else if (sprinting)
             {
                 Debug.Log("charge attack used");
                 attackTrigger.SetActive(true);

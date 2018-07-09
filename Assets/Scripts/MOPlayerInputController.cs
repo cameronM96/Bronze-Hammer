@@ -16,6 +16,8 @@ public class MOPlayerInputController : MonoBehaviour
     private float hMov;
     private float vMov;
 
+    public bool sprinting;
+
     // Use this for initialization
     void Start()
     {
@@ -51,7 +53,7 @@ public class MOPlayerInputController : MonoBehaviour
         {
             //make player attack
             Debug.Log("Attack key pressed");
-            Player.GetComponent<MOMovementController>().Attack();
+            Player.GetComponent<MOMovementController>().Attack(sprinting);
         }
 
         //check for magic button
@@ -63,12 +65,12 @@ public class MOPlayerInputController : MonoBehaviour
 
         if (Input.GetKeyDown("left shift"))
         {
-            moveSpeed = 7.5f;
+            sprinting = true;
             Debug.Log("Sprinting");
         }
         if (Input.GetKeyUp("left shift"))
         {
-            moveSpeed = 5.0f;
+            sprinting = false;
             Debug.Log("not sprinting");
         }
     }
@@ -87,6 +89,13 @@ public class MOPlayerInputController : MonoBehaviour
         //Debug.Log("player move direction is " + moveDirection);
 
         //call the method on the controller script sending the required vars
-        Player.GetComponent<MOMovementController>().Move(moveDirection, moveSpeed);
+        if (sprinting)
+        {
+            Player.GetComponent<MOMovementController>().Move(moveDirection, moveSpeed*1.5f);
+        }
+        else if (!sprinting)
+        {
+            Player.GetComponent<MOMovementController>().Move(moveDirection, moveSpeed);
+        }
     }
 }
