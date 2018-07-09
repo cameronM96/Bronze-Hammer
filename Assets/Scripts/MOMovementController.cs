@@ -5,7 +5,9 @@ using UnityEngine;
 public class MOMovementController : MonoBehaviour
 {
     private GameObject scriptEntity;
-    private float entityTurnSpeed = 10;
+    private GameObject attackTrigger;
+    private float entityTurnSpeed = 10.0f;
+    private float timer = 0.0f;
 
     public int entityID = 0;
     public Vector3 entityRotation;
@@ -18,6 +20,8 @@ public class MOMovementController : MonoBehaviour
         {
             Debug.Log("Contoller working for player with name " + gameObject.name);
             scriptEntity = GameObject.FindGameObjectWithTag("Player");
+            attackTrigger = GameObject.Find("Player Attack Trigger");
+
         }
         else if (entityID == 2) // ID 2 = ENEMY
         {
@@ -27,12 +31,23 @@ public class MOMovementController : MonoBehaviour
         {
             Debug.Log("Controller not working for " + gameObject.name);
         }
+        attackTrigger.SetActive(false);
     }
 
     private void Update()
     {
         //scriptEntity.transform.rotation = Quaternion.Euler(entityRotation*entityTurnSpeed*Time.deltaTime);
         scriptEntity.transform.rotation = Quaternion.Lerp(scriptEntity.transform.rotation, Quaternion.Euler(entityRotation), entityTurnSpeed * Time.deltaTime);
+        if (timer > 0)
+        {
+            timer -= Time.deltaTime;
+        }
+        else if (timer <= 0 & attackTrigger.activeSelf == true)
+        {
+            timer = 0;
+            attackTrigger.SetActive(false);
+            Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+        }
     }
 
     // method is called when needed from an input script
@@ -87,6 +102,12 @@ public class MOMovementController : MonoBehaviour
     public void Attack()
     {
         Debug.Log(scriptEntity.name + " attacking");
+        if (timer == 0)
+        {
+            attackTrigger.SetActive(true);
+            Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+            timer = 0.5f;
+        }
         //attack animation and stuff here?
     }
 
