@@ -13,6 +13,8 @@ public class MOPlayerInputController : MonoBehaviour
     private Vector3 moveDirection; // the direction the player will be moved in
     private float moveSpeed; //the speed the player will move
     private float jumpHeight; //the height of the players jump
+    private float hMov;
+    private float vMov;
 
     // Use this for initialization
     void Start()
@@ -31,6 +33,7 @@ public class MOPlayerInputController : MonoBehaviour
         //set movemnt values
         moveSpeed = 5.0f;
         jumpHeight = 500.0f;
+
     }
 
     // Update is called once per frame
@@ -57,18 +60,31 @@ public class MOPlayerInputController : MonoBehaviour
             Debug.Log("magic key pressed");
             Player.GetComponent<MOMovementController>().Magic();
         }
+
+        if (Input.GetKeyDown("left shift"))
+        {
+            moveSpeed = 7.5f;
+            Debug.Log("Sprinting");
+        }
+        if (Input.GetKeyUp("left shift"))
+        {
+            moveSpeed = 5.0f;
+            Debug.Log("not sprinting");
+        }
     }
 
     //called once per physics update
     private void FixedUpdate()
     {
         //get the input for horizontal and vertical axis through unity controls
-        float hMov = CrossPlatformInputManager.GetAxis("Horizontal");
-        float vMov = CrossPlatformInputManager.GetAxis("Vertical");
+         hMov = CrossPlatformInputManager.GetAxis("Horizontal");
+         vMov = CrossPlatformInputManager.GetAxis("Vertical");
+        
 
         //calculate movement relative to the camera
         gameCameraForward = Vector3.Scale(gameCamera.forward, new Vector3(1, 0, 1)).normalized;
-        moveDirection = vMov * gameCameraForward + hMov * gameCamera.right; 
+        moveDirection = vMov * gameCameraForward + hMov * gameCamera.right;
+        //Debug.Log("player move direction is " + moveDirection);
 
         //call the method on the controller script sending the required vars
         Player.GetComponent<MOMovementController>().Move(moveDirection, moveSpeed);

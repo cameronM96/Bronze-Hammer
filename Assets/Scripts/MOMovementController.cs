@@ -7,7 +7,10 @@ public class MOMovementController : MonoBehaviour
     private GameObject scriptEntity;
     private GameObject attackTrigger;
     private float entityTurnSpeed = 10.0f;
-    private float timer = 0.0f;
+    private float timerA = 0.0f;
+    private float timerC = 0.0f;
+    private float timerJ = 0.0f;
+    private int attackCounter;
 
     public int entityID = 0;
     public Vector3 entityRotation;
@@ -32,21 +35,32 @@ public class MOMovementController : MonoBehaviour
             Debug.Log("Controller not working for " + gameObject.name);
         }
         attackTrigger.SetActive(false);
+        attackCounter = 0;
     }
 
     private void Update()
     {
         //scriptEntity.transform.rotation = Quaternion.Euler(entityRotation*entityTurnSpeed*Time.deltaTime);
         scriptEntity.transform.rotation = Quaternion.Lerp(scriptEntity.transform.rotation, Quaternion.Euler(entityRotation), entityTurnSpeed * Time.deltaTime);
-        if (timer > 0)
+        if (timerA > 0)
         {
-            timer -= Time.deltaTime;
+            timerA -= Time.deltaTime;
         }
-        else if (timer <= 0 & attackTrigger.activeSelf == true)
+        else if (timerA <= 0 & attackTrigger.activeSelf == true)
         {
-            timer = 0;
+            timerA = 0;
             attackTrigger.SetActive(false);
             Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+        }
+
+        if (timerC>0)
+        {
+            timerC -= Time.deltaTime;
+        }
+        if (timerJ > 0)
+        {
+            timerJ -= Time.deltaTime;
+            //  Debug.Log("timerJ = " + timerJ);
         }
     }
 
@@ -93,8 +107,12 @@ public class MOMovementController : MonoBehaviour
     //called from input controller 
     public void Jump(float height)
     {
-        Debug.Log(scriptEntity.name + " jumping");
-        scriptEntity.GetComponent<Rigidbody>().AddForce(0, height, 0);
+        if (timerJ <= 0.0f)
+        {
+            Debug.Log(scriptEntity.name + " jumping");
+            scriptEntity.GetComponent<Rigidbody>().AddForce(0, height, 0);
+            timerJ = 2.0f;
+        }
         //jump animation and stuff here?
     }
 
@@ -102,13 +120,46 @@ public class MOMovementController : MonoBehaviour
     public void Attack()
     {
         Debug.Log(scriptEntity.name + " attacking");
-        if (timer == 0)
+        if (timerA == 0)
         {
-            attackTrigger.SetActive(true);
-            Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
-            timer = 0.5f;
+            if (timerJ>0)
+            {
+                Debug.Log("jump attack used");
+                attackCounter = 0;
+                attackTrigger.SetActive(true);
+                Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+                timerA = 1.0f;
+                //put jump attack here
+            }
+            else if (attackCounter >= 3)
+            {
+                Debug.Log("3 attack combo used");
+                attackCounter = 0;
+                attackTrigger.SetActive(true);
+                Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+                timerA = 0.25f;
+                //put combo here
+            }
+            else if (scriptEntity.GetComponent<Rigidbody>().velocity.x >=5.1)
+            {
+                Debug.Log("charge attack used");
+                attackTrigger.SetActive(true);
+                Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);   
+            }
+            else
+            {
+                attackTrigger.SetActive(true);
+                Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+                timerA = 0.25f;
+                //attack animation and stuff here?
+                attackCounter += 1;
+                if (timerC==0)
+                {
+                    timerC = 1;
+                }
+            }
+
         }
-        //attack animation and stuff here?
     }
 
     //called from player's input controller only
