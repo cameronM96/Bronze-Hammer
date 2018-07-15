@@ -5,7 +5,6 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class MOPlayerInputController : MonoBehaviour
 {
-
     public GameObject Player; // the player to be controlled
 
     private Transform gameCamera; // the transform of the main game camera
