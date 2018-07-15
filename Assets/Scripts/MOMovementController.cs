@@ -16,7 +16,7 @@ public class MOMovementController : MonoBehaviour
     public Vector3 entityRotation;
 
     // Use this for initialization
-    void Start()
+    protected virtual void Start()
     {
         //check what entity the script is attached to used for debugging and testing reasons and possible mounting controls
         if (entityID == 1) // ID 1 = PLAYER
@@ -24,11 +24,12 @@ public class MOMovementController : MonoBehaviour
             Debug.Log("Contoller working for player with name " + gameObject.name);
             scriptEntity = GameObject.FindGameObjectWithTag("Player");
             attackTrigger = GameObject.Find("Player Attack Trigger");
-
         }
         else if (entityID == 2) // ID 2 = ENEMY
         {
             Debug.Log("Controller working for enemy with name " + gameObject.name);
+            scriptEntity = this.gameObject;
+            attackTrigger = this.gameObject.transform.GetChild(1).Find("AttackTrigger").gameObject;
         }
         else if (entityID == 3) // ID 3 = MOUNT
         {
@@ -42,7 +43,7 @@ public class MOMovementController : MonoBehaviour
         attackCounter = 0;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         //scriptEntity.transform.rotation = Quaternion.Euler(entityRotation*entityTurnSpeed*Time.deltaTime);
         scriptEntity.transform.rotation = Quaternion.Lerp(scriptEntity.transform.rotation, Quaternion.Euler(entityRotation), entityTurnSpeed * Time.deltaTime);
@@ -50,7 +51,7 @@ public class MOMovementController : MonoBehaviour
         {
             timerA -= Time.deltaTime;
         }
-        else if (timerA <= 0 & attackTrigger.activeSelf == true)
+        else if (timerA <= 0 && attackTrigger.activeSelf == true)
         {
             timerA = 0;
             attackTrigger.SetActive(false);
