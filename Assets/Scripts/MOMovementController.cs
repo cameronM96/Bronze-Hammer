@@ -30,6 +30,10 @@ public class MOMovementController : MonoBehaviour
         {
             Debug.Log("Controller working for enemy with name " + gameObject.name);
         }
+        else if (entityID == 3) // ID 3 = MOUNT
+        {
+            Debug.Log("Controller working for mount with name " + gameObject.name);
+        }
         else // if no ID matched return this error with what entity it is not working for
         {
             Debug.Log("Controller not working for " + gameObject.name);
