@@ -54,7 +54,7 @@ public class AIController : MOMovementController
         gameCameraForward = Vector3.Scale(gameCamera.forward, new Vector3(1, 0, 1)).normalized;
         moveDirection = vMov * gameCameraForward + hMov * gameCamera.right;
 
-        // Attack if enemy is close enough and roughly the same z position
+        // Attack if enemy is close enough and roughly the same z position AND facing the player
         if ((attackTarget.transform.position - enemy.transform.position).magnitude < 2 &&
             (attackTarget.transform.position.z - enemy.transform.position.z < 0.2 &&
             attackTarget.transform.position.z - enemy.transform.position.z > -0.2))
@@ -75,6 +75,7 @@ public class AIController : MOMovementController
         if(attack)
         {
             // Make sure AI is facing the right directions first
+            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.Euler(entityRotation), 0);
             m_character.Move(Vector3.zero, moveSpeed);
             m_character.Attack(false);
         }
