@@ -62,7 +62,7 @@ public class MOMovementController : MonoBehaviour
         {
             timerA = 0;
             attackTrigger.SetActive(false);
-            Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+            //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
         }
 
         if (timerC>0)
@@ -140,7 +140,7 @@ public class MOMovementController : MonoBehaviour
     {
         if (timerJ <= 0.0f)
         {
-            Debug.Log(scriptEntity.name + " jumping");
+            //Debug.Log(scriptEntity.name + " jumping");
             m_Anim.SetBool("jump",true);
             scriptEntity.GetComponent<Rigidbody>().AddForce(0, height, 0);
             timerJ = 2.0f;
@@ -151,41 +151,41 @@ public class MOMovementController : MonoBehaviour
     //called from input controller
     public void Attack(bool sprinting)
     {
-        Debug.Log(scriptEntity.name + " attacking");
+       // Debug.Log(scriptEntity.name + " attacking");
         if (timerA == 0)
         {
             if (timerJ>0)
             {
-                Debug.Log("jump attack used");
+                //Debug.Log("jump attack used");
                 attackCounter = 0;
                 m_Anim.SetBool("attack", true);
                 attackTrigger.SetActive(true);
-                Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+                //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
                 timerA = 1.0f;
                 //put jump attack here
             }
             else if (attackCounter >= 3)
             {
-                Debug.Log("3 attack combo used");
+                //Debug.Log("3 attack combo used");
                 attackCounter = 0;
                 m_Anim.SetBool("attack", true);
                 attackTrigger.SetActive(true);
-                Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+                //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
                 timerA = 0.25f;
                 //put combo here
             }
             else if (sprinting)
             {
-                Debug.Log("charge attack used");
+                //Debug.Log("charge attack used");
                 m_Anim.SetBool("charge", true);
                 attackTrigger.SetActive(true);
-                Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);   
+                //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);   
             }
             else
             {
                 m_Anim.SetBool("attack", true);
                 attackTrigger.SetActive(true);
-                Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+                //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
                 timerA = 0.25f;
                 //attack animation and stuff here?
                 attackCounter += 1;
@@ -200,7 +200,7 @@ public class MOMovementController : MonoBehaviour
     //called from player's input controller only
     public void Magic()
     {
-        Debug.Log(scriptEntity.name + " using magic");
+        //Debug.Log(scriptEntity.name + " using magic");
         m_Anim.SetBool("magic", true);
         //check for different players 
         /*

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class MOPlayerInputController : MonoBehaviour
+public class MOPlayerInputController : MOMovementController
 {
     public GameObject Player; // the player to be controlled
 
@@ -18,8 +18,9 @@ public class MOPlayerInputController : MonoBehaviour
     public bool sprinting;
 
     // Use this for initialization
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         //set the game camera
         gameCamera = Camera.main.transform;
         Debug.Log("game camera transform set for " + gameCamera.name);
@@ -38,47 +39,49 @@ public class MOPlayerInputController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+   protected override void Update()
     {
-        //check for the jump button
-        if (Input.GetButtonDown("Jump Button"))
-        {
-            // make player jump
-            Debug.Log("jump key pressed");
-            Player.GetComponent<MOMovementController>().Jump(jumpHeight);
-        }
+        base.Update();
         //check for attack button
         if (Input.GetButtonDown("Attack Button"))
         {
             //make player attack
-            Debug.Log("Attack key pressed");
+           // Debug.Log("Attack key pressed");
             Player.GetComponent<MOMovementController>().Attack(sprinting);
         }
 
         //check for magic button
         if (Input.GetButtonDown("Magic Button"))
         {
-            Debug.Log("magic key pressed");
+           // Debug.Log("magic key pressed");
             Player.GetComponent<MOMovementController>().Magic();
         }
 
         if (Input.GetKeyDown("left shift"))
         {
             sprinting = true;
-            Debug.Log("Sprinting");
+            //Debug.Log("Sprinting");
         }
         if (Input.GetKeyUp("left shift"))
         {
             sprinting = false;
-            Debug.Log("not sprinting");
+            //Debug.Log("not sprinting");
         }
     }
 
     //called once per physics update
     private void FixedUpdate()
     {
+        //check for the jump button
+        if (Input.GetButtonDown("Jump Button"))
+        {
+            // make player jump
+            //Debug.Log("jump key pressed");
+            Player.GetComponent<MOMovementController>().Jump(jumpHeight);
+        }
+
         //get the input for horizontal and vertical axis through unity controls
-         hMov = CrossPlatformInputManager.GetAxis("Horizontal");
+        hMov = CrossPlatformInputManager.GetAxis("Horizontal");
          vMov = CrossPlatformInputManager.GetAxis("Vertical");
         
 
