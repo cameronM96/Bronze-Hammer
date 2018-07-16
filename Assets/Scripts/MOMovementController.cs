@@ -136,7 +136,7 @@ public class MOMovementController : MonoBehaviour
         {
             //Debug.Log(scriptEntity.name + " jumping");
             m_Anim.SetBool("jump",true);
-            scriptEntity.GetComponent<Rigidbody>().AddForce(0, height, 0);
+            m_Rigidbody.AddForce(0, height, 0);
             timerJ = 2.0f;
         }
         //jump animation and stuff here?
