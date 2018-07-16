@@ -15,6 +15,9 @@ public class MOMovementController : MonoBehaviour
     public int entityID = 0;
     public Vector3 entityRotation;
 
+    private Rigidbody m_Rigidbody;
+    private Animator m_Anim;
+
     // Use this for initialization
     protected virtual void Start()
     {
@@ -39,6 +42,10 @@ public class MOMovementController : MonoBehaviour
         {
             Debug.Log("Controller not working for " + gameObject.name);
         }
+
+        m_Rigidbody = this.transform.parent.GetComponent<Rigidbody>();
+        m_Anim = GetComponent<Animator>();
+
         attackTrigger.SetActive(false);
         attackCounter = 0;
     }
@@ -67,13 +74,32 @@ public class MOMovementController : MonoBehaviour
             timerJ -= Time.deltaTime;
             //  Debug.Log("timerJ = " + timerJ);
         }
+
+        //if (health < 0)
+        //{
+        //    m_Anim.SetBool("dead", true);
+        //}
+    }
+
+    private void LateUpdate()
+    {
+        Vector3 groundVelocity = m_Rigidbody.velocity;
+        groundVelocity.y = 0f;
+
+        m_Anim.SetFloat("velocity", groundVelocity.magnitude);
+
+        // Reset relevent animation parameters
+        m_Anim.SetBool("attack", false);
+        m_Anim.SetBool("magic", false);
+        m_Anim.SetBool("charge", false);
     }
 
     // method is called when needed from an input script
     public void Move(Vector3 mov, float speed)
     {
         //move the gameobject based on the vars from the input script
-        scriptEntity.transform.parent.Translate(mov * speed * Time.deltaTime);
+        //scriptEntity.transform.parent.Translate(mov * speed * Time.deltaTime);
+        m_Rigidbody.velocity = (mov * speed);
 
         if (mov.x < 0 & mov.z == 0) //left
         {
@@ -115,6 +141,7 @@ public class MOMovementController : MonoBehaviour
         if (timerJ <= 0.0f)
         {
             Debug.Log(scriptEntity.name + " jumping");
+            m_Anim.SetBool("jump",true);
             scriptEntity.GetComponent<Rigidbody>().AddForce(0, height, 0);
             timerJ = 2.0f;
         }
@@ -131,6 +158,7 @@ public class MOMovementController : MonoBehaviour
             {
                 Debug.Log("jump attack used");
                 attackCounter = 0;
+                m_Anim.SetBool("attack", true);
                 attackTrigger.SetActive(true);
                 Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
                 timerA = 1.0f;
@@ -140,6 +168,7 @@ public class MOMovementController : MonoBehaviour
             {
                 Debug.Log("3 attack combo used");
                 attackCounter = 0;
+                m_Anim.SetBool("attack", true);
                 attackTrigger.SetActive(true);
                 Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
                 timerA = 0.25f;
@@ -148,11 +177,13 @@ public class MOMovementController : MonoBehaviour
             else if (sprinting)
             {
                 Debug.Log("charge attack used");
+                m_Anim.SetBool("charge", true);
                 attackTrigger.SetActive(true);
                 Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);   
             }
             else
             {
+                m_Anim.SetBool("attack", true);
                 attackTrigger.SetActive(true);
                 Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
                 timerA = 0.25f;
@@ -163,7 +194,6 @@ public class MOMovementController : MonoBehaviour
                     timerC = 1;
                 }
             }
-
         }
     }
 
@@ -171,6 +201,7 @@ public class MOMovementController : MonoBehaviour
     public void Magic()
     {
         Debug.Log(scriptEntity.name + " using magic");
+        m_Anim.SetBool("magic", true);
         //check for different players 
         /*
         if (gameObject.name == "")
@@ -186,5 +217,10 @@ public class MOMovementController : MonoBehaviour
         use the magic for player 3
         }
         */
+    }
+
+    private void Death()
+    {
+        m_Anim.SetBool("dead", true);
     }
 }

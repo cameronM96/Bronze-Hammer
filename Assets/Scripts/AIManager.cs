@@ -26,6 +26,8 @@ public class AIManager : MonoBehaviour {
         if (timer > updateTimer)
         {
             UpdateList();
+
+            if (enemies.Count() <= 0)
             UpdateTargets();
             timer = 0f;
         }
