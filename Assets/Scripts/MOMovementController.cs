@@ -41,7 +41,7 @@ public class MOMovementController : MonoBehaviour
             Debug.Log("Controller not working for " + gameObject.name);
         }
 
-        m_Rigidbody = this.transform.parent.GetComponent<Rigidbody>();
+        m_Rigidbody = GetComponentInParent<Rigidbody>();
         m_Anim = GetComponent<Animator>();
         m_Anim.SetBool("grounded", true);
 
@@ -73,11 +73,6 @@ public class MOMovementController : MonoBehaviour
             timerJ -= Time.deltaTime;
             //  Debug.Log("timerJ = " + timerJ);
         }
-
-        //if (health < 0)
-        //{
-        //    m_Anim.SetBool("dead", true);
-        //}
     }
 
     private void LateUpdate()

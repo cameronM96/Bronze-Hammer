@@ -65,6 +65,8 @@ public class AIController : MOMovementController
         {
             attack = false;
         }
+
+        // Add a check for jumping
     }
 
     private void FixedUpdate()
