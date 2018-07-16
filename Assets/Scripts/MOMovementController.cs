@@ -5,7 +5,7 @@ using UnityEngine;
 public class MOMovementController : MonoBehaviour
 {
     private GameObject scriptEntity;
-    [SerializeField] private Collider attackTrigger;
+    [SerializeField] public Collider attackTrigger;
     private float entityTurnSpeed = 10.0f;
     private float timerA = 0.0f;
     private float timerC = 0.0f;
@@ -83,9 +83,9 @@ public class MOMovementController : MonoBehaviour
         m_Anim.SetFloat("velocity", groundVelocity.magnitude);
 
         // Reset relevent animation parameters
-        m_Anim.SetBool("attack", false);
-        m_Anim.SetBool("magic", false);
-        m_Anim.SetBool("charge", false);
+        //m_Anim.SetBool("attack", false);
+        //m_Anim.SetBool("magic", false);
+        //m_Anim.SetBool("charge", false);
     }
 
     // method is called when needed from an input script
@@ -166,7 +166,7 @@ public class MOMovementController : MonoBehaviour
                 attackTrigger.enabled = true;
                 //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
                 timerA = 0.25f;
-                //put combo here
+                //put knockback here
             }
             else if (sprinting)
             {
