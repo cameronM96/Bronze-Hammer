@@ -6708,22 +6708,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b9a755556ce4841a582e7103119e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
-  sprinting: 0
---- !u!114 &2041377935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2041377932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f3ef77d6f048e44e92b2f85a979cd93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   attackTrigger: {fileID: 53989692}
   entityID: 1
   entityRotation: {x: 0, y: 0, z: 0}
+  Player: {fileID: 0}
+  sprinting: 0
 --- !u!136 &2041377936
 CapsuleCollider:
   m_ObjectHideFlags: 0
