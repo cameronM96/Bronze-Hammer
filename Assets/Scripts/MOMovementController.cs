@@ -6,7 +6,7 @@ public class MOMovementController : MonoBehaviour
 {
     private GameObject scriptEntity;
     [SerializeField] public Collider attackTrigger;
-    private float entityTurnSpeed = 10.0f;
+    public float entityTurnSpeed = 10.0f;
     private float timerA = 0.0f;
     private float timerC = 0.0f;
     private float timerJ = 0.0f;
@@ -61,6 +61,7 @@ public class MOMovementController : MonoBehaviour
         {
             timerA = 0;
             attackTrigger.enabled = false;
+            m_Anim.SetBool("attack", false);
             //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
         }
 
@@ -148,6 +149,7 @@ public class MOMovementController : MonoBehaviour
        // Debug.Log(scriptEntity.name + " attacking");
         if (timerA == 0)
         {
+            // Change this is a ground check instead
             if (timerJ>0)
             {
                 //Debug.Log("jump attack used");

@@ -25,10 +25,14 @@ public class AIManager : MonoBehaviour {
         // Update every few seconds rather than every frame
         if (timer > updateTimer)
         {
+            Debug.Log("Updating Enemies List");
             UpdateList();
 
-            if (enemies.Count() <= 0)
-            UpdateTargets();
+            if (enemies.Length > 0)
+            {
+                Debug.Log("Updating Enemies targets");
+                UpdateTargets();
+            }
             timer = 0f;
         }
 	}
@@ -42,6 +46,7 @@ public class AIManager : MonoBehaviour {
     // Determines which side of the player the AI's should move to.
     private void UpdateTargets()
     {
+        Debug.Log("Updating targets");
         // If increased to 2 players this will need to be overhauled.
         // Order the AI based on distance from the player
         enemies = enemies.OrderBy(enemy => Vector3.Distance(player.transform.position, enemy.transform.position)).ToArray();
@@ -58,30 +63,59 @@ public class AIManager : MonoBehaviour {
         {
             // Find what side of the player the AI is on (positive = right, negative = left)
             float side = player.transform.position.x - enemy.transform.position.x;
-            
-            if (rightSideList.Count == leftSideList.Count)      // if the lists are even move the AI to which ever side is closest.
-            {
-                if (side > 0)
-                {
-                    rightSideList.Add(enemy);
-                    enemy.GetComponent<AIController>().moveTarget = Rightside;
-                }
-                else
-                {
-                    leftSideList.Add(enemy);
-                    enemy.GetComponent<AIController>().moveTarget = leftside;
-                }
-            }
-            else if (rightSideList.Count > leftSideList.Count)  // if lists aren't even move AI to the side with less units on it.
-            {
-                leftSideList.Add(enemy);
-                enemy.GetComponent<AIController>().moveTarget = leftside;
-            }
-            else
+
+            // sort the enemies by the sides they are on.
+            if (side > 0)
             {
                 rightSideList.Add(enemy);
                 enemy.GetComponent<AIController>().moveTarget = Rightside;
             }
+            else
+            {
+                leftSideList.Add(enemy);
+                enemy.GetComponent<AIController>().moveTarget = leftside;
+            }
+
+            Debug.Log("Right side enemy count check 1: " + rightSideList.Count);
+            Debug.Log("Left side enemy count check 1: " + leftSideList.Count);
+
+            // Balance out the number of enemies on each side of the player +/- 1.
+            while (!(leftSideList.Count < rightSideList.Count + 1 &&
+                leftSideList.Count > rightSideList.Count - 1))
+            {
+                if (leftSideList.Count > rightSideList.Count)
+                {
+                    int index = rightSideList.Count + 1;
+                    if (leftSideList.Count > index)
+                    {
+                        GameObject enemySwapped = leftSideList[index];
+                        leftSideList.RemoveAt(index);
+                        rightSideList.Add(enemySwapped);
+                        enemy.GetComponent<AIController>().moveTarget = Rightside;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                else
+                {
+                    int index = leftSideList.Count + 1;
+                    if (rightSideList.Count > index)
+                    {
+                        GameObject enemySwapped = rightSideList[index];
+                        rightSideList.RemoveAt(index);
+                        leftSideList.Add(enemySwapped);
+                        enemy.GetComponent<AIController>().moveTarget = leftside;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            Debug.Log("Right side enemy count check 2: " + rightSideList.Count);
+            Debug.Log("Left side enemy count check 2: " + leftSideList.Count);
         }
     }
 }

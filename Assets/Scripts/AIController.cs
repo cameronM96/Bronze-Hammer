@@ -75,7 +75,7 @@ public class AIController : MOMovementController
         if(attack)
         {
             // Make sure AI is facing the right directions first
-            this.transform.rotation = Quaternion.Lerp(this.transform.rotation, Quaternion.Euler(entityRotation), 0);
+            this.transform.LookAt(attackTarget.transform);
             m_character.Move(Vector3.zero, moveSpeed);
             m_character.Attack(false);
         }
