@@ -218,6 +218,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4728931552521646}
   - component: {fileID: 54873520361925422}
+  - component: {fileID: 195484974057216922}
   m_Layer: 0
   m_Name: EGO Enemy1
   m_TagString: Untagged
@@ -451,6 +452,7 @@ GameObject:
   - component: {fileID: 136563257930510220}
   - component: {fileID: 114435717050340346}
   - component: {fileID: 114249835466595174}
+  - component: {fileID: 136549496961090846}
   m_Layer: 0
   m_Name: Enemy 1@Sword And Shield Run
   m_TagString: Enemy
@@ -1091,6 +1093,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 10
+  playerWeapon: 0
 --- !u!114 &114249835466595174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1124,6 +1127,19 @@ MonoBehaviour:
   moveSpeed: 3
   jumpHeight: 500
   sprinting: 0
+--- !u!136 &136549496961090846
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1781925095676416}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 0.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!136 &136563257930510220
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1133,7 +1149,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.05
+  m_Radius: 0.1
   m_Height: 0.4
   m_Direction: 1
   m_Center: {x: 0, y: 0.2, z: 0}
@@ -1206,3 +1222,24 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.0020642877, y: 0.016925052, z: 0.055010855}
     m_Extent: {x: 0.14206658, y: 0.23312949, z: 0.12491119}
   m_DirtyAABB: 0
+--- !u!195 &195484974057216922
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1311574417885848}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4

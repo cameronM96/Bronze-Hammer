@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AIController : MOMovementController
 {
@@ -9,6 +10,7 @@ public class AIController : MOMovementController
     public GameObject attackTarget; // The Target to attack
 
     private MOMovementController m_character;
+    private NavMeshAgent agent;
 
     private Transform gameCamera; // the transform of the main game camera
     private Vector3 gameCameraForward; //the forward vector of the main game camera
@@ -21,6 +23,7 @@ public class AIController : MOMovementController
     private float vMov;
     private bool jump;
     private bool attack;
+    private bool tooClose;
 
     public bool sprinting;
 
@@ -30,6 +33,8 @@ public class AIController : MOMovementController
         base.Start();
 
         m_character = GetComponent<MOMovementController>();
+
+        agent = GetComponentInParent<NavMeshAgent>();
 
         enemy = this.gameObject;
 
@@ -45,6 +50,8 @@ public class AIController : MOMovementController
     {
         base.Update();
 
+        //agent.destination = moveTarget.transform.position;
+
         // Determine which direction to walk
         targetDir = (moveTarget.transform.position - enemy.transform.position).normalized;
         hMov = targetDir.x;
@@ -53,6 +60,8 @@ public class AIController : MOMovementController
         //calculate movement relative to the camera
         gameCameraForward = Vector3.Scale(gameCamera.forward, new Vector3(1, 0, 1)).normalized;
         moveDirection = vMov * gameCameraForward + hMov * gameCamera.right;
+
+        // add steering for when there are other AI in the way
 
         // Attack if enemy is close enough and roughly the same z position AND facing the player
         if ((attackTarget.transform.position - enemy.transform.position).magnitude < 2 &&
@@ -81,11 +90,24 @@ public class AIController : MOMovementController
         }
         else
         {
-            //Debug.Log(moveDirection);
+            // Prevent movement if an AI is too close
+            //if (!tooClose)
             m_character.Move(moveDirection, moveSpeed);
         }
         
         if (jump)
             m_character.Jump(jumpHeight);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Enemy")
+            tooClose = true;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Enemy")
+            tooClose = false;
     }
 }

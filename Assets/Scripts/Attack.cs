@@ -13,7 +13,7 @@ public class Attack : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!playerWeapon)
+        if (playerWeapon)
         {
             if (other.gameObject.GetComponent<Health>() && other.gameObject.tag == "Enemy")
             {
