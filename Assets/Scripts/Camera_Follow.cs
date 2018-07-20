@@ -86,7 +86,7 @@ public class Camera_Follow : MonoBehaviour {
 
         levelMaxX = (rightBounds.position.x + rightBoundsWidth) - (camWidth / 2);
 
-        Debug.Log("Changing Camera Max to: " + rightBounds);
+        //Debug.Log("Changing Camera Max to: " + rightBounds);
     }
 
     private void SetSpawnPoints ()

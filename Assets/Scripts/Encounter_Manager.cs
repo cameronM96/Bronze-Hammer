@@ -15,20 +15,15 @@ public class Encounter_Manager : MonoBehaviour {
     [HideInInspector] public int encounterIndex;
     [HideInInspector] public bool beginEncounter;
 
-    private Transform rightBoundary;
-    private Transform leftBoundary;
-
     private void Awake()
     {
         Instance = this;
         camera_Instance = Camera.main.GetComponent<Camera_Follow>();
-        rightBoundary = GameObject.FindGameObjectWithTag("RightBoundary").transform;
-        leftBoundary = GameObject.FindGameObjectWithTag("LeftBoundary").transform;
 
-        //foreach (Transform child in this.transform)
-        //{
-        //    child.GetComponent<MeshRenderer>().enabled = false;
-        //}
+        foreach (Transform child in this.transform)
+        {
+            child.GetComponent<MeshRenderer>().enabled = false;
+        }
     }
 
     private void Update()

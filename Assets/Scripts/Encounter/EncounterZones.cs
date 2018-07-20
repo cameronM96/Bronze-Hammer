@@ -19,7 +19,7 @@ public class EncounterZones : MonoBehaviour {
         // Trigger encounter if it has not been triggered before and collider is a player.
         if (other.tag == "Player" && !encounterTriggered)
         {
-            Debug.Log("Encounter: " + encounterIndex + " has been triggered");
+            //Debug.Log("Encounter: " + encounterIndex + " has been triggered");
             encounterTriggered = true;
             m_EncounterManager.beginEncounter = true;
             m_EncounterManager.encounterIndex = encounterIndex;
