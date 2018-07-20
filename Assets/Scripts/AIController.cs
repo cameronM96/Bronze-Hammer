@@ -10,7 +10,7 @@ public class AIController : MOMovementController
     public GameObject attackTarget; // The Target to attack
 
     private MOMovementController m_character;
-    private NavMeshAgent agent;
+    // private NavMeshAgent agent;
 
     private Transform gameCamera; // the transform of the main game camera
     private Vector3 gameCameraForward; //the forward vector of the main game camera
@@ -34,7 +34,7 @@ public class AIController : MOMovementController
 
         m_character = GetComponent<MOMovementController>();
 
-        agent = GetComponentInParent<NavMeshAgent>();
+        // agent = GetComponentInParent<NavMeshAgent>();
 
         enemy = this.gameObject;
 
