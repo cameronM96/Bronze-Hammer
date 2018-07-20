@@ -12,6 +12,12 @@ public class MOMovementController : MonoBehaviour
     private float timerJ = 0.0f;
     private int attackCounter;
 
+    public Transform m_GroundCheck;     // A position marking where to check if the player is grounded.
+    const float k_GroundedRadius = .01f; // Radius of the overlap circle to determine if grounded
+    private bool m_Grounded;            // Whether or not the character is grounded.
+    [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
+
+
     public int entityID = 0;
     public Vector3 entityRotation;
 
@@ -19,7 +25,7 @@ public class MOMovementController : MonoBehaviour
     private Animator m_Anim;
 
     // Use this for initialization
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         //check what entity the script is attached to used for debugging and testing reasons and possible mounting controls
         if (entityID == 1) // ID 1 = PLAYER
@@ -42,6 +48,7 @@ public class MOMovementController : MonoBehaviour
         }
 
         m_Rigidbody = GetComponentInParent<Rigidbody>();
+        m_GroundCheck = GetComponentInParent<Transform>();
         m_Anim = GetComponent<Animator>();
         m_Anim.SetBool("grounded", true);
 
@@ -74,6 +81,20 @@ public class MOMovementController : MonoBehaviour
             timerJ -= Time.deltaTime;
             //  Debug.Log("timerJ = " + timerJ);
         }
+
+        m_Grounded = false;
+
+        // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
+        // This can be done using layers instead but Sample Assets will not overwrite your project settings.
+        Collider[] colliders = Physics.OverlapSphere(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
+        for (int i = 0; i < colliders.Length; i++)
+        {
+            if (colliders[i].gameObject != gameObject)
+                m_Grounded = true;
+        }
+
+        if (m_Anim != null)
+            m_Anim.SetBool("grounded", m_Grounded);
     }
 
     private void LateUpdate()
@@ -94,7 +115,7 @@ public class MOMovementController : MonoBehaviour
     {
         //move the gameobject based on the vars from the input script
         //scriptEntity.transform.parent.Translate(mov * speed * Time.deltaTime);
-        m_Rigidbody.velocity = (mov * speed);
+        m_Rigidbody.velocity = new Vector3(mov.x * speed, m_Rigidbody.velocity.y, mov.z * speed);
 
         if (mov.x < 0 & mov.z == 0) //left
         {
@@ -133,7 +154,7 @@ public class MOMovementController : MonoBehaviour
     //called from input controller 
     public void Jump(float height)
     {
-        if (timerJ <= 0.0f)
+        if (timerJ <= 0.0f && m_Grounded)
         {
             //Debug.Log(scriptEntity.name + " jumping");
             m_Anim.SetBool("jump",true);
@@ -150,7 +171,7 @@ public class MOMovementController : MonoBehaviour
         if (timerA == 0)
         {
             // Change this is a ground check instead
-            if (timerJ>0)
+            if (timerJ>0 && !m_Grounded)
             {
                 //Debug.Log("jump attack used");
                 attackCounter = 0;

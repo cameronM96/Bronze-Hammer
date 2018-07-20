@@ -19,6 +19,8 @@ public class Encounter_Manager : MonoBehaviour {
     {
         Instance = this;
         camera_Instance = Camera.main.GetComponent<Camera_Follow>();
+        rightSpawnPoint = camera_Instance.transform.GetChild(1);
+        leftSpawnPoint = camera_Instance.transform.GetChild(0);
 
         foreach (Transform child in this.transform)
         {
@@ -37,17 +39,39 @@ public class Encounter_Manager : MonoBehaviour {
             {
                 DebugEncounters();
                 // Begin wave by spawning enemies
+                int z1 = 0;
+                int z2 = 0;
                 foreach (GameObject enemy in 
                     m_EncountersList[encounterIndex].waves[m_EncountersList[encounterIndex].waveNumber].rightSideEnemies)
                 {
                     //TODO: Fan the enemies out a bit (like +/- 2 or 3 z each iteration)
-                    // Instantiate(enemy, rightSpawnPoint);
+                    GameObject newEnemy;
+                    Transform newSpawnPoint =  rightSpawnPoint;
+                    newSpawnPoint.position = 
+                        new Vector3(rightSpawnPoint.position.x, 
+                        rightSpawnPoint.position.y, 
+                        rightSpawnPoint.position.z + z1);
+
+                    newEnemy = Instantiate(enemy, rightSpawnPoint);
+                    newEnemy.transform.parent = null;
+
+                    z1 += 3;
                 }
 
                 foreach (GameObject enemy in 
                     m_EncountersList[encounterIndex].waves[m_EncountersList[encounterIndex].waveNumber].leftSideEnemies)
                 {
-                    // Instantiate(enemy, leftSpawnPoint);
+                    GameObject newEnemy;
+                    Transform newSpawnPoint = leftSpawnPoint;
+                    newSpawnPoint.position =
+                        new Vector3(leftSpawnPoint.position.x,
+                        leftSpawnPoint.position.y,
+                        leftSpawnPoint.position.z + z2);
+
+                    newEnemy = Instantiate(enemy, leftSpawnPoint);
+                    newEnemy.transform.parent = null;
+
+                    z2 += 3;
                 }
                 
                 ++m_EncountersList[encounterIndex].waveNumber;

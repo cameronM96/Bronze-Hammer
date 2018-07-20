@@ -28,9 +28,9 @@ public class AIController : MOMovementController
     public bool sprinting;
 
     // Use this for initialization
-    protected override void Start ()
+    protected override void Awake ()
     {
-        base.Start();
+        base.Awake();
 
         m_character = GetComponent<MOMovementController>();
 
@@ -53,9 +53,17 @@ public class AIController : MOMovementController
         //agent.destination = moveTarget.transform.position;
 
         // Determine which direction to walk
-        targetDir = (moveTarget.transform.position - enemy.transform.position).normalized;
-        hMov = targetDir.x;
-        vMov = targetDir.z;
+        if (moveTarget != null)
+        {
+            targetDir = (moveTarget.transform.position - enemy.transform.position).normalized;
+            hMov = targetDir.x;
+            vMov = targetDir.z;
+        }
+        else
+        {
+            hMov = 0;
+            vMov = 0;
+        }
 
         //calculate movement relative to the camera
         gameCameraForward = Vector3.Scale(gameCamera.forward, new Vector3(1, 0, 1)).normalized;

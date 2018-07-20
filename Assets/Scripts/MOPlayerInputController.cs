@@ -18,9 +18,9 @@ public class MOPlayerInputController : MOMovementController
     public bool sprinting;
 
     // Use this for initialization
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
         //set the game camera
         gameCamera = Camera.main.transform;
         Debug.Log("game camera transform set for " + gameCamera.name);
