@@ -57,24 +57,13 @@ public class Encounter_Manager : MonoBehaviour {
                 
                 ++m_EncountersList[encounterIndex].waveNumber;
             }
-            else if (CheckForEnemies() == 0 && m_EncountersList[encounterIndex].waves.Length < 
-                m_EncountersList[encounterIndex].waveNumber)
-            {
-                // Change the cameras max when all enemies are killed and there are no more waves left.
-                if (this.transform.GetChild(encounterIndex + 1) != null)
-                {
-                    camera_Instance.rightBounds = this.transform.GetChild(encounterIndex + 1);
-                }
-                else
-                {
-                    camera_Instance.rightBounds = rightBoundary;
-                }
-            }
 
             // If all waves have been spawned end encounter.
-            if (m_EncountersList[encounterIndex].waves.Length <= m_EncountersList[encounterIndex].waveNumber)
+            if (m_EncountersList[encounterIndex].waves.Length <= m_EncountersList[encounterIndex].waveNumber && 
+                CheckForEnemies() == 0)
             {
                 beginEncounter = false;
+                camera_Instance.NewBoundary();
             }
         }
     }
