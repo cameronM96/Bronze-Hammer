@@ -72,19 +72,23 @@ public class PlayerHealth : MonoBehaviour {
 
             if (manaleft >= maxMana)
             {
+                // If there is still mana left over, increase magic level and reset manaLeft.
                 currentMana = maxMana;
                 manaleft -= maxMana;
                 ++magiclevel;
             }
             else
             {
+                // All mana has been acounted for
                 currentMana = manaleft;
                 manaleft = 0;
             }
 
+            // Update this manabar
             manabar.fillAmount = currentMana / maxMana;
         }
 
+        // Update Magic level
         level.text = "" + magiclevel;
     }
 }
