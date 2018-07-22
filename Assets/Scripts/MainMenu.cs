@@ -10,10 +10,32 @@ public class MainMenu : MonoBehaviour {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void Level1()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void Level2()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void Level3()
+    {
+        SceneManager.LoadScene(3);
+    }
+
     public void QuitGame()
     {
+        if (Application.isEditor)
+        {
+            UnityEditor.EditorApplication.isPlaying = false;
+        }
+        else
+        {
+            Application.Quit();
+        }
         Debug.Log("QUIT");
-        Application.Quit();
     }
 	
 }
