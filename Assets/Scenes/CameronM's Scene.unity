@@ -1525,7 +1525,7 @@ Prefab:
         type: 2}
       propertyPath: healthBar
       value: 
-      objectReference: {fileID: 2012029049}
+      objectReference: {fileID: 1829144267}
     - target: {fileID: 4901006827180956, guid: a2b8eedf097e32f448c7c31a8226c7a7, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0.23705906
@@ -7060,6 +7060,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 659fd05b00e02ef4f999377221675792, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1829144267 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114201808155198094, guid: 659fd05b00e02ef4f999377221675792,
+    type: 2}
+  m_PrefabInternal: {fileID: 1829144266}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1844873239
 Prefab:
   m_ObjectHideFlags: 0
@@ -7873,12 +7879,6 @@ Transform:
   m_PrefabParentObject: {fileID: 4025932716056612, guid: 7e8b4e3b44a09a140bbbd0ee7fe083c7,
     type: 2}
   m_PrefabInternal: {fileID: 1974953143}
---- !u!114 &2012029049 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114114718737883582, guid: 659fd05b00e02ef4f999377221675792,
-    type: 2}
-  m_PrefabInternal: {fileID: 1829144266}
-  m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &2040836825
 Prefab:
   m_ObjectHideFlags: 0
