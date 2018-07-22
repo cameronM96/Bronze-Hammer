@@ -21,9 +21,9 @@ public class AIController : MOMovementController
     [SerializeField] private float jumpHeight = 500.0f; //the height of the AI's jump
     private float hMov;
     private float vMov;
-    private bool jump;
+    //private bool jump;
     private bool attack;
-    private bool tooClose;
+    //private bool tooClose;
 
     public bool sprinting;
 
@@ -102,20 +102,5 @@ public class AIController : MOMovementController
             //if (!tooClose)
             m_character.Move(moveDirection, moveSpeed);
         }
-        
-        if (jump)
-            m_character.Jump(jumpHeight);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Enemy")
-            tooClose = true;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Enemy")
-            tooClose = false;
     }
 }

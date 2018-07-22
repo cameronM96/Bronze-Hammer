@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour {
 
     public int health;
-    [SerializeField] private Slider healthBar;
+    [SerializeField] private Image healthBar;
+    private int maxHealth;
     public int mana;
     private int maxMana = 0;
     [SerializeField] private Image[] manaBars;
@@ -15,10 +16,11 @@ public class PlayerHealth : MonoBehaviour {
     public bool addMana = false;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         health = 100;
-        healthBar.maxValue = health;
+        maxHealth = health;
+        healthBar.fillAmount = 1;
 
         // Get Max mana
         foreach (int levelmax in manaPerLevel)
@@ -37,16 +39,15 @@ public class PlayerHealth : MonoBehaviour {
         }
     }
 
-    public void TakeDamage(int damageTaken)
+    public void TakeDamage(int damageTaken, bool knockedDown)
     {
         health -= damageTaken;
-        healthBar.value = health;
+        healthBar.fillAmount = health / maxHealth;
         //update UI health
         if (health <= 0)
         {
             //Debug.Log(gameObject.name + " has died");
-            if (this.tag == "Enemy")
-                Destroy(gameObject, 3);
+            GetComponent<MOMovementController>().Death();
             //go to game over screen or back to menu?
         }
         else

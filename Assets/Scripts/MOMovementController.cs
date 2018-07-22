@@ -12,12 +12,11 @@ public class MOMovementController : MonoBehaviour
     private float timerJ = 0.0f;
     private int attackCounter;
 
-    public Transform m_GroundCheck;     // A position marking where to check if the player is grounded.
-    const float k_GroundedRadius = .01f; // Radius of the overlap circle to determine if grounded
-    private bool m_Grounded;            // Whether or not the character is grounded.
-    [SerializeField] private LayerMask m_WhatIsGround;                  // A mask determining what is ground to the character
-
-
+    public Transform m_GroundCheck;                        // A position marking where to check if the player is grounded.
+    const float k_GroundedRadius = .01f;                   // Radius of the overlap circle to determine if grounded
+    private bool m_Grounded;                               // Whether or not the character is grounded.
+    [SerializeField] private LayerMask m_WhatIsGround;     // A mask determining what is ground to the character
+    
     public int entityID = 0;
     public Vector3 entityRotation;
 
@@ -90,7 +89,11 @@ public class MOMovementController : MonoBehaviour
         for (int i = 0; i < colliders.Length; i++)
         {
             if (colliders[i].gameObject != gameObject)
+            {
                 m_Grounded = true;
+                m_Anim.SetBool("jump", false);
+            }
+
         }
 
         if (m_Anim != null)
@@ -113,102 +116,112 @@ public class MOMovementController : MonoBehaviour
     // method is called when needed from an input script
     public void Move(Vector3 mov, float speed)
     {
-        //move the gameobject based on the vars from the input script
-        //scriptEntity.transform.parent.Translate(mov * speed * Time.deltaTime);
-        m_Rigidbody.velocity = new Vector3(mov.x * speed, m_Rigidbody.velocity.y, mov.z * speed);
+        if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead") || !m_Anim.GetBool("attack"))
+        {
+            //move the gameobject based on the vars from the input script
+            //scriptEntity.transform.parent.Translate(mov * speed * Time.deltaTime);
+            m_Rigidbody.velocity = new Vector3(mov.x * speed, m_Rigidbody.velocity.y, mov.z * speed);
 
-        if (mov.x < 0 & mov.z == 0) //left
-        {
-            entityRotation.Set(0, 270, 0);
-        }
-        else if (mov.x > 0 & mov.z == 0)//right
-        {
-            entityRotation.Set(0, 90, 0);
-        }
-        else if (mov.z > 0 & mov.x == 0)//up
-        {
-            entityRotation.Set(0, 0, 0);
-        }
-        else if (mov.z < 0 & mov.x == 0)//down
-        {
-            entityRotation.Set(0, 180, 0);
-        }
-        else if (mov.x < 0 & mov.z > 0)//up and left
-        {
-            entityRotation.Set(0, 315, 0);
-        }
-        else if (mov.x > 0 & mov.z > 0)//up and right
-        {
-            entityRotation.Set(0, 45, 0);
-        }
-        else if (mov.x < 0 & mov.z < 0)//down and left
-        {
-            entityRotation.Set(0, 225, 0);
-        }
-        else if (mov.x > 0 & mov.z < 0)//down and right
-        {
-            entityRotation.Set(0, 135, 0);
+            if (mov.x < 0 & mov.z == 0) //left
+            {
+                entityRotation.Set(0, 270, 0);
+            }
+            else if (mov.x > 0 & mov.z == 0)//right
+            {
+                entityRotation.Set(0, 90, 0);
+            }
+            else if (mov.z > 0 & mov.x == 0)//up
+            {
+                entityRotation.Set(0, 0, 0);
+            }
+            else if (mov.z < 0 & mov.x == 0)//down
+            {
+                entityRotation.Set(0, 180, 0);
+            }
+            else if (mov.x < 0 & mov.z > 0)//up and left
+            {
+                entityRotation.Set(0, 315, 0);
+            }
+            else if (mov.x > 0 & mov.z > 0)//up and right
+            {
+                entityRotation.Set(0, 45, 0);
+            }
+            else if (mov.x < 0 & mov.z < 0)//down and left
+            {
+                entityRotation.Set(0, 225, 0);
+            }
+            else if (mov.x > 0 & mov.z < 0)//down and right
+            {
+                entityRotation.Set(0, 135, 0);
+            }
         }
     }
 
     //called from input controller 
     public void Jump(float height)
     {
-        if (timerJ <= 0.0f && m_Grounded)
+        if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead"))
         {
-            //Debug.Log(scriptEntity.name + " jumping");
-            m_Anim.SetBool("jump",true);
-            m_Rigidbody.AddForce(0, height, 0);
-            timerJ = 2.0f;
+            if (timerJ <= 0.0f && m_Grounded)
+            {
+                //Debug.Log(scriptEntity.name + " jumping");
+                m_Anim.SetBool("jump", true);
+                m_Rigidbody.AddForce(0, height, 0);
+                timerJ = 2.0f;
+            }
         }
-        //jump animation and stuff here?
     }
 
     //called from input controller
     public void Attack(bool sprinting)
     {
-       // Debug.Log(scriptEntity.name + " attacking");
-        if (timerA == 0)
+        if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead"))
         {
-            // Change this is a ground check instead
-            if (timerJ>0 && !m_Grounded)
+            m_Rigidbody.velocity = new Vector3(0, 0, 0);
+            // Debug.Log(scriptEntity.name + " attacking");
+            if (timerA == 0)
             {
-                //Debug.Log("jump attack used");
-                attackCounter = 0;
-                m_Anim.SetBool("attack", true);
-                attackTrigger.enabled = true;
-                //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
-                timerA = 1.0f;
-                //put jump attack here
-            }
-            else if (attackCounter >= 3)
-            {
-                //Debug.Log("3 attack combo used");
-                attackCounter = 0;
-                m_Anim.SetBool("attack", true);
-                attackTrigger.enabled = true;
-                //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
-                timerA = 0.25f;
-                //put knockback here
-            }
-            else if (sprinting)
-            {
-                //Debug.Log("charge attack used");
-                m_Anim.SetBool("charge", true);
-                attackTrigger.enabled = true;
-                //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);   
-            }
-            else
-            {
-                m_Anim.SetBool("attack", true);
-                attackTrigger.enabled = true;
-                //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
-                timerA = 0.25f;
-                //attack animation and stuff here?
-                attackCounter += 1;
-                if (timerC==0)
+                // Change this is a ground check instead
+                if (timerJ > 0 && !m_Grounded)
                 {
-                    timerC = 1;
+                    //Debug.Log("jump attack used");
+                    attackCounter = 0;
+                    m_Anim.SetBool("attack", true);
+                    attackTrigger.enabled = true;
+                    //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+                    timerA = 1.0f;
+                    //put jump attack here
+                }
+                else if (attackCounter >= 3)
+                {
+                    //Debug.Log("3 attack combo used");
+                    attackCounter = 0;
+                    m_Anim.SetBool("attack", true);
+                    attackTrigger.enabled = true;
+                    //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+                    timerA = 0.25f;
+                    //put knockback here
+                }
+                else if (sprinting)
+                {
+                    //Debug.Log("charge attack used");
+                    m_Anim.SetBool("charge", true);
+                    attackTrigger.enabled = true;
+                    //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+                    //put knockback here
+                }
+                else
+                {
+                    m_Anim.SetBool("attack", true);
+                    attackTrigger.enabled = true;
+                    //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+                    timerA = 0.25f;
+                    //attack animation and stuff here?
+                    attackCounter += 1;
+                    if (timerC == 0)
+                    {
+                        timerC = 1;
+                    }
                 }
             }
         }
@@ -217,27 +230,45 @@ public class MOMovementController : MonoBehaviour
     //called from player's input controller only
     public void Magic()
     {
-        //Debug.Log(scriptEntity.name + " using magic");
-        m_Anim.SetBool("magic", true);
-        //check for different players 
-        /*
-        if (gameObject.name == "")
+        if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead"))
         {
-        //use the magic for player 1
+            //Debug.Log(scriptEntity.name + " using magic");
+            m_Anim.SetBool("magic", true);
+            //check for different players 
+            /*
+            if (gameObject.name == "")
+            {
+            //use the magic for player 1
+            }
+            else if (gameObject.name == "")
+            {
+            //use the magic for player 2
+            }
+            else if (gameObject.name == "")
+            {
+            use the magic for player 3
+            }
+            */
         }
-        else if (gameObject.name == "")
-        {
-        //use the magic for player 2
-        }
-        else if (gameObject.name == "")
-        {
-        use the magic for player 3
-        }
-        */
     }
 
-    private void Death()
+    public void KnockBack(float dir)
+    {
+        m_Anim.SetBool("knockback", true);
+        m_Rigidbody.velocity = new Vector3(0, 0, 0);
+        m_Rigidbody.AddForce((dir * 500), 500,0);
+    }
+
+    public void Death()
     {
         m_Anim.SetBool("dead", true);
+        if (this.tag == "Player")
+        {
+
+        }
+        else
+        {
+            Destroy(gameObject, 3);
+        }
     }
 }

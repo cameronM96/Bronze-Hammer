@@ -5,32 +5,29 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public int health;
+    private Animator m_Anim;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         health = 100;
+        m_Anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public void TakeDamage(int damageTaken)
+    public void TakeDamage(int damageTaken, bool knockBack)
     {
         health -= damageTaken;
         //update UI health
         if (health <= 0)
         {
             Debug.Log(gameObject.name + " has died");
-            Destroy(gameObject);
+            GetComponent<MOMovementController>().Death();
             //go to game over screen or back to menu?
         }
-        else
+        else if (!knockBack)
         {
             Debug.Log(gameObject.name + " took " + damageTaken + " damage, Leaving them at " + health + " health");
+            m_Anim.SetBool("hurt", true);
         }
     }
 }

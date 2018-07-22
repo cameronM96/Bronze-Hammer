@@ -2,30 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Attack : MonoBehaviour {
-    public int attackDamage;
+public class Attack : MonoBehaviour
+{
+    public int attackDamage = 10;
+    public int comboMultiplier = 2;
     public bool playerWeapon;
+    public bool knockback;
 
 	// Use this for initialization
-	void Start () {
-        attackDamage = 10;
+	void Start ()
+    {
+        knockback = false;
 	}
 
     private void OnTriggerEnter(Collider other)
     {
         if (playerWeapon)
         {
-            if (other.gameObject.GetComponent<Health>() && other.gameObject.tag == "Enemy")
+            if (other.gameObject.GetComponent<Health>() && other.gameObject.tag == "Enemy" && knockback)
             {
-                other.gameObject.GetComponent<Health>().TakeDamage(attackDamage);
+                float dir = 0;
+                if (other.transform.position.x > transform.parent.position.x)
+                {
+                    dir = 1;
+                }
+                else
+                {
+                    dir = -1;
+                }
+                other.gameObject.GetComponent<MOMovementController>().KnockBack(dir);
+                other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier , true);
+                knockback = false;
+            }
+            else if (other.gameObject.GetComponent<Health>() && other.gameObject.tag == "Enemy")
+            {
+                other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, false);
                 Debug.Log(gameObject.transform.parent.name + " Hit the " + other.gameObject.name + " for " + attackDamage);
             }
         }
         else
         {
-            if (other.gameObject.GetComponent<PlayerHealth>() && other.gameObject.tag == "Player")
+            if (other.gameObject.GetComponent<PlayerHealth>() && other.gameObject.tag == "Player" && knockback)
             {
-                other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+                float dir = 0;
+                if (other.transform.position.x > transform.parent.position.x)
+                {
+                    dir = 1;
+                }
+                else
+                {
+                    dir = -1;
+                }
+                other.gameObject.GetComponent<MOMovementController>().KnockBack(dir);
+                other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage * comboMultiplier, true);
+                knockback = false;
+            }
+            else if (other.gameObject.GetComponent<PlayerHealth>() && other.gameObject.tag == "Player")
+            {
+                other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage, false);
                 Debug.Log(gameObject.transform.parent.name + " Hit the " + other.gameObject.name + " for " + attackDamage);
             }
         }

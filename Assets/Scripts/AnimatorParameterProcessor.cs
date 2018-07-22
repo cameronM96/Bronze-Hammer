@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class AnimatorParameterProcessor : StateMachineBehaviour {
 
-    [SerializeField] bool attack;
+    [SerializeField] bool hurt;
+    [SerializeField] bool knockback;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        //SetAttackBool(animator, attack);
+        if (hurt)
+            SetHurtBool(animator, false);
+
+        if (knockback)
+            SetKnockBackBool(animator, false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -20,7 +25,12 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        SetAttackBool(animator, attack);
+        //if (hurt)
+        //    SetHurtBool(animator, false);
+
+        //if (knockback)
+        //    SetKnockBackBool(animator, false);
+
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here
@@ -33,9 +43,13 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
     //
     //}
 
-    private void SetAttackBool (Animator animator, bool check)
+    private void SetHurtBool (Animator animator, bool check)
     {
-        animator.SetBool("attack", check);
-        Debug.Log("attack triggered");
+        animator.SetBool("hurt", check);
+    }
+
+    private void SetKnockBackBool(Animator animator, bool check)
+    {
+        animator.SetBool("knockedDown", check);
     }
 }
