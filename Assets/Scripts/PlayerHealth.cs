@@ -15,12 +15,19 @@ public class PlayerHealth : MonoBehaviour {
     [SerializeField] private Text level;
     public bool addMana = false;
 
+    private Animator m_Anim;
+
+    private AudioSource m_Audio;
+    [SerializeField] private AudioClip[] m_AudioClips;
+
     // Use this for initialization
     void Awake()
     {
         health = 100;
         maxHealth = health;
         healthBar.fillAmount = 1;
+        m_Anim = GetComponent<Animator>();
+        m_Audio = GetComponent<AudioSource>();
 
         // Get Max mana
         foreach (int levelmax in manaPerLevel)
@@ -50,8 +57,11 @@ public class PlayerHealth : MonoBehaviour {
             GetComponent<MOMovementController>().Death();
             //go to game over screen or back to menu?
         }
-        else
+        else if (!knockedDown)
         {
+            m_Anim.SetBool("hurt", true);
+            m_Audio.clip = m_AudioClips[0];
+            m_Audio.Play();
             //Debug.Log(gameObject.name + " took " + damageTaken + " damage, Leaving them at " + health + " health");
         }
     }

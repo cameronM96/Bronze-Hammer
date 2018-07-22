@@ -15,12 +15,16 @@ public class Encounter_Manager : MonoBehaviour {
     [HideInInspector] public int encounterIndex;
     [HideInInspector] public bool beginEncounter;
 
+    private AudioSource m_Audio;
+
     private void Awake()
     {
         Instance = this;
         camera_Instance = Camera.main.GetComponent<Camera_Follow>();
         rightSpawnPoint = camera_Instance.transform.GetChild(1);
         leftSpawnPoint = camera_Instance.transform.GetChild(0);
+
+        m_Audio = GetComponent<AudioSource>();
 
         foreach (Transform child in this.transform)
         {
@@ -83,6 +87,7 @@ public class Encounter_Manager : MonoBehaviour {
             {
                 beginEncounter = false;
                 camera_Instance.NewBoundary();
+                m_Audio.Play();
             }
         }
     }

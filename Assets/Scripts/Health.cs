@@ -6,12 +6,15 @@ public class Health : MonoBehaviour
 {
     public int health;
     private Animator m_Anim;
+    private AudioSource m_Audio;
+    [SerializeField] private AudioClip[] m_AudioClips;
 
     // Use this for initialization
     void Awake()
     {
         health = 100;
         m_Anim = GetComponent<Animator>();
+        m_Audio = GetComponent<AudioSource>();
     }
 
     public void TakeDamage(int damageTaken, bool knockBack)
@@ -28,6 +31,8 @@ public class Health : MonoBehaviour
         {
             Debug.Log(gameObject.name + " took " + damageTaken + " damage, Leaving them at " + health + " health");
             m_Anim.SetBool("hurt", true);
+            m_Audio.clip = m_AudioClips[0];
+            m_Audio.Play();
         }
     }
 }

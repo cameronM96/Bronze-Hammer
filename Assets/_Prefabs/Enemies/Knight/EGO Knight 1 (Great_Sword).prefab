@@ -302,6 +302,7 @@ GameObject:
   - component: {fileID: 136737145664187616}
   - component: {fileID: 114697925654305780}
   - component: {fileID: 114980225584997068}
+  - component: {fileID: 82070335415435052}
   m_Layer: 11
   m_Name: Knight 1
   m_TagString: Enemy
@@ -1163,6 +1164,101 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 4.2, y: 28, z: 2}
   m_Center: {x: 0, y: 24.9, z: 0}
+--- !u!82 &82070335415435052
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1424993015233442}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &95512146499503390
 Animator:
   serializedVersion: 3
@@ -1193,7 +1289,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 10
+  comboMultiplier: 2
   playerWeapon: 0
+  knockback: 0
+  m_Audio: {fileID: 0}
 --- !u!114 &114697925654305780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1213,6 +1312,10 @@ MonoBehaviour:
     m_Bits: 1
   entityID: 2
   entityRotation: {x: 0, y: 0, z: 0}
+  m_AudioClips:
+  - {fileID: 8300000, guid: ff068c879163d35438860f8e69d2307a, type: 3}
+  - {fileID: 8300000, guid: a1bedab2ed1dcd940a3d36ea32b0b233, type: 3}
+  - {fileID: 8300000, guid: 53a3de367afc4c744bdec4a8e69a2687, type: 3}
   enemy: {fileID: 1827697471794374}
   moveTarget: {fileID: 0}
   attackTarget: {fileID: 0}
@@ -1231,6 +1334,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  m_AudioClips:
+  - {fileID: 8300000, guid: fe18081d090812e44b5564aa37471f11, type: 3}
 --- !u!136 &136737145664187616
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -9,6 +9,8 @@ public class Attack : MonoBehaviour
     public bool playerWeapon;
     public bool knockback;
 
+    [SerializeField] private AudioSource m_Audio;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -17,6 +19,7 @@ public class Attack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //m_Audio.Play();
         if (playerWeapon)
         {
             if (other.gameObject.GetComponent<Health>() && other.gameObject.tag == "Enemy" && knockback)
@@ -42,6 +45,7 @@ public class Attack : MonoBehaviour
         }
         else
         {
+
             if (other.gameObject.GetComponent<PlayerHealth>() && other.gameObject.tag == "Player" && knockback)
             {
                 float dir = 0;

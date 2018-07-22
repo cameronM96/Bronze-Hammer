@@ -23,6 +23,9 @@ public class MOMovementController : MonoBehaviour
     private Rigidbody m_Rigidbody;
     private Animator m_Anim;
 
+    private AudioSource m_Audio;
+    [SerializeField] private AudioClip[] m_AudioClips;
+
     // Use this for initialization
     protected virtual void Awake()
     {
@@ -50,6 +53,7 @@ public class MOMovementController : MonoBehaviour
         m_GroundCheck = GetComponentInParent<Transform>();
         m_Anim = GetComponent<Animator>();
         m_Anim.SetBool("grounded", true);
+        m_Audio = GetComponent<AudioSource>();
 
         attackTrigger.enabled = false;
         attackCounter = 0;
@@ -106,6 +110,12 @@ public class MOMovementController : MonoBehaviour
         groundVelocity.y = 0f;
 
         m_Anim.SetFloat("velocity", groundVelocity.magnitude);
+
+        if (groundVelocity.magnitude != 0)
+        {
+            m_Audio.clip = m_AudioClips[0];
+            m_Audio.Play();
+        }
 
         // Reset relevent animation parameters
         //m_Anim.SetBool("attack", false);
@@ -234,6 +244,8 @@ public class MOMovementController : MonoBehaviour
         {
             //Debug.Log(scriptEntity.name + " using magic");
             m_Anim.SetBool("magic", true);
+            m_Audio.clip = m_AudioClips[1];
+            m_Audio.Play();
             //check for different players 
             /*
             if (gameObject.name == "")
@@ -262,6 +274,8 @@ public class MOMovementController : MonoBehaviour
     public void Death()
     {
         m_Anim.SetBool("dead", true);
+        m_Audio.clip = m_AudioClips[0];
+        m_Audio.Play();
         if (this.tag == "Player")
         {
 
