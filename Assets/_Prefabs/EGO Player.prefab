@@ -1307,6 +1307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   healthBar: {fileID: 0}
+  maxHealth: 0
   mana: 0
   manaBars:
   - {fileID: 0}
@@ -1314,6 +1315,12 @@ MonoBehaviour:
   - {fileID: 0}
   manaPerLevel: 320000001e00000014000000
   level: {fileID: 0}
+  livesUI: {fileID: 0}
+  deathScreen: {fileID: 0}
+  gameOverScreen: {fileID: 0}
+  livesPrefab: {fileID: 1920970004202408, guid: 922496564d989bd459f9a55f15eb136c,
+    type: 2}
+  playerLives: {fileID: 0}
   addMana: 0
   m_AudioClips:
   - {fileID: 8300000, guid: fe18081d090812e44b5564aa37471f11, type: 3}
