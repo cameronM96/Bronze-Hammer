@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerLives : MonoBehaviour {
 
     private static bool created = false;
-    public int lives = 3;
+    public int lives;
 
     // Use this for initialization
     private void Awake()

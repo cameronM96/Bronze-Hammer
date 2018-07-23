@@ -6,17 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour {
 
-    public int health;
+    public float health;
     [SerializeField] private Image healthBar;
-    private int maxHealth;
+    [SerializeField] private float maxHealth;
     public int mana;
     private int maxMana = 0;
     public Image[] manaBars;
     public int[] manaPerLevel;
     public Text level;
     public Text livesUI;
-    public Image deathScreen;
-    public Image gameOverScreen;
+    public GameObject deathScreen;
+    public GameObject gameOverScreen;
+    [SerializeField] private GameObject livesPrefab;
     public PlayerLives playerLives;
     public bool addMana = false;
 
@@ -33,7 +34,20 @@ public class PlayerHealth : MonoBehaviour {
         healthBar.fillAmount = 1;
         m_Anim = GetComponent<Animator>();
         m_Audio = GetComponent<AudioSource>();
-        playerLives = GameObject.FindGameObjectWithTag("PlayerLives").GetComponent<PlayerLives>();
+        if (!GameObject.FindGameObjectWithTag("PlayerLives"))
+        {
+            GameObject livesInstance = Instantiate(livesPrefab);
+            livesInstance.transform.parent = null;
+            livesInstance.transform.position = new Vector3(0, 0, 0);
+            playerLives = GameObject.FindGameObjectWithTag("PlayerLives").GetComponent<PlayerLives>();
+            Debug.Log("Creating Lives prefab");
+        }
+        else
+        {
+            playerLives = GameObject.FindGameObjectWithTag("PlayerLives").GetComponent<PlayerLives>();
+            Debug.Log("Lives Prefab found");
+        }
+        livesUI.text = ("" + playerLives.lives);
 
         // Get Max mana
         foreach (int levelmax in manaPerLevel)
@@ -54,40 +68,45 @@ public class PlayerHealth : MonoBehaviour {
 
     public void TakeDamage(int damageTaken, bool knockedDown)
     {
-        health -= damageTaken;
-        if (health < 0)
-            health = 0;
+        if (health > 0)
+        {
+            health -= damageTaken;
+            if (health < 0)
+                health = 0;
 
-        healthBar.fillAmount = health / maxHealth;
-        //update UI health
-        if (health <= 0)
-        {
-            if (playerLives.lives <= 0)
+            healthBar.fillAmount = (health / maxHealth);
+            //update UI health
+            if (health <= 0)
             {
-                // Game Over
-                livesUI.text = "" + playerLives.LoseLife();
-                GetComponent<MOMovementController>().Death();
-                gameOverScreen.enabled = true;
-                StartCoroutine(GameOver());
-                //go to game over screen
+                if (playerLives.lives <= 0)
+                {
+                    // Game Over
+                    playerLives.lives -= 1;
+                    livesUI.text = ("" + playerLives.LoseLife());
+                    GetComponent<MOMovementController>().Death();
+                    gameOverScreen.SetActive(true);
+                    StartCoroutine(GameOver());
+                    //go to game over screen
+                }
+                else
+                {
+                    // Restart Level
+                    //Debug.Log(gameObject.name + " has died");
+                    playerLives.lives -= 1;
+                    livesUI.text = ("" + playerLives.LoseLife());
+                    GetComponent<MOMovementController>().Death();
+                    deathScreen.SetActive(true);
+                    StartCoroutine(RestartLevel());
+                    //go to game over screen
+                }
             }
-            else
+            else if (!knockedDown)
             {
-                // Restart Level
-                //Debug.Log(gameObject.name + " has died");
-                livesUI.text = "" + playerLives.LoseLife();
-                GetComponent<MOMovementController>().Death();
-                deathScreen.enabled = true;
-                StartCoroutine(RestartLevel());
-                //go to game over screen
+                m_Anim.SetBool("hurt", true);
+                m_Audio.clip = m_AudioClips[0];
+                m_Audio.Play();
+                //Debug.Log(gameObject.name + " took " + damageTaken + " damage, Leaving them at " + health + " health");
             }
-        }
-        else if (!knockedDown)
-        {
-            m_Anim.SetBool("hurt", true);
-            m_Audio.clip = m_AudioClips[0];
-            m_Audio.Play();
-            //Debug.Log(gameObject.name + " took " + damageTaken + " damage, Leaving them at " + health + " health");
         }
     }
 
