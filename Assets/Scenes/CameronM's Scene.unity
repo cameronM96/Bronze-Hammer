@@ -1534,6 +1534,47 @@ Transform:
   m_PrefabParentObject: {fileID: 4656844632371554, guid: e971215efc85bda4189210e7576b0867,
     type: 2}
   m_PrefabInternal: {fileID: 380164745}
+--- !u!1 &381050703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 381050705}
+  - component: {fileID: 381050704}
+  m_Layer: 0
+  m_Name: Player Lives
+  m_TagString: PlayerLives
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &381050704
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 381050703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7911729d921123c4290a134054462764, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lives: 3
+--- !u!4 &381050705
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 381050703}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &399403238
 Prefab:
   m_ObjectHideFlags: 0
@@ -1598,6 +1639,26 @@ Prefab:
       propertyPath: level
       value: 
       objectReference: {fileID: 272336465}
+    - target: {fileID: 114119019841418536, guid: a2b8eedf097e32f448c7c31a8226c7a7,
+        type: 2}
+      propertyPath: livesUI
+      value: 
+      objectReference: {fileID: 585689103}
+    - target: {fileID: 114119019841418536, guid: a2b8eedf097e32f448c7c31a8226c7a7,
+        type: 2}
+      propertyPath: deathScreen
+      value: 
+      objectReference: {fileID: 1682780032}
+    - target: {fileID: 114119019841418536, guid: a2b8eedf097e32f448c7c31a8226c7a7,
+        type: 2}
+      propertyPath: gameOverScreen
+      value: 
+      objectReference: {fileID: 858405288}
+    - target: {fileID: 114119019841418536, guid: a2b8eedf097e32f448c7c31a8226c7a7,
+        type: 2}
+      propertyPath: playerLives
+      value: 
+      objectReference: {fileID: 381050704}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2b8eedf097e32f448c7c31a8226c7a7, type: 2}
   m_IsPrefabParent: 0
@@ -3025,6 +3086,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1829144266}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &585689103 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114688516321254968, guid: 659fd05b00e02ef4f999377221675792,
+    type: 2}
+  m_PrefabInternal: {fileID: 1829144266}
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &593931020
 GameObject:
   m_ObjectHideFlags: 0
@@ -4080,6 +4147,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4565463531372428, guid: a4ee203112c7f81448202922179eea07,
     type: 2}
   m_PrefabInternal: {fileID: 858273924}
+--- !u!114 &858405288 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114947800476657186, guid: 659fd05b00e02ef4f999377221675792,
+    type: 2}
+  m_PrefabInternal: {fileID: 1829144266}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &891914840
 Prefab:
   m_ObjectHideFlags: 0
@@ -6511,6 +6584,12 @@ Transform:
   m_PrefabParentObject: {fileID: 4201613745004186, guid: 6ea9bf93dec528346b2bb8198fd1a26d,
     type: 2}
   m_PrefabInternal: {fileID: 1671668274}
+--- !u!114 &1682780032 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114914129897753640, guid: 659fd05b00e02ef4f999377221675792,
+    type: 2}
+  m_PrefabInternal: {fileID: 1829144266}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1709437060
 Prefab:
   m_ObjectHideFlags: 0
@@ -7009,6 +7088,11 @@ Prefab:
     - target: {fileID: 1329600598190348, guid: 659fd05b00e02ef4f999377221675792, type: 2}
       propertyPath: m_Name
       value: TestUICanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 114201808155198094, guid: 659fd05b00e02ef4f999377221675792,
+        type: 2}
+      propertyPath: m_FillAmount
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 659fd05b00e02ef4f999377221675792, type: 2}

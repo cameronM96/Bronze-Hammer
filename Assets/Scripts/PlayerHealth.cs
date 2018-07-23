@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour {
 
@@ -10,9 +11,13 @@ public class PlayerHealth : MonoBehaviour {
     private int maxHealth;
     public int mana;
     private int maxMana = 0;
-    [SerializeField] private Image[] manaBars;
-    [SerializeField] private int[] manaPerLevel;
-    [SerializeField] private Text level;
+    public Image[] manaBars;
+    public int[] manaPerLevel;
+    public Text level;
+    public Text livesUI;
+    public Image deathScreen;
+    public Image gameOverScreen;
+    public PlayerLives playerLives;
     public bool addMana = false;
 
     private Animator m_Anim;
@@ -28,6 +33,7 @@ public class PlayerHealth : MonoBehaviour {
         healthBar.fillAmount = 1;
         m_Anim = GetComponent<Animator>();
         m_Audio = GetComponent<AudioSource>();
+        playerLives = GameObject.FindGameObjectWithTag("PlayerLives").GetComponent<PlayerLives>();
 
         // Get Max mana
         foreach (int levelmax in manaPerLevel)
@@ -49,13 +55,32 @@ public class PlayerHealth : MonoBehaviour {
     public void TakeDamage(int damageTaken, bool knockedDown)
     {
         health -= damageTaken;
+        if (health < 0)
+            health = 0;
+
         healthBar.fillAmount = health / maxHealth;
         //update UI health
         if (health <= 0)
         {
-            //Debug.Log(gameObject.name + " has died");
-            GetComponent<MOMovementController>().Death();
-            //go to game over screen or back to menu?
+            if (playerLives.lives <= 0)
+            {
+                // Game Over
+                livesUI.text = "" + playerLives.LoseLife();
+                GetComponent<MOMovementController>().Death();
+                gameOverScreen.enabled = true;
+                StartCoroutine(GameOver());
+                //go to game over screen
+            }
+            else
+            {
+                // Restart Level
+                //Debug.Log(gameObject.name + " has died");
+                livesUI.text = "" + playerLives.LoseLife();
+                GetComponent<MOMovementController>().Death();
+                deathScreen.enabled = true;
+                StartCoroutine(RestartLevel());
+                //go to game over screen
+            }
         }
         else if (!knockedDown)
         {
@@ -101,5 +126,17 @@ public class PlayerHealth : MonoBehaviour {
 
         // Update Magic level
         level.text = "" + magiclevel;
+    }
+
+    IEnumerator RestartLevel ()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    IEnumerator GameOver ()
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Main Menu Scene");
     }
 }
