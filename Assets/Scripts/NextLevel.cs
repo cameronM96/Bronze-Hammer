@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class NextLevel : MonoBehaviour {
-    
+
+    public int nextScene;
+
     private void Awake()
     {
         GetComponent<MeshRenderer>().enabled = false;
@@ -14,7 +16,7 @@ public class NextLevel : MonoBehaviour {
     {
         if(other.tag == "Player")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(nextScene);
         }
     }
 }

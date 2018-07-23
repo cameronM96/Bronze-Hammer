@@ -282,6 +282,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1678770640690192
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4674216913211598}
+  m_Layer: 11
+  m_Name: Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1696402740674384
 GameObject:
   m_ObjectHideFlags: 1
@@ -675,12 +690,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1629565974223566}
-  m_LocalRotation: {x: -0.2410285, y: 0.27041754, z: 0.6201872, w: 0.6958071}
-  m_LocalPosition: {x: 0.1187, y: 0.0093, z: 0.0011}
-  m_LocalScale: {x: 0.010000001, y: 0.01, z: 0.010000002}
+  m_LocalRotation: {x: -0.24102847, y: 0.2704176, z: 0.6201873, w: 0.69580704}
+  m_LocalPosition: {x: 0.11870025, y: 0.009300761, z: 0.0010987986}
+  m_LocalScale: {x: 0.010000006, y: 0.010000007, z: 0.010000002}
   m_Children:
   - {fileID: 4908395699754904}
-  m_Father: {fileID: 4926969188091682}
+  m_Father: {fileID: 4674216913211598}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -42.132004, y: 5.9870005, z: 81.115005}
 --- !u!4 &4463538666974382
@@ -739,6 +754,20 @@ Transform:
   m_Father: {fileID: 4065795276004994}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -50.90676, y: -30.78967, z: 34.474976}
+--- !u!4 &4674216913211598
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1678770640690192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4365165334666804}
+  m_Father: {fileID: 4926969188091682}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4676612664311328
 Transform:
   m_ObjectHideFlags: 1
@@ -846,7 +875,7 @@ Transform:
   m_LocalPosition: {x: -0, y: 0.057834752, z: -3.5527136e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4365165334666804}
+  - {fileID: 4674216913211598}
   m_Father: {fileID: 4363814932263720}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1115,7 +1144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6934da1c32407c845886daac3045813d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackTrigger: {fileID: 0}
+  attackTrigger: {fileID: 65859619313715716}
   entityTurnSpeed: 10
   m_GroundCheck: {fileID: 4257219765449880}
   m_WhatIsGround:
