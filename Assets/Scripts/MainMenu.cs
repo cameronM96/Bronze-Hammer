@@ -5,6 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
+    private void Awake()
+    {
+        if (GameObject.FindGameObjectWithTag("PlayerLives"))
+        {
+            GameObject.FindGameObjectWithTag("PlayerLives").GetComponent<PlayerLives>().lives = 3;
+        }
+    }
+
     public void PlayGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -27,13 +35,7 @@ public class MainMenu : MonoBehaviour {
 
     public void QuitGame()
     {
-        if (Application.isEditor)
-        {
-            UnityEditor.EditorApplication.isPlaying = false;
-        }
-        else
-        {
-            Application.Quit();
-        }
+        Application.Quit();
     }
 }
+

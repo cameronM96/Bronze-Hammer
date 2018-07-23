@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class MOPlayerInputController : MOMovementController
@@ -66,6 +67,10 @@ public class MOPlayerInputController : MOMovementController
         {
             sprinting = false;
             //Debug.Log("not sprinting");
+        }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Main Menu Scene");
         }
     }
 
