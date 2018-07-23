@@ -45,37 +45,65 @@ public class Encounter_Manager : MonoBehaviour {
                 // Begin wave by spawning enemies
                 int z1 = 0;
                 int z2 = 0;
+
+                bool switchSides1 = false;
                 foreach (GameObject enemy in 
                     m_EncountersList[encounterIndex].waves[m_EncountersList[encounterIndex].waveNumber].rightSideEnemies)
                 {
                     //TODO: Fan the enemies out a bit (like +/- 2 or 3 z each iteration)
                     GameObject newEnemy;
                     Transform newSpawnPoint =  rightSpawnPoint;
-                    newSpawnPoint.position = 
-                        new Vector3(rightSpawnPoint.position.x, 
-                        rightSpawnPoint.position.y, 
-                        rightSpawnPoint.position.z + z1);
+
+                    if (switchSides1)
+                    {
+                        newSpawnPoint.position =
+                            new Vector3(rightSpawnPoint.position.x,
+                            rightSpawnPoint.position.y,
+                            rightSpawnPoint.position.z + z1);
+                        switchSides1 = !switchSides1;
+                    }
+                    else
+                    {
+                        newSpawnPoint.position =
+                            new Vector3(rightSpawnPoint.position.x,
+                            rightSpawnPoint.position.y,
+                            rightSpawnPoint.position.z - z1);
+                        switchSides1 = !switchSides1;
+                    }
 
                     newEnemy = Instantiate(enemy, rightSpawnPoint);
                     newEnemy.transform.parent = null;
 
-                    z1 += 3;
+                    z1 += 2;
                 }
 
+                bool switchSides2 = false;
                 foreach (GameObject enemy in 
                     m_EncountersList[encounterIndex].waves[m_EncountersList[encounterIndex].waveNumber].leftSideEnemies)
                 {
                     GameObject newEnemy;
                     Transform newSpawnPoint = leftSpawnPoint;
-                    newSpawnPoint.position =
-                        new Vector3(leftSpawnPoint.position.x,
-                        leftSpawnPoint.position.y,
-                        leftSpawnPoint.position.z + z2);
+                    if (switchSides2)
+                    {
+                        newSpawnPoint.position =
+                            new Vector3(leftSpawnPoint.position.x,
+                            leftSpawnPoint.position.y,
+                            leftSpawnPoint.position.z + z2);
+                        switchSides2 = !switchSides2;
+                    }
+                    else
+                    {
+                        newSpawnPoint.position =
+                            new Vector3(leftSpawnPoint.position.x,
+                            leftSpawnPoint.position.y,
+                            leftSpawnPoint.position.z - z2);
+                        switchSides2 = !switchSides2;
+                    }
 
                     newEnemy = Instantiate(enemy, leftSpawnPoint);
                     newEnemy.transform.parent = null;
 
-                    z2 += 3;
+                    z2 += 2;
                 }
                 
                 ++m_EncountersList[encounterIndex].waveNumber;

@@ -282,7 +282,7 @@ public class MOMovementController : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject, 3);
+            Destroy(this.transform.parent.gameObject, 3);
         }
     }
 }
