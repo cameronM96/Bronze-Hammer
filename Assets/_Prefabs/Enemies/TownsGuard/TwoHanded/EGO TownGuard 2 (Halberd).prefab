@@ -71,6 +71,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1220821308803572
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4478453202948758}
+  m_Layer: 11
+  m_Name: Weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1223578980005954
 GameObject:
   m_ObjectHideFlags: 1
@@ -689,8 +704,22 @@ Transform:
   m_LocalPosition: {x: -0, y: 0.057834752, z: -3.5527136e-17}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4868930780091404}
+  - {fileID: 4478453202948758}
   m_Father: {fileID: 4830371919689102}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4478453202948758
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1220821308803572}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4868930780091404}
+  m_Father: {fileID: 4457122467542134}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4540821527265842
@@ -812,12 +841,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1798479389132050}
-  m_LocalRotation: {x: 0.000000039115548, y: 0.000000007450581, z: 0.70741034, w: 0.7068032}
-  m_LocalPosition: {x: 0.1925, y: 0.0215, z: 0}
-  m_LocalScale: {x: 0.012500047, y: 0.012500029, z: 0.0125000235}
+  m_LocalRotation: {x: 0.000000085914486, y: -0.000000014901158, z: 0.7074103, w: 0.7068032}
+  m_LocalPosition: {x: 0.19249977, y: 0.02150049, z: -0}
+  m_LocalScale: {x: 0.012500072, y: 0.012500049, z: 0.01250004}
   m_Children:
   - {fileID: 4193946566915844}
-  m_Father: {fileID: 4457122467542134}
+  m_Father: {fileID: 4478453202948758}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90.049}
 --- !u!4 &4886193693079582
@@ -1115,7 +1144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6934da1c32407c845886daac3045813d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackTrigger: {fileID: 0}
+  attackTrigger: {fileID: 65697337489789704}
   entityTurnSpeed: 10
   m_GroundCheck: {fileID: 4974817980127120}
   m_WhatIsGround:
