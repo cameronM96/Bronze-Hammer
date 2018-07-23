@@ -78,12 +78,13 @@ public class PlayerHealth : MonoBehaviour {
             //update UI health
             if (health <= 0)
             {
+                playerLives.LoseLife();
+                livesUI.text = ("" + playerLives.lives);
+                GetComponent<MOMovementController>().Death();
+
                 if (playerLives.lives <= 0)
                 {
                     // Game Over
-                    playerLives.lives -= 1;
-                    livesUI.text = ("" + playerLives.LoseLife());
-                    GetComponent<MOMovementController>().Death();
                     gameOverScreen.SetActive(true);
                     StartCoroutine(GameOver());
                     //go to game over screen
@@ -92,9 +93,6 @@ public class PlayerHealth : MonoBehaviour {
                 {
                     // Restart Level
                     //Debug.Log(gameObject.name + " has died");
-                    playerLives.lives -= 1;
-                    livesUI.text = ("" + playerLives.LoseLife());
-                    GetComponent<MOMovementController>().Death();
                     deathScreen.SetActive(true);
                     StartCoroutine(RestartLevel());
                     //go to game over screen
