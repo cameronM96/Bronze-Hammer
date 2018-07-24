@@ -7,23 +7,16 @@ public class Magic : MonoBehaviour {
     private GameObject[] enemies;
     [SerializeField] private float waitTimer;
     [SerializeField] private GameObject[] magicVisuals;
-    private Camera gameCamera;
-    private float sightDistance = 200f;
-    private int layerMask = 0;
-    GameObject magicEffect;
-
-    private void Start()
-    {
-        gameCamera = Camera.main;
-    }
+    private GameObject magicEffect;
 
     public void CastMagic (GameObject caster, float magicDamage, int magicLevel, int player)
     {
+        // Find all enemies
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-
+        
         if (enemies != null)
         {
+            // Deal damage to all enemies and freeze them for the duration of the spell
             foreach (GameObject enemy in enemies)
             {
                 enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevel), false);
@@ -33,6 +26,7 @@ public class Magic : MonoBehaviour {
 
         switch (player)
         {
+            // Determine which character casted the magic
             case 0:
                 EstocMagic(magicLevel, caster);
                 break;
@@ -49,39 +43,44 @@ public class Magic : MonoBehaviour {
         StartCoroutine(FreezeEnemies(waitTimer));
     }
 
+    // Freeze enemy timer 
     IEnumerator FreezeEnemies(float waitTimer)
     {
         yield return new WaitForSeconds(waitTimer);
+
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
         if (enemies != null)
         {
             foreach (GameObject enemy in enemies)
             {
+                // Unfreeze enemies
                 enemy.GetComponent<MOMovementController>().freeze = false;
             }
         }
     }
 
+    // Estoc's spells
     private void EstocMagic(int magicLevel, GameObject caster)
     {
         switch (magicLevel)
         {
             case 1:
-                Debug.Log("Level 1 Estoc Magic Cast! Magic Cast on Player");
-                magicEffect = Instantiate(magicVisuals[magicLevel], caster.transform);
+                // Crete Level 1 spell visuals
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
                 magicEffect.transform.parent = null;
                 break;
             case 2:
-                Debug.Log("Level 2 Estoc Magic Cast! Magic Cast in centre of screen");
-                magicEffect = Instantiate(magicVisuals[magicLevel], CameraToGround(caster));
+                // Crete Level 2 spell visuals
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1], CameraToGround(caster));
                 magicEffect.transform.parent = null;
                 magicEffect.transform.position = CameraToGround(caster).position;
                 break;
             case 3:
-                Debug.Log("Level 3 Estoc Magic Cast! Magic Cast on Enemies");
+                // Crete Level 3 spell visuals
                 foreach (GameObject enemy in enemies)
                 {
-                    magicEffect = Instantiate(magicVisuals[magicLevel], enemy.transform);
+                    magicEffect = Instantiate(magicVisuals[magicLevel - 1], enemy.transform);
                     magicEffect.transform.parent = null;
                 }
                 break;
@@ -90,42 +89,53 @@ public class Magic : MonoBehaviour {
         }
     }
 
+    // Lilith's spells
     private void LilithMagic(int magicLevel, GameObject caster)
     {
         switch (magicLevel)
         {
             case 1:
-                magicEffect = Instantiate(magicVisuals[magicLevel], caster.transform);
+                // Crete Level 1 spell visuals
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
                 magicEffect.transform.parent = null;
                 break;
             case 2:
-                magicEffect = Instantiate(magicVisuals[magicLevel], caster.transform);
+                // Crete Level 2 spell visuals
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1], CameraToGround(caster));
                 magicEffect.transform.parent = null;
+                magicEffect.transform.position = CameraToGround(caster).position;
                 break;
             case 3:
-                magicEffect = Instantiate(magicVisuals[magicLevel], caster.transform);
-                magicEffect.transform.parent = null;
+                // Crete Level 3 spell visuals
+                foreach (GameObject enemy in enemies)
+                {
+                    magicEffect = Instantiate(magicVisuals[magicLevel - 1], enemy.transform);
+                    magicEffect.transform.parent = null;
+                }
                 break;
             case 4:
-                magicEffect = Instantiate(magicVisuals[magicLevel], caster.transform);
-                magicEffect.transform.parent = null;
+                // Crete Level 4 spell visuals
                 break;
             default:
                 break;
         }
     }
 
+    // Crag's spells
     private void CragMagic(int magicLevel, GameObject caster)
     {
         switch (magicLevel)
         {
             case 1:
-                magicEffect = Instantiate(magicVisuals[magicLevel], caster.transform);
+                // Crete Level 1 spell visuals
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
                 magicEffect.transform.parent = null;
                 break;
             case 2:
-                magicEffect = Instantiate(magicVisuals[magicLevel], caster.transform);
+                // Crete Level 2 spell visuals
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1], CameraToGround(caster));
                 magicEffect.transform.parent = null;
+                magicEffect.transform.position = CameraToGround(caster).position;
                 break;
             default:
                 break;
@@ -134,10 +144,11 @@ public class Magic : MonoBehaviour {
 
     private Transform CameraToGround (GameObject caster)
     {
+        // Raycast from camera down to the ground (Finds the centre of the screen)
         RaycastHit hit;
-        Ray forwardRay = new Ray(gameCamera.transform.position, transform.forward);
+        //Ray forwardRay = new Ray(gameCamera.transform.position, transform.forward);
 
-        if (Physics.Raycast (forwardRay, out hit, sightDistance))
+        if (Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out hit, 200f, 0))
         {
             Debug.Log("Ray hit ground at: " + hit.transform.position);
             return hit.transform;
