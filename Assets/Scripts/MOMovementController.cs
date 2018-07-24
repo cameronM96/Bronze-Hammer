@@ -11,11 +11,16 @@ public class MOMovementController : MonoBehaviour
     private float timerC = 0.0f;
     private float timerJ = 0.0f;
     private int attackCounter;
+    public bool freeze;                                     // Freeze Character when hit by magic
 
-    public Transform m_GroundCheck;                        // A position marking where to check if the player is grounded.
-    const float k_GroundedRadius = .01f;                   // Radius of the overlap circle to determine if grounded
-    private bool m_Grounded;                               // Whether or not the character is grounded.
-    [SerializeField] private LayerMask m_WhatIsGround;     // A mask determining what is ground to the character
+    public Transform m_GroundCheck;                         // A position marking where to check if the player is grounded.
+    const float k_GroundedRadius = .01f;                    // Radius of the overlap circle to determine if grounded
+    private bool m_Grounded;                                // Whether or not the character is grounded.
+    [SerializeField] private LayerMask m_WhatIsGround;      // A mask determining what is ground to the character
+
+    [SerializeField] private float magicDamage;             // Base magic damage 
+    [SerializeField] private int magicLevel;                // magicDamage multiplied by magicLevel
+    [SerializeField] private int playerCharacer;            // 0 = Estoc, 1 = Lilith, 2 = Crag.
     
     public int entityID = 0;
     public Vector3 entityRotation;
@@ -126,7 +131,7 @@ public class MOMovementController : MonoBehaviour
     // method is called when needed from an input script
     public void Move(Vector3 mov, float speed)
     {
-        if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead") || !m_Anim.GetBool("attack"))
+        if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead") || !m_Anim.GetBool("attack") || !freeze)
         {
             //move the gameobject based on the vars from the input script
             //scriptEntity.transform.parent.Translate(mov * speed * Time.deltaTime);
@@ -170,7 +175,7 @@ public class MOMovementController : MonoBehaviour
     //called from input controller 
     public void Jump(float height)
     {
-        if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead"))
+        if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead") || !freeze)
         {
             if (timerJ <= 0.0f && m_Grounded)
             {
@@ -185,7 +190,7 @@ public class MOMovementController : MonoBehaviour
     //called from input controller
     public void Attack(bool sprinting)
     {
-        if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead"))
+        if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead") || !freeze)
         {
             m_Rigidbody.velocity = new Vector3(0, 0, 0);
             // Debug.Log(scriptEntity.name + " attacking");
@@ -242,25 +247,35 @@ public class MOMovementController : MonoBehaviour
     {
         if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead"))
         {
-            //Debug.Log(scriptEntity.name + " using magic");
-            m_Anim.SetBool("magic", true);
-            m_Audio.clip = m_AudioClips[1];
-            m_Audio.Play();
-            //check for different players 
-            /*
-            if (gameObject.name == "")
+            if (magicLevel > 0)
             {
-            //use the magic for player 1
+                //Debug.Log(scriptEntity.name + " using magic");
+                Magic magicEvent = GameObject.FindGameObjectWithTag("MagicEvent").GetComponent<Magic>();
+                magicEvent.CastMagic(this.gameObject, magicDamage, magicLevel, playerCharacer);
+
+                m_Anim.SetBool("magic", true);
+                m_Audio.clip = m_AudioClips[1];
+                m_Audio.Play();
+                //check for different players 
+                /*
+                if (gameObject.name == "")
+                {
+                //use the magic for player 1
+                }
+                else if (gameObject.name == "")
+                {
+                //use the magic for player 2
+                }
+                else if (gameObject.name == "")
+                {
+                use the magic for player 3
+                }
+                */
             }
-            else if (gameObject.name == "")
+            else
             {
-            //use the magic for player 2
+                
             }
-            else if (gameObject.name == "")
-            {
-            use the magic for player 3
-            }
-            */
         }
     }
 

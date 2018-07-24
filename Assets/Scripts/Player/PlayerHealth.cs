@@ -61,7 +61,7 @@ public class PlayerHealth : MonoBehaviour {
     {
         if (addMana)
         {
-            AddMana(10);
+            AddMana(25);
             addMana = false;
         }
     }
