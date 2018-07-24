@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class DestroySelf : MonoBehaviour {
 
-    [SerializeField] private float waitTimer;
+    public float waitTimer;
 
 	// Use this for initialization
-	void Start ()
+	void Awake ()
     {
         Destroy(this.gameObject, waitTimer);
 	}

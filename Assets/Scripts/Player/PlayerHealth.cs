@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour {
     public Image[] manaBars;
     public int[] manaPerLevel;
     public Text level;
+    public int currentMagicLevel;
     public Text livesUI;
     public GameObject deathScreen;
     public GameObject gameOverScreen;
@@ -143,6 +144,7 @@ public class PlayerHealth : MonoBehaviour {
 
         // Update Magic level
         level.text = "" + magiclevel;
+        currentMagicLevel = magiclevel;
     }
 
     IEnumerator RestartLevel ()

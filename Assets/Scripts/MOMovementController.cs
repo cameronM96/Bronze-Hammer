@@ -247,11 +247,10 @@ public class MOMovementController : MonoBehaviour
     {
         if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead"))
         {
-            if (magicLevel > 0)
+            if (GetComponent<PlayerHealth>().currentMagicLevel > 0)
             {
                 //Debug.Log(scriptEntity.name + " using magic");
-                Magic magicEvent = GameObject.FindGameObjectWithTag("MagicEvent").GetComponent<Magic>();
-                magicEvent.CastMagic(this.gameObject, magicDamage, magicLevel, playerCharacer);
+                GetComponent<Magic>().CastMagic(this.gameObject, magicDamage, GetComponent<PlayerHealth>().currentMagicLevel, playerCharacer);
 
                 m_Anim.SetBool("magic", true);
                 m_Audio.clip = m_AudioClips[1];
