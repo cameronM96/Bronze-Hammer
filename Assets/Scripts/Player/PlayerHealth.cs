@@ -41,12 +41,10 @@ public class PlayerHealth : MonoBehaviour {
             livesInstance.transform.parent = null;
             livesInstance.transform.position = new Vector3(0, 0, 0);
             playerLives = GameObject.FindGameObjectWithTag("PlayerLives").GetComponent<PlayerLives>();
-            Debug.Log("Creating Lives prefab");
         }
         else
         {
             playerLives = GameObject.FindGameObjectWithTag("PlayerLives").GetComponent<PlayerLives>();
-            Debug.Log("Lives Prefab found");
         }
         livesUI.text = ("" + playerLives.lives);
 
@@ -114,6 +112,42 @@ public class PlayerHealth : MonoBehaviour {
         mana += manaValue;
         if (mana > maxMana)
             mana = maxMana;
+
+        float manaleft = mana;
+        int magiclevel = 0;
+
+        // Set each bar relative to the manaPerLevel
+        foreach (Image manabar in manaBars)
+        {
+            float currentMana = 0;
+            float maxMana = manaPerLevel[magiclevel];
+
+            if (manaleft >= maxMana)
+            {
+                // If there is still mana left over, increase magic level and reset manaLeft.
+                currentMana = maxMana;
+                manaleft -= maxMana;
+                ++magiclevel;
+            }
+            else
+            {
+                // All mana has been acounted for
+                currentMana = manaleft;
+                manaleft = 0;
+            }
+
+            // Update this manabar
+            manabar.fillAmount = currentMana / maxMana;
+        }
+
+        // Update Magic level
+        level.text = "" + magiclevel;
+        currentMagicLevel = magiclevel;
+    }
+
+    public void UseMana()
+    {
+        mana = 0;
 
         float manaleft = mana;
         int magiclevel = 0;

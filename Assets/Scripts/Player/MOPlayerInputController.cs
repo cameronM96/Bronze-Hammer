@@ -24,11 +24,9 @@ public class MOPlayerInputController : MOMovementController
         base.Awake();
         //set the game camera
         gameCamera = Camera.main.transform;
-        Debug.Log("game camera transform set for " + gameCamera.name);
 
         // set the player var to be the player
         Player = GameObject.FindGameObjectWithTag("Player");
-        Debug.Log("Player found " + Player.name);
 
         //set the entitiy ID in the movemnt controller script, ID 1 = player
         gameObject.GetComponent<MOMovementController>().entityID = 1;

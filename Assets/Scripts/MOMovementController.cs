@@ -37,12 +37,10 @@ public class MOMovementController : MonoBehaviour
         //check what entity the script is attached to used for debugging and testing reasons and possible mounting controls
         if (entityID == 1) // ID 1 = PLAYER
         {
-            Debug.Log("Contoller working for player with name " + gameObject.name);
             scriptEntity = GameObject.FindGameObjectWithTag("Player");
         }
         else if (entityID == 2) // ID 2 = ENEMY
         {
-            Debug.Log("Controller working for enemy with name " + gameObject.name);
             scriptEntity = this.gameObject;
         }
         else if (entityID == 3) // ID 3 = MOUNT
@@ -251,6 +249,7 @@ public class MOMovementController : MonoBehaviour
             {
                 //Debug.Log(scriptEntity.name + " using magic");
                 GetComponent<Magic>().CastMagic(this.gameObject, magicDamage, GetComponent<PlayerHealth>().currentMagicLevel, playerCharacer);
+                GetComponent<PlayerHealth>().UseMana();
 
                 m_Anim.SetBool("magic", true);
                 m_Audio.clip = m_AudioClips[1];

@@ -72,9 +72,9 @@ public class Magic : MonoBehaviour {
                 break;
             case 2:
                 // Crete Level 2 spell visuals
-                magicEffect = Instantiate(magicVisuals[magicLevel - 1], CameraToGround(caster));
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
                 magicEffect.transform.parent = null;
-                magicEffect.transform.position = CameraToGround(caster).position;
+                magicEffect.transform.position = CameraToGround(caster);
                 break;
             case 3:
                 // Crete Level 3 spell visuals
@@ -101,9 +101,9 @@ public class Magic : MonoBehaviour {
                 break;
             case 2:
                 // Crete Level 2 spell visuals
-                magicEffect = Instantiate(magicVisuals[magicLevel - 1], CameraToGround(caster));
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
                 magicEffect.transform.parent = null;
-                magicEffect.transform.position = CameraToGround(caster).position;
+                magicEffect.transform.position = CameraToGround(caster);
                 break;
             case 3:
                 // Crete Level 3 spell visuals
@@ -133,30 +133,28 @@ public class Magic : MonoBehaviour {
                 break;
             case 2:
                 // Crete Level 2 spell visuals
-                magicEffect = Instantiate(magicVisuals[magicLevel - 1], CameraToGround(caster));
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
                 magicEffect.transform.parent = null;
-                magicEffect.transform.position = CameraToGround(caster).position;
+                magicEffect.transform.position = CameraToGround(caster);
                 break;
             default:
                 break;
         }
     }
 
-    private Transform CameraToGround (GameObject caster)
+    private Vector3 CameraToGround (GameObject caster)
     {
         // Raycast from camera down to the ground (Finds the centre of the screen)
         RaycastHit hit;
         //Ray forwardRay = new Ray(gameCamera.transform.position, transform.forward);
 
-        if (Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out hit, 200f, 0))
+        if (Physics.Raycast (Camera.main.transform.position, Camera.main.transform.forward, out hit, 200f))
         {
-            Debug.Log("Ray hit ground at: " + hit.transform.position);
-            return hit.transform;
+            return hit.transform.position;
         }
         else
         {
-            Debug.Log("Ray hit nothing, creating on player");
-            return caster.transform;
+            return caster.transform.position;
         }
     }
 }

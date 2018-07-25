@@ -42,6 +42,11 @@ public class Attack : MonoBehaviour
                 other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, false);
                 Debug.Log(gameObject.transform.parent.name + " Hit the " + other.gameObject.name + " for " + attackDamage);
             }
+
+            if (other.tag == "Chicken")
+            {
+                other.transform.parent.gameObject.GetComponent<ChickenAI>().KickChicken();
+            }
         }
         else
         {
