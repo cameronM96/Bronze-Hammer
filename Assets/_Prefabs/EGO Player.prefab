@@ -465,8 +465,8 @@ GameObject:
   - component: {fileID: 136601928828506296}
   - component: {fileID: 114562743392479458}
   - component: {fileID: 114119019841418536}
-  - component: {fileID: 82229716821119904}
-  - component: {fileID: 82029402169574788}
+  - component: {fileID: 82727935267194420}
+  - component: {fileID: 114050011169943476}
   m_Layer: 10
   m_Name: Estoc-Slasher@Sword And Shield Idle
   m_TagString: Player
@@ -693,7 +693,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1673924259739322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -64.65, y: 0.1, z: 0.55}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4938205382637520}
@@ -1086,7 +1086,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.74, y: 21, z: 1}
   m_Center: {x: 0.000001296401, y: 18.1, z: -0.0000038146973}
---- !u!82 &82029402169574788
+--- !u!82 &82727935267194420
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1096,102 +1096,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!82 &82229716821119904
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1904412668261358}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1294,6 +1199,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114050011169943476
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1904412668261358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d752bac8f58e0284eb776e61b77a2f3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTimer: 5
+  magicLevelMulitplier:
+  - 1
+  - 2
+  - 2.5
+  magicVisuals:
+  - {fileID: 1425738852213952, guid: 4f4648d3c5c4f1a4488bd7754be34bd1, type: 2}
+  - {fileID: 1085845944956044, guid: 6052df2d9c93c5c45bbfce39a9eb4a98, type: 2}
+  - {fileID: 1429339215974446, guid: 80de70b85af15e946938c7533db2f784, type: 2}
 --- !u!114 &114119019841418536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1313,8 +1238,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  manaPerLevel: 320000001e00000014000000
+  manaPerLevel: 320000003200000019000000
   level: {fileID: 0}
+  currentMagicLevel: 0
   livesUI: {fileID: 0}
   deathScreen: {fileID: 0}
   gameOverScreen: {fileID: 0}
@@ -1337,10 +1263,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackTrigger: {fileID: 65154458744524092}
   entityTurnSpeed: 10
+  freeze: 0
   m_GroundCheck: {fileID: 4556326213208176}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
+  magicDamage: 75
+  magicLevel: 0
+  playerCharacer: 0
   entityID: 1
   entityRotation: {x: 0, y: 0, z: 0}
   m_AudioClips:

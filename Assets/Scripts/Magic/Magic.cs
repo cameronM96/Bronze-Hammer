@@ -6,6 +6,7 @@ public class Magic : MonoBehaviour {
 
     private GameObject[] enemies;
     [SerializeField] private float waitTimer;
+    [SerializeField] private float[] magicLevelMulitplier;
     [SerializeField] private GameObject[] magicVisuals;
     private GameObject magicEffect;
 
@@ -19,7 +20,7 @@ public class Magic : MonoBehaviour {
             // Deal damage to all enemies and freeze them for the duration of the spell
             foreach (GameObject enemy in enemies)
             {
-                enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevel), false);
+                enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevelMulitplier[magicLevel]), false);
                 enemy.GetComponent<MOMovementController>().freeze = true;
             }
         }
@@ -66,23 +67,26 @@ public class Magic : MonoBehaviour {
         switch (magicLevel)
         {
             case 1:
-                // Crete Level 1 spell visuals
-                magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
-                magicEffect.transform.parent = null;
-                break;
-            case 2:
-                // Crete Level 2 spell visuals
-                magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
-                magicEffect.transform.parent = null;
-                magicEffect.transform.position = CameraToGround(caster);
-                break;
-            case 3:
-                // Crete Level 3 spell visuals
+                // Crete Level 1 spell visuals (all enemies)
                 foreach (GameObject enemy in enemies)
                 {
                     magicEffect = Instantiate(magicVisuals[magicLevel - 1], enemy.transform);
                     magicEffect.transform.parent = null;
                 }
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
+                magicEffect.transform.parent = null;
+                break;
+            case 2:
+                // Crete Level 2 spell visuals (Centre multiple)
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
+                magicEffect.transform.parent = null;
+                magicEffect.transform.position = CameraToGround(caster);
+                break;
+            case 3:
+                // Crete Level 3 spell visuals (Centre 1)
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
+                magicEffect.transform.parent = null;
+                magicEffect.transform.position = CameraToGround(caster);
                 break;
             default:
                 break;

@@ -41,6 +41,7 @@ public class ChickenAI : MonoBehaviour {
 
         if (timesHit < maxTimesHit && time < retreatTimer)
         {
+            // If destination was reached, wait for a while then find new destination.
             if (agent.pathStatus == NavMeshPathStatus.PathComplete)
             {
                 float distance = Vector3.Distance(this.transform.position,agent.destination);
@@ -56,6 +57,7 @@ public class ChickenAI : MonoBehaviour {
         }
         else
         {
+            // Run away if time existed for too long or hit a bunch.
             if (!retreating)
                 Retreat(CameraToGround());
 
@@ -63,6 +65,7 @@ public class ChickenAI : MonoBehaviour {
             {
                 float distance = Vector3.Distance(this.transform.position, agent.destination);
 
+                // Die when it reaches this spot
                 if (distance < 1 && distance > -1)
                 {
                     Destroy(this.gameObject);
@@ -72,6 +75,7 @@ public class ChickenAI : MonoBehaviour {
         }
     }
 
+    // Get the boundaries for where chicken can move to (In cameraview and game area)
     private void GetBoundaries (Vector3 origin)
     {
         RaycastHit hit;
@@ -101,6 +105,7 @@ public class ChickenAI : MonoBehaviour {
         minZ = Camera.main.transform.GetChild(3).transform.position.z;
     }
 
+    // Find new place to walk too (Wander)
     private void NewGoal (Vector3 origin)
     {
         float x = Random.Range(minX, maxX);
@@ -109,10 +114,9 @@ public class ChickenAI : MonoBehaviour {
         Vector3 newGoal = new Vector3(x, y, z);
 
         agent.SetDestination(newGoal);
-
-        Debug.Log("New destination: " + newGoal);
     }
 
+    // Run away (run off screen)
     private void Retreat (Vector3 origin)
     {
         Vector3 retreatPoint;
@@ -124,10 +128,9 @@ public class ChickenAI : MonoBehaviour {
 
         agent.SetDestination(retreatPoint);
         retreating = true;
-
-        Debug.Log("Chicken Retreating to " + finalPostion);
     }
 
+    // Wait for a while then find new destination
     IEnumerator PauseTimer (float waitTimer)
     {
         waiting = true;
@@ -140,6 +143,7 @@ public class ChickenAI : MonoBehaviour {
         agent.isStopped = false;
     }
 
+    // Finds the centre point of the screen
     private Vector3 CameraToGround()
     {
         // Raycast from camera down to the ground (Finds the centre of the screen)
@@ -156,6 +160,7 @@ public class ChickenAI : MonoBehaviour {
         }
     }
 
+    // Drop pots when hit
     public void KickChicken()
     {
         m_Rigidbody.AddForce(new Vector3(m_Rigidbody.velocity.x, 200, m_Rigidbody.velocity.z));

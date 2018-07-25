@@ -31,6 +31,7 @@ public class Potion : MonoBehaviour {
         }
     }
 
+    // Wait a while before pot can be picked up
     IEnumerator Collidable ()
     {
         yield return new WaitForSeconds(0.2f);
