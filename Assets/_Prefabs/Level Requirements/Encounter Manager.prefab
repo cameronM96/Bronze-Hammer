@@ -132,7 +132,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1816744294287334}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.844557, y: -50.069176, z: 48.708366}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4278853819521056}
@@ -313,8 +313,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1dac4a2e645100d49a8e6632e2fdde97, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 1
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -439,12 +439,7 @@ MonoBehaviour:
   m_EncountersList:
   - name: 'Encounter: 1'
     encounterPoint: {fileID: 1071009017965494}
-    waves:
-    - name: 'Wave: 1'
-      rightSideEnemies:
-      - {fileID: 1311574417885848, guid: 5d597681b42fdbd41820e9a3efafbd6d, type: 2}
-      - {fileID: 1311574417885848, guid: 5d597681b42fdbd41820e9a3efafbd6d, type: 2}
-      leftSideEnemies: []
+    waves: []
     waveNumber: 0
   - name: 'Encounter: 2'
     encounterPoint: {fileID: 1197465472297838}

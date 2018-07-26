@@ -65,9 +65,9 @@ public class PlayerHealth : MonoBehaviour {
         }
     }
 
-    public void TakeDamage(int damageTaken, bool knockedDown)
+    public void TakeDamage(int damageTaken, bool knockedDown, float dir)
     {
-        if (health > 0)
+        if (health > 0 && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
             health -= damageTaken;
             if (health < 0)
@@ -103,6 +103,10 @@ public class PlayerHealth : MonoBehaviour {
                 m_Audio.clip = m_AudioClips[0];
                 m_Audio.Play();
                 //Debug.Log(gameObject.name + " took " + damageTaken + " damage, Leaving them at " + health + " health");
+            }
+            else
+            {
+                GetComponent<MOMovementController>().KnockBack(dir);
             }
         }
     }

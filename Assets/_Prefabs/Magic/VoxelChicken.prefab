@@ -68,7 +68,7 @@ Transform:
   m_GameObject: {fileID: 1963266348105856}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.028490305, y: 0.028490297, z: 0.028490297}
+  m_LocalScale: {x: 0.0285, y: 0.0285, z: 0.0285}
   m_Children:
   - {fileID: 4038631480049670}
   m_Father: {fileID: 0}
@@ -143,9 +143,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manaPot: {fileID: 1377585333511898, guid: c8106e9bbdd8cde4b858245d11bfaca5, type: 2}
-  pauseTimer: 3
-  retreatTimer: 15
-  timesHit: 3
+  pauseTimer: 10
+  retreatTimer: 30
+  timesHit: 0
   maxTimesHit: 3
 --- !u!136 &136614686003500096
 CapsuleCollider:

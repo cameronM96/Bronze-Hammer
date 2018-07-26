@@ -370,7 +370,6 @@ GameObject:
   - component: {fileID: 136452447879211962}
   - component: {fileID: 114239372296166566}
   - component: {fileID: 114570219183293028}
-  - component: {fileID: 136421367153138906}
   - component: {fileID: 82779973433839830}
   m_Layer: 11
   m_Name: Enemy 1@Sword And Shield Run
@@ -1087,10 +1086,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackTrigger: {fileID: 65883968714614520}
   entityTurnSpeed: 10
+  freeze: 0
   m_GroundCheck: {fileID: 4388284722728262}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
+  magicDamage: 0
+  magicLevel: 0
+  playerCharacer: 0
   entityID: 2
   entityRotation: {x: 0, y: 0, z: 0}
   m_AudioClips:
@@ -1101,7 +1104,6 @@ MonoBehaviour:
   moveTarget: {fileID: 0}
   attackTarget: {fileID: 0}
   moveSpeed: 3
-  jumpHeight: 500
   sprinting: 0
 --- !u!114 &114570219183293028
 MonoBehaviour:
@@ -1133,19 +1135,6 @@ MonoBehaviour:
   playerWeapon: 0
   knockback: 0
   m_Audio: {fileID: 0}
---- !u!136 &136421367153138906
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1827510715023070}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 0.7
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!136 &136452447879211962
 CapsuleCollider:
   m_ObjectHideFlags: 1

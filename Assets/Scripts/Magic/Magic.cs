@@ -10,7 +10,7 @@ public class Magic : MonoBehaviour {
     [SerializeField] private GameObject[] magicVisuals;
     private GameObject magicEffect;
 
-    public void CastMagic (GameObject caster, float magicDamage, int magicLevel, int player)
+    public void CastMagic (GameObject caster, float magicDamage, int magicLevel, PlayerCharacters player)
     {
         // Find all enemies
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
@@ -20,7 +20,8 @@ public class Magic : MonoBehaviour {
             // Deal damage to all enemies and freeze them for the duration of the spell
             foreach (GameObject enemy in enemies)
             {
-                enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevelMulitplier[magicLevel]), false);
+                enemy.transform.parent.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+                enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevelMulitplier[magicLevel - 1]), true, 0);
                 enemy.GetComponent<MOMovementController>().freeze = true;
             }
         }
@@ -28,13 +29,13 @@ public class Magic : MonoBehaviour {
         switch (player)
         {
             // Determine which character casted the magic
-            case 0:
+            case PlayerCharacters.Estoc:
                 EstocMagic(magicLevel, caster);
                 break;
-            case 1:
+            case PlayerCharacters.Lilith:
                 LilithMagic(magicLevel, caster);
                 break;
-            case 2:
+            case PlayerCharacters.Crag:
                 CragMagic(magicLevel, caster);
                 break;
             default:
@@ -73,8 +74,8 @@ public class Magic : MonoBehaviour {
                     magicEffect = Instantiate(magicVisuals[magicLevel - 1], enemy.transform);
                     magicEffect.transform.parent = null;
                 }
-                magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
-                magicEffect.transform.parent = null;
+                //magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
+                //magicEffect.transform.parent = null;
                 break;
             case 2:
                 // Crete Level 2 spell visuals (Centre multiple)

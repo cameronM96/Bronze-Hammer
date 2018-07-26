@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
 
+public enum PlayerCharacters { Estoc, Lilith, Crag };
+
 public class MOPlayerInputController : MOMovementController
 {
+    public PlayerCharacters playerCharacter;
     public GameObject Player; // the player to be controlled
 
     private Transform gameCamera; // the transform of the main game camera
@@ -34,7 +37,6 @@ public class MOPlayerInputController : MOMovementController
         //set movemnt values
         moveSpeed = 5.0f;
         jumpHeight = 500.0f;
-
     }
 
     // Update is called once per frame
@@ -85,20 +87,19 @@ public class MOPlayerInputController : MOMovementController
 
         //get the input for horizontal and vertical axis through unity controls
         hMov = CrossPlatformInputManager.GetAxis("Horizontal");
-         vMov = CrossPlatformInputManager.GetAxis("Vertical");
+        vMov = CrossPlatformInputManager.GetAxis("Vertical");
         
-
         //calculate movement relative to the camera
         gameCameraForward = Vector3.Scale(gameCamera.forward, new Vector3(1, 0, 1)).normalized;
         moveDirection = vMov * gameCameraForward + hMov * gameCamera.right;
         //Debug.Log("player move direction is " + moveDirection);
 
         //call the method on the controller script sending the required vars
-        if (sprinting)
+        if (sprinting && (hMov != 0 || vMov != 0))
         {
             Player.GetComponent<MOMovementController>().Move(moveDirection, moveSpeed*1.5f);
         }
-        else if (!sprinting)
+        else if (!sprinting && (hMov != 0 || vMov != 0))
         {
             Player.GetComponent<MOMovementController>().Move(moveDirection, moveSpeed);
         }

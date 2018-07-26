@@ -21,8 +21,7 @@ public class ChickenAI : MonoBehaviour {
     private LayerMask mask = 1 << 9;            // https://docs.unity3d.com/Manual/Layers.html
     private bool waiting = false;
     private bool retreating = false;
-
-
+    
 	// Use this for initialization
 	void Awake ()
     {
@@ -120,11 +119,7 @@ public class ChickenAI : MonoBehaviour {
     private void Retreat (Vector3 origin)
     {
         Vector3 retreatPoint;
-        retreatPoint = new Vector3(origin.x - 50f, origin.y, origin.z);
-
-        NavMeshHit hit;
-        NavMesh.SamplePosition(retreatPoint, out hit, 5, 1);
-        Vector3 finalPostion = hit.position;
+        retreatPoint = new Vector3(origin.x - 40f, origin.y, origin.z);
 
         agent.SetDestination(retreatPoint);
         retreating = true;
@@ -163,10 +158,12 @@ public class ChickenAI : MonoBehaviour {
     // Drop pots when hit
     public void KickChicken()
     {
-        m_Rigidbody.AddForce(new Vector3(m_Rigidbody.velocity.x, 200, m_Rigidbody.velocity.z));
+        m_Rigidbody.AddForce(new Vector3(m_Rigidbody.velocity.x, 300, m_Rigidbody.velocity.z));
         GameObject potion = Instantiate(manaPot);
         potion.transform.position = this.transform.position;
-        potion.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(10, -10), 200, Random.Range(10, -10)));
+        potion.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(10, -10), 400, Random.Range(10, -10)));
         ++timesHit;
+        GetBoundaries(wanderCentre);
+        NewGoal(CameraToGround());
     }
 }

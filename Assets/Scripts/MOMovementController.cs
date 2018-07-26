@@ -10,7 +10,7 @@ public class MOMovementController : MonoBehaviour
     private float timerA = 0.0f;
     private float timerC = 0.0f;
     private float timerJ = 0.0f;
-    private int attackCounter;
+    [HideInInspector] public int attackCounter;
     public bool freeze;                                     // Freeze Character when hit by magic
 
     public Transform m_GroundCheck;                         // A position marking where to check if the player is grounded.
@@ -20,7 +20,6 @@ public class MOMovementController : MonoBehaviour
 
     [SerializeField] private float magicDamage;             // Base magic damage 
     [SerializeField] private int magicLevel;                // magicDamage multiplied by magicLevel
-    [SerializeField] private int playerCharacer;            // 0 = Estoc, 1 = Lilith, 2 = Crag.
     
     public int entityID = 0;
     public Vector3 entityRotation;
@@ -34,6 +33,7 @@ public class MOMovementController : MonoBehaviour
     // Use this for initialization
     protected virtual void Awake()
     {
+        
         //check what entity the script is attached to used for debugging and testing reasons and possible mounting controls
         if (entityID == 1) // ID 1 = PLAYER
         {
@@ -66,6 +66,7 @@ public class MOMovementController : MonoBehaviour
     {
         //scriptEntity.transform.rotation = Quaternion.Euler(entityRotation*entityTurnSpeed*Time.deltaTime);
         scriptEntity.transform.rotation = Quaternion.Lerp(scriptEntity.transform.rotation, Quaternion.Euler(entityRotation), entityTurnSpeed * Time.deltaTime);
+
         if (timerA > 0)
         {
             timerA -= Time.deltaTime;
@@ -82,6 +83,7 @@ public class MOMovementController : MonoBehaviour
         {
             timerC -= Time.deltaTime;
         }
+
         if (timerJ > 0)
         {
             timerJ -= Time.deltaTime;
@@ -100,7 +102,6 @@ public class MOMovementController : MonoBehaviour
                 m_Grounded = true;
                 m_Anim.SetBool("jump", false);
             }
-
         }
 
         if (m_Anim != null)
@@ -114,12 +115,6 @@ public class MOMovementController : MonoBehaviour
 
         m_Anim.SetFloat("velocity", groundVelocity.magnitude);
 
-        if (groundVelocity.magnitude != 0)
-        {
-            m_Audio.clip = m_AudioClips[0];
-            m_Audio.Play();
-        }
-
         // Reset relevent animation parameters
         //m_Anim.SetBool("attack", false);
         //m_Anim.SetBool("magic", false);
@@ -129,11 +124,15 @@ public class MOMovementController : MonoBehaviour
     // method is called when needed from an input script
     public void Move(Vector3 mov, float speed)
     {
-        if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead") || !m_Anim.GetBool("attack") || !freeze)
+        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !m_Anim.GetBool("attack") && !freeze
+            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knockedDown") && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
             //move the gameobject based on the vars from the input script
             //scriptEntity.transform.parent.Translate(mov * speed * Time.deltaTime);
             m_Rigidbody.velocity = new Vector3(mov.x * speed, m_Rigidbody.velocity.y, mov.z * speed);
+
+            m_Audio.clip = m_AudioClips[0];
+            m_Audio.Play();
 
             if (mov.x < 0 & mov.z == 0) //left
             {
@@ -173,7 +172,8 @@ public class MOMovementController : MonoBehaviour
     //called from input controller 
     public void Jump(float height)
     {
-        if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead") || !freeze)
+        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
+            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knockedDown") && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
             if (timerJ <= 0.0f && m_Grounded)
             {
@@ -188,13 +188,13 @@ public class MOMovementController : MonoBehaviour
     //called from input controller
     public void Attack(bool sprinting)
     {
-        if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead") || !freeze)
+        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze 
+            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knockedDown") && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
             m_Rigidbody.velocity = new Vector3(0, 0, 0);
             // Debug.Log(scriptEntity.name + " attacking");
             if (timerA == 0)
             {
-                // Change this is a ground check instead
                 if (timerJ > 0 && !m_Grounded)
                 {
                     //Debug.Log("jump attack used");
@@ -243,43 +243,25 @@ public class MOMovementController : MonoBehaviour
     //called from player's input controller only
     public void Magic()
     {
-        if (!m_Anim.GetBool("hurt") || !m_Anim.GetBool("dead"))
+        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
+            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knockedDown") && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
             if (GetComponent<PlayerHealth>().currentMagicLevel > 0)
             {
                 //Debug.Log(scriptEntity.name + " using magic");
-                GetComponent<Magic>().CastMagic(this.gameObject, magicDamage, GetComponent<PlayerHealth>().currentMagicLevel, playerCharacer);
+                GetComponent<Magic>().CastMagic(this.gameObject, magicDamage, GetComponent<PlayerHealth>().currentMagicLevel, GetComponent<MOPlayerInputController>().playerCharacter);
                 GetComponent<PlayerHealth>().UseMana();
 
                 m_Anim.SetBool("magic", true);
                 m_Audio.clip = m_AudioClips[1];
                 m_Audio.Play();
-                //check for different players 
-                /*
-                if (gameObject.name == "")
-                {
-                //use the magic for player 1
-                }
-                else if (gameObject.name == "")
-                {
-                //use the magic for player 2
-                }
-                else if (gameObject.name == "")
-                {
-                use the magic for player 3
-                }
-                */
-            }
-            else
-            {
-                
             }
         }
     }
 
     public void KnockBack(float dir)
     {
-        m_Anim.SetBool("knockback", true);
+        m_Anim.SetBool("knockedDown", true);
         m_Rigidbody.velocity = new Vector3(0, 0, 0);
         m_Rigidbody.AddForce((dir * 500), 500,0);
     }
@@ -287,15 +269,20 @@ public class MOMovementController : MonoBehaviour
     public void Death()
     {
         m_Anim.SetBool("dead", true);
+        m_Anim.SetBool("knockedDown", true);
         m_Audio.clip = m_AudioClips[0];
         m_Audio.Play();
-        if (this.tag == "Player")
+        this.gameObject.layer = 15;
+        StartCoroutine(FallThroughFloor(5));
+        if (this.tag != "Player")
         {
-            // Restart Level
+            Destroy(this.transform.parent.gameObject, 7);
         }
-        else
-        {
-            Destroy(this.transform.parent.gameObject, 3);
-        }
+    }
+
+    IEnumerator FallThroughFloor (float waittimer)
+    {
+        yield return new WaitForSeconds(waittimer);
+        GetComponent<Collider>().enabled = false;
     }
 }

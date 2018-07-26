@@ -17,22 +17,29 @@ public class Health : MonoBehaviour
         m_Audio = GetComponent<AudioSource>();
     }
 
-    public void TakeDamage(int damageTaken, bool knockBack)
+    public void TakeDamage(int damageTaken, bool knockBack , float dir)
     {
-        health -= damageTaken;
-        //update UI health
-        if (health <= 0)
+        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
-            Debug.Log(gameObject.name + " has died");
-            GetComponent<MOMovementController>().Death();
-            //go to game over screen or back to menu?
-        }
-        else if (!knockBack)
-        {
-            Debug.Log(gameObject.name + " took " + damageTaken + " damage, Leaving them at " + health + " health");
-            m_Anim.SetBool("hurt", true);
-            m_Audio.clip = m_AudioClips[0];
-            m_Audio.Play();
+            health -= damageTaken;
+            //update UI health
+            if (health <= 0)
+            {
+                //Debug.Log(gameObject.name + " has died");
+                GetComponent<MOMovementController>().Death();
+                //go to game over screen or back to menu?
+            }
+            else if (!knockBack)
+            {
+                //Debug.Log(gameObject.name + " took " + damageTaken + " damage, Leaving them at " + health + " health");
+                m_Anim.SetBool("hurt", true);
+                m_Audio.clip = m_AudioClips[0];
+                m_Audio.Play();
+            }
+            else
+            {
+                GetComponent<MOMovementController>().KnockBack(dir);
+            }
         }
     }
 }

@@ -125,8 +125,9 @@ public class Encounter_Manager : MonoBehaviour {
         // Find all enemies in the scene and return the number of enemies.
         //TODO: Maybe change this so its triggered when an enemy is killed and not every frame. (for performance)
         GameObject[] enemiesInScene = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] chickens = GameObject.FindGameObjectsWithTag("Chicken");
 
-        return enemiesInScene.Length;
+        return (enemiesInScene.Length + chickens.Length);
     }
 
     private void DebugEncounters()
