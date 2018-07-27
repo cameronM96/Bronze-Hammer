@@ -8,12 +8,14 @@ public class Attack : MonoBehaviour
     public int comboMultiplier = 2;
     public bool playerWeapon;
     [SerializeField] private GameObject parentObject;
+    private Animator m_Anim;
 
     [SerializeField] private AudioSource m_Audio;
 
     private void Start()
     {
         parentObject = this.transform.root.GetChild(0).gameObject;
+        m_Anim = parentObject.GetComponent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,7 +25,8 @@ public class Attack : MonoBehaviour
         {
             if (other.gameObject.GetComponent<Health>() && other.gameObject.tag == "Enemy")
             {
-                if (parentObject.GetComponent<MOMovementController>().attackCounter >= 3)
+                if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack3 (KNOCKBACK)") ||
+                    m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Dash Attack"))
                 {
                     float dir = 0;
                     if (other.transform.position.x > transform.parent.position.x)
@@ -52,7 +55,8 @@ public class Attack : MonoBehaviour
         {
             if (other.gameObject.GetComponent<PlayerHealth>() && other.gameObject.tag == "Player")
             {
-                if (parentObject.GetComponent<MOMovementController>().attackCounter >= 3)
+                if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack3 (KNOCKBACK)") ||
+                    m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Dash Attack"))
                 {
                     float dir = 0;
                     if (other.transform.position.x > transform.parent.position.x)

@@ -8,10 +8,12 @@ public class PlayerHealth : MonoBehaviour {
 
     public float health;
     [SerializeField] private Image healthBar;
+    [SerializeField] private Text healthText;
     [SerializeField] private float maxHealth;
     public int mana;
-    private int maxMana = 0;
+    private int totalMaxMana = 0;
     public Image[] manaBars;
+    [SerializeField] private Text manaText;
     public int[] manaPerLevel;
     public Text level;
     public int currentMagicLevel;
@@ -30,9 +32,13 @@ public class PlayerHealth : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
+        // Default Health
         health = 100;
         maxHealth = health;
         healthBar.fillAmount = 1;
+        healthText.text = "" + health + "/" + maxHealth;
+
+        // Find Components
         m_Anim = GetComponent<Animator>();
         m_Audio = GetComponent<AudioSource>();
         if (!GameObject.FindGameObjectWithTag("PlayerLives"))
@@ -48,11 +54,14 @@ public class PlayerHealth : MonoBehaviour {
         }
         livesUI.text = ("" + playerLives.lives);
 
-        // Get Max mana
+        // Default mana
         foreach (int levelmax in manaPerLevel)
         {
-            maxMana += levelmax;
+            totalMaxMana += levelmax;
         }
+
+        manaText.text = "" + mana + "/" + manaPerLevel[currentMagicLevel];
+        level.text = "" + currentMagicLevel + "/" + manaPerLevel.Length;
     }
 
     // Update is called once per frame
@@ -74,6 +83,7 @@ public class PlayerHealth : MonoBehaviour {
                 health = 0;
 
             healthBar.fillAmount = (health / maxHealth);
+            healthText.text = "" + health + "/" + maxHealth;
             //update UI health
             if (health <= 0)
             {
@@ -114,8 +124,8 @@ public class PlayerHealth : MonoBehaviour {
     public void AddMana(int manaValue)
     {
         mana += manaValue;
-        if (mana > maxMana)
-            mana = maxMana;
+        if (mana > totalMaxMana)
+            mana = totalMaxMana;
 
         float manaleft = mana;
         int magiclevel = 0;
@@ -132,10 +142,25 @@ public class PlayerHealth : MonoBehaviour {
                 currentMana = maxMana;
                 manaleft -= maxMana;
                 ++magiclevel;
+                if (mana != totalMaxMana)
+                {
+                    manaText.text = "" + 0 + "/" + manaPerLevel[magiclevel];
+                }
+                else
+                {
+                    manaText.text = "" + currentMana + "/" + manaPerLevel[magiclevel -1];
+                }
+            }
+            else if (manaleft != 0)
+            {
+                // All mana has been accounted for
+                currentMana = manaleft;
+                manaleft = 0;
+                manaText.text = "" + currentMana + "/" + manaPerLevel[magiclevel];
             }
             else
             {
-                // All mana has been acounted for
+                // All mana has been accounted for
                 currentMana = manaleft;
                 manaleft = 0;
             }
@@ -145,7 +170,7 @@ public class PlayerHealth : MonoBehaviour {
         }
 
         // Update Magic level
-        level.text = "" + magiclevel;
+        level.text = "" + magiclevel + "/" + manaPerLevel.Length;
         currentMagicLevel = magiclevel;
     }
 
@@ -183,6 +208,7 @@ public class PlayerHealth : MonoBehaviour {
         // Update Magic level
         level.text = "" + magiclevel;
         currentMagicLevel = magiclevel;
+        manaText.text = "" + mana + "/" + manaPerLevel[magiclevel];
     }
 
     IEnumerator RestartLevel ()

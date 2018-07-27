@@ -65,7 +65,9 @@ public class MOMovementController : MonoBehaviour
     protected virtual void Update()
     {
         //scriptEntity.transform.rotation = Quaternion.Euler(entityRotation*entityTurnSpeed*Time.deltaTime);
-        scriptEntity.transform.rotation = Quaternion.Lerp(scriptEntity.transform.rotation, Quaternion.Euler(entityRotation), entityTurnSpeed * Time.deltaTime);
+        scriptEntity.transform.rotation = 
+            Quaternion.Lerp(scriptEntity.transform.rotation, 
+            Quaternion.Euler(entityRotation), entityTurnSpeed * Time.deltaTime);
 
         if (timerA > 0)
         {
@@ -124,8 +126,9 @@ public class MOMovementController : MonoBehaviour
     // method is called when needed from an input script
     public void Move(Vector3 mov, float speed)
     {
-        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !m_Anim.GetBool("attack") && !freeze
-            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knockedDown") && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
+        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !m_Anim.GetBool("attack") && 
+            !freeze && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") && 
+            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
             //move the gameobject based on the vars from the input script
             //scriptEntity.transform.parent.Translate(mov * speed * Time.deltaTime);
@@ -173,7 +176,8 @@ public class MOMovementController : MonoBehaviour
     public void Jump(float height)
     {
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
-            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knockedDown") && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
+            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") && 
+            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
             if (timerJ <= 0.0f && m_Grounded)
             {
@@ -189,7 +193,8 @@ public class MOMovementController : MonoBehaviour
     public void Attack(bool sprinting)
     {
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze 
-            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knockedDown") && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
+            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") && 
+            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
             m_Rigidbody.velocity = new Vector3(0, 0, 0);
             // Debug.Log(scriptEntity.name + " attacking");
@@ -244,12 +249,14 @@ public class MOMovementController : MonoBehaviour
     public void Magic()
     {
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
-            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knockedDown") && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
+            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") && 
+            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
             if (GetComponent<PlayerHealth>().currentMagicLevel > 0)
             {
                 //Debug.Log(scriptEntity.name + " using magic");
-                GetComponent<Magic>().CastMagic(this.gameObject, magicDamage, GetComponent<PlayerHealth>().currentMagicLevel, GetComponent<MOPlayerInputController>().playerCharacter);
+                GetComponent<Magic>().CastMagic(this.gameObject, magicDamage, 
+                    GetComponent<PlayerHealth>().currentMagicLevel, GetComponent<MOPlayerInputController>().playerCharacter);
                 GetComponent<PlayerHealth>().UseMana();
 
                 m_Anim.SetBool("magic", true);

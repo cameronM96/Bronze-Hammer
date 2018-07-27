@@ -50,10 +50,10 @@ public class Encounter_Manager : MonoBehaviour {
                 foreach (GameObject enemy in 
                     m_EncountersList[encounterIndex].waves[m_EncountersList[encounterIndex].waveNumber].rightSideEnemies)
                 {
-                    //TODO: Fan the enemies out a bit (like +/- 2 or 3 z each iteration)
                     GameObject newEnemy;
                     Transform newSpawnPoint =  rightSpawnPoint;
 
+                    // Determine spawn location
                     if (switchSides1)
                     {
                         newSpawnPoint.position =
@@ -83,6 +83,8 @@ public class Encounter_Manager : MonoBehaviour {
                 {
                     GameObject newEnemy;
                     Transform newSpawnPoint = leftSpawnPoint;
+
+                    // Determine spawn location
                     if (switchSides2)
                     {
                         newSpawnPoint.position =
