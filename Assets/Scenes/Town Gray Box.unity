@@ -10551,7 +10551,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 17.804218, y: 35.963497, z: 1}
-  m_Center: {x: -2.0265179, y: 0.4565487, z: 0}
+  m_Center: {x: -2.0265179, y: 0.4565487, z: 2.78}
 --- !u!1 &895206247
 GameObject:
   m_ObjectHideFlags: 0
@@ -16682,6 +16682,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
       propertyPath: m_EncountersList.Array.data[1].waves.Array.data[0].leftSideEnemies.Array.size
       value: 2
       objectReference: {fileID: 0}
@@ -16693,17 +16698,27 @@ Prefab:
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
       propertyPath: m_EncountersList.Array.data[2].waves.Array.data[0].leftSideEnemies.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
       propertyPath: m_EncountersList.Array.data[2].waves.Array.data[1].leftSideEnemies.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
       propertyPath: m_EncountersList.Array.data[2].waves.Array.data[2].leftSideEnemies.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.data[0].leftSideEnemies.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.data[1].leftSideEnemies.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
@@ -16729,6 +16744,21 @@ Prefab:
         type: 2}
       propertyPath: m_EncountersList.Array.data[2].waves.Array.data[2].rightSideEnemies.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[0].waves.Array.data[0].rightSideEnemies.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.data[0].rightSideEnemies.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.data[1].rightSideEnemies.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4380639367605570, guid: cf6971c61016ac54d8eeae98d2545fba, type: 2}
       propertyPath: m_LocalPosition.x
@@ -16848,13 +16878,13 @@ Prefab:
         type: 2}
       propertyPath: m_EncountersList.Array.data[0].waves.Array.data[0].rightSideEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 1487537729578142, guid: 5f4b7b0e5d629864b9fbe353823a406a,
+      objectReference: {fileID: 1315216203428494, guid: 3535cec1c44e2164599dd6600968c555,
         type: 2}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
       propertyPath: m_EncountersList.Array.data[0].waves.Array.data[0].rightSideEnemies.Array.data[1]
       value: 
-      objectReference: {fileID: 1487537729578142, guid: 5f4b7b0e5d629864b9fbe353823a406a,
+      objectReference: {fileID: 1315216203428494, guid: 3535cec1c44e2164599dd6600968c555,
         type: 2}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
@@ -16881,31 +16911,31 @@ Prefab:
         type: 2}
       propertyPath: m_EncountersList.Array.data[1].waves.Array.data[0].rightSideEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 1731136542514964, guid: 19762bf7bb52c90429404f0cd0213de5,
+      objectReference: {fileID: 1963266348105856, guid: eeefc1ee997e84b499d67cc6714bed5b,
         type: 2}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
       propertyPath: m_EncountersList.Array.data[1].waves.Array.data[0].leftSideEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 1487537729578142, guid: 5f4b7b0e5d629864b9fbe353823a406a,
+      objectReference: {fileID: 1069602969923176, guid: 21dc264946672fa4bbe192b68c7de95c,
         type: 2}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
       propertyPath: m_EncountersList.Array.data[1].waves.Array.data[0].leftSideEnemies.Array.data[1]
       value: 
-      objectReference: {fileID: 1121111852689202, guid: 10f1e544e19005643b22c3ba6600f29c,
+      objectReference: {fileID: 1317050819945318, guid: ef37070ba2f41574b96c01cb58cb667a,
         type: 2}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
       propertyPath: m_EncountersList.Array.data[1].waves.Array.data[1].rightSideEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 1401349503216182, guid: 5092d68986dd611409335de5443fd7bd,
+      objectReference: {fileID: 1105496031313118, guid: 7e32716baa6d82d42b06161aef86db2c,
         type: 2}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
       propertyPath: m_EncountersList.Array.data[1].waves.Array.data[1].leftSideEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 1827697471794374, guid: b9b6682bc0d02934cabf0105ff32f870,
+      objectReference: {fileID: 1225867758863036, guid: 47adeba1aa2f69c4888c9b17e5f368db,
         type: 2}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
@@ -16926,7 +16956,7 @@ Prefab:
         type: 2}
       propertyPath: m_EncountersList.Array.data[2].waves.Array.data[0].rightSideEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 1311574417885848, guid: 5d597681b42fdbd41820e9a3efafbd6d,
+      objectReference: {fileID: 1350052564802316, guid: 2bef1cb8a7d5d90448485fc328c87813,
         type: 2}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
@@ -16938,19 +16968,19 @@ Prefab:
         type: 2}
       propertyPath: m_EncountersList.Array.data[2].waves.Array.data[0].leftSideEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 1353566493829694, guid: 6827f99989ea5ec42a966ef67fd143fd,
+      objectReference: {fileID: 1057519227488368, guid: d0ca0720383abb24e81a3e9f3190723f,
         type: 2}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
       propertyPath: m_EncountersList.Array.data[2].waves.Array.data[0].leftSideEnemies.Array.data[1]
       value: 
-      objectReference: {fileID: 1454675613116182, guid: ce79300f6d7b7044981467fd5834cb17,
+      objectReference: {fileID: 1057519227488368, guid: d0ca0720383abb24e81a3e9f3190723f,
         type: 2}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
       propertyPath: m_EncountersList.Array.data[2].waves.Array.data[1].leftSideEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 1454675613116182, guid: ce79300f6d7b7044981467fd5834cb17,
+      objectReference: {fileID: 1963266348105856, guid: eeefc1ee997e84b499d67cc6714bed5b,
         type: 2}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
@@ -16962,19 +16992,19 @@ Prefab:
         type: 2}
       propertyPath: m_EncountersList.Array.data[2].waves.Array.data[1].rightSideEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 1827697471794374, guid: b9b6682bc0d02934cabf0105ff32f870,
+      objectReference: {fileID: 1963266348105856, guid: eeefc1ee997e84b499d67cc6714bed5b,
         type: 2}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
       propertyPath: m_EncountersList.Array.data[2].waves.Array.data[2].rightSideEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 1861345842559246, guid: c7dfb72ea63d6d24aa669f9fbba150f0,
+      objectReference: {fileID: 1943132236885468, guid: f50994be8754f024e95af67b4ab745ef,
         type: 2}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
       propertyPath: m_EncountersList.Array.data[2].waves.Array.data[2].rightSideEnemies.Array.data[1]
       value: 
-      objectReference: {fileID: 1943919693854386, guid: 8482ae1eb5198ab499979a385d35d4f5,
+      objectReference: {fileID: 1928420465225166, guid: abc9f604e8ed436488243be9196dfbd7,
         type: 2}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
@@ -16987,6 +17017,62 @@ Prefab:
       propertyPath: m_EncountersList.Array.data[2].waves.Array.data[2].leftSideEnemies.Array.data[1]
       value: 
       objectReference: {fileID: 1402101116731038, guid: 16a43cce0ca52f0429019ad9f574b62e,
+        type: 2}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[0].waves.Array.data[0].name
+      value: 'Wave: 1'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.data[0].name
+      value: 'Wave: 1'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.data[1].name
+      value: 'Wave: 2'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.data[2].name
+      value: 'Wave: 3'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.data[0].rightSideEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 1704039824969990, guid: 5b47da40c16483546b73aba43e064739,
+        type: 2}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.data[0].rightSideEnemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 1731958637972180, guid: c440594100c27fe42881595f7ef7f295,
+        type: 2}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.data[0].leftSideEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 1861345842559246, guid: c7dfb72ea63d6d24aa669f9fbba150f0,
+        type: 2}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.data[0].leftSideEnemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 1402101116731038, guid: 16a43cce0ca52f0429019ad9f574b62e,
+        type: 2}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.data[1].rightSideEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 1963266348105856, guid: eeefc1ee997e84b499d67cc6714bed5b,
+        type: 2}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.data[1].leftSideEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 1963266348105856, guid: eeefc1ee997e84b499d67cc6714bed5b,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf6971c61016ac54d8eeae98d2545fba, type: 2}
