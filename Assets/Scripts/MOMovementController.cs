@@ -11,7 +11,9 @@ public class MOMovementController : MonoBehaviour
     private float timerC = 0.0f;
     private float timerJ = 0.0f;
     [HideInInspector] public int attackCounter;
-    public bool freeze;                                     // Freeze Character when hit by magic
+    [HideInInspector] public bool freeze;                   // Freeze Character when hit by magic
+    [HideInInspector] public bool mounted = false;          // Redirects animations to mount
+    [HideInInspector] public GameObject mount;              // The mount gameobject
 
     public Transform m_GroundCheck;                         // A position marking where to check if the player is grounded.
     const float k_GroundedRadius = .01f;                    // Radius of the overlap circle to determine if grounded
@@ -33,7 +35,6 @@ public class MOMovementController : MonoBehaviour
     // Use this for initialization
     protected virtual void Awake()
     {
-        
         //check what entity the script is attached to used for debugging and testing reasons and possible mounting controls
         if (entityID == 1) // ID 1 = PLAYER
         {
@@ -42,10 +43,6 @@ public class MOMovementController : MonoBehaviour
         else if (entityID == 2) // ID 2 = ENEMY
         {
             scriptEntity = this.gameObject;
-        }
-        else if (entityID == 3) // ID 3 = MOUNT
-        {
-            Debug.Log("Controller working for mount with name " + gameObject.name);
         }
         else // if no ID matched return this error with what entity it is not working for
         {
@@ -73,11 +70,20 @@ public class MOMovementController : MonoBehaviour
         {
             timerA -= Time.deltaTime;
         }
-        else if (timerA <= 0 && attackTrigger.enabled == true)
+        else if (timerA <= 0 )
         {
-            timerA = 0;
-            attackTrigger.enabled = false;
-            m_Anim.SetBool("attack", false);
+            
+            if (!mounted && attackTrigger.enabled == true)
+            {
+                attackTrigger.enabled = false;
+                m_Anim.SetBool("attack", false);
+                timerA = 0;
+            }
+            else if (mounted)
+            {
+                timerA = 0;
+                mount.GetComponent<MountingController>().AttackOff();
+            }
             //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
         }
 
@@ -200,46 +206,54 @@ public class MOMovementController : MonoBehaviour
             // Debug.Log(scriptEntity.name + " attacking");
             if (timerA == 0)
             {
-                if (timerJ > 0 && !m_Grounded)
+                if (!mounted)
                 {
-                    //Debug.Log("jump attack used");
-                    attackCounter = 0;
-                    m_Anim.SetBool("attack", true);
-                    attackTrigger.enabled = true;
-                    //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
-                    timerA = 1.0f;
-                    //put jump attack here
-                }
-                else if (attackCounter >= 3)
-                {
-                    //Debug.Log("3 attack combo used");
-                    attackCounter = 0;
-                    m_Anim.SetBool("attack", true);
-                    attackTrigger.enabled = true;
-                    //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
-                    timerA = 0.25f;
-                    //put knockback here
-                }
-                else if (sprinting)
-                {
-                    //Debug.Log("charge attack used");
-                    m_Anim.SetBool("charge", true);
-                    attackTrigger.enabled = true;
-                    //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
-                    //put knockback here
+                    if (timerJ > 0 && !m_Grounded)
+                    {
+                        //Debug.Log("jump attack used");
+                        attackCounter = 0;
+                        m_Anim.SetBool("attack", true);
+                        attackTrigger.enabled = true;
+                        //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+                        timerA = 1.0f;
+                        //put jump attack here
+                    }
+                    else if (attackCounter >= 3)
+                    {
+                        //Debug.Log("3 attack combo used");
+                        attackCounter = 0;
+                        m_Anim.SetBool("attack", true);
+                        attackTrigger.enabled = true;
+                        //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+                        timerA = 0.25f;
+                        //put knockback here
+                    }
+                    else if (sprinting)
+                    {
+                        //Debug.Log("charge attack used");
+                        m_Anim.SetBool("charge", true);
+                        attackTrigger.enabled = true;
+                        //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+                        //put knockback here
+                    }
+                    else
+                    {
+                        m_Anim.SetBool("attack", true);
+                        attackTrigger.enabled = true;
+                        //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+                        timerA = 0.25f;
+                        //attack animation and stuff here?
+                        attackCounter += 1;
+                        if (timerC == 0)
+                        {
+                            timerC = 1;
+                        }
+                    }
                 }
                 else
                 {
-                    m_Anim.SetBool("attack", true);
-                    attackTrigger.enabled = true;
-                    //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
-                    timerA = 0.25f;
-                    //attack animation and stuff here?
-                    attackCounter += 1;
-                    if (timerC == 0)
-                    {
-                        timerC = 1;
-                    }
+                    mount.GetComponent<MountingController>().Attack();
+                    timerA = 2f;
                 }
             }
         }
@@ -259,9 +273,17 @@ public class MOMovementController : MonoBehaviour
                     GetComponent<PlayerHealth>().currentMagicLevel, GetComponent<MOPlayerInputController>().playerCharacter);
                 GetComponent<PlayerHealth>().UseMana();
 
-                m_Anim.SetBool("magic", true);
                 m_Audio.clip = m_AudioClips[1];
                 m_Audio.Play();
+
+                if (mounted)
+                {
+                    mount.GetComponent<MountingController>().m_Anim.SetBool("magic", true);
+                }
+                else
+                {
+                    m_Anim.SetBool("magic", true);
+                }
             }
         }
     }
@@ -271,6 +293,11 @@ public class MOMovementController : MonoBehaviour
         m_Anim.SetBool("knockedDown", true);
         m_Rigidbody.velocity = new Vector3(0, 0, 0);
         m_Rigidbody.AddForce((dir * 500), 500,0);
+    
+        if(mounted)
+        {
+            mount.GetComponent<MountingController>().UnMounted();
+        }
     }
 
     public void Death()

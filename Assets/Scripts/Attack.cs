@@ -12,7 +12,7 @@ public class Attack : MonoBehaviour
 
     [SerializeField] private AudioSource m_Audio;
 
-    private void Start()
+    private void Awake()
     {
         parentObject = this.transform.root.GetChild(0).gameObject;
         m_Anim = parentObject.GetComponent<Animator>();
