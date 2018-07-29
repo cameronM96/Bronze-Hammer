@@ -65,7 +65,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4550304847354366}
   m_Layer: 0
-  m_Name: Halberd
+  m_Name: WEAPON
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -669,7 +669,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1402101116731038}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 37.01798, y: 1.524979e-15, z: -68.67895}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4705156920965266}
@@ -1268,7 +1268,7 @@ Animator:
   m_GameObject: {fileID: 1371685918761560}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 2cc399e80a5b19947890586a4216ccbe, type: 3}
-  m_Controller: {fileID: 9100000, guid: 43a3c00b264225f40891e70c17766c31, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6ce6827a9caa48d4eafe7cb173541d24, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1292,6 +1292,8 @@ MonoBehaviour:
   entityTurnSpeed: 10
   attackCounter: 0
   freeze: 0
+  mounted: 0
+  mount: {fileID: 0}
   m_GroundCheck: {fileID: 4299618192731296}
   m_WhatIsGround:
     serializedVersion: 2

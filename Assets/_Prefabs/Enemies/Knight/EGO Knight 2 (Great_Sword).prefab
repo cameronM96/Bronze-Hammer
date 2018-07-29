@@ -530,7 +530,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4078994808406080}
   m_Layer: 0
-  m_Name: Great Sword
+  m_Name: WEAPON
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -867,7 +867,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1731958637972180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 32.617043, y: 1.5545348e-15, z: -70.010025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4607743779989414}
@@ -1268,7 +1268,7 @@ Animator:
   m_GameObject: {fileID: 1438955894763052}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 2cc399e80a5b19947890586a4216ccbe, type: 3}
-  m_Controller: {fileID: 9100000, guid: 43a3c00b264225f40891e70c17766c31, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6ce6827a9caa48d4eafe7cb173541d24, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1308,6 +1308,8 @@ MonoBehaviour:
   entityTurnSpeed: 10
   attackCounter: 0
   freeze: 0
+  mounted: 0
+  mount: {fileID: 0}
   m_GroundCheck: {fileID: 4650925004604756}
   m_WhatIsGround:
     serializedVersion: 2
