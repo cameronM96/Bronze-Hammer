@@ -90,7 +90,7 @@ public class MountingController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //check so that you can have 2 mounts ride each other. 
-        if (other.tag == "Player" || other.tag == "AI")
+        if (other.tag == "Player" || other.tag == "Enemy")
         {
             Debug.Log("Collided with character, mounting");
             //check not already mounted by something

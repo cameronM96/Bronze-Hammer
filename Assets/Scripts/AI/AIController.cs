@@ -26,6 +26,7 @@ public class AIController : MOMovementController
     //private bool tooClose;
 
     public bool sprinting;
+    private bool stop;
 
     // Use this for initialization
     protected override void Awake ()
@@ -98,9 +99,24 @@ public class AIController : MOMovementController
         }
         else
         {
-            // Prevent movement if an AI is too close
-            //if (!tooClose)
-            m_character.Move(moveDirection, moveSpeed);
+            if (!stop)
+            {
+                // Prevent movement if an AI is too close
+                //if (!tooClose)
+                m_character.Move(moveDirection, moveSpeed);
+            }
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+            stop = true;
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+            stop = false;
     }
 }

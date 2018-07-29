@@ -6,8 +6,9 @@ using System.Linq;
 public class AIManager : MonoBehaviour {
     
     private GameObject[] enemies;
+    private GameObject[] mounts;
     private GameObject player;
-    [SerializeField] private float updateTimer = 0.5f;
+    [SerializeField] private float updateTimer = 2f;
     private float timer = 1f;
 
 	// Use this for initialization
@@ -41,6 +42,7 @@ public class AIManager : MonoBehaviour {
     {
         // Find all the enemies in the scene and store references to them
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        mounts = GameObject.FindGameObjectsWithTag("Mount");
     }
 
     // Determines which side of the player the AI's should move to.
@@ -57,7 +59,7 @@ public class AIManager : MonoBehaviour {
         // Get the points the AI want to move to.
         GameObject leftside = player.transform.parent.Find("LeftSide").gameObject;
         GameObject Rightside = player.transform.parent.Find("RightSide").gameObject;
-
+        
         // Determine which side of the player the AI should move to.
         foreach (GameObject enemy in enemies)
         {
@@ -114,8 +116,29 @@ public class AIManager : MonoBehaviour {
                     }
                 }
             }
-            //Debug.Log("Right side enemy count check 2: " + rightSideList.Count);
-            //Debug.Log("Left side enemy count check 2: " + leftSideList.Count);
+        }
+
+        foreach (GameObject mount in mounts)
+        {
+            if (!mount.GetComponent<MountingController>().isCurrentlyMounted)
+            {
+                int enemyIndex = 0;
+                int closestEnemyIndex = 0;
+                float closestEnemyDistance = 500f;
+                foreach (GameObject enemy in enemies)
+                {
+                    float distance;
+
+                    distance = Vector3.Distance(enemy.transform.position, mount.transform.position);
+
+                    if (distance < closestEnemyDistance)
+                        closestEnemyIndex = enemyIndex;
+
+                    ++enemyIndex;
+                }
+
+                enemies[closestEnemyIndex].GetComponent<AIController>().moveTarget = mount;
+            }
         }
     }
 }

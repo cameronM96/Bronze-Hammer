@@ -5,7 +5,7 @@ using UnityEngine;
 public class MOMovementController : MonoBehaviour
 {
     private GameObject scriptEntity;
-    [SerializeField] public Collider attackTrigger;
+    [SerializeField] public Collider[] attackTrigger;
     public float entityTurnSpeed = 10.0f;
     private float timerA = 0.0f;
     private float timerC = 0.0f;
@@ -55,7 +55,10 @@ public class MOMovementController : MonoBehaviour
         m_Anim.SetBool("grounded", true);
         m_Audio = GetComponent<AudioSource>();
 
-        attackTrigger.enabled = false;
+        foreach (Collider collider in attackTrigger)
+        {
+            collider.enabled = false;
+        }
         attackCounter = 0;
     }
 
@@ -73,9 +76,9 @@ public class MOMovementController : MonoBehaviour
         else if (timerA <= 0 )
         {
             
-            if (!mounted && attackTrigger.enabled == true)
+            if (!mounted && attackTrigger[0].enabled == true)
             {
-                attackTrigger.enabled = false;
+                attackTrigger[0].enabled = false;
                 m_Anim.SetBool("attack", false);
                 timerA = 0;
             }
@@ -213,7 +216,7 @@ public class MOMovementController : MonoBehaviour
                         //Debug.Log("jump attack used");
                         attackCounter = 0;
                         m_Anim.SetBool("attack", true);
-                        attackTrigger.enabled = true;
+                        attackTrigger[0].enabled = true;
                         //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
                         timerA = 1.0f;
                         //put jump attack here
@@ -223,7 +226,7 @@ public class MOMovementController : MonoBehaviour
                         //Debug.Log("3 attack combo used");
                         attackCounter = 0;
                         m_Anim.SetBool("attack", true);
-                        attackTrigger.enabled = true;
+                        attackTrigger[0].enabled = true;
                         //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
                         timerA = 0.25f;
                         //put knockback here
@@ -232,18 +235,35 @@ public class MOMovementController : MonoBehaviour
                     {
                         //Debug.Log("charge attack used");
                         m_Anim.SetBool("charge", true);
-                        attackTrigger.enabled = true;
+                        attackTrigger[0].enabled = true;
                         //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
                         //put knockback here
                     }
                     else
                     {
                         m_Anim.SetBool("attack", true);
-                        attackTrigger.enabled = true;
                         //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
                         timerA = 0.25f;
                         //attack animation and stuff here?
                         attackCounter += 1;
+
+                        if (attackCounter == 2)
+                        {
+                            switch (GetComponent<MOPlayerInputController>().playerCharacter)
+                            {
+                                case PlayerCharacters.Lilith:
+                                    attackTrigger[1].enabled = true;
+                                    break;
+                                default:
+                                    attackTrigger[0].enabled = true;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            attackTrigger[0].enabled = true;
+                        }
+
                         if (timerC == 0)
                         {
                             timerC = 1;
