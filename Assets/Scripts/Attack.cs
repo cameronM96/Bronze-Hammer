@@ -14,6 +14,12 @@ public class Attack : MonoBehaviour
 
     private void Awake()
     {
+        StartCoroutine(InitialiseWaitTimer());
+    }
+
+    IEnumerator InitialiseWaitTimer()
+    {
+        yield return new WaitForEndOfFrame();
         parentObject = this.transform.root.GetChild(0).gameObject;
         m_Anim = parentObject.GetComponent<Animator>();
     }
@@ -68,10 +74,12 @@ public class Attack : MonoBehaviour
                         dir = -1;
                     }
                     other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage * comboMultiplier, true, dir);
+                    GetComponent<Collider>().enabled = false;
                 }
                 else
                 {
                     other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage, false , 0);
+                    GetComponent<Collider>().enabled = false;
                     // Debug.Log(gameObject.transform.parent.name + " Hit the " + other.gameObject.name + " for " + attackDamage);
                 }
             }

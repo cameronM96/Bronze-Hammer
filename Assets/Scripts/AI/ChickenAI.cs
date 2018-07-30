@@ -29,12 +29,18 @@ public class ChickenAI : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         wanderCentre = CameraToGround();
         GetBoundaries(wanderCentre);
-        NewGoal(wanderCentre);
+        StartCoroutine(InitialiseWaitTimer());
         m_Rigidbody = GetComponent<Rigidbody>();
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    IEnumerator InitialiseWaitTimer()
+    {
+        yield return new WaitForEndOfFrame();
+        NewGoal(wanderCentre);
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         time += Time.deltaTime;
 
@@ -75,7 +81,7 @@ public class ChickenAI : MonoBehaviour {
     }
 
     // Get the boundaries for where chicken can move to (In cameraview and game area)
-    private void GetBoundaries (Vector3 origin)
+    public void GetBoundaries (Vector3 origin)
     {
         RaycastHit hit;
 
@@ -105,13 +111,20 @@ public class ChickenAI : MonoBehaviour {
     }
 
     // Find new place to walk too (Wander)
-    private void NewGoal (Vector3 origin)
+    public void NewGoal (Vector3 origin)
     {
         float x = Random.Range(minX, maxX);
         float y = origin.y;
         float z = Random.Range(minZ, maxZ); ;
         Vector3 newGoal = new Vector3(x, y, z);
 
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(newGoal, out hit, 100.0f, NavMesh.AllAreas))
+        {
+            newGoal = hit.position;
+        }
+
+        Debug.Log(newGoal);
         agent.SetDestination(newGoal);
     }
 
@@ -120,6 +133,12 @@ public class ChickenAI : MonoBehaviour {
     {
         Vector3 retreatPoint;
         retreatPoint = new Vector3(origin.x - 40f, origin.y, origin.z);
+
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(retreatPoint, out hit, 1.0f, NavMesh.AllAreas))
+        {
+            retreatPoint = hit.position;
+        }
 
         agent.SetDestination(retreatPoint);
         retreating = true;
@@ -139,7 +158,7 @@ public class ChickenAI : MonoBehaviour {
     }
 
     // Finds the centre point of the screen
-    private Vector3 CameraToGround()
+    public Vector3 CameraToGround()
     {
         // Raycast from camera down to the ground (Finds the centre of the screen)
         RaycastHit hit;
@@ -159,11 +178,34 @@ public class ChickenAI : MonoBehaviour {
     public void KickChicken()
     {
         m_Rigidbody.AddForce(new Vector3(m_Rigidbody.velocity.x, 300, m_Rigidbody.velocity.z));
-        GameObject potion = Instantiate(manaPot);
-        potion.transform.position = this.transform.position;
-        potion.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(10, -10), 400, Random.Range(10, -10)));
+        if (timesHit < maxTimesHit)
+        {
+            GameObject potion = Instantiate(manaPot);
+            potion.GetComponent<Rigidbody>().isKinematic = true;
+            potion.transform.position = new Vector3(this.transform.position.x, this.transform.position.y + 2, this.transform.position.z);
+            potion.GetComponent<Rigidbody>().isKinematic = false;
+            potion.transform.SetParent(null, false);
+            potion.GetComponent<Rigidbody>().AddForce(new Vector3(Random.Range(10, -10), 300, Random.Range(10, -10)));
+        }
+        else
+        {
+            Death();
+        }
         ++timesHit;
         GetBoundaries(wanderCentre);
         NewGoal(CameraToGround());
+    }
+
+    public void Death()
+    {
+        this.gameObject.layer = 15;
+        StartCoroutine(FallThroughFloor(5));
+        Destroy(this.gameObject, 7);
+    }
+
+    IEnumerator FallThroughFloor(float waittimer)
+    {
+        yield return new WaitForSeconds(waittimer);
+        GetComponentInChildren<Collider>().enabled = false;
     }
 }

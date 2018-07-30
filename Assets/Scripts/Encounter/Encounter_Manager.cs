@@ -71,8 +71,17 @@ public class Encounter_Manager : MonoBehaviour {
                         switchSides1 = !switchSides1;
                     }
 
-                    newEnemy = Instantiate(enemy, rightSpawnPoint);
-                    newEnemy.transform.parent = null;
+                    if (enemy.transform.GetChild(0).tag == "Chicken")
+                    {
+                        newEnemy = Instantiate(enemy);
+                        newEnemy.transform.parent = null;
+                        newEnemy.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(rightSpawnPoint.position);
+                    }
+                    else
+                    {
+                        newEnemy = Instantiate(enemy, rightSpawnPoint);
+                        newEnemy.transform.parent = null;
+                    }
 
                     z1 += 2;
                 }
@@ -102,9 +111,17 @@ public class Encounter_Manager : MonoBehaviour {
                         switchSides2 = !switchSides2;
                     }
 
-                    newEnemy = Instantiate(enemy, leftSpawnPoint);
-                    newEnemy.transform.parent = null;
-
+                    if (enemy.transform.GetChild(0).tag == "Chicken")
+                    {
+                        newEnemy = Instantiate(enemy);
+                        newEnemy.transform.parent = null;
+                        newEnemy.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(rightSpawnPoint.position);
+                    }
+                    else
+                    {
+                        newEnemy = Instantiate(enemy, rightSpawnPoint);
+                        newEnemy.transform.parent = null;
+                    }
                     z2 += 2;
                 }
                 

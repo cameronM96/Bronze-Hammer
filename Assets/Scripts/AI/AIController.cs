@@ -71,12 +71,12 @@ public class AIController : MOMovementController
         moveDirection = vMov * gameCameraForward + hMov * gameCamera.right;
 
         // add steering for when there are other AI in the way
-
+        float dist = Vector3.Distance(attackTarget.transform.position, enemy.transform.position);
+        //Debug.Log(dist);
         // Attack if enemy is close enough and roughly the same z position AND facing the player
-        if ((attackTarget.transform.position - enemy.transform.position).magnitude < 2 &&
-            (attackTarget.transform.position.z - enemy.transform.position.z < 0.2 &&
-            attackTarget.transform.position.z - enemy.transform.position.z > -0.2))
+        if (dist < 2)
         {
+            //Debug.Log("Attacking");
             attack = true;
         }
         else

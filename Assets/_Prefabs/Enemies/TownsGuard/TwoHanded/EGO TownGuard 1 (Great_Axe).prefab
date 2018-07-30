@@ -650,7 +650,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1057049043010834}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.984495, y: 1.6168294e-15, z: -72.81552}
+  m_LocalPosition: {x: -32.188667, y: -0.0000016845999, z: -5.0142484}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4065289194952026}
@@ -1144,7 +1144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6934da1c32407c845886daac3045813d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackTrigger: {fileID: 65859619313715716}
+  attackTrigger:
+  - {fileID: 65859619313715716}
   entityTurnSpeed: 10
   attackCounter: 0
   freeze: 0

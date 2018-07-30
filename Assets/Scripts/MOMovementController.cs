@@ -75,7 +75,6 @@ public class MOMovementController : MonoBehaviour
         }
         else if (timerA <= 0 )
         {
-            
             if (!mounted && attackTrigger[0].enabled == true)
             {
                 attackTrigger[0].enabled = false;
@@ -202,7 +201,7 @@ public class MOMovementController : MonoBehaviour
     public void Attack(bool sprinting)
     {
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze 
-            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") && 
+            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Knocked Down") && 
             !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
             m_Rigidbody.velocity = new Vector3(0, 0, 0);
@@ -249,14 +248,21 @@ public class MOMovementController : MonoBehaviour
 
                         if (attackCounter == 2)
                         {
-                            switch (GetComponent<MOPlayerInputController>().playerCharacter)
+                            if (this.tag == "Player")
                             {
-                                case PlayerCharacters.Lilith:
-                                    attackTrigger[1].enabled = true;
-                                    break;
-                                default:
-                                    attackTrigger[0].enabled = true;
-                                    break;
+                                switch (GetComponent<MOPlayerInputController>().playerCharacter)
+                                {
+                                    case PlayerCharacters.Lilith:
+                                        attackTrigger[1].enabled = true;
+                                        break;
+                                    default:
+                                        attackTrigger[0].enabled = true;
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                attackTrigger[0].enabled = true;
                             }
                         }
                         else

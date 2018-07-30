@@ -6,24 +6,40 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour {
 
     public Transform PauseBackground;
+    bool paused = false;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (PauseBackground.gameObject.activeInHierarchy == false)
-                {
-                PauseBackground.gameObject.SetActive(true);
-                }
+            if (paused)
+            {
+
+                Resume();
+            }
             else
             {
-                PauseBackground.gameObject.SetActive(false);
+                Pause();
             }
         }
     }
 
+    void Pause()
+    {
+        PauseBackground.gameObject.SetActive(true);
+        Time.timeScale = 0f;
+        paused = true;
+    }
+
+    void Resume()
+    {
+        PauseBackground.gameObject.SetActive(false);
+        Time.timeScale = 1f;
+        paused = false;
+    }
+
 	public void Quit ()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 0);
+        SceneManager.LoadScene(0);
     }
 }
