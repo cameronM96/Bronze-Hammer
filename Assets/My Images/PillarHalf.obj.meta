@@ -11,7 +11,12 @@ ModelImporter:
     2300000: PillarHalf
     3300000: PillarHalf
     4300000: PillarHalf
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: PillarHalfMat
+    second: {fileID: 2100000, guid: e9890bacd964d70498ac303c740917f1, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

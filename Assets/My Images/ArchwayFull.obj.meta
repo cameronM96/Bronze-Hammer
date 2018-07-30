@@ -11,7 +11,12 @@ ModelImporter:
     2300000: ArchwayFull
     3300000: ArchwayFull
     4300000: ArchwayFull
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ArchwayFullMat
+    second: {fileID: 2100000, guid: cb2e85352030bdd419fc64aa5d9ba7e6, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
