@@ -1203,10 +1203,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6934da1c32407c845886daac3045813d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackTrigger: {fileID: 135371509216844684}
+  attackTrigger:
+  - {fileID: 135371509216844684}
   entityTurnSpeed: 10
   attackCounter: 0
   freeze: 0
+  mounted: 0
+  mount: {fileID: 0}
   m_GroundCheck: {fileID: 4912482532979208}
   m_WhatIsGround:
     serializedVersion: 2

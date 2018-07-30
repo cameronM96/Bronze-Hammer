@@ -914,7 +914,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1643485702589674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -41.85, y: 0.15120566, z: -4.867532}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4942037496105816}
@@ -1117,7 +1117,7 @@ MonoBehaviour:
   attackDamage: 10
   comboMultiplier: 2
   playerWeapon: 0
-  knockback: 0
+  parentObject: {fileID: 0}
   m_Audio: {fileID: 0}
 --- !u!114 &114583906595962766
 MonoBehaviour:
@@ -1144,12 +1144,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6934da1c32407c845886daac3045813d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackTrigger: {fileID: 65697337489789704}
+  attackTrigger:
+  - {fileID: 65697337489789704}
   entityTurnSpeed: 10
+  attackCounter: 0
+  freeze: 0
+  mounted: 0
+  mount: {fileID: 0}
   m_GroundCheck: {fileID: 4974817980127120}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
+  magicDamage: 0
+  magicLevel: 0
   entityID: 2
   entityRotation: {x: 0, y: 0, z: 0}
   m_AudioClips:
@@ -1160,7 +1167,6 @@ MonoBehaviour:
   moveTarget: {fileID: 0}
   attackTarget: {fileID: 0}
   moveSpeed: 3
-  jumpHeight: 500
   sprinting: 0
 --- !u!136 &136266720464255276
 CapsuleCollider:

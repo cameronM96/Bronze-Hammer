@@ -68,10 +68,6 @@ public class MOPlayerInputController : MOMovementController
             sprinting = false;
             //Debug.Log("not sprinting");
         }
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("Main Menu Scene");
-        }
     }
 
     //called once per physics update
