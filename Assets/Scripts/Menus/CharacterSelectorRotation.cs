@@ -35,17 +35,17 @@ public class CharacterSelectorRotation : MonoBehaviour {
         if (index == 0)     //Reads the aray's index and adjusts other game objects based upon which entry in the array is selected
         {
             CharacterName.text = ("Estoc Slasher");
-            CharacterBio.text = ("A duelist with a silver \n tongue, well versed \n in the arts of \n fine swordplay \n and sleight of hand. \n A charming yet sadistic \n rogue who effortlessly \n and elegantly glides \n through battle with his \n dual use of magic and \n metal.");
+            CharacterBio.text = ("A DEULIST WITH A SILVER \n TONGUE, WELL VERSED \n IN THE ARTS OF \n FINE SWORDPLAY \n AND SLEIGHT OF HAND. \n A CHARMING YET SADISTIC \n ROGUE WHO EFFORTLESSLY \n AND ELEGANTLY GLIDES \n THROUGH BATTLE WITH HIS \n DUAL USE OF MAGIC AND \n METAL.");
         }
         if (index == 1)     //Reads the aray's index and adjusts other game objects based upon which entry in the array is selected
         {
             CharacterName.text = ("Lilith Spellshade");
-            CharacterBio.text = ("A dark and enigmatic \n sorceress of brilliant \n intellect. \n Although she may not \n be a master of the \n blade, her command \n of the arcane arts \n makes her a fearsome \n foe to be trifled with.");
+            CharacterBio.text = ("A DARK AND ENIGMATIC \n SORCERESS OF BRILLIANT \n INTELLECT. \n ALTHOUGH SHE MAY NOT \n BE A MASTER OF THE \n BLADE, HER COMMAND \n OF THE ARCANE ARTS \n MAKES HER A FEARSOME \n FOE TO BE TRIFLED WITH.");
         }
         if (index == 2)     //Reads the aray's index and adjusts other game objects based upon which entry in the array is selected
         {
             CharacterName.text = ("Crag Rockhand");
-            CharacterBio.text = ("Son of a great barbarian \n chief, revered by his \n people for his monstrous \n strength and feared by \n his foes for his \n insatiable thirst for \n battle. \n This warrior has yet to \n find a challenge that he \n couldn’t solve with his \n great axe and instinct \n for bloodshed.");
+            CharacterBio.text = ("SON OF A GREAT BARBARIAN \n CHIEF, REVERED BY HIS \n PEOPLE FOR HIS MONSTROUS \n STRENGTH AND FEARED BY \n HIS FOES FOR HIS \n INSATIABLE THIRST FOR \n BATTLE. \n THIS WARRIOR HAS YET TO \n FIND A CHALLENGE THAT HE \n COULDN’T SOLVE WITH HIS \n GREAT AXE AND INSTINCT \n FOR BLOODSHED.");
         }
         Wait();
     }
