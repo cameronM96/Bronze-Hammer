@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CharacterSelectorRotation : MonoBehaviour {
 
@@ -11,18 +12,15 @@ public class CharacterSelectorRotation : MonoBehaviour {
     public Text CharacterName;
     public Text CharacterBio;
     public int HeavyRotation;
-    private bool Estoc = false;
-    private bool Lilith = false;
-    private bool Crag = false;
     private bool allowRotate;
     [SerializeField] private float waitTimer;
+    private SelectedPlayer selectedPlayer;
+    private ProceedToLevel proceedToLevel;
 
     private void Start()
     {
-        //Sets all characters to false to wait for selection
-        Estoc = false;
-        Lilith = false;
-        Crag = false;
+        selectedPlayer = GameObject.FindGameObjectWithTag("Character Selector").GetComponent<SelectedPlayer>();
+        proceedToLevel = GameObject.FindGameObjectWithTag("Proceed To Level").GetComponent<ProceedToLevel>();
 
         allowRotate = true;     //Dictates wether or not the Game Object housing the player models rotates and if the character list array's index can change
         HeavyRotation = 0;      //Sets the Game Object housing the player models rotation to 0
@@ -93,16 +91,18 @@ public class CharacterSelectorRotation : MonoBehaviour {
     {
         if(index == 0)
         {
-            Estoc = true;
+            selectedPlayer.EstocSelected();
         }
         if (index == 1)
         {
-            Lilith = true;
+            selectedPlayer.LilithSelected();
         }
         if (index == 2)
         {
-            Crag = true;
+            selectedPlayer.CragSelected();
         }
+
+        SceneManager.LoadScene(proceedToLevel.nextScene);
     }
 
     IEnumerator WaitTimer()
