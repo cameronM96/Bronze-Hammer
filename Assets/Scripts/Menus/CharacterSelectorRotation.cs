@@ -11,10 +11,6 @@ public class CharacterSelectorRotation : MonoBehaviour {
     public GameObject Carousel;
     public Text CharacterName;
     public Text CharacterBio;
-    public Image CharacterStats;
-    public Sprite EstocStats;
-    public Sprite LilithStats;
-    public Sprite CragStats;
     public int HeavyRotation;
     private bool allowRotate;
     [SerializeField] private float waitTimer;
@@ -32,14 +28,10 @@ public class CharacterSelectorRotation : MonoBehaviour {
         characterList = new GameObject[transform.childCount];       //Sets the array's length to be the number of children under the parent Game Object
         for(int i = 0; i < transform.childCount; i++)               //Initializes the array
             characterList[i] = transform.GetChild(i).gameObject;
-
-        Input.ResetInputAxes();
     }
 
     void Update()
     {
-        Debug.Log(Input.GetAxis("Horizontal") + "DEBUG TESTING PIROR TO REST OF UPDATE");
-
         if (index == 0)     //Reads the aray's index and adjusts other game objects based upon which entry in the array is selected
         {
             CharacterName.text = ("Estoc Slasher");
@@ -62,16 +54,12 @@ public class CharacterSelectorRotation : MonoBehaviour {
     {
         if (allowRotate)
         {
-            Debug.Log(Input.GetAxis("Horizontal"));
-            if (Input.GetAxis("Horizontal") < 0 ||
-                Input.GetAxis("HorizontalJoy") < 0)    //Once the horizontal axis is below '0' or 'left'
+            if (Input.GetAxis("Horizontal") < 0)    //Once the horizontal axis is below '0' or 'left'
             {
                 GoLeft();                   //Runs the GoLeft Method
                 allowRotate = false;             //Stops the player from being able to change array index or cycle characters
             }
-
-            if (Input.GetAxis("Horizontal") > 0 ||
-                Input.GetAxis("HorizontalJoy") > 0)    //Once the horizontal axis is above '0' or 'right'
+            if (Input.GetAxis("Horizontal") > 0)    //Once the horizontal axis is above '0' or 'right'
             {
                 GoRight();                  //Runs the GoRight Method
                 allowRotate = false;            //Stops the player from being able to change array index or cycle characters
@@ -114,7 +102,6 @@ public class CharacterSelectorRotation : MonoBehaviour {
             selectedPlayer.CragSelected();
         }
 
-        StopAllCoroutines();
         SceneManager.LoadScene(proceedToLevel.nextScene);
     }
 
