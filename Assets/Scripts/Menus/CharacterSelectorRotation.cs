@@ -11,6 +11,10 @@ public class CharacterSelectorRotation : MonoBehaviour {
     public GameObject Carousel;
     public Text CharacterName;
     public Text CharacterBio;
+    public Image CharacterStats;
+    public Sprite EstocStats;
+    public Sprite LilithStats;
+    public Sprite CragStats;
     public int HeavyRotation;
     private bool allowRotate;
     [SerializeField] private float waitTimer;
