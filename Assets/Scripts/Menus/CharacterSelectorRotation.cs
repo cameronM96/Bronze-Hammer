@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class CharacterSelectorRotation : MonoBehaviour {
 
+    public Image StatScreen;
+    public Sprite EstocStats;
+    public Sprite LilithStats;
+    public Sprite CragStats;
     private GameObject[] characterList;
     private int index;
     public GameObject Carousel;
@@ -21,6 +25,9 @@ public class CharacterSelectorRotation : MonoBehaviour {
     {
         selectedPlayer = GameObject.FindGameObjectWithTag("Character Selector").GetComponent<SelectedPlayer>();
         proceedToLevel = GameObject.FindGameObjectWithTag("Proceed To Level").GetComponent<ProceedToLevel>();
+        
+        StatScreen = GameObject.FindGameObjectWithTag("Stats").GetComponent<Image>(); //Searches for the tagged object and gets its source image component
+        StatScreen.sprite = EstocStats;         //Sets the source image
 
         allowRotate = true;     //Dictates wether or not the Game Object housing the player models rotates and if the character list array's index can change
         HeavyRotation = 0;      //Sets the Game Object housing the player models rotation to 0
@@ -35,17 +42,20 @@ public class CharacterSelectorRotation : MonoBehaviour {
         if (index == 0)     //Reads the aray's index and adjusts other game objects based upon which entry in the array is selected
         {
             CharacterName.text = ("Estoc Slasher");
-            CharacterBio.text = ("A DEULIST WITH A SILVER \n TONGUE, WELL VERSED \n IN THE ARTS OF \n FINE SWORDPLAY \n AND SLEIGHT OF HAND. \n A CHARMING YET SADISTIC \n ROGUE WHO EFFORTLESSLY \n AND ELEGANTLY GLIDES \n THROUGH BATTLE WITH HIS \n DUAL USE OF MAGIC AND \n METAL.");
+            CharacterBio.text = ("A DEULIST WITH A \n SILVER TONGUE, WELL \n VERSED IN THE ARTS \n OF FINE SWORDPLAY \n AND SLEIGHT OF HAND. \n A CHARMING YET \n SADISTIC ROGUE WHO \n EFFORTLESSLY AND ELEGANTLY GLIDES \n THROUGH BATTLE \n WITH HIS DUAL USE \n OF MAGIC AND METAL.");
+            StatScreen.sprite = EstocStats;
         }
         if (index == 1)     //Reads the aray's index and adjusts other game objects based upon which entry in the array is selected
         {
             CharacterName.text = ("Lilith Spellshade");
-            CharacterBio.text = ("A DARK AND ENIGMATIC \n SORCERESS OF BRILLIANT \n INTELLECT. \n ALTHOUGH SHE MAY NOT \n BE A MASTER OF THE \n BLADE, HER COMMAND \n OF THE ARCANE ARTS \n MAKES HER A FEARSOME \n FOE TO BE TRIFLED WITH.");
+            CharacterBio.text = ("A DARK AND ENIGMATIC \n SORCERESS OF \n BRILLIANT INTELLECT. \n ALTHOUGH SHE MAY NOT \n BE A MASTER OF THE \n BLADE, HER COMMAND \n OF THE ARCANE ARTS \n MAKES HER A \n FEARSOME FOE TO BE \n TRIFLED WITH.");
+            StatScreen.sprite = LilithStats;
         }
         if (index == 2)     //Reads the aray's index and adjusts other game objects based upon which entry in the array is selected
         {
             CharacterName.text = ("Crag Rockhand");
-            CharacterBio.text = ("SON OF A GREAT BARBARIAN \n CHIEF, REVERED BY HIS \n PEOPLE FOR HIS MONSTROUS \n STRENGTH AND FEARED BY \n HIS FOES FOR HIS \n INSATIABLE THIRST FOR \n BATTLE. \n THIS WARRIOR HAS YET TO \n FIND A CHALLENGE THAT HE \n COULDN’T SOLVE WITH HIS \n GREAT AXE AND INSTINCT \n FOR BLOODSHED.");
+            CharacterBio.text = ("SON OF A GREAT \n BARBARIAN CHIEF, \n REVERED BY HIS \n PEOPLE FOR HIS \n MONSTROUS STRENGTH \n AND FEARED BY \n HIS FOES FOR HIS \n INSATIABLE THIRST \n FOR BATTLE. \n THIS WARRIOR HAS YET \n TO FIND A CHALLENGE \n THAT HE COULDN’T \n SOLVE WITH HIS \n GREAT AXE AND \n INSTINCT FOR \n BLOODSHED.");
+            StatScreen.sprite = CragStats;
         }
         Wait();
     }
@@ -89,7 +99,7 @@ public class CharacterSelectorRotation : MonoBehaviour {
 
     public void Confirm()
     {
-        if(index == 0)
+        if(index == 0)          //Depending on what index of the array is selected by confirm, the corresponding character's bool is set to true to be used in other scripts that load them into the level.
         {
             selectedPlayer.EstocSelected();
         }
@@ -105,7 +115,7 @@ public class CharacterSelectorRotation : MonoBehaviour {
         SceneManager.LoadScene(proceedToLevel.nextScene);
     }
 
-    IEnumerator WaitTimer()
+    IEnumerator WaitTimer()     //Forced the program to wait between completing any more operations or accepting any more inputs
     {
         print(Time.time);
         yield return new WaitForSeconds(waitTimer);
