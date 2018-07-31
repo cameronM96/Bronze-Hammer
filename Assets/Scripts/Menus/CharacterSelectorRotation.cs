@@ -58,6 +58,16 @@ public class CharacterSelectorRotation : MonoBehaviour {
             StatScreen.sprite = CragStats;
         }
         Wait();
+
+        if (Input.GetKeyDown("joystick button 0"))
+        {
+            Confirm();
+        }
+
+        if (Input.GetKeyDown("joystick button 1"))
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 
     public void Wait()
