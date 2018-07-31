@@ -1116,12 +1116,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6934da1c32407c845886daac3045813d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackTrigger: {fileID: 136475825886484464}
+  attackTrigger:
+  - {fileID: 0}
   entityTurnSpeed: 10
+  attackCounter: 0
+  freeze: 0
+  mounted: 0
+  mount: {fileID: 0}
   m_GroundCheck: {fileID: 4325064329952258}
   m_WhatIsGround:
     serializedVersion: 2
     m_Bits: 1
+  magicDamage: 0
+  magicLevel: 0
   entityID: 2
   entityRotation: {x: 0, y: 0, z: 0}
   m_AudioClips:
@@ -1132,7 +1139,6 @@ MonoBehaviour:
   moveTarget: {fileID: 0}
   attackTarget: {fileID: 0}
   moveSpeed: 3
-  jumpHeight: 500
   sprinting: 0
 --- !u!114 &114854173734965820
 MonoBehaviour:
@@ -1148,7 +1154,7 @@ MonoBehaviour:
   attackDamage: 10
   comboMultiplier: 2
   playerWeapon: 0
-  knockback: 0
+  parentObject: {fileID: 0}
   m_Audio: {fileID: 0}
 --- !u!136 &136475825886484464
 CapsuleCollider:
