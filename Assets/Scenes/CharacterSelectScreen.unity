@@ -614,6 +614,7 @@ GameObject:
   - component: {fileID: 210934594}
   - component: {fileID: 210934593}
   - component: {fileID: 210934592}
+  - component: {fileID: 210934595}
   m_Layer: 0
   m_Name: SelectButton
   m_TagString: Untagged
@@ -654,9 +655,9 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_SelectOnUp: {fileID: 1103642822}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 210934592}
     m_SelectOnLeft: {fileID: 1417029643}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 210934592}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0.58847857, g: 0, b: 1, a: 1}
@@ -725,6 +726,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 210934590}
+--- !u!114 &210934595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 210934590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1689198506}
+          m_MethodName: SetSelectedGameObject
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 210934590}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &215684588
 GameObject:
   m_ObjectHideFlags: 0
@@ -31315,6 +31346,7 @@ GameObject:
   - component: {fileID: 1103642824}
   - component: {fileID: 1103642823}
   - component: {fileID: 1103642822}
+  - component: {fileID: 1103642825}
   m_Layer: 0
   m_Name: RightButton
   m_TagString: SelectingCharacter
@@ -31354,10 +31386,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 1103642822}
     m_SelectOnDown: {fileID: 210934592}
     m_SelectOnLeft: {fileID: 2142456840}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnRight: {fileID: 1103642822}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -31426,6 +31458,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1103642820}
+--- !u!114 &1103642825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1103642820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1689198506}
+          m_MethodName: SetSelectedGameObject
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1103642820}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1119575132
 GameObject:
   m_ObjectHideFlags: 0
@@ -41659,6 +41721,7 @@ GameObject:
   - component: {fileID: 1417029644}
   - component: {fileID: 1417029643}
   - component: {fileID: 1417029642}
+  - component: {fileID: 1417029646}
   m_Layer: 0
   m_Name: BackButton
   m_TagString: Untagged
@@ -41711,8 +41774,8 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_SelectOnUp: {fileID: 2142456840}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnDown: {fileID: 1417029643}
+    m_SelectOnLeft: {fileID: 1417029643}
     m_SelectOnRight: {fileID: 210934592}
   m_Transition: 1
   m_Colors:
@@ -41782,6 +41845,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1417029640}
+--- !u!114 &1417029646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1417029640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1689198506}
+          m_MethodName: SetSelectedGameObject
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1417029640}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1446624205
 GameObject:
   m_ObjectHideFlags: 0
@@ -57113,6 +57206,7 @@ GameObject:
   - component: {fileID: 2142456842}
   - component: {fileID: 2142456841}
   - component: {fileID: 2142456840}
+  - component: {fileID: 2142456843}
   m_Layer: 0
   m_Name: LeftButton
   m_TagString: SelectingCharacter
@@ -57152,9 +57246,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 4
-    m_SelectOnUp: {fileID: 0}
+    m_SelectOnUp: {fileID: 2142456840}
     m_SelectOnDown: {fileID: 210934592}
-    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnLeft: {fileID: 2142456840}
     m_SelectOnRight: {fileID: 1103642822}
   m_Transition: 1
   m_Colors:
@@ -57224,6 +57318,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2142456838}
+--- !u!114 &2142456843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2142456838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1689198506}
+          m_MethodName: SetSelectedGameObject
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 2142456838}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &2143595120
 GameObject:
   m_ObjectHideFlags: 0
