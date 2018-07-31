@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 54271050675625240}
   m_Layer: 10
   m_Name: EGO Lilith
-  m_TagString: Untagged
+  m_TagString: Lilith
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -917,7 +917,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1956872478430160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -64.937, y: -49.4213, z: 46.789}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4923858487353770}
@@ -1644,10 +1644,10 @@ MonoBehaviour:
   - 3
   - 5
   magicVisuals:
-  - {fileID: 1425738852213952, guid: 4f4648d3c5c4f1a4488bd7754be34bd1, type: 2}
-  - {fileID: 1085845944956044, guid: 6052df2d9c93c5c45bbfce39a9eb4a98, type: 2}
-  - {fileID: 1429339215974446, guid: 80de70b85af15e946938c7533db2f784, type: 2}
-  - {fileID: 1429339215974446, guid: 80de70b85af15e946938c7533db2f784, type: 2}
+  - {fileID: 1773606270382572, guid: 2b6ac34e39df8144faed24dba2eedb9f, type: 2}
+  - {fileID: 1923563884989994, guid: 1689d4489d0f2784b8eeeb547f2e51c9, type: 2}
+  - {fileID: 1570555667515028, guid: 382d983ea44abf9448aed135b667bf3c, type: 2}
+  - {fileID: 1284570177187334, guid: 069cc121410c52b4ca978edc9cd6be71, type: 2}
 --- !u!114 &114494604020787888
 MonoBehaviour:
   m_ObjectHideFlags: 1

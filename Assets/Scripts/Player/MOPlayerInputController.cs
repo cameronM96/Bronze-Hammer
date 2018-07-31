@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityStandardAssets.CrossPlatformInput;
 
 public enum PlayerCharacters { Estoc, Lilith, Crag };
 
@@ -82,8 +81,8 @@ public class MOPlayerInputController : MOMovementController
         }
 
         //get the input for horizontal and vertical axis through unity controls
-        hMov = CrossPlatformInputManager.GetAxis("Horizontal");
-        vMov = CrossPlatformInputManager.GetAxis("Vertical");
+        hMov = Input.GetAxis("Horizontal");
+        vMov = Input.GetAxis("Vertical");
         
         //calculate movement relative to the camera
         gameCameraForward = Vector3.Scale(gameCamera.forward, new Vector3(1, 0, 1)).normalized;
