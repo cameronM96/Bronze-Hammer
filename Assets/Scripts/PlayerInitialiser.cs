@@ -8,7 +8,6 @@ public class PlayerInitialiser : MonoBehaviour {
     [SerializeField] private GameObject estoc;
     [SerializeField] private GameObject lilith;
     [SerializeField] private GameObject crag;
-    [SerializeField] private AIManager aiManager;
 
 	// Use this for initialization
 	void Start ()

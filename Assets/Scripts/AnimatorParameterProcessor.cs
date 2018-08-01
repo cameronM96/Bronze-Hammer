@@ -8,6 +8,7 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
     [SerializeField] bool knockback;
     [SerializeField] bool magic;
     [SerializeField] bool attack;
+    [SerializeField] bool charge;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -23,6 +24,9 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
 
         if (attack)
             animator.SetBool("attack", false);
+
+        if (charge)
+            animator.SetBool("charge", false);
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -36,7 +36,6 @@ public class PlayerHealth : MonoBehaviour {
     {
         characterNameUI.text = characterName;
         // Default Health
-        health = 100;
         maxHealth = health;
         healthBar.fillAmount = 1;
         healthText.text = "" + health + "/" + maxHealth;

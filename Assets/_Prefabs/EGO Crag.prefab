@@ -399,7 +399,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1694351274450896
 GameObject:
   m_ObjectHideFlags: 1
@@ -1293,6 +1293,7 @@ MonoBehaviour:
   attackDamage: 10
   comboMultiplier: 2
   playerWeapon: 1
+  crag: 0
   parentObject: {fileID: 0}
   m_Audio: {fileID: 0}
 --- !u!114 &114635742806235890
