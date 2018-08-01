@@ -75,16 +75,49 @@ public class MOMovementController : MonoBehaviour
         }
         else if (timerA <= 0 )
         {
-            if (!mounted && attackTrigger[0].enabled == true)
+            if (this.gameObject.tag == "Player")
             {
-                attackTrigger[0].enabled = false;
-                m_Anim.SetBool("attack", false);
-                timerA = 0;
+                if (GetComponent<MOPlayerInputController>().playerCharacter == PlayerCharacters.Lilith)
+                {
+                    if (!mounted)
+                    {
+                        m_Anim.SetBool("attack", false);
+                        timerA = 0;
+                    }
+                    else
+                    {
+                        timerA = 0;
+                        mount.GetComponent<MountingController>().AttackOff();
+                    }
+                }
+                else
+                {
+                    if (!mounted && attackTrigger[0].enabled == true)
+                    {
+                        attackTrigger[0].enabled = false;
+                        m_Anim.SetBool("attack", false);
+                        timerA = 0;
+                    }
+                    else if (mounted)
+                    {
+                        timerA = 0;
+                        mount.GetComponent<MountingController>().AttackOff();
+                    }
+                }
             }
-            else if (mounted)
+            else
             {
-                timerA = 0;
-                mount.GetComponent<MountingController>().AttackOff();
+                if (!mounted && attackTrigger[0].enabled == true)
+                {
+                    attackTrigger[0].enabled = false;
+                    m_Anim.SetBool("attack", false);
+                    timerA = 0;
+                }
+                else if (mounted)
+                {
+                    timerA = 0;
+                    mount.GetComponent<MountingController>().AttackOff();
+                }
             }
             //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
         }

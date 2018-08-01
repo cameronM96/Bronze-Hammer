@@ -914,7 +914,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1643485702589674}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -41.85, y: 0.15120566, z: -4.867532}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4942037496105816}
@@ -1117,6 +1117,7 @@ MonoBehaviour:
   attackDamage: 10
   comboMultiplier: 2
   playerWeapon: 0
+  crag: 0
   parentObject: {fileID: 0}
   m_Audio: {fileID: 0}
 --- !u!114 &114583906595962766

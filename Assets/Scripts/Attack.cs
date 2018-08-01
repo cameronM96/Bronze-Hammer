@@ -7,6 +7,7 @@ public class Attack : MonoBehaviour
     public int attackDamage = 10;
     public int comboMultiplier = 2;
     public bool playerWeapon;
+    [SerializeField] private bool crag = false;
     [SerializeField] private GameObject parentObject;
     private Animator m_Anim;
 
@@ -43,7 +44,14 @@ public class Attack : MonoBehaviour
                     {
                         dir = -1;
                     }
-                    other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier, true, dir);
+                    if (crag)
+                        other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier * 2, true, dir);
+                    else
+                        other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier, true, dir);
+                }
+                else if (crag && m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
+                {
+                    other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier, false, 0);
                 }
                 else
                 {

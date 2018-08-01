@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour {
 
+    [SerializeField] private string characterName;
+    [SerializeField] private Text characterNameUI;
     public float health;
     [SerializeField] private Image healthBar;
     [SerializeField] private Text healthText;
@@ -32,6 +34,7 @@ public class PlayerHealth : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
+        characterNameUI.text = characterName;
         // Default Health
         health = 100;
         maxHealth = health;

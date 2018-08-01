@@ -7,7 +7,7 @@ public class AIManager : MonoBehaviour {
     
     private GameObject[] enemies;
     private GameObject[] mounts;
-    private GameObject player;
+    public GameObject player;
     [SerializeField] private float updateTimer = 2f;
     private float timer = 1f;
 
@@ -15,11 +15,17 @@ public class AIManager : MonoBehaviour {
 	void Start ()
     {
         UpdateList();
-        player = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(InitialiseWaitTimer());
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    IEnumerator InitialiseWaitTimer()
+    {
+        yield return new WaitForEndOfFrame();
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         timer += Time.deltaTime;
 
@@ -57,8 +63,8 @@ public class AIManager : MonoBehaviour {
         List<GameObject> rightSideList = new List<GameObject>();
 
         // Get the points the AI want to move to.
-        GameObject leftside = player.transform.parent.Find("LeftSide").gameObject;
-        GameObject Rightside = player.transform.parent.Find("RightSide").gameObject;
+        GameObject leftside = player.transform.parent.GetChild(2).gameObject;
+        GameObject Rightside = player.transform.parent.GetChild(1).gameObject;
         
         // Determine which side of the player the AI should move to.
         foreach (GameObject enemy in enemies)

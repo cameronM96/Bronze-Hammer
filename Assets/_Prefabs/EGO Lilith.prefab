@@ -753,7 +753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1996337877268374
 GameObject:
   m_ObjectHideFlags: 1
@@ -917,7 +917,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1956872478430160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 18.259935, y: 4.9968105e-17, z: -2.2503638}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4923858487353770}
@@ -1659,6 +1659,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ccd871d8fae0b54eb514fb0f97c6ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Lilith-Spellshade
+  characterNameUI: {fileID: 0}
   health: 100
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
