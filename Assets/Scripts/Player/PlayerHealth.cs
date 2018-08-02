@@ -25,6 +25,7 @@ public class PlayerHealth : MonoBehaviour {
     [SerializeField] private GameObject livesPrefab;
     public PlayerLives playerLives;
     public bool addMana = false;
+    private bool dead = false;
 
     private Animator m_Anim;
 
@@ -87,8 +88,9 @@ public class PlayerHealth : MonoBehaviour {
             healthBar.fillAmount = (health / maxHealth);
             healthText.text = "" + health + "/" + maxHealth;
             //update UI health
-            if (health <= 0)
+            if (health <= 0 && dead)
             {
+                dead = true;
                 playerLives.LoseLife();
                 livesUI.text = ("" + playerLives.lives);
                 GetComponent<MOMovementController>().Death();
@@ -109,14 +111,14 @@ public class PlayerHealth : MonoBehaviour {
                     //go to game over screen
                 }
             }
-            else if (!knockedDown)
+            else if (!knockedDown && health > 0)
             {
                 m_Anim.SetBool("hurt", true);
                 m_Audio.clip = m_AudioClips[0];
                 m_Audio.Play();
                 //Debug.Log(gameObject.name + " took " + damageTaken + " damage, Leaving them at " + health + " health");
             }
-            else
+            else if (knockedDown && health > 0)
             {
                 GetComponent<MOMovementController>().KnockBack(dir);
             }

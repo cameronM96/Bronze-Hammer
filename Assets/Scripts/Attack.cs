@@ -10,8 +10,8 @@ public class Attack : MonoBehaviour
     [SerializeField] private bool crag = false;
     [SerializeField] private GameObject parentObject;
     private Animator m_Anim;
-    public bool attack3;
-    public bool attack2;
+    public bool attack3 = false;
+    public bool attack2 = false;
 
     [SerializeField] private AudioSource m_Audio;
 

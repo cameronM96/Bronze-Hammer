@@ -124,26 +124,39 @@ public class AIManager : MonoBehaviour {
             }
         }
 
+        // Find which AI should get the mount
         foreach (GameObject mount in mounts)
         {
             if (!mount.GetComponent<MountingController>().isCurrentlyMounted)
             {
-                int enemyIndex = 0;
-                int closestEnemyIndex = 0;
-                float closestEnemyDistance = 500f;
-                foreach (GameObject enemy in enemies)
+                // If mount is too far away, ignore it
+                float distanceToPlayer;
+
+                distanceToPlayer = Vector3.Distance(player.transform.position, mount.transform.position);
+
+                if (distanceToPlayer < 50f)
                 {
-                    float distance;
+                    int enemyIndex = 0;
+                    int closestEnemyIndex = 0;
+                    float closestEnemyDistance = 500f;
+                    foreach (GameObject enemy in enemies)
+                    {
+                        // Find which enemy is closest to the mount (closest AI goes for mount)
+                        float distance;
 
-                    distance = Vector3.Distance(enemy.transform.position, mount.transform.position);
+                        distance = Vector3.Distance(enemy.transform.position, mount.transform.position);
 
-                    if (distance < closestEnemyDistance)
-                        closestEnemyIndex = enemyIndex;
+                        if (distance < closestEnemyDistance)
+                        {
+                            closestEnemyIndex = enemyIndex;
+                            closestEnemyDistance = distance;
+                        }
 
-                    ++enemyIndex;
+                        ++enemyIndex;
+                    }
+
+                    enemies[closestEnemyIndex].GetComponent<AIController>().moveTarget = mount;
                 }
-
-                enemies[closestEnemyIndex].GetComponent<AIController>().moveTarget = mount;
             }
         }
     }
