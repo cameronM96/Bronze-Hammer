@@ -21,7 +21,7 @@ public class CharacterSelectorRotation : MonoBehaviour {
     [SerializeField] private float waitTimer;
     private SelectedPlayer selectedPlayer;
     private ProceedToLevel proceedToLevel;
-    [SerializeField] private EventSystem eventSystem;
+    //[SerializeField] private EventSystem eventSystem;
 
     private void Start()
     {
@@ -74,7 +74,7 @@ public class CharacterSelectorRotation : MonoBehaviour {
 
     public void Wait()
     {
-        if (allowRotate && eventSystem.currentSelectedGameObject.tag == "SelectingCharacter")
+        if (allowRotate  == true)
         {
             if (Input.GetAxis("Horizontal") < 0)    //Once the horizontal axis is below '0' or 'left'
             {
