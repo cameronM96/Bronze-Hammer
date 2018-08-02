@@ -129,7 +129,7 @@ public class AIBossController : MOMovementController
             // Make sure AI is facing the right directions first
             this.transform.LookAt(attackTarget.transform);
             m_character.Move(Vector3.zero, moveSpeed);
-            m_character.Attack(false);
+            m_character.BossAttack(1);
             attack1Cooldown = 2.0f;
         }
         else if (attack && attack2Cooldown <=0.0f)
@@ -137,7 +137,7 @@ public class AIBossController : MOMovementController
             // Make sure AI is facing the right directions first
             this.transform.LookAt(attackTarget.transform);
             m_character.Move(Vector3.zero, moveSpeed);
-            m_character.Attack(false);
+            m_character.BossAttack(2);
             attack2Cooldown = 10.0f;
         }
         else if (attack && attack3Cooldown<=0.0f &&attack3Distance<=distanceToPlayer)
@@ -145,7 +145,7 @@ public class AIBossController : MOMovementController
             // Make sure AI is facing the right directions first
             this.transform.LookAt(attackTarget.transform);
             m_character.Move(Vector3.zero, moveSpeed);
-            m_character.Attack(false);
+            m_character.BossAttack(3);
             attack3Cooldown = 5.0f;
         }
         else
@@ -155,6 +155,7 @@ public class AIBossController : MOMovementController
             m_character.Move(moveDirection, moveSpeed);
         }
 
+        //use teleport ability
         if (distanceToPlayer <= teleportDistance && teleportTime <= 0.0f)
         {
             int teleportLocationSelector = Random.Range(1, 5);

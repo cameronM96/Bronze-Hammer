@@ -22,7 +22,7 @@ public class MOMovementController : MonoBehaviour
 
     [SerializeField] private float magicDamage;             // Base magic damage 
     [SerializeField] private int magicLevel;                // magicDamage multiplied by magicLevel
-    
+
     public int entityID = 0;
     public Vector3 entityRotation;
 
@@ -65,15 +65,15 @@ public class MOMovementController : MonoBehaviour
     protected virtual void Update()
     {
         //scriptEntity.transform.rotation = Quaternion.Euler(entityRotation*entityTurnSpeed*Time.deltaTime);
-        scriptEntity.transform.rotation = 
-            Quaternion.Lerp(scriptEntity.transform.rotation, 
+        scriptEntity.transform.rotation =
+            Quaternion.Lerp(scriptEntity.transform.rotation,
             Quaternion.Euler(entityRotation), entityTurnSpeed * Time.deltaTime);
 
         if (timerA > 0)
         {
             timerA -= Time.deltaTime;
         }
-        else if (timerA <= 0 )
+        else if (timerA <= 0)
         {
             if (!mounted && attackTrigger[0].enabled == true)
             {
@@ -89,7 +89,7 @@ public class MOMovementController : MonoBehaviour
             //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
         }
 
-        if (timerC>0)
+        if (timerC > 0)
         {
             timerC -= Time.deltaTime;
         }
@@ -134,8 +134,8 @@ public class MOMovementController : MonoBehaviour
     // method is called when needed from an input script
     public void Move(Vector3 mov, float speed)
     {
-        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !m_Anim.GetBool("attack") && 
-            !freeze && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") && 
+        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !m_Anim.GetBool("attack") &&
+            !freeze && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") &&
             !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
             //move the gameobject based on the vars from the input script
@@ -184,7 +184,7 @@ public class MOMovementController : MonoBehaviour
     public void Jump(float height)
     {
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
-            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") && 
+            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") &&
             !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
             if (timerJ <= 0.0f && m_Grounded)
@@ -200,8 +200,8 @@ public class MOMovementController : MonoBehaviour
     //called from input controller
     public void Attack(bool sprinting)
     {
-        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze 
-            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Knocked Down") && 
+        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
+            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Knocked Down") &&
             !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
             m_Rigidbody.velocity = new Vector3(0, 0, 0);
@@ -284,18 +284,41 @@ public class MOMovementController : MonoBehaviour
             }
         }
     }
+    public void BossAttack(int attackNumber)
+    {
+        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
+            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Knocked Down") &&
+            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
+        {
+            m_Rigidbody.velocity = new Vector3(0, 0, 0);
+            // Debug.Log(scriptEntity.name + " attacking");
+            if (attackNumber == 1)
+            {
+                attackTrigger[0].enabled = true;
+            }
+            else if (attackNumber == 2)
+            {
+                attackTrigger[0].enabled = true;
+            }
+            else if (attackNumber == 3)
+            {
+                attackTrigger[0].enabled = true;
+            }
+        }
+    }
+
 
     //called from player's input controller only
     public void Magic()
     {
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
-            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") && 
+            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") &&
             !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
             if (GetComponent<PlayerHealth>().currentMagicLevel > 0)
             {
                 //Debug.Log(scriptEntity.name + " using magic");
-                GetComponent<Magic>().CastMagic(this.gameObject, magicDamage, 
+                GetComponent<Magic>().CastMagic(this.gameObject, magicDamage,
                     GetComponent<PlayerHealth>().currentMagicLevel, GetComponent<MOPlayerInputController>().playerCharacter);
                 GetComponent<PlayerHealth>().UseMana();
 
@@ -318,9 +341,9 @@ public class MOMovementController : MonoBehaviour
     {
         m_Anim.SetBool("knockedDown", true);
         m_Rigidbody.velocity = new Vector3(0, 0, 0);
-        m_Rigidbody.AddForce((dir * 500), 500,0);
-    
-        if(mounted)
+        m_Rigidbody.AddForce((dir * 500), 500, 0);
+
+        if (mounted)
         {
             mount.GetComponent<MountingController>().UnMounted();
         }
@@ -340,7 +363,7 @@ public class MOMovementController : MonoBehaviour
         }
     }
 
-    IEnumerator FallThroughFloor (float waittimer)
+    IEnumerator FallThroughFloor(float waittimer)
     {
         yield return new WaitForSeconds(waittimer);
         GetComponent<Collider>().enabled = false;
