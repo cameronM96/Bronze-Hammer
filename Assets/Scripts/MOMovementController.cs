@@ -79,44 +79,38 @@ public class MOMovementController : MonoBehaviour
             {
                 if (GetComponent<MOPlayerInputController>().playerCharacter == PlayerCharacters.Lilith)
                 {
-                    if (!mounted)
-                    {
-                        m_Anim.SetBool("attack", false);
-                        timerA = 0;
-                    }
-                    else
-                    {
-                        timerA = 0;
-                        mount.GetComponent<MountingController>().AttackOff();
-                    }
+                    m_Anim.SetBool("attack", false);
+                    timerA = 0;
                 }
                 else
                 {
-                    if (!mounted && attackTrigger[0].enabled == true)
+                    if (attackTrigger[0].enabled == true)
                     {
                         attackTrigger[0].enabled = false;
                         m_Anim.SetBool("attack", false);
                         timerA = 0;
                     }
-                    else if (mounted)
-                    {
-                        timerA = 0;
-                        mount.GetComponent<MountingController>().AttackOff();
-                    }
+                }
+
+                if (mounted)
+                {
+                    mount.GetComponent<MountingController>().AttackOff();
+                    timerA = 0;
                 }
             }
             else
             {
-                if (!mounted && attackTrigger[0].enabled == true)
+                if (attackTrigger[0].enabled == true)
                 {
                     attackTrigger[0].enabled = false;
                     m_Anim.SetBool("attack", false);
                     timerA = 0;
                 }
-                else if (mounted)
+
+                if (mounted)
                 {
-                    timerA = 0;
                     mount.GetComponent<MountingController>().AttackOff();
+                    timerA = 0;
                 }
             }
             //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
@@ -361,6 +355,9 @@ public class MOMovementController : MonoBehaviour
 
     public void Death()
     {
+        if(mounted)
+            mount.GetComponent<MountingController>().UnMounted();
+        
         m_Anim.SetBool("dead", true);
         m_Anim.SetBool("knockedDown", true);
         m_Audio.clip = m_AudioClips[0];

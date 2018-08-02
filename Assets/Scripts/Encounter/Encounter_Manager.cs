@@ -52,12 +52,12 @@ public class Encounter_Manager : MonoBehaviour {
                     m_EncountersList[encounterIndex].waves[m_EncountersList[encounterIndex].waveNumber].rightSideEnemies)
                 {
                     GameObject newEnemy;
-                    Transform newSpawnPoint =  rightSpawnPoint;
+                    Vector3 newSpawnPoint =  rightSpawnPoint.position;
 
                     // Determine spawn location
                     if (switchSides1)
                     {
-                        newSpawnPoint.position =
+                        newSpawnPoint =
                             new Vector3(rightSpawnPoint.position.x,
                             rightSpawnPoint.position.y,
                             rightSpawnPoint.position.z + z1);
@@ -65,7 +65,7 @@ public class Encounter_Manager : MonoBehaviour {
                     }
                     else
                     {
-                        newSpawnPoint.position =
+                        newSpawnPoint =
                             new Vector3(rightSpawnPoint.position.x,
                             rightSpawnPoint.position.y,
                             rightSpawnPoint.position.z - z1);
@@ -75,22 +75,22 @@ public class Encounter_Manager : MonoBehaviour {
                     if (enemy.transform.GetChild(0).tag == "Chicken")
                     {
                         NavMeshHit hit;
-                        if (NavMesh.SamplePosition(newSpawnPoint.position, out hit, 100.0f, NavMesh.AllAreas))
+                        if (NavMesh.SamplePosition(newSpawnPoint, out hit, 100.0f, NavMesh.AllAreas))
                         {
-                            newSpawnPoint.position = hit.position;
+                            newSpawnPoint = hit.position;
                         }
 
                         newEnemy = Instantiate(enemy);
                         newEnemy.transform.parent = null;
-                        newEnemy.GetComponent<NavMeshAgent>().Warp(newSpawnPoint.position);
+                        newEnemy.GetComponent<NavMeshAgent>().Warp(newSpawnPoint);
                     }
                     else
                     {
-                        newEnemy = Instantiate(enemy, newSpawnPoint);
+                        newEnemy = Instantiate(enemy, newSpawnPoint, new Quaternion(0,0,0,0));
                         newEnemy.transform.parent = null;
                     }
 
-                    z1 += 3;
+                    z1 += 2;
                 }
 
                 bool switchSides2 = false;
@@ -98,12 +98,12 @@ public class Encounter_Manager : MonoBehaviour {
                     m_EncountersList[encounterIndex].waves[m_EncountersList[encounterIndex].waveNumber].leftSideEnemies)
                 {
                     GameObject newEnemy;
-                    Transform newSpawnPoint = leftSpawnPoint;
+                    Vector3 newSpawnPoint = leftSpawnPoint.position;
 
                     // Determine spawn location
                     if (switchSides2)
                     {
-                        newSpawnPoint.position =
+                        newSpawnPoint =
                             new Vector3(leftSpawnPoint.position.x,
                             leftSpawnPoint.position.y,
                             leftSpawnPoint.position.z + z2);
@@ -111,7 +111,7 @@ public class Encounter_Manager : MonoBehaviour {
                     }
                     else
                     {
-                        newSpawnPoint.position =
+                        newSpawnPoint =
                             new Vector3(leftSpawnPoint.position.x,
                             leftSpawnPoint.position.y,
                             leftSpawnPoint.position.z - z2);
@@ -121,21 +121,21 @@ public class Encounter_Manager : MonoBehaviour {
                     if (enemy.transform.GetChild(0).tag == "Chicken")
                     {
                         NavMeshHit hit;
-                        if (NavMesh.SamplePosition(newSpawnPoint.position, out hit, 100.0f, NavMesh.AllAreas))
+                        if (NavMesh.SamplePosition(newSpawnPoint, out hit, 100.0f, NavMesh.AllAreas))
                         {
-                            newSpawnPoint.position = hit.position;
+                            newSpawnPoint = hit.position;
                         }
 
                         newEnemy = Instantiate(enemy);
                         newEnemy.transform.parent = null;
-                        newEnemy.GetComponent<NavMeshAgent>().Warp(newSpawnPoint.position);
+                        newEnemy.GetComponent<NavMeshAgent>().Warp(newSpawnPoint);
                     }
                     else
                     {
-                        newEnemy = Instantiate(enemy, newSpawnPoint);
+                        newEnemy = Instantiate(enemy, newSpawnPoint, new Quaternion(0, 0, 0, 0));
                         newEnemy.transform.parent = null;
                     }
-                    z2 += 3;
+                    z2 += 2;
                 }
                 
                 ++m_EncountersList[encounterIndex].waveNumber;

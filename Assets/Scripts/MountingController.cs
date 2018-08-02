@@ -60,13 +60,14 @@ public class MountingController : MonoBehaviour
             // Short ranged attack
             if(mountedCharacter.tag == "Player")
             {
+                attack.SetActive(true);
                 attack.GetComponent<MountAttack>().playerAttack = true;
             }
             else
             {
+                attack.SetActive(true);
                 attack.GetComponent<MountAttack>().playerAttack = false;
             }
-            attack.SetActive(true);
         }
     }
 
