@@ -118,6 +118,7 @@ public class MountingController : MonoBehaviour
                 mountedCharacter.GetComponent<Animator>().SetBool("mounted", true);
                 mountedCharacter.GetComponent<MOMovementController>().mounted = true;
                 mountedCharacter.GetComponent<MOMovementController>().mount = this.gameObject;
+                mountedCharacter.GetComponent<MOMovementController>().m_GroundCheck = GetComponentInParent<Transform>();
 
                 rb = mountedCharacter.transform.parent.GetComponent<Rigidbody>();
             }
