@@ -7,7 +7,7 @@ public class AIManager : MonoBehaviour {
     
     private GameObject[] enemies;
     private GameObject[] mounts;
-    private GameObject player;
+    public GameObject player;
     [SerializeField] private float updateTimer = 2f;
     private float timer = 1f;
 
@@ -15,11 +15,17 @@ public class AIManager : MonoBehaviour {
 	void Start ()
     {
         UpdateList();
-        player = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(InitialiseWaitTimer());
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    IEnumerator InitialiseWaitTimer()
+    {
+        yield return new WaitForEndOfFrame();
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    // Update is called once per frame
+    void Update ()
     {
         timer += Time.deltaTime;
 
@@ -57,8 +63,8 @@ public class AIManager : MonoBehaviour {
         List<GameObject> rightSideList = new List<GameObject>();
 
         // Get the points the AI want to move to.
-        GameObject leftside = player.transform.parent.Find("LeftSide").gameObject;
-        GameObject Rightside = player.transform.parent.Find("RightSide").gameObject;
+        GameObject leftside = player.transform.parent.GetChild(2).gameObject;
+        GameObject Rightside = player.transform.parent.GetChild(1).gameObject;
         
         // Determine which side of the player the AI should move to.
         foreach (GameObject enemy in enemies)
@@ -118,26 +124,39 @@ public class AIManager : MonoBehaviour {
             }
         }
 
+        // Find which AI should get the mount
         foreach (GameObject mount in mounts)
         {
             if (!mount.GetComponent<MountingController>().isCurrentlyMounted)
             {
-                int enemyIndex = 0;
-                int closestEnemyIndex = 0;
-                float closestEnemyDistance = 500f;
-                foreach (GameObject enemy in enemies)
+                // If mount is too far away, ignore it
+                float distanceToPlayer;
+
+                distanceToPlayer = Vector3.Distance(player.transform.position, mount.transform.position);
+
+                if (distanceToPlayer < 50f)
                 {
-                    float distance;
+                    int enemyIndex = 0;
+                    int closestEnemyIndex = 0;
+                    float closestEnemyDistance = 500f;
+                    foreach (GameObject enemy in enemies)
+                    {
+                        // Find which enemy is closest to the mount (closest AI goes for mount)
+                        float distance;
 
-                    distance = Vector3.Distance(enemy.transform.position, mount.transform.position);
+                        distance = Vector3.Distance(enemy.transform.position, mount.transform.position);
 
-                    if (distance < closestEnemyDistance)
-                        closestEnemyIndex = enemyIndex;
+                        if (distance < closestEnemyDistance)
+                        {
+                            closestEnemyIndex = enemyIndex;
+                            closestEnemyDistance = distance;
+                        }
 
-                    ++enemyIndex;
+                        ++enemyIndex;
+                    }
+
+                    enemies[closestEnemyIndex].GetComponent<AIController>().moveTarget = mount;
                 }
-
-                enemies[closestEnemyIndex].GetComponent<AIController>().moveTarget = mount;
             }
         }
     }

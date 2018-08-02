@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     private Animator m_Anim;
     private AudioSource m_Audio;
     [SerializeField] private AudioClip[] m_AudioClips;
+    private bool dead = false;
 
     // Use this for initialization
     void Awake()
@@ -23,20 +24,21 @@ public class Health : MonoBehaviour
         {
             health -= damageTaken;
             //update UI health
-            if (health <= 0)
+            if (health <= 0 && !dead)
             {
                 //Debug.Log(gameObject.name + " has died");
+                dead = true;
                 GetComponent<MOMovementController>().Death();
                 //go to game over screen or back to menu?
             }
-            else if (!knockBack)
+            else if (!knockBack && health > 0)
             {
                 //Debug.Log(gameObject.name + " took " + damageTaken + " damage, Leaving them at " + health + " health");
                 m_Anim.SetBool("hurt", true);
                 m_Audio.clip = m_AudioClips[0];
                 m_Audio.Play();
             }
-            else
+            else if (knockBack && health > 0)
             {
                 GetComponent<MOMovementController>().KnockBack(dir);
             }

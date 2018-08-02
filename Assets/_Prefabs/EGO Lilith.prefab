@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 54271050675625240}
   m_Layer: 10
   m_Name: EGO Lilith
-  m_TagString: Lilith
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -917,7 +917,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1956872478430160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -64.937, y: -49.4213, z: 46.789}
+  m_LocalPosition: {x: -129.91096, y: 2.6909723, z: -21.913588}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4923858487353770}
@@ -1624,6 +1624,7 @@ MonoBehaviour:
   attackDamage: 15
   comboMultiplier: 1
   playerWeapon: 1
+  crag: 0
   parentObject: {fileID: 0}
   m_Audio: {fileID: 0}
 --- !u!114 &114255788817352738
@@ -1659,6 +1660,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ccd871d8fae0b54eb514fb0f97c6ac7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterName: Lilith-Spellshade
+  characterNameUI: {fileID: 0}
   health: 100
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
@@ -1696,6 +1699,7 @@ MonoBehaviour:
   attackDamage: 10
   comboMultiplier: 2
   playerWeapon: 1
+  crag: 0
   parentObject: {fileID: 0}
   m_Audio: {fileID: 0}
 --- !u!114 &114784508698700904
@@ -1746,7 +1750,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1756292857254372}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.1
@@ -1758,7 +1762,7 @@ SphereCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1789215409056644}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.1

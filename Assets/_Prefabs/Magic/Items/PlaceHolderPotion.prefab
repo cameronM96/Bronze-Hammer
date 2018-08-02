@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4681701798850922}
   - component: {fileID: 135076951921507322}
-  - component: {fileID: 135064599345900162}
   - component: {fileID: 54874343027427824}
   - component: {fileID: 114869727661373770}
+  - component: {fileID: 65203392358869388}
   m_Layer: 13
   m_Name: PlaceHolderPotion
   m_TagString: ManaPot
@@ -160,6 +160,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &65203392358869388
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1377585333511898}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8, y: 0.9, z: 0.8}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114869727661373770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,18 +187,6 @@ MonoBehaviour:
   manaValue: 25
   healthValue: 0
   triggerCollider: {fileID: 135076951921507322}
---- !u!135 &135064599345900162
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1377585333511898}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &135076951921507322
 SphereCollider:
   m_ObjectHideFlags: 1

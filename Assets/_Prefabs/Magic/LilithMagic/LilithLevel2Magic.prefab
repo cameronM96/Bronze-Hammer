@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4002322991591298}
   - component: {fileID: 198507060535090004}
   - component: {fileID: 199995723390943518}
+  - component: {fileID: 114270567627665032}
   m_Layer: 0
   m_Name: LilithLevel2Magic
   m_TagString: Untagged
@@ -41,6 +42,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &114270567627665032
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1923563884989994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 727e5daf5a644d24da6a57e6248079ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTimer: 5
 --- !u!198 &198507060535090004
 ParticleSystem:
   m_ObjectHideFlags: 1

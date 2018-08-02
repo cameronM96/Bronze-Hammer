@@ -100,26 +100,29 @@ public class Magic : MonoBehaviour {
         switch (magicLevel)
         {
             case 1:
-                // Crete Level 1 spell visuals (on Player)
-                magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
-                magicEffect.transform.parent = null;
-                break;
-            case 2:
-                // Crete Level 2 spell visuals (Centre)
-                magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
-                magicEffect.transform.parent = null;
-                magicEffect.transform.position = CameraToGround(caster);
-                break;
-            case 3:
-                // Crete Level 3 spell visuals (on enemies)
+                // Crete Level 1 spell visuals (all enemies)
                 foreach (GameObject enemy in enemies)
                 {
                     magicEffect = Instantiate(magicVisuals[magicLevel - 1], enemy.transform);
                     magicEffect.transform.parent = null;
                 }
                 break;
+            case 2:
+                // Crete Level 1 spell visuals (on Player)
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
+                magicEffect.transform.parent = null;
+                break;
+            case 3:
+                // Crete Level 2 spell visuals (Centre)
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
+                magicEffect.transform.parent = null;
+                magicEffect.transform.position = CameraToGround(caster);
+                break;
             case 4:
-                // Crete Level 4 spell visuals
+                // Crete Level 2 spell visuals (Centre)
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
+                magicEffect.transform.parent = null;
+                magicEffect.transform.position = CameraToGround(caster);
                 break;
             default:
                 break;
@@ -132,15 +135,14 @@ public class Magic : MonoBehaviour {
         switch (magicLevel)
         {
             case 1:
-                // Crete Level 1 spell visuals (On Player)
+                // Crete Level 1 spell visuals (on Player)
                 magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
                 magicEffect.transform.parent = null;
                 break;
             case 2:
-                // Crete Level 2 spell visuals (Centre)
-                magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
+                // Crete Level 1 spell visuals (on Player)
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
                 magicEffect.transform.parent = null;
-                magicEffect.transform.position = CameraToGround(caster);
                 break;
             default:
                 break;

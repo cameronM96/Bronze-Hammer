@@ -29,6 +29,26 @@ public class Potion : MonoBehaviour {
 
             Destroy(this.gameObject);
         }
+
+        if (other.tag == "Mount")
+        {
+            if (other.GetComponent<MountingController>().isCurrentlyMounted)
+            {
+                if (other.transform.parent.parent.tag == "Player")
+                {
+                    if (manaPot)
+                    {
+                        other.transform.parent.GetComponentInParent<PlayerHealth>().AddMana(manaValue);
+                    }
+                    else
+                    {
+                        // Add Health
+                    }
+
+                    Destroy(this.gameObject);
+                }
+            }
+        }
     }
 
     // Wait a while before pot can be picked up

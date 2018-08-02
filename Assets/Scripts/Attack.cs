@@ -7,8 +7,11 @@ public class Attack : MonoBehaviour
     public int attackDamage = 10;
     public int comboMultiplier = 2;
     public bool playerWeapon;
+    [SerializeField] private bool crag = false;
     [SerializeField] private GameObject parentObject;
     private Animator m_Anim;
+    public bool attack3 = false;
+    public bool attack2 = false;
 
     [SerializeField] private AudioSource m_Audio;
 
@@ -31,8 +34,7 @@ public class Attack : MonoBehaviour
         {
             if (other.gameObject.GetComponent<Health>() && other.gameObject.tag == "Enemy")
             {
-                if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack3 (KNOCKBACK)") ||
-                    m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Dash Attack"))
+                if (attack3)
                 {
                     float dir = 0;
                     if (other.transform.position.x > transform.parent.position.x)
@@ -43,7 +45,14 @@ public class Attack : MonoBehaviour
                     {
                         dir = -1;
                     }
-                    other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier, true, dir);
+                    if (crag)
+                        other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier * 2, true, dir);
+                    else
+                        other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier, true, dir);
+                }
+                else if (crag && attack2)
+                {
+                    other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier, false, 0);
                 }
                 else
                 {

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PauseMenu : MonoBehaviour {
 
     public Transform PauseBackground;
+    [SerializeField] private EventSystem eventSystem;
     bool paused = false;
 
     void Update()
@@ -27,6 +29,11 @@ public class PauseMenu : MonoBehaviour {
     void Pause()
     {
         PauseBackground.gameObject.SetActive(true);
+        PauseBackground.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        PauseBackground.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+        PauseBackground.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+        eventSystem.SetSelectedGameObject(PauseBackground.transform.GetChild(0).GetChild(0).GetChild(0).gameObject);
+        eventSystem.SetSelectedGameObject(PauseBackground.transform.GetChild(0).GetChild(0).GetChild(1).gameObject);
         Time.timeScale = 0f;
         paused = true;
     }

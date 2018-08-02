@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Encounter_Manager : MonoBehaviour {
 
@@ -51,12 +52,12 @@ public class Encounter_Manager : MonoBehaviour {
                     m_EncountersList[encounterIndex].waves[m_EncountersList[encounterIndex].waveNumber].rightSideEnemies)
                 {
                     GameObject newEnemy;
-                    Transform newSpawnPoint =  rightSpawnPoint;
+                    Vector3 newSpawnPoint =  rightSpawnPoint.position;
 
                     // Determine spawn location
                     if (switchSides1)
                     {
-                        newSpawnPoint.position =
+                        newSpawnPoint =
                             new Vector3(rightSpawnPoint.position.x,
                             rightSpawnPoint.position.y,
                             rightSpawnPoint.position.z + z1);
@@ -64,7 +65,7 @@ public class Encounter_Manager : MonoBehaviour {
                     }
                     else
                     {
-                        newSpawnPoint.position =
+                        newSpawnPoint =
                             new Vector3(rightSpawnPoint.position.x,
                             rightSpawnPoint.position.y,
                             rightSpawnPoint.position.z - z1);
@@ -73,13 +74,19 @@ public class Encounter_Manager : MonoBehaviour {
 
                     if (enemy.transform.GetChild(0).tag == "Chicken")
                     {
+                        NavMeshHit hit;
+                        if (NavMesh.SamplePosition(newSpawnPoint, out hit, 100.0f, NavMesh.AllAreas))
+                        {
+                            newSpawnPoint = hit.position;
+                        }
+
                         newEnemy = Instantiate(enemy);
                         newEnemy.transform.parent = null;
-                        newEnemy.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(rightSpawnPoint.position);
+                        newEnemy.GetComponent<NavMeshAgent>().Warp(newSpawnPoint);
                     }
                     else
                     {
-                        newEnemy = Instantiate(enemy, rightSpawnPoint);
+                        newEnemy = Instantiate(enemy, newSpawnPoint, new Quaternion(0,0,0,0));
                         newEnemy.transform.parent = null;
                     }
 
@@ -91,12 +98,12 @@ public class Encounter_Manager : MonoBehaviour {
                     m_EncountersList[encounterIndex].waves[m_EncountersList[encounterIndex].waveNumber].leftSideEnemies)
                 {
                     GameObject newEnemy;
-                    Transform newSpawnPoint = leftSpawnPoint;
+                    Vector3 newSpawnPoint = leftSpawnPoint.position;
 
                     // Determine spawn location
                     if (switchSides2)
                     {
-                        newSpawnPoint.position =
+                        newSpawnPoint =
                             new Vector3(leftSpawnPoint.position.x,
                             leftSpawnPoint.position.y,
                             leftSpawnPoint.position.z + z2);
@@ -104,7 +111,7 @@ public class Encounter_Manager : MonoBehaviour {
                     }
                     else
                     {
-                        newSpawnPoint.position =
+                        newSpawnPoint =
                             new Vector3(leftSpawnPoint.position.x,
                             leftSpawnPoint.position.y,
                             leftSpawnPoint.position.z - z2);
@@ -113,13 +120,19 @@ public class Encounter_Manager : MonoBehaviour {
 
                     if (enemy.transform.GetChild(0).tag == "Chicken")
                     {
+                        NavMeshHit hit;
+                        if (NavMesh.SamplePosition(newSpawnPoint, out hit, 100.0f, NavMesh.AllAreas))
+                        {
+                            newSpawnPoint = hit.position;
+                        }
+
                         newEnemy = Instantiate(enemy);
                         newEnemy.transform.parent = null;
-                        newEnemy.GetComponent<UnityEngine.AI.NavMeshAgent>().Warp(rightSpawnPoint.position);
+                        newEnemy.GetComponent<NavMeshAgent>().Warp(newSpawnPoint);
                     }
                     else
                     {
-                        newEnemy = Instantiate(enemy, rightSpawnPoint);
+                        newEnemy = Instantiate(enemy, newSpawnPoint, new Quaternion(0, 0, 0, 0));
                         newEnemy.transform.parent = null;
                     }
                     z2 += 2;

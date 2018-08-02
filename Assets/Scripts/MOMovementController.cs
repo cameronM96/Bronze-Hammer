@@ -69,22 +69,62 @@ public class MOMovementController : MonoBehaviour
             Quaternion.Lerp(scriptEntity.transform.rotation,
             Quaternion.Euler(entityRotation), entityTurnSpeed * Time.deltaTime);
 
+        // Reset attacks
         if (timerA > 0)
         {
             timerA -= Time.deltaTime;
         }
         else if (timerA <= 0)
         {
-            if (!mounted && attackTrigger[0].enabled == true)
+            if (this.gameObject.tag == "Player")
             {
-                attackTrigger[0].enabled = false;
-                m_Anim.SetBool("attack", false);
-                timerA = 0;
+                // Reset players attacks
+                if (GetComponent<MOPlayerInputController>().playerCharacter == PlayerCharacters.Lilith)
+                {
+                    m_Anim.SetBool("attack", false);
+                    attackTrigger[0].enabled = false;
+                    attackTrigger[1].enabled = false;
+                    attackTrigger[0].gameObject.GetComponent<Attack>().attack2 = false;
+                    attackTrigger[0].gameObject.GetComponent<Attack>().attack3 = false;
+                    attackTrigger[1].gameObject.GetComponent<Attack>().attack2 = false;
+                    attackTrigger[1].gameObject.GetComponent<Attack>().attack3 = false;
+                    timerA = 0;
+                }
+                else
+                {
+                    if (attackTrigger[0].enabled == true)
+                    {
+                        attackTrigger[0].enabled = false;
+                        attackTrigger[0].gameObject.GetComponent<Attack>().attack2 = false;
+                        attackTrigger[0].gameObject.GetComponent<Attack>().attack3 = false;
+                        m_Anim.SetBool("attack", false);
+                        timerA = 0;
+                    }
+                }
+
+                if (mounted)
+                {
+                    mount.GetComponent<MountingController>().AttackOff();
+                    timerA = 0;
+                }
             }
-            else if (mounted)
+            else
             {
-                timerA = 0;
-                mount.GetComponent<MountingController>().AttackOff();
+                // Reset AI attacks
+                if (attackTrigger[0].enabled == true)
+                {
+                    attackTrigger[0].enabled = false;
+                    attackTrigger[0].gameObject.GetComponent<Attack>().attack2 = false;
+                    attackTrigger[0].gameObject.GetComponent<Attack>().attack3 = false;
+                    m_Anim.SetBool("attack", false);
+                    timerA = 0;
+                }
+
+                if (mounted)
+                {
+                    mount.GetComponent<MountingController>().AttackOff();
+                    timerA = 0;
+                }
             }
             //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
         }
@@ -124,11 +164,6 @@ public class MOMovementController : MonoBehaviour
         groundVelocity.y = 0f;
 
         m_Anim.SetFloat("velocity", groundVelocity.magnitude);
-
-        // Reset relevent animation parameters
-        //m_Anim.SetBool("attack", false);
-        //m_Anim.SetBool("magic", false);
-        //m_Anim.SetBool("charge", false);
     }
 
     // method is called when needed from an input script
@@ -212,6 +247,7 @@ public class MOMovementController : MonoBehaviour
                 {
                     if (timerJ > 0 && !m_Grounded)
                     {
+                        // Jump attack
                         //Debug.Log("jump attack used");
                         attackCounter = 0;
                         m_Anim.SetBool("attack", true);
@@ -220,18 +256,21 @@ public class MOMovementController : MonoBehaviour
                         timerA = 1.0f;
                         //put jump attack here
                     }
-                    else if (attackCounter >= 3)
+                    else if (attackCounter >= 2)
                     {
+                        // Combo finisher (third attack)
                         //Debug.Log("3 attack combo used");
                         attackCounter = 0;
                         m_Anim.SetBool("attack", true);
                         attackTrigger[0].enabled = true;
+                        attackTrigger[0].gameObject.GetComponent<Attack>().attack3 = true;
                         //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
                         timerA = 0.25f;
                         //put knockback here
                     }
                     else if (sprinting)
                     {
+                        // Charge Attack
                         //Debug.Log("charge attack used");
                         m_Anim.SetBool("charge", true);
                         attackTrigger[0].enabled = true;
@@ -240,35 +279,40 @@ public class MOMovementController : MonoBehaviour
                     }
                     else
                     {
+                        // Normal attack (attack 1 and 2)
                         m_Anim.SetBool("attack", true);
                         //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
                         timerA = 0.25f;
                         //attack animation and stuff here?
-                        attackCounter += 1;
-
-                        if (attackCounter == 2)
+                        if (attackCounter == 1)
                         {
                             if (this.tag == "Player")
                             {
                                 switch (GetComponent<MOPlayerInputController>().playerCharacter)
                                 {
+                                    // Use left hand if lilith otherwise use right
                                     case PlayerCharacters.Lilith:
                                         attackTrigger[1].enabled = true;
                                         break;
                                     default:
                                         attackTrigger[0].enabled = true;
+                                        attackTrigger[0].gameObject.GetComponent<Attack>().attack2 = true;
                                         break;
                                 }
                             }
                             else
                             {
+                                // Use right hand if not second attack
                                 attackTrigger[0].enabled = true;
                             }
                         }
                         else
                         {
+                            // normal attack used by AI and players
                             attackTrigger[0].enabled = true;
                         }
+                        
+                        attackCounter += 1;
 
                         if (timerC == 0)
                         {
@@ -278,6 +322,7 @@ public class MOMovementController : MonoBehaviour
                 }
                 else
                 {
+                    // Mount attack (freeze for duration of attack)
                     mount.GetComponent<MountingController>().Attack();
                     timerA = 2f;
                 }
@@ -311,17 +356,22 @@ public class MOMovementController : MonoBehaviour
     //called from player's input controller only
     public void Magic()
     {
+        // Cast magic
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
             && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") &&
             !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
         {
+            // Cast magic if their level is greater than 0
             if (GetComponent<PlayerHealth>().currentMagicLevel > 0)
             {
                 //Debug.Log(scriptEntity.name + " using magic");
                 GetComponent<Magic>().CastMagic(this.gameObject, magicDamage,
                     GetComponent<PlayerHealth>().currentMagicLevel, GetComponent<MOPlayerInputController>().playerCharacter);
+
+                // Use up mana
                 GetComponent<PlayerHealth>().UseMana();
 
+                // Animations and sounds
                 m_Audio.clip = m_AudioClips[1];
                 m_Audio.Play();
 
@@ -339,28 +389,45 @@ public class MOMovementController : MonoBehaviour
 
     public void KnockBack(float dir)
     {
+        // Knock back mechanic which sends this character flying backwards
         m_Anim.SetBool("knockedDown", true);
         m_Rigidbody.velocity = new Vector3(0, 0, 0);
+<<<<<<< HEAD
         m_Rigidbody.AddForce((dir * 500), 500, 0);
 
         if (mounted)
+=======
+        m_Rigidbody.AddForce((dir * 500), 500,0);
+    
+        //Dis-mount character if knocked back
+        if(mounted)
+>>>>>>> 8d7983bf4659ed46bb26188393356ad864914bfc
         {
             mount.GetComponent<MountingController>().UnMounted();
+            m_GroundCheck = GetComponentInParent<Transform>();
         }
     }
 
     public void Death()
     {
+        // Dis-mount character if killed
+        if (mounted)
+        {
+            mount.GetComponent<MountingController>().UnMounted();
+            m_GroundCheck = GetComponentInParent<Transform>();
+        }
+
+        // Kill character
         m_Anim.SetBool("dead", true);
         m_Anim.SetBool("knockedDown", true);
         m_Audio.clip = m_AudioClips[0];
         m_Audio.Play();
         this.gameObject.layer = 15;
         StartCoroutine(FallThroughFloor(5));
+
+        // Destroy character if it's not a player
         if (this.tag != "Player")
-        {
             Destroy(this.transform.parent.gameObject, 7);
-        }
     }
 
     IEnumerator FallThroughFloor(float waittimer)

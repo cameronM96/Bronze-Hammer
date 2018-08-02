@@ -8,7 +8,7 @@ public class ChickenAI : MonoBehaviour {
     private Vector3 wanderCentre;
     [SerializeField] private GameObject manaPot;
     [SerializeField] private float pauseTimer = 3;
-    public float retreatTimer = 15f;
+    public float retreatTimer = 20f;
     private float time = 0;
     public float timesHit = 0;
     [SerializeField] private float maxTimesHit = 3;
@@ -18,7 +18,7 @@ public class ChickenAI : MonoBehaviour {
     private float minZ = 0;
     private NavMeshAgent agent;
     private Rigidbody m_Rigidbody;
-    private LayerMask mask = 1 << 9;            // https://docs.unity3d.com/Manual/Layers.html
+    private int mask = 1 << 9;            // https://docs.unity3d.com/Manual/Layers.html
     private bool waiting = false;
     private bool retreating = false;
     
@@ -64,19 +64,11 @@ public class ChickenAI : MonoBehaviour {
         {
             // Run away if time existed for too long or hit a bunch.
             if (!retreating)
-                Retreat(CameraToGround());
-
-            if (agent.pathStatus == NavMeshPathStatus.PathComplete)
             {
-                float distance = Vector3.Distance(this.transform.position, agent.destination);
-
-                // Die when it reaches this spot
-                if (distance < 1 && distance > -1)
-                {
-                    Destroy(this.gameObject);
-                }
+                wanderCentre = CameraToGround();
+                GetBoundaries(wanderCentre);
+                Retreat(wanderCentre);
             }
-
         }
     }
 
@@ -86,23 +78,23 @@ public class ChickenAI : MonoBehaviour {
         RaycastHit hit;
 
         // X values
-        if (Physics.Raycast(origin, Vector3.right, out hit, Mathf.Infinity, mask))
+        if (Physics.Raycast(origin, Vector3.right, out hit, 20f, mask))
         {
             maxX = hit.transform.position.x - 2;
         }
         else
         {
-            maxX = origin.x + 15f;
+            maxX = origin.x - 15f;
         }
 
         // MixX
-        if (Physics.Raycast(origin, Vector3.left, out hit, Mathf.Infinity, mask))
+        if (Physics.Raycast(origin, Vector3.left, out hit, 20f, mask))
         {
-            minX = hit.transform.position.x - 2;
+            minX = hit.transform.position.x + 2;
         }
         else
         {
-            minX = origin.x - 15f;
+            minX = origin.x + 15f;
         }
 
         // Z values
@@ -119,7 +111,7 @@ public class ChickenAI : MonoBehaviour {
         Vector3 newGoal = new Vector3(x, y, z);
 
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(newGoal, out hit, 100.0f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(newGoal, out hit, 10.0f, NavMesh.AllAreas))
         {
             newGoal = hit.position;
         }
@@ -131,8 +123,7 @@ public class ChickenAI : MonoBehaviour {
     // Run away (run off screen)
     private void Retreat (Vector3 origin)
     {
-        Vector3 retreatPoint;
-        retreatPoint = new Vector3(origin.x - 40f, origin.y, origin.z);
+        Vector3 retreatPoint = Camera.main.transform.GetChild(4).transform.position;
 
         NavMeshHit hit;
         if (NavMesh.SamplePosition(retreatPoint, out hit, 1.0f, NavMesh.AllAreas))
@@ -141,7 +132,9 @@ public class ChickenAI : MonoBehaviour {
         }
 
         agent.SetDestination(retreatPoint);
+        agent.speed *= 2;
         retreating = true;
+        Destroy(this.gameObject, 10);
     }
 
     // Wait for a while then find new destination
@@ -199,13 +192,19 @@ public class ChickenAI : MonoBehaviour {
     public void Death()
     {
         this.gameObject.layer = 15;
-        StartCoroutine(FallThroughFloor(5));
-        Destroy(this.gameObject, 7);
     }
 
     IEnumerator FallThroughFloor(float waittimer)
     {
         yield return new WaitForSeconds(waittimer);
         GetComponentInChildren<Collider>().enabled = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "ChickenKiller")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

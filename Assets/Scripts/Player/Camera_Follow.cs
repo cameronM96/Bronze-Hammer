@@ -20,8 +20,6 @@ public class Camera_Follow : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        target = GameObject.FindGameObjectWithTag("Player").transform;
-
         camHeight = this.gameObject.GetComponent<Camera>().orthographicSize * 2;
         camWidth = camHeight * this.gameObject.GetComponent<Camera>().aspect;
 
