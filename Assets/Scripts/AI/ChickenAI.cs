@@ -111,7 +111,7 @@ public class ChickenAI : MonoBehaviour {
         Vector3 newGoal = new Vector3(x, y, z);
 
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(newGoal, out hit, 100.0f, NavMesh.AllAreas))
+        if (NavMesh.SamplePosition(newGoal, out hit, 10.0f, NavMesh.AllAreas))
         {
             newGoal = hit.position;
         }
