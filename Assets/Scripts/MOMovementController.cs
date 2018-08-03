@@ -82,6 +82,7 @@ public class MOMovementController : MonoBehaviour
                 // Reset players attacks
                 if (GetComponent<MOPlayerInputController>().playerCharacter == PlayerCharacters.Lilith)
                 {
+                    Debug.Log("Player attack reset");
                     m_Anim.SetBool("attack", false);
                     attackTrigger[0].enabled = false;
                     attackTrigger[1].enabled = false;
@@ -89,15 +90,18 @@ public class MOMovementController : MonoBehaviour
                     attackTrigger[0].gameObject.GetComponent<Attack>().attack3 = false;
                     attackTrigger[1].gameObject.GetComponent<Attack>().attack2 = false;
                     attackTrigger[1].gameObject.GetComponent<Attack>().attack3 = false;
+                    attackCounter = 0;
                     timerA = 0;
                 }
                 else
                 {
                     if (attackTrigger[0].enabled == true)
                     {
+                        Debug.Log("Player attack reset");
                         attackTrigger[0].enabled = false;
                         attackTrigger[0].gameObject.GetComponent<Attack>().attack2 = false;
                         attackTrigger[0].gameObject.GetComponent<Attack>().attack3 = false;
+                        attackCounter = 0;
                         m_Anim.SetBool("attack", false);
                         timerA = 0;
                     }
@@ -114,9 +118,11 @@ public class MOMovementController : MonoBehaviour
                 // Reset AI attacks
                 if (attackTrigger[0].enabled == true)
                 {
+                    Debug.Log("Player attack reset");
                     attackTrigger[0].enabled = false;
                     attackTrigger[0].gameObject.GetComponent<Attack>().attack2 = false;
                     attackTrigger[0].gameObject.GetComponent<Attack>().attack3 = false;
+                    attackCounter = 0;
                     m_Anim.SetBool("attack", false);
                     timerA = 0;
                 }
@@ -267,7 +273,7 @@ public class MOMovementController : MonoBehaviour
                         timerA = 1.0f;
                         //put jump attack here
                     }
-                    else if (attackCounter >= 3)
+                    else if (attackCounter >= 2)
                     {
                         // Combo finisher (third attack)
                         Debug.Log("3 attack combo used");
@@ -276,7 +282,7 @@ public class MOMovementController : MonoBehaviour
                         attackTrigger[0].enabled = true;
                         attackTrigger[0].gameObject.GetComponent<Attack>().attack3 = true;
                         //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
-                        timerA = 0.25f;
+                        timerA = 1.30f;
                         //put knockback here
                     }
                     else if (sprinting)
@@ -292,8 +298,9 @@ public class MOMovementController : MonoBehaviour
                     {
                         // Normal attack (attack 1 and 2)
                         m_Anim.SetBool("attack", true);
-                        Debug.Log("Basic attack used");
-                        timerA = 0.25f;
+                        
+                        timerA = 1.30f;
+                        Debug.Log("Basic attack used, length is " + timerA);
                         //attack animation and stuff here?
                         if (attackCounter == 1)
                         {
