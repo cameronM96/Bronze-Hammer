@@ -88,7 +88,7 @@ public class PlayerHealth : MonoBehaviour {
             healthBar.fillAmount = (health / maxHealth);
             healthText.text = "" + health + "/" + maxHealth;
             //update UI health
-            if (health <= 0 && dead)
+            if (health <= 0 && !dead)
             {
                 dead = true;
                 playerLives.LoseLife();

@@ -10,6 +10,7 @@ public class MOMovementController : MonoBehaviour
     private float timerA = 0.0f;
     private float timerC = 0.0f;
     private float timerJ = 0.0f;
+    private bool dead = false;
     [HideInInspector] public int attackCounter;
     [HideInInspector] public bool freeze;                   // Freeze Character when hit by magic
     [HideInInspector] public bool mounted = false;          // Redirects animations to mount
@@ -171,14 +172,24 @@ public class MOMovementController : MonoBehaviour
     {
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !m_Anim.GetBool("attack") &&
             !freeze && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") &&
-            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
+            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up") && !dead)
         {
+            bool inAir = false;
+            if (this.gameObject.tag != "Player" && !m_Grounded)
+            {
+                inAir = true;
+            }
+
             //move the gameobject based on the vars from the input script
             //scriptEntity.transform.parent.Translate(mov * speed * Time.deltaTime);
-            m_Rigidbody.velocity = new Vector3(mov.x * speed, m_Rigidbody.velocity.y, mov.z * speed);
+            if (!inAir)
+            {
+                m_Rigidbody.velocity = new Vector3(mov.x * speed, m_Rigidbody.velocity.y, mov.z * speed);
 
-            m_Audio.clip = m_AudioClips[0];
-            m_Audio.Play();
+                m_Audio.clip = m_AudioClips[0];
+                m_Audio.Play();
+                m_Audio.volume = 0.2f;
+            }
 
             if (mov.x < 0 & mov.z == 0) //left
             {
@@ -220,7 +231,7 @@ public class MOMovementController : MonoBehaviour
     {
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
             && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") &&
-            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
+            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up") && !dead)
         {
             if (timerJ <= 0.0f && m_Grounded)
             {
@@ -237,7 +248,7 @@ public class MOMovementController : MonoBehaviour
     {
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
             && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Knocked Down") &&
-            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
+            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up") && !dead)
         {
             m_Rigidbody.velocity = new Vector3(0, 0, 0);
             // Debug.Log(scriptEntity.name + " attacking");
@@ -256,10 +267,10 @@ public class MOMovementController : MonoBehaviour
                         timerA = 1.0f;
                         //put jump attack here
                     }
-                    else if (attackCounter >= 2)
+                    else if (attackCounter >= 3)
                     {
                         // Combo finisher (third attack)
-                        //Debug.Log("3 attack combo used");
+                        Debug.Log("3 attack combo used");
                         attackCounter = 0;
                         m_Anim.SetBool("attack", true);
                         attackTrigger[0].enabled = true;
@@ -281,7 +292,7 @@ public class MOMovementController : MonoBehaviour
                     {
                         // Normal attack (attack 1 and 2)
                         m_Anim.SetBool("attack", true);
-                        //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
+                        Debug.Log("Basic attack used");
                         timerA = 0.25f;
                         //attack animation and stuff here?
                         if (attackCounter == 1)
@@ -329,11 +340,12 @@ public class MOMovementController : MonoBehaviour
             }
         }
     }
+
     public void BossAttack(int attackNumber)
     {
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
             && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Knocked Down") &&
-            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
+            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up") && !dead)
         {
             m_Rigidbody.velocity = new Vector3(0, 0, 0);
             // Debug.Log(scriptEntity.name + " attacking");
@@ -351,15 +363,14 @@ public class MOMovementController : MonoBehaviour
             }
         }
     }
-
-
+    
     //called from player's input controller only
     public void Magic()
     {
         // Cast magic
         if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
             && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") &&
-            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
+            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up") && !dead)
         {
             // Cast magic if their level is greater than 0
             if (GetComponent<PlayerHealth>().currentMagicLevel > 0)
@@ -374,6 +385,7 @@ public class MOMovementController : MonoBehaviour
                 // Animations and sounds
                 m_Audio.clip = m_AudioClips[1];
                 m_Audio.Play();
+                m_Audio.volume = 1f;
 
                 if (mounted)
                 {
@@ -392,16 +404,13 @@ public class MOMovementController : MonoBehaviour
         // Knock back mechanic which sends this character flying backwards
         m_Anim.SetBool("knockedDown", true);
         m_Rigidbody.velocity = new Vector3(0, 0, 0);
-<<<<<<< HEAD
         m_Rigidbody.AddForce((dir * 500), 500, 0);
 
         if (mounted)
-=======
         m_Rigidbody.AddForce((dir * 500), 500,0);
     
         //Dis-mount character if knocked back
         if(mounted)
->>>>>>> 8d7983bf4659ed46bb26188393356ad864914bfc
         {
             mount.GetComponent<MountingController>().UnMounted();
             m_GroundCheck = GetComponentInParent<Transform>();
@@ -410,6 +419,7 @@ public class MOMovementController : MonoBehaviour
 
     public void Death()
     {
+        dead = true;
         // Dis-mount character if killed
         if (mounted)
         {
@@ -422,6 +432,7 @@ public class MOMovementController : MonoBehaviour
         m_Anim.SetBool("knockedDown", true);
         m_Audio.clip = m_AudioClips[0];
         m_Audio.Play();
+        m_Audio.volume = 1f;
         this.gameObject.layer = 15;
         StartCoroutine(FallThroughFloor(5));
 
