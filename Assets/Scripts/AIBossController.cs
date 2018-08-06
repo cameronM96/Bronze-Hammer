@@ -8,6 +8,8 @@ public class AIBossController : MOMovementController
     public GameObject enemy; // the entity to be controlled
     public GameObject moveTarget;   // The Target to move towards
     public GameObject attackTarget; // The Target to attack
+    public RuntimeAnimatorController form1Animations;//the contoller for the first form of the boss
+    public RuntimeAnimatorController form2Animations;//the controller for the second form of the boss
 
     private MOMovementController m_character;
     // private NavMeshAgent agent;
@@ -23,12 +25,12 @@ public class AIBossController : MOMovementController
     public GameObject teleportLocation4;
     public GameObject teleportLocation5;
 
-    public float attack1Cooldown;//cooldown of the basic lightning wave attack
+    private float attack1Cooldown;//cooldown of the basic lightning wave attack
 
-    public float attack2Cooldown; //cooldown of the powerful magic attack
+    private float attack2Cooldown; //cooldown of the powerful magic attack
 
-    public float attack3Cooldown; //cooldown of the knockback sword attack
-    public float attack3Distance = 10; //the minimum distance the play muct be away to use attack 3
+    private float attack3Cooldown; //cooldown of the knockback sword attack
+    private float attack3Distance = 10; //the minimum distance the play muct be away to use attack 3
 
     private bool phase2; //bool of if the boss fight is in phase 1 or 2 
 
@@ -52,6 +54,7 @@ public class AIBossController : MOMovementController
     {
         base.Awake();
 
+        GetComponent<Animator>().runtimeAnimatorController = form1Animations;
         m_character = GetComponent<MOMovementController>();
 
         // agent = GetComponentInParent<NavMeshAgent>();

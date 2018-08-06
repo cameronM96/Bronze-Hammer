@@ -1107,6 +1107,8 @@ MonoBehaviour:
   playerWeapon: 0
   crag: 0
   parentObject: {fileID: 0}
+  attack3: 0
+  attack2: 0
   m_Audio: {fileID: 0}
 --- !u!114 &114718057906768164
 MonoBehaviour:
@@ -1129,7 +1131,7 @@ MonoBehaviour:
   m_GroundCheck: {fileID: 4741955193925784}
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 131073
   magicDamage: 0
   magicLevel: 0
   entityID: 2

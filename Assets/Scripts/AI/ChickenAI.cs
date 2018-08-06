@@ -18,7 +18,7 @@ public class ChickenAI : MonoBehaviour {
     private float minZ = 0;
     private NavMeshAgent agent;
     private Rigidbody m_Rigidbody;
-    private int mask = 1 << 9;            // https://docs.unity3d.com/Manual/Layers.html
+    private int mask = 1 << 17;            // https://docs.unity3d.com/Manual/Layers.html
     private bool waiting = false;
     private bool retreating = false;
     
@@ -159,7 +159,7 @@ public class ChickenAI : MonoBehaviour {
 
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, 1))
         {
-            return hit.transform.position;
+            return hit.point;
         }
         else
         {
