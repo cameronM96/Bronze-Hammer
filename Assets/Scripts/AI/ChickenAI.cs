@@ -21,6 +21,7 @@ public class ChickenAI : MonoBehaviour {
     private int mask = 1 << 17;            // https://docs.unity3d.com/Manual/Layers.html
     private bool waiting = false;
     private bool retreating = false;
+    private IEnumerator pauseCoRoutine;
     
 	// Use this for initialization
 	void Awake ()
@@ -31,7 +32,9 @@ public class ChickenAI : MonoBehaviour {
         GetBoundaries(wanderCentre);
         StartCoroutine(InitialiseWaitTimer());
         m_Rigidbody = GetComponent<Rigidbody>();
-	}
+        pauseCoRoutine = PauseTimer(pauseTimer);
+
+    }
 
     IEnumerator InitialiseWaitTimer()
     {
@@ -44,7 +47,7 @@ public class ChickenAI : MonoBehaviour {
     {
         time += Time.deltaTime;
 
-        if (timesHit < maxTimesHit && time < retreatTimer)
+        if (timesHit < maxTimesHit && time < retreatTimer && !retreating)
         {
             // If destination was reached, wait for a while then find new destination.
             if (agent.pathStatus == NavMeshPathStatus.PathComplete)
@@ -55,7 +58,7 @@ public class ChickenAI : MonoBehaviour {
                 {
                     if (!waiting)
                     {
-                        StartCoroutine(PauseTimer(pauseTimer));
+                        StartCoroutine(pauseCoRoutine);
                     }
                 }
             }
@@ -65,6 +68,7 @@ public class ChickenAI : MonoBehaviour {
             // Run away if time existed for too long or hit a bunch.
             if (!retreating)
             {
+                StopCoroutine(pauseCoRoutine);
                 wanderCentre = CameraToGround();
                 GetBoundaries(wanderCentre);
                 Retreat(wanderCentre);
@@ -123,6 +127,9 @@ public class ChickenAI : MonoBehaviour {
     // Run away (run off screen)
     private void Retreat (Vector3 origin)
     {
+        Debug.Log("Chicken Retreating");
+        agent.isStopped = true;
+        agent.ResetPath();
         Vector3 retreatPoint = Camera.main.transform.GetChild(4).transform.position;
 
         NavMeshHit hit;
@@ -133,19 +140,22 @@ public class ChickenAI : MonoBehaviour {
 
         agent.SetDestination(retreatPoint);
         agent.speed *= 2;
+        agent.isStopped = false;
         retreating = true;
         Destroy(this.gameObject, 10);
     }
 
     // Wait for a while then find new destination
-    IEnumerator PauseTimer (float waitTimer)
+    IEnumerator PauseTimer(float waitTimer)
     {
         waiting = true;
         agent.isStopped = true;
         yield return new WaitForSeconds(waitTimer);
+
         wanderCentre = CameraToGround();
         GetBoundaries(wanderCentre);
         NewGoal(wanderCentre);
+
         waiting = false;
         agent.isStopped = false;
     }
