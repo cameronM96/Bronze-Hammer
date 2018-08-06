@@ -26,12 +26,16 @@ public class AIController : MOMovementController
     //private bool tooClose;
 
     public bool sprinting;
+    public float attackDistance = 2;
+    private float meleeAttackDistance;
     private bool stop;
 
     // Use this for initialization
     protected override void Awake ()
     {
         base.Awake();
+
+        meleeAttackDistance = attackDistance;
 
         m_character = GetComponent<MOMovementController>();
 
@@ -74,7 +78,7 @@ public class AIController : MOMovementController
         float dist = Vector3.Distance(attackTarget.transform.position, enemy.transform.position);
         //Debug.Log(dist);
         // Attack if enemy is close enough and roughly the same z position AND facing the player
-        if (dist < 2)
+        if (dist < attackDistance)
         {
             //Debug.Log("Attacking");
             attack = true;

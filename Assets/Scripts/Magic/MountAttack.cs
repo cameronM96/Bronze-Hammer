@@ -6,7 +6,6 @@ public class MountAttack : MonoBehaviour {
 
     public int attackDamage = 10;
     public bool playerAttack;
-    [SerializeField] private bool ranged;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,10 +14,19 @@ public class MountAttack : MonoBehaviour {
         {
             if (other.gameObject.GetComponent<Health>() && other.gameObject.tag == "Enemy")
             {
-                other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, false, 0);
+                // Determine which direction to send the target in when hit
+                float dir = 0;
+                if (other.transform.position.x > transform.position.x)
+                {
+                    dir = 1;
+                }
+                else
+                {
+                    dir = -1;
+                }
+
+                other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, true, dir);
                 // Debug.Log(gameObject.transform.parent.name + " Hit the " + other.gameObject.name + " for " + attackDamage);
-                if (ranged)
-                    Destroy(this.transform.parent.parent);
             }
 
             if (other.tag == "Chicken")
@@ -30,10 +38,19 @@ public class MountAttack : MonoBehaviour {
         {
             if (other.gameObject.GetComponent<PlayerHealth>() && other.gameObject.tag == "Player")
             {
-                other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage, false, 0);
+                // Determine which direction to send the target in when hit
+                float dir = 0;
+                if (other.transform.position.x > transform.position.x)
+                {
+                    dir = 1;
+                }
+                else
+                {
+                    dir = -1;
+                }
+
+                other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage, true, dir);
                 // Debug.Log(gameObject.transform.parent.name + " Hit the " + other.gameObject.name + " for " + attackDamage);
-                if (ranged)
-                    Destroy(this.transform.parent.parent);
             }
         }
     }

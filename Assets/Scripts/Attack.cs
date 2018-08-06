@@ -45,6 +45,7 @@ public class Attack : MonoBehaviour
                     {
                         dir = -1;
                     }
+
                     if (crag)
                         other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier * 2, true, dir);
                     else

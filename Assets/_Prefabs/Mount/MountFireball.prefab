@@ -21,8 +21,6 @@ GameObject:
   - component: {fileID: 4496791922806730}
   - component: {fileID: 198329194783758342}
   - component: {fileID: 199104127693290668}
-  - component: {fileID: 135107757332750758}
-  - component: {fileID: 114790157013645038}
   m_Layer: 0
   m_Name: Particles
   m_TagString: Untagged
@@ -38,6 +36,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4186693816728440}
+  - component: {fileID: 135314106239433554}
+  - component: {fileID: 114201849351463296}
+  - component: {fileID: 114237952400028818}
   m_Layer: 0
   m_Name: MountFireball
   m_TagString: Untagged
@@ -82,14 +83,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1383227445612508}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4100678349201380}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!4 &4496791922806730
 Transform:
   m_ObjectHideFlags: 1
@@ -103,34 +104,44 @@ Transform:
   m_Father: {fileID: 4100678349201380}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &114790157013645038
+--- !u!114 &114201849351463296
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1049728956774638}
+  m_GameObject: {fileID: 1383227445612508}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51daa11a8229bc54a9a30c4dbc5eca6c, type: 3}
+  m_Script: {fileID: 11500000, guid: 727e5daf5a644d24da6a57e6248079ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
-  comboMultiplier: 2
-  playerWeapon: 0
-  parentObject: {fileID: 0}
-  m_Audio: {fileID: 0}
---- !u!135 &135107757332750758
+  waitTimer: 12
+--- !u!114 &114237952400028818
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1383227445612508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac75b59477ecafe4ea611b95f4764156, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 40
+  playerRider: 0
+  speed: 10
+--- !u!135 &135314106239433554
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1049728956774638}
+  m_GameObject: {fileID: 1383227445612508}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 2}
+  m_Center: {x: 1.7, y: 0, z: 0}
 --- !u!198 &198016332551895424
 ParticleSystem:
   m_ObjectHideFlags: 1

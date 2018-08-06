@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4197095972727468}
   - component: {fileID: 65549571621475298}
+  - component: {fileID: 114959576305279758}
   m_Layer: 0
   m_Name: MountFirebreath
   m_TagString: Untagged
@@ -114,6 +115,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2290344, y: 1.5100956, z: 5.7685413}
   m_Center: {x: 0.05588913, y: 0.2357378, z: 2.3842707}
+--- !u!114 &114959576305279758
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1505677224801890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecaf0084729227d4c89a09e7b939b34f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 40
+  playerAttack: 0
 --- !u!198 &198586354458050748
 ParticleSystem:
   m_ObjectHideFlags: 1

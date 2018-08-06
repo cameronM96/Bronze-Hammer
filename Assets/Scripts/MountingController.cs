@@ -10,6 +10,7 @@ public class MountingController : MonoBehaviour
     [SerializeField] private bool ranged;
     [SerializeField] private GameObject attack;
     [SerializeField] private GameObject attackPoint;
+    [SerializeField] private float attackRange = 4;
 
     public bool isCurrentlyMounted;
 
@@ -48,11 +49,11 @@ public class MountingController : MonoBehaviour
             projectile.transform.parent = null;
             if (mountedCharacter.tag == "Player")
             {
-                projectile.transform.GetChild(0).GetComponentInChildren<MountAttack>().playerAttack = true;
+                projectile.GetComponent<Projectile>().playerRider = true;
             }
             else
             {
-                projectile.transform.GetChild(0).GetComponentInChildren<MountAttack>().playerAttack = false;
+                projectile.GetComponent<Projectile>().playerRider = false;
             }
         }
         else
@@ -73,6 +74,7 @@ public class MountingController : MonoBehaviour
 
     public void AttackOff()
     {
+        // Turns off the attack animation
         m_Anim.SetBool("attack", false);
         if (!ranged)
         {
@@ -82,6 +84,7 @@ public class MountingController : MonoBehaviour
 
     public void UnMounted()
     {
+        // Unmounts the rider from the mount
         mountedCharacter = null;
         rb = null;
         isCurrentlyMounted = false;
@@ -95,7 +98,8 @@ public class MountingController : MonoBehaviour
         {
             Debug.Log("Collided with character, mounting");
             //check not already mounted by something
-            if (!isCurrentlyMounted && !other.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("knocked Down"))
+            if (!isCurrentlyMounted && !other.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("knocked Down") 
+                && !other.GetComponent<MOMovementController>().mounted)
             {
                 Debug.Log(gameObject.name + " Being mounted by " + other);
                 //set mounted character to the object collided with
@@ -121,6 +125,9 @@ public class MountingController : MonoBehaviour
                 mountedCharacter.GetComponent<MOMovementController>().m_GroundCheck = GetComponentInParent<Transform>();
 
                 rb = mountedCharacter.transform.parent.GetComponent<Rigidbody>();
+
+                if (other.tag == "Enemy")
+                    other.GetComponent<AIController>().attackDistance = attackRange;
             }
         }
     }
