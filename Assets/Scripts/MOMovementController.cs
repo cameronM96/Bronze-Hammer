@@ -359,14 +359,17 @@ public class MOMovementController : MonoBehaviour
             if (attackNumber == 1)
             {
                 attackTrigger[0].enabled = true;
+                m_Anim.SetBool("Attack 1", true);
             }
             else if (attackNumber == 2)
             {
                 attackTrigger[0].enabled = true;
+                m_Anim.SetBool("Attack 2", true);
             }
             else if (attackNumber == 3)
             {
                 attackTrigger[0].enabled = true;
+                m_Anim.SetBool("Attack 3", true);
             }
         }
     }

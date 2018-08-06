@@ -57,6 +57,8 @@ public class AIBossController : MOMovementController
         GetComponent<Animator>().runtimeAnimatorController = form1Animations;
         m_character = GetComponent<MOMovementController>();
 
+        phase2 = false;
+
         // agent = GetComponentInParent<NavMeshAgent>();
 
         enemy = this.gameObject;
