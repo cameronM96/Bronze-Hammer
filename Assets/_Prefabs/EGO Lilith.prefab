@@ -1626,6 +1626,8 @@ MonoBehaviour:
   playerWeapon: 1
   crag: 0
   parentObject: {fileID: 0}
+  attack3: 0
+  attack2: 0
   m_Audio: {fileID: 0}
 --- !u!114 &114255788817352738
 MonoBehaviour:
@@ -1648,7 +1650,7 @@ MonoBehaviour:
   - {fileID: 1773606270382572, guid: 2b6ac34e39df8144faed24dba2eedb9f, type: 2}
   - {fileID: 1923563884989994, guid: 1689d4489d0f2784b8eeeb547f2e51c9, type: 2}
   - {fileID: 1570555667515028, guid: 382d983ea44abf9448aed135b667bf3c, type: 2}
-  - {fileID: 1284570177187334, guid: 069cc121410c52b4ca978edc9cd6be71, type: 2}
+  - {fileID: 0}
 --- !u!114 &114494604020787888
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1701,6 +1703,8 @@ MonoBehaviour:
   playerWeapon: 1
   crag: 0
   parentObject: {fileID: 0}
+  attack3: 0
+  attack2: 0
   m_Audio: {fileID: 0}
 --- !u!114 &114784508698700904
 MonoBehaviour:
@@ -1724,7 +1728,7 @@ MonoBehaviour:
   m_GroundCheck: {fileID: 4272327259457918}
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 131073
   magicDamage: 75
   magicLevel: 0
   entityID: 1

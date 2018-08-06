@@ -14,6 +14,9 @@ public class Camera_Follow : MonoBehaviour {
     private float currentX;
     private int currentBoundaryIndex = 0;
     [SerializeField] private float spawnBuffer = 2;
+    [SerializeField] private bool debugMode;
+    [SerializeField] private GameObject ball;
+    private int mask = 1 << 17;
 
     private float camWidth, camHeight, levelMinX, levelMaxX;
 
@@ -67,7 +70,12 @@ public class Camera_Follow : MonoBehaviour {
             if (currentX < x)
                 transform.position = new Vector3(x, transform.position.y, transform.position.z);
         }
-	}
+
+        if (debugMode)
+        {
+            ball.transform.position = CameraToGround();
+        }
+    }
 
     public void NewBoundary()
     {
@@ -101,6 +109,23 @@ public class Camera_Follow : MonoBehaviour {
                 spawner.position = new Vector3((camWidth / 2) + spawnBuffer, spawner.position.y, spawner.position.z);
             }
             switchbool = !switchbool;
+        }
+    }
+
+    // Finds the centre point of the screen
+    public Vector3 CameraToGround()
+    {
+        // Raycast from camera down to the ground (Finds the centre of the screen)
+        RaycastHit hit;
+        //Ray forwardRay = new Ray(gameCamera.transform.position, transform.forward);
+
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, Mathf.Infinity, mask))
+        {
+            return hit.point;
+        }
+        else
+        {
+            return this.transform.position;
         }
     }
 }
