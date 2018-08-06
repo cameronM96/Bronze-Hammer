@@ -62,7 +62,12 @@ ModelImporter:
     7400000: mixamo.com
     9500000: //RootNode
     13700000: EnemyKing
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 16c163f148f43744cb72a7fb33f41a83, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
