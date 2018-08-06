@@ -42,6 +42,14 @@ public class MountingController : MonoBehaviour
     public void Attack()
     {
         m_Anim.SetBool("attack", true);
+        Debug.Log("Attack animation triggered");
+        StartCoroutine(AttackDelay());
+    }
+
+    IEnumerator AttackDelay()
+    {
+        Debug.Log("Attack triggered");
+        yield return new WaitForSeconds(1.03f);
         if (ranged)
         {
             // Long ranged attack
@@ -59,7 +67,7 @@ public class MountingController : MonoBehaviour
         else
         {
             // Short ranged attack
-            if(mountedCharacter.tag == "Player")
+            if (mountedCharacter.tag == "Player")
             {
                 attack.SetActive(true);
                 attack.GetComponent<MountAttack>().playerAttack = true;
@@ -89,6 +97,7 @@ public class MountingController : MonoBehaviour
         rb = null;
         isCurrentlyMounted = false;
         this.transform.parent.parent = null;
+        AttackOff();
     }
 
     private void OnTriggerEnter(Collider other)
