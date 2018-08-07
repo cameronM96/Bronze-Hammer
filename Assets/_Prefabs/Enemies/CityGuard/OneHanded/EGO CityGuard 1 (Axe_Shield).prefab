@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 33121176272107824}
   - component: {fileID: 23741993176456206}
   - component: {fileID: 114690578253184404}
-  - component: {fileID: 65492240615304318}
+  - component: {fileID: 64555453976209630}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Untagged
@@ -876,7 +876,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1069602969923176}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.345261, y: 1.6845852e-15, z: -75.86697}
+  m_LocalPosition: {x: -24.671633, y: -0.0000016845999, z: -11.532709}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4501102392803036}
@@ -1079,8 +1079,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65492240615304318
-BoxCollider:
+--- !u!64 &64555453976209630
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -1088,9 +1088,11 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8, y: 13, z: 1}
-  m_Center: {x: 0, y: 18.9, z: 0}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: e4049e7c1c15fcc499e26de1c57d43e2, type: 3}
 --- !u!82 &82511254759327518
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1216,7 +1218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrigger:
-  - {fileID: 65492240615304318}
+  - {fileID: 64555453976209630}
   entityTurnSpeed: 10
   attackCounter: 0
   freeze: 0
@@ -1239,6 +1241,7 @@ MonoBehaviour:
   attackTarget: {fileID: 0}
   moveSpeed: 3
   sprinting: 0
+  attackDistance: 2
 --- !u!114 &114634309813339236
 MonoBehaviour:
   m_ObjectHideFlags: 1

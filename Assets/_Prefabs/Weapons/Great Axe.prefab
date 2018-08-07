@@ -36,8 +36,8 @@ GameObject:
   - component: {fileID: 4740445866633798}
   - component: {fileID: 33932118467874444}
   - component: {fileID: 23880111528198456}
-  - component: {fileID: 65407912629112420}
   - component: {fileID: 114128129656601324}
+  - component: {fileID: 64736738897870478}
   m_Layer: 0
   m_Name: Great_Axe
   m_TagString: Untagged
@@ -114,8 +114,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1594620492925938}
   m_Mesh: {fileID: 4300000, guid: 56fef1654319a5e4095a6b340bed1484, type: 3}
---- !u!65 &65407912629112420
-BoxCollider:
+--- !u!64 &64736738897870478
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -123,9 +123,11 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 18.23, y: 20, z: 1.94}
-  m_Center: {x: 0, y: 40.9, z: 0}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 56fef1654319a5e4095a6b340bed1484, type: 3}
 --- !u!114 &114128129656601324
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,5 +142,8 @@ MonoBehaviour:
   attackDamage: 10
   comboMultiplier: 2
   playerWeapon: 0
+  crag: 0
   parentObject: {fileID: 0}
+  attack3: 0
+  attack2: 0
   m_Audio: {fileID: 0}

@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 33082002314082076}
   - component: {fileID: 23432188878777344}
   - component: {fileID: 114946171403310218}
-  - component: {fileID: 135190052302318084}
+  - component: {fileID: 64568062317359484}
   m_Layer: 0
   m_Name: Mace
   m_TagString: Untagged
@@ -721,7 +721,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1317050819945318}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.49588624, y: 1.7737832e-15, z: -79.88409}
+  m_LocalPosition: {x: -23.223946, y: -0.0000016845999, z: -12.825469}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4263220190740750}
@@ -977,6 +977,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!64 &64568062317359484
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1527654930809346}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 0ef4a53f57d3ed54f8632c4f7916f868, type: 3}
 --- !u!82 &82618484781291858
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1116,7 +1130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrigger:
-  - {fileID: 135190052302318084}
+  - {fileID: 64568062317359484}
   entityTurnSpeed: 10
   attackCounter: 0
   freeze: 0
@@ -1139,6 +1153,7 @@ MonoBehaviour:
   attackTarget: {fileID: 0}
   moveSpeed: 3
   sprinting: 0
+  attackDistance: 2
 --- !u!114 &114946171403310218
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1158,18 +1173,6 @@ MonoBehaviour:
   attack3: 0
   attack2: 0
   m_Audio: {fileID: 0}
---- !u!135 &135190052302318084
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1527654930809346}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3.5
-  m_Center: {x: 0, y: 23.4, z: 0}
 --- !u!136 &136256445553436458
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 33452551381034962}
   - component: {fileID: 23531780695263236}
   - component: {fileID: 114685055006381758}
-  - component: {fileID: 136320755875254378}
+  - component: {fileID: 64532403733354638}
   m_Layer: 0
   m_Name: Great_Mace
   m_TagString: Untagged
@@ -114,6 +114,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1810637955245034}
   m_Mesh: {fileID: 4300000, guid: 29c986479d1a7f24a8ff0699070bdde9, type: 3}
+--- !u!64 &64532403733354638
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1810637955245034}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 29c986479d1a7f24a8ff0699070bdde9, type: 3}
 --- !u!114 &114685055006381758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,18 +142,8 @@ MonoBehaviour:
   attackDamage: 10
   comboMultiplier: 2
   playerWeapon: 0
+  crag: 0
   parentObject: {fileID: 0}
+  attack3: 0
+  attack2: 0
   m_Audio: {fileID: 0}
---- !u!136 &136320755875254378
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1810637955245034}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 5.5
-  m_Height: 12.6
-  m_Direction: 1
-  m_Center: {x: 0, y: 47, z: 0}

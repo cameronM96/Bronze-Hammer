@@ -36,8 +36,8 @@ GameObject:
   - component: {fileID: 4857235360787900}
   - component: {fileID: 33857883531859020}
   - component: {fileID: 23465086435394004}
-  - component: {fileID: 65561963296808836}
   - component: {fileID: 114035659882876692}
+  - component: {fileID: 64708075503543970}
   m_Layer: 0
   m_Name: Halberd
   m_TagString: Untagged
@@ -114,8 +114,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1277045165520462}
   m_Mesh: {fileID: 4300000, guid: def897b9b9bb28945b1c846d718d858e, type: 3}
---- !u!65 &65561963296808836
-BoxCollider:
+--- !u!64 &64708075503543970
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -123,9 +123,11 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.1, y: 12, z: 2}
-  m_Center: {x: 0.5, y: 50.18, z: 0}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: def897b9b9bb28945b1c846d718d858e, type: 3}
 --- !u!114 &114035659882876692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,5 +142,8 @@ MonoBehaviour:
   attackDamage: 10
   comboMultiplier: 2
   playerWeapon: 0
+  crag: 0
   parentObject: {fileID: 0}
+  attack3: 0
+  attack2: 0
   m_Audio: {fileID: 0}
