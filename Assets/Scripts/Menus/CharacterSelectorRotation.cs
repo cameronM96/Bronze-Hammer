@@ -61,12 +61,12 @@ public class CharacterSelectorRotation : MonoBehaviour {
         }
         Wait();
 
-        if (Input.GetKeyDown("joystick button 0"))
+        if (Input.GetKeyDown("joystick button 0") || (Input.GetKeyDown(KeyCode.J) || (Input.GetKeyDown(KeyCode.Return) || (Input.GetKeyDown(KeyCode.Space)))))
         {
             Confirm();
         }
 
-        if (Input.GetKeyDown("joystick button 1"))
+        if (Input.GetKeyDown("joystick button 1") || (Input.GetKeyDown(KeyCode.Escape)))
         {
             SceneManager.LoadScene(0);
         }
