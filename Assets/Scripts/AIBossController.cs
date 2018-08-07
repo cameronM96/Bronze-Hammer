@@ -52,6 +52,7 @@ public class AIBossController : MOMovementController
     // Use this for initialization
     protected override void Awake()
     {
+        gameObject.GetComponent<MOMovementController>().entityID = 2;
         base.Awake();
 
         GetComponent<Animator>().runtimeAnimatorController = form1Animations;
@@ -63,6 +64,8 @@ public class AIBossController : MOMovementController
 
         enemy = this.gameObject;
 
+        //set move target as boss doesn't need to surround, will need to change with multiple players
+        moveTarget = GameObject.FindGameObjectWithTag("Player");
         // This will need to change when there are multiple players
         attackTarget = GameObject.FindGameObjectWithTag("Player");
 
@@ -73,6 +76,7 @@ public class AIBossController : MOMovementController
     // Update is called once per frame
     protected override void Update()
     {
+
         base.Update();
 
         if (teleportTime < 0.0f)
@@ -161,34 +165,34 @@ public class AIBossController : MOMovementController
         }
 
         //use teleport ability
-        if (distanceToPlayer <= teleportDistance && teleportTime <= 0.0f)
-        {
-            int teleportLocationSelector = Random.Range(1, 5);
-            if (teleportLocationSelector == 1)
-            {
-                gameObject.transform.SetPositionAndRotation(teleportLocation1.transform.position, gameObject.transform.rotation);
-            }
-            else if (teleportLocationSelector == 2)
-            {
-                gameObject.transform.SetPositionAndRotation(teleportLocation2.transform.position, gameObject.transform.rotation);
+        //if (distanceToPlayer <= teleportDistance && teleportTime <= 0.0f)
+        //{
+        //    int teleportLocationSelector = Random.Range(1, 5);
+        //    if (teleportLocationSelector == 1)
+        //    {
+        //        gameObject.transform.SetPositionAndRotation(teleportLocation1.transform.position, gameObject.transform.rotation);
+        //    }
+        //    else if (teleportLocationSelector == 2)
+        //    {
+        //        gameObject.transform.SetPositionAndRotation(teleportLocation2.transform.position, gameObject.transform.rotation);
 
-            }
-            else if (teleportLocationSelector == 3)
-            {
-                gameObject.transform.SetPositionAndRotation(teleportLocation3.transform.position, gameObject.transform.rotation);
+        //    }
+        //    else if (teleportLocationSelector == 3)
+        //    {
+        //        gameObject.transform.SetPositionAndRotation(teleportLocation3.transform.position, gameObject.transform.rotation);
 
-            }
-            else if (teleportLocationSelector == 4)
-            {
-                gameObject.transform.SetPositionAndRotation(teleportLocation4.transform.position, gameObject.transform.rotation);
+        //    }
+        //    else if (teleportLocationSelector == 4)
+        //    {
+        //        gameObject.transform.SetPositionAndRotation(teleportLocation4.transform.position, gameObject.transform.rotation);
 
-            }
-            else if (teleportLocationSelector == 5)
-            {
-                gameObject.transform.SetPositionAndRotation(teleportLocation5.transform.position, gameObject.transform.rotation);
+        //    }
+        //    else if (teleportLocationSelector == 5)
+        //    {
+        //        gameObject.transform.SetPositionAndRotation(teleportLocation5.transform.position, gameObject.transform.rotation);
 
-            }
-            teleportTime = 10.0f;
-        }
+        //    }
+        //    teleportTime = 10.0f;
+        //}
     }
 }
