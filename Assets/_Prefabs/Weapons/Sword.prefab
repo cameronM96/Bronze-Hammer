@@ -124,8 +124,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.6, y: 20.1, z: 1}
-  m_Center: {x: 0, y: 17.8, z: 0}
+  m_Size: {x: 4, y: 22, z: 2}
+  m_Center: {x: 0, y: 19, z: 0}
 --- !u!114 &114540238768559798
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,5 +140,8 @@ MonoBehaviour:
   attackDamage: 10
   comboMultiplier: 2
   playerWeapon: 0
+  crag: 0
   parentObject: {fileID: 0}
+  attack3: 0
+  attack2: 0
   m_Audio: {fileID: 0}

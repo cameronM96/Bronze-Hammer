@@ -7,9 +7,9 @@ public class MOMovementController : MonoBehaviour
     private GameObject scriptEntity;
     [SerializeField] public Collider[] attackTrigger;
     public float entityTurnSpeed = 10.0f;
-    private float timerA = 0.0f;
-    private float timerC = 0.0f;
-    private float timerJ = 0.0f;
+    private float timerA = 0.0f;                            // Attack speed limiter
+    private float timerC = 0.0f;                            // Resets attack timer
+    private float timerJ = 0.0f;                            // Jump timer
     private bool dead = false;
     [HideInInspector] public int attackCounter;
     [HideInInspector] public bool freeze;                   // Freeze Character when hit by magic
@@ -258,7 +258,7 @@ public class MOMovementController : MonoBehaviour
         {
             m_Rigidbody.velocity = new Vector3(0, 0, 0);
             // Debug.Log(scriptEntity.name + " attacking");
-            if (timerA == 0)
+            if (timerA <= 0)
             {
                 if (!mounted)
                 {

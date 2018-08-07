@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 33025240182331648}
   - component: {fileID: 23147663793507126}
   - component: {fileID: 114931394923861184}
-  - component: {fileID: 65899891986153760}
+  - component: {fileID: 64917636338916188}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Untagged
@@ -114,8 +114,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1813501216137012}
   m_Mesh: {fileID: 4300000, guid: e4049e7c1c15fcc499e26de1c57d43e2, type: 3}
---- !u!65 &65899891986153760
-BoxCollider:
+--- !u!64 &64917636338916188
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -123,9 +123,11 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8, y: 13, z: 1}
-  m_Center: {x: 0, y: 18.9, z: 0}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: e4049e7c1c15fcc499e26de1c57d43e2, type: 3}
 --- !u!114 &114931394923861184
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -140,5 +142,8 @@ MonoBehaviour:
   attackDamage: 10
   comboMultiplier: 2
   playerWeapon: 0
+  crag: 0
   parentObject: {fileID: 0}
+  attack3: 0
+  attack2: 0
   m_Audio: {fileID: 0}
