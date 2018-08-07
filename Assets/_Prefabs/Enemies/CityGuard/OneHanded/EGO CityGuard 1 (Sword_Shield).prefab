@@ -761,7 +761,7 @@ Transform:
   m_GameObject: {fileID: 1311632388622338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.3827744, y: 1.6830352e-15, z: -75.79717}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 4567701198156760}
   m_Father: {fileID: 0}
@@ -1239,6 +1239,7 @@ MonoBehaviour:
   attackTarget: {fileID: 0}
   moveSpeed: 3
   sprinting: 0
+  attackDistance: 2
 --- !u!114 &114672626344663008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1270,6 +1271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
+  bossHealth: 0
   m_AudioClips:
   - {fileID: 8300000, guid: fe18081d090812e44b5564aa37471f11, type: 3}
 --- !u!136 &136060797747946306
