@@ -10,6 +10,9 @@ public class MOMovementController : MonoBehaviour
     private float timerA = 0.0f;                            // Attack speed limiter
     private float timerC = 0.0f;                            // Resets attack timer
     private float timerJ = 0.0f;                            // Jump timer
+    [SerializeField] private GameObject shadowPrefab;             
+    private GameObject shadow;                                     // Shadow for a reference point when jumping  
+    private int shadowRayMask = 1 << 17;                           // https://docs.unity3d.com/Manual/Layers.html
     [HideInInspector] public bool dead = false;
     [HideInInspector] public int attackCounter;
 
@@ -50,6 +53,7 @@ public class MOMovementController : MonoBehaviour
         if (entityID == 1) // ID 1 = PLAYER
         {
             scriptEntity = GameObject.FindGameObjectWithTag("Player");
+            shadow = Instantiate(shadowPrefab);
         }
         else if (entityID == 2) // ID 2 = ENEMY
         {
@@ -79,6 +83,13 @@ public class MOMovementController : MonoBehaviour
         scriptEntity.transform.rotation =
             Quaternion.Lerp(scriptEntity.transform.rotation,
             Quaternion.Euler(entityRotation), entityTurnSpeed * Time.deltaTime);
+
+        // Set shadow position
+        RaycastHit hit;
+        if (Physics.Raycast(transform.parent.position,Vector3.down, out hit, Mathf.Infinity, shadowRayMask))
+        {
+            shadow.transform.position = hit.point;
+        }
 
         // Reset attacks
         if (timerA > 0)
@@ -205,35 +216,35 @@ public class MOMovementController : MonoBehaviour
                 m_Audio.volume = 0.2f;
             }
 
-            if (mov.x < 0 & mov.z == 0) //left
+            if (mov.x < -0.2f && (mov.z < 0.2f && mov.z > -0.2f)) //left
             {
                 entityRotation.Set(0, 270, 0);
             }
-            else if (mov.x > 0 & mov.z == 0)//right
+            else if (mov.x > 0.2f && (mov.z < 0.2f && mov.z > -0.2f))//right
             {
                 entityRotation.Set(0, 90, 0);
             }
-            else if (mov.z > 0 & mov.x == 0)//up
+            else if (mov.z > 0.2f && (mov.x < 0.2f && mov.x > -0.2f))//up
             {
                 entityRotation.Set(0, 0, 0);
             }
-            else if (mov.z < 0 & mov.x == 0)//down
+            else if (mov.z < -0.2f && (mov.x < 0.2f && mov.x > -0.2f))//down
             {
                 entityRotation.Set(0, 180, 0);
             }
-            else if (mov.x < 0 & mov.z > 0)//up and left
+            else if (mov.x < -0.2f && mov.z > 0.2f)//up and left
             {
                 entityRotation.Set(0, 315, 0);
             }
-            else if (mov.x > 0 & mov.z > 0)//up and right
+            else if (mov.x > 0.2f && mov.z > 0.2f)//up and right
             {
                 entityRotation.Set(0, 45, 0);
             }
-            else if (mov.x < 0 & mov.z < 0)//down and left
+            else if (mov.x < -0.2f && mov.z < -0.2f)//down and left
             {
                 entityRotation.Set(0, 225, 0);
             }
-            else if (mov.x > 0 & mov.z < 0)//down and right
+            else if (mov.x > 0.2f && mov.z < -0.2f)//down and right
             {
                 entityRotation.Set(0, 135, 0);
             }
@@ -260,7 +271,9 @@ public class MOMovementController : MonoBehaviour
     {
         if (!hurtAnim && !freeze && !knockedDownAnim && !dead && !castingMagic)
         {
-            m_Rigidbody.velocity = new Vector3(0, 0, 0);
+            if (m_Grounded)
+                m_Rigidbody.velocity = new Vector3(0, 0, 0);
+
             // Debug.Log(scriptEntity.name + " attacking");
             if (timerA <= 0)
             {
@@ -414,14 +427,12 @@ public class MOMovementController : MonoBehaviour
         // Knock back mechanic which sends this character flying backwards
         m_Anim.SetBool("knockedDown", true);
         m_Rigidbody.velocity = new Vector3(0, 0, 0);
-        m_Rigidbody.AddForce((dir * 500), 500, 0);
-
-        if (mounted)
-        m_Rigidbody.AddForce((dir * 500), 500,0);
+        m_Rigidbody.AddForce((dir * 250), 250, 0);
     
         //Dis-mount character if knocked back
         if(mounted)
         {
+            m_Anim.SetBool("mounted", false);
             mount.GetComponent<MountingController>().UnMounted();
             m_GroundCheck = GetComponentInParent<Transform>();
         }
@@ -433,6 +444,7 @@ public class MOMovementController : MonoBehaviour
         // Dis-mount character if killed
         if (mounted)
         {
+            m_Anim.SetBool("mounted", false);
             mount.GetComponent<MountingController>().UnMounted();
             m_GroundCheck = GetComponentInParent<Transform>();
         }

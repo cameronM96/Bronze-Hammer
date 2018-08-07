@@ -47,7 +47,11 @@ public class MountingController : MonoBehaviour
 
     IEnumerator AttackDelay()
     {
-        yield return new WaitForSeconds(0.7f);
+        float waitTimer = 0.7f;
+        if (ranged)
+            waitTimer = 1.04f;
+
+        yield return new WaitForSeconds(waitTimer);
         if (ranged)
         {
             // Long ranged attack

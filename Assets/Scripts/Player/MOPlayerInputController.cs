@@ -14,8 +14,8 @@ public class MOPlayerInputController : MOMovementController
     private Transform gameCamera; // the transform of the main game camera
     private Vector3 gameCameraForward; //the forward vector of the main game camera
     private Vector3 moveDirection; // the direction the player will be moved in
-    private float moveSpeed; //the speed the player will move
-    private float jumpHeight; //the height of the players jump
+    private float moveSpeed = 7.0f; //the speed the player will move
+    private float jumpHeight = 500f; //the height of the players jump
     private float hMov;
     private float vMov;
 
@@ -33,10 +33,6 @@ public class MOPlayerInputController : MOMovementController
 
         //set the entitiy ID in the movemnt controller script, ID 1 = player
         gameObject.GetComponent<MOMovementController>().entityID = 1;
-
-        //set movemnt values
-        moveSpeed = 5.0f;
-        jumpHeight = 500.0f;
     }
 
     // Update is called once per frame
