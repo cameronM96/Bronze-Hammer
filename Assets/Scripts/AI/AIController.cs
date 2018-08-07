@@ -78,7 +78,7 @@ public class AIController : MOMovementController
         float dist = Vector3.Distance(attackTarget.transform.position, enemy.transform.position);
         //Debug.Log(dist);
         // Attack if enemy is close enough and roughly the same z position AND facing the player
-        if (dist < attackDistance)
+        if (dist < meleeAttackDistance)
         {
             //Debug.Log("Attacking");
             attack = true;

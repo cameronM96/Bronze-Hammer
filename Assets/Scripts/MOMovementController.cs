@@ -14,10 +14,11 @@ public class MOMovementController : MonoBehaviour
     [HideInInspector] public int attackCounter;
 
     // Animation feedback
-    [HideInInspector] public bool freeze;                   // Freeze Character when hit by magic
-    [HideInInspector] public bool attackingAnim;            // Don't let character move until attack is over
-    [HideInInspector] public bool hurtAnim;                 // Check if character is hurt
-    [HideInInspector] public bool knockedDownAnim;          // Check if character is knocked down
+    [HideInInspector] public bool freeze = false;                   // Freeze Character when hit by magic
+    [HideInInspector] public bool attackingAnim = false;            // Don't let character move until attack is over
+    [HideInInspector] public bool hurtAnim = false;                 // Check if character is hurt
+    [HideInInspector] public bool knockedDownAnim = false;          // Check if character is knocked down
+    [HideInInspector] public bool castingMagic = false;             // Check if character is casting magic
 
     [HideInInspector] public bool mounted = false;          // Redirects animations to mount
     [HideInInspector] public GameObject mount;              // The mount gameobject
@@ -84,7 +85,7 @@ public class MOMovementController : MonoBehaviour
         {
             timerA -= Time.deltaTime;
         }
-        else if (timerA <= 0)
+        else if (!attackingAnim)
         {
             if (this.gameObject.tag == "Player")
             {
@@ -185,7 +186,7 @@ public class MOMovementController : MonoBehaviour
     // method is called when needed from an input script
     public void Move(Vector3 mov, float speed)
     {
-        if (!hurtAnim && !attackingAnim && !freeze && !knockedDownAnim && !dead)
+        if (!hurtAnim && !attackingAnim && !freeze && !knockedDownAnim && !dead && !castingMagic)
         {
             bool inAir = false;
             if (this.gameObject.tag != "Player" && !m_Grounded)
@@ -242,7 +243,7 @@ public class MOMovementController : MonoBehaviour
     //called from input controller 
     public void Jump(float height)
     {
-        if (!hurtAnim && !attackingAnim && !freeze && !knockedDownAnim && !dead)
+        if (!hurtAnim && !attackingAnim && !freeze && !knockedDownAnim && !dead && !castingMagic)
         {
             if (timerJ <= 0.0f && m_Grounded)
             {
@@ -257,7 +258,7 @@ public class MOMovementController : MonoBehaviour
     //called from input controller
     public void Attack(bool sprinting)
     {
-        if (!hurtAnim && !freeze && !knockedDownAnim && !dead)
+        if (!hurtAnim && !freeze && !knockedDownAnim && !dead && !castingMagic)
         {
             m_Rigidbody.velocity = new Vector3(0, 0, 0);
             // Debug.Log(scriptEntity.name + " attacking");
@@ -283,9 +284,8 @@ public class MOMovementController : MonoBehaviour
                         attackCounter = 0;
                         m_Anim.SetBool("attack", true);
                         attackTrigger[0].enabled = true;
-                        attackTrigger[0].gameObject.GetComponent<Attack>().attack3 = true;
                         //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
-                        timerA = 1.30f;
+                        timerA = 0.25f;
                         //put knockback here
                     }
                     else if (sprinting)
@@ -302,7 +302,7 @@ public class MOMovementController : MonoBehaviour
                         // Normal attack (attack 1 and 2)
                         m_Anim.SetBool("attack", true);
                         
-                        timerA = 1.30f;
+                        timerA = 0.25f;
                         Debug.Log("Basic attack used, length is " + timerA);
                         //attack animation and stuff here?
                         if (attackCounter == 1)
@@ -317,7 +317,6 @@ public class MOMovementController : MonoBehaviour
                                         break;
                                     default:
                                         attackTrigger[0].enabled = true;
-                                        attackTrigger[0].gameObject.GetComponent<Attack>().attack2 = true;
                                         break;
                                 }
                             }
@@ -345,7 +344,7 @@ public class MOMovementController : MonoBehaviour
                 {
                     // Mount attack (freeze for duration of attack)
                     mount.GetComponent<MountingController>().Attack();
-                    timerA = 2f;
+                    timerA = 2.2f;
                 }
             }
         }

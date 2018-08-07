@@ -24,10 +24,21 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
             SetKnockBackBool(animator, false);
 
         if (magic)
+        {
             animator.SetBool("magic", false);
+            if (mount)
+            {
+                animator.gameObject.GetComponent<MountingController>().mountedCharacter.GetComponent<MOMovementController>().castingMagic = true;
+            }
+            else
+            {
+                animator.gameObject.GetComponent<MOMovementController>().castingMagic = true;
+            }
+        }
 
         if (attack)
         {
+            animator.SetBool("attack", false);
             if (mount)
             {
                 animator.gameObject.GetComponent<MountingController>().mountedCharacter.GetComponent<MOMovementController>().attackingAnim = true;
@@ -77,6 +88,18 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
 
         if (hurt)
             animator.gameObject.GetComponent<MOMovementController>().hurtAnim = false;
+
+        if (magic)
+        {
+            if (mount)
+            {
+                animator.gameObject.GetComponent<MountingController>().mountedCharacter.GetComponent<MOMovementController>().castingMagic = false;
+            }
+            else
+            {
+                animator.gameObject.GetComponent<MOMovementController>().castingMagic = false;
+            }
+        }
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

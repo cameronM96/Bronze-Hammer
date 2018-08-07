@@ -42,14 +42,12 @@ public class MountingController : MonoBehaviour
     public void Attack()
     {
         m_Anim.SetBool("attack", true);
-        Debug.Log("Attack animation triggered");
         StartCoroutine(AttackDelay());
     }
 
     IEnumerator AttackDelay()
     {
-        Debug.Log("Attack triggered");
-        yield return new WaitForSeconds(1.03f);
+        yield return new WaitForSeconds(0.7f);
         if (ranged)
         {
             // Long ranged attack
