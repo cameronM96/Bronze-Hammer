@@ -94,10 +94,17 @@ public class AIController : MOMovementController
     private void FixedUpdate()
     {
         //call the method on the controller script sending the required vars
-        if(attack)
+        if(attack && !m_character.dead)
         {
             // Make sure AI is facing the right directions first
-            this.transform.LookAt(attackTarget.transform);
+            if (!m_character.attackingAnim)
+            {
+                Vector3 lookTarget = new Vector3(
+                    attackTarget.transform.position.x,
+                    this.transform.position.y,
+                    attackTarget.transform.position.z);
+                this.transform.parent.LookAt(lookTarget);
+            }
             m_character.Move(Vector3.zero, moveSpeed);
             m_character.Attack(false);
         }

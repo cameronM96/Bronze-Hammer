@@ -10,20 +10,29 @@ public class MOMovementController : MonoBehaviour
     private float timerA = 0.0f;                            // Attack speed limiter
     private float timerC = 0.0f;                            // Resets attack timer
     private float timerJ = 0.0f;                            // Jump timer
-    private bool dead = false;
+    [HideInInspector] public bool dead = false;
     [HideInInspector] public int attackCounter;
+
+    // Animation feedback
     [HideInInspector] public bool freeze;                   // Freeze Character when hit by magic
+    [HideInInspector] public bool attackingAnim;            // Don't let character move until attack is over
+    [HideInInspector] public bool hurtAnim;                 // Check if character is hurt
+    [HideInInspector] public bool knockedDownAnim;          // Check if character is knocked down
+
     [HideInInspector] public bool mounted = false;          // Redirects animations to mount
     [HideInInspector] public GameObject mount;              // The mount gameobject
 
+    // Ground check data
     public Transform m_GroundCheck;                         // A position marking where to check if the player is grounded.
     const float k_GroundedRadius = .01f;                    // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;                                // Whether or not the character is grounded.
     [SerializeField] private LayerMask m_WhatIsGround;      // A mask determining what is ground to the character
 
+    // Magic Data
     [SerializeField] private float magicDamage;             // Base magic damage 
     [SerializeField] private int magicLevel;                // magicDamage multiplied by magicLevel
 
+    // Character movement variables
     public int entityID = 0;
     public Vector3 entityRotation;
 
@@ -176,9 +185,7 @@ public class MOMovementController : MonoBehaviour
     // method is called when needed from an input script
     public void Move(Vector3 mov, float speed)
     {
-        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !m_Anim.GetBool("attack") &&
-            !freeze && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") &&
-            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up") && !dead)
+        if (!hurtAnim && !attackingAnim && !freeze && !knockedDownAnim && !dead)
         {
             bool inAir = false;
             if (this.gameObject.tag != "Player" && !m_Grounded)
@@ -235,9 +242,7 @@ public class MOMovementController : MonoBehaviour
     //called from input controller 
     public void Jump(float height)
     {
-        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
-            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") &&
-            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up") && !dead)
+        if (!hurtAnim && !attackingAnim && !freeze && !knockedDownAnim && !dead)
         {
             if (timerJ <= 0.0f && m_Grounded)
             {
@@ -252,9 +257,7 @@ public class MOMovementController : MonoBehaviour
     //called from input controller
     public void Attack(bool sprinting)
     {
-        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
-            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Knocked Down") &&
-            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up") && !dead)
+        if (!hurtAnim && !freeze && !knockedDownAnim && !dead)
         {
             m_Rigidbody.velocity = new Vector3(0, 0, 0);
             // Debug.Log(scriptEntity.name + " attacking");
@@ -378,9 +381,7 @@ public class MOMovementController : MonoBehaviour
     public void Magic()
     {
         // Cast magic
-        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
-            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("knocked Down") &&
-            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up") && !dead)
+        if (!hurtAnim && !attackingAnim && !freeze && !knockedDownAnim && !dead)
         {
             // Cast magic if their level is greater than 0
             if (GetComponent<PlayerHealth>().currentMagicLevel > 0)

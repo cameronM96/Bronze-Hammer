@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MountingController : MonoBehaviour
 {
-    private GameObject mountedCharacter;
+    [HideInInspector] public GameObject mountedCharacter;
     private Rigidbody rb;
     public Animator m_Anim;
     [SerializeField] private bool ranged;
@@ -107,7 +107,7 @@ public class MountingController : MonoBehaviour
         {
             Debug.Log("Collided with character, mounting");
             //check not already mounted by something
-            if (!isCurrentlyMounted && !other.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("knocked Down") 
+            if (!isCurrentlyMounted && !other.GetComponent<MOMovementController>().knockedDownAnim 
                 && !other.GetComponent<MOMovementController>().mounted)
             {
                 Debug.Log(gameObject.name + " Being mounted by " + other);
@@ -125,8 +125,8 @@ public class MountingController : MonoBehaviour
                 //set collided with game object as the mounts parent
                 this.transform.parent.parent = mountedCharacter.transform;
                 this.transform.parent.rotation = new Quaternion(mountedCharacter.transform.rotation.x, mountedCharacter.transform.rotation.y, mountedCharacter.transform.rotation.z, mountedCharacter.transform.rotation.w);
-                mountedCharacter.transform.position = new Vector3(mountedCharacter.transform.position.x, mountedCharacter.transform.position.y + 0.8f, mountedCharacter.transform.position.z);
-                this.transform.parent.localPosition = new Vector3(0, -0.2f, 0);
+                mountedCharacter.transform.position = new Vector3(mountedCharacter.transform.position.x, mountedCharacter.transform.position.y, mountedCharacter.transform.position.z);
+                this.transform.parent.localPosition = new Vector3(0, 0, 0);
 
                 mountedCharacter.GetComponent<Animator>().SetBool("mounted", true);
                 mountedCharacter.GetComponent<MOMovementController>().mounted = true;
