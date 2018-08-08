@@ -180,7 +180,9 @@ public class ChickenAI : MonoBehaviour {
     // Drop pots when hit
     public void KickChicken()
     {
+        // Make chicken jump in the air
         m_Rigidbody.AddForce(new Vector3(m_Rigidbody.velocity.x, 300, m_Rigidbody.velocity.z));
+        // Drop potion and iterate times hit
         if (timesHit < maxTimesHit)
         {
             GameObject potion = Instantiate(manaPot);
@@ -201,7 +203,13 @@ public class ChickenAI : MonoBehaviour {
 
     public void Death()
     {
+        // Make the chick un hit able (dropped all potions)
         this.gameObject.layer = 15;
+        // Run away
+        StopCoroutine(pauseCoRoutine);
+        wanderCentre = CameraToGround();
+        GetBoundaries(wanderCentre);
+        Retreat(wanderCentre);
     }
 
     IEnumerator FallThroughFloor(float waittimer)

@@ -409,6 +409,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4096897015480212}
+  - component: {fileID: 136261603370031814}
   m_Layer: 16
   m_Name: Mount 2
   m_TagString: Untagged
@@ -456,7 +457,6 @@ GameObject:
   - component: {fileID: 4378284628927664}
   - component: {fileID: 137096027176109532}
   - component: {fileID: 95968840393803484}
-  - component: {fileID: 136736886837362132}
   - component: {fileID: 136807270646887966}
   - component: {fileID: 114924269908766362}
   m_Layer: 16
@@ -950,19 +950,20 @@ MonoBehaviour:
   attackPoint: {fileID: 1100610146966438}
   attackRange: 4
   isCurrentlyMounted: 0
---- !u!136 &136736886837362132
+  mountDelay: 1
+--- !u!136 &136261603370031814
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1868190858339150}
+  m_GameObject: {fileID: 1818847078296234}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2
   m_Direction: 2
-  m_Center: {x: 0, y: 0.5, z: 1.3}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!136 &136807270646887966
 CapsuleCollider:
   m_ObjectHideFlags: 1

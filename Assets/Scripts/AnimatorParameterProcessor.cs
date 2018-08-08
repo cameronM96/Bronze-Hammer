@@ -28,7 +28,8 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
             animator.SetBool("magic", false);
             if (mount)
             {
-                animator.gameObject.GetComponent<MountingController>().mountedCharacter.GetComponent<MOMovementController>().castingMagic = true;
+                if (animator.gameObject.GetComponent<MountingController>().mountedCharacter != null)
+                    animator.gameObject.GetComponent<MountingController>().mountedCharacter.GetComponent<MOMovementController>().castingMagic = true;
             }
             else
             {
@@ -41,7 +42,8 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
             animator.SetBool("attack", false);
             if (mount)
             {
-                animator.gameObject.GetComponent<MountingController>().mountedCharacter.GetComponent<MOMovementController>().attackingAnim = true;
+                if (animator.gameObject.GetComponent<MountingController>().mountedCharacter != null)
+                    animator.gameObject.GetComponent<MountingController>().mountedCharacter.GetComponent<MOMovementController>().attackingAnim = true;
             }
             else
             {
@@ -70,7 +72,8 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
     {
         if (mount)
         {
-            animator.gameObject.GetComponent<MountingController>().mountedCharacter.GetComponent<MOMovementController>().attackingAnim = false;
+            if (animator.gameObject.GetComponent<MountingController>().mountedCharacter != null)
+                animator.gameObject.GetComponent<MountingController>().mountedCharacter.GetComponent<MOMovementController>().attackingAnim = false;
         }
         else
         {
@@ -93,7 +96,8 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
         {
             if (mount)
             {
-                animator.gameObject.GetComponent<MountingController>().mountedCharacter.GetComponent<MOMovementController>().castingMagic = false;
+                if (animator.gameObject.GetComponent<MountingController>().mountedCharacter != null)
+                    animator.gameObject.GetComponent<MountingController>().mountedCharacter.GetComponent<MOMovementController>().castingMagic = false;
             }
             else
             {

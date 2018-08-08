@@ -53,6 +53,11 @@ public class Projectile : MonoBehaviour {
             other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, true, dir);
             DestroySelf();
         }
+
+        if (other.tag == "Chicken" && playerRider)
+        {
+            other.transform.parent.gameObject.GetComponent<ChickenAI>().KickChicken();
+        }
     }
 
     private void DestroySelf()

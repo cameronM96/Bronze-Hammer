@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Encounter_Manager : MonoBehaviour {
 
@@ -15,6 +16,12 @@ public class Encounter_Manager : MonoBehaviour {
 
     [HideInInspector] public int encounterIndex;
     [HideInInspector] public bool beginEncounter;
+    private bool flash;
+    public Image arrowIndicator;
+    private float flashTimer;
+    private float flashArrow;
+    public float flashDuration = 3f;
+    public float flashFrequency = 0.3f;
 
     private AudioSource m_Audio;
 
@@ -141,13 +148,35 @@ public class Encounter_Manager : MonoBehaviour {
                 ++m_EncountersList[encounterIndex].waveNumber;
             }
 
-            // If all waves have been spawned end encounter.
+            // If all waves have been spawned, end encounter.
             if (m_EncountersList[encounterIndex].waves.Length <= m_EncountersList[encounterIndex].waveNumber && 
                 CheckForEnemies() == 0)
             {
                 beginEncounter = false;
                 camera_Instance.NewBoundary();
                 m_Audio.Play();
+                flash = true;
+                flashTimer = 0;
+            }
+        }
+
+        // Flash the arrow indicator after encounter ends
+        if (flash)
+        {
+            flashTimer += Time.deltaTime;
+            flashArrow += Time.deltaTime;
+            if (flashTimer <= flashDuration)
+            {
+                if (flashArrow >= flashFrequency)
+                {
+                    arrowIndicator.enabled = !arrowIndicator.enabled;
+                    flashArrow = 0;
+                }
+            }
+            else
+            {
+                flash = false;
+                arrowIndicator.enabled = false;
             }
         }
     }

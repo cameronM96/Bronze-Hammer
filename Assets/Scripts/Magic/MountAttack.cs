@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MountAttack : MonoBehaviour {
 
-    public int attackDamage = 10;
+    public int attackDamage = 40;
     public bool playerAttack;
 
     private void OnTriggerEnter(Collider other)

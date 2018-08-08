@@ -323,7 +323,6 @@ GameObject:
   - component: {fileID: 4837727410911604}
   - component: {fileID: 137577719794988286}
   - component: {fileID: 95955629092080382}
-  - component: {fileID: 136570530096642182}
   - component: {fileID: 136481842352213994}
   - component: {fileID: 114443839744147706}
   m_Layer: 16
@@ -465,6 +464,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4565176397173256}
+  - component: {fileID: 136034133665179300}
   m_Layer: 16
   m_Name: Mount 1
   m_TagString: Untagged
@@ -1019,7 +1019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecaf0084729227d4c89a09e7b939b34f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 40
   playerAttack: 0
 --- !u!114 &114443839744147706
 MonoBehaviour:
@@ -1039,6 +1039,20 @@ MonoBehaviour:
   attackPoint: {fileID: 0}
   attackRange: 4
   isCurrentlyMounted: 0
+  mountDelay: 1
+--- !u!136 &136034133665179300
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1952570906798008}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!136 &136481842352213994
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -1052,19 +1066,6 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 2
   m_Center: {x: 0, y: 1, z: 1.3}
---- !u!136 &136570530096642182
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1714655453039814}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 2
-  m_Center: {x: 0, y: 0.5, z: 1.3}
 --- !u!137 &137577719794988286
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

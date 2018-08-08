@@ -85,10 +85,18 @@ public class MOMovementController : MonoBehaviour
             Quaternion.Euler(entityRotation), entityTurnSpeed * Time.deltaTime);
 
         // Set shadow position
-        RaycastHit hit;
-        if (Physics.Raycast(transform.parent.position,Vector3.down, out hit, Mathf.Infinity, shadowRayMask))
+        if (entityID == 1)
         {
-            shadow.transform.position = hit.point;
+            Vector3 origin = new Vector3(transform.parent.position.x, transform.parent.position.y + 1f, transform.parent.position.z);
+            RaycastHit hit;
+            if (Physics.Raycast(origin, Vector3.down, out hit, Mathf.Infinity, shadowRayMask))
+            {
+                shadow.transform.position = hit.point;
+            }
+            else
+            {
+                shadow.transform.position = transform.parent.position;
+            }
         }
 
         // Reset attacks
@@ -179,6 +187,8 @@ public class MOMovementController : MonoBehaviour
             {
                 m_Grounded = true;
                 m_Anim.SetBool("jump", false);
+                if (mounted)
+                    mount.GetComponent<MountingController>().m_Anim.SetBool("jump", false);
             }
         }
 
@@ -259,9 +269,12 @@ public class MOMovementController : MonoBehaviour
             if (timerJ <= 0.0f && m_Grounded)
             {
                 //Debug.Log(scriptEntity.name + " jumping");
-                m_Anim.SetBool("jump", true);
                 m_Rigidbody.AddForce(0, height, 0);
                 timerJ = 2.0f;
+                if (mounted)
+                    mount.GetComponent<MountingController>().m_Anim.SetBool("jump", true);
+                else
+                    m_Anim.SetBool("jump", true);
             }
         }
     }
