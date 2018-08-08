@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -697,7 +697,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &956359164
 RectTransform:
   m_ObjectHideFlags: 0
@@ -761,10 +761,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Crag pilage and KiLL for Life-Subtractor!                         \nCrag
-    go hOme to sHow gooD wurk!      \nwen Crag go HomE he no sEE LiVIng Life-Subtractor....\nHE
-    SEE DED LIFE-SUBTRACTOR!\nCrag is Sad....\n\nCRAG IS ANGRY! \n\nCrag find WhO
-    do This!\n\nCrag KiLL Who do This!!!!!!\n"
+  m_Text: "Crag pilage and KiLL for Life-Subtractor!\n\nCrag go hOme to sHow gooD
+    wurk!\n\nwen Crag go HomE he no sEE LiVIng Life-Subtractor....\n\nHE SEE DED LIFE-SUBTRACTOR!\n\nCrag
+    is Sad....\n\nCRAG IS ANGRY! \n\nCrag find WhO do This!\n\nCrag KiLL Who do This!!!!!!\n"
 --- !u!222 &956359167
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -990,7 +989,7 @@ MonoBehaviour:
     that something was wrong. The guards were gone and there was the distinct smell
     of 'good' in the air.\n\nIt would appear in my absence, that someone bucked up
     the courage to attack my leader.\n\nI swear, in the name of my true king Life-Subtractor,
-    I shall take revenge!\n\n They have no idea what they have brought upon themselves..."
+    I shall take revenge!\n\nThey have no idea what they have brought upon themselves..."
 --- !u!222 &1586515500
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1027,7 +1026,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2009211591
 RectTransform:
   m_ObjectHideFlags: 0
