@@ -18,7 +18,7 @@ public class AIController : MOMovementController
     private Vector3 targetDir;  // Direction of the Target relative to the AI.
 
     [SerializeField] private float moveSpeed = 7.0f; //the speed the AI will move
-    //[SerializeField] private float jumpHeight = 500.0f; //the height of the AI's jump
+    //[SerializeField] private float jumpHeight = 10.0f; //the height of the AI's jump
     private float hMov;
     private float vMov;
     //private bool jump;
@@ -91,8 +91,9 @@ public class AIController : MOMovementController
         // Add a check for jumping
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
         //call the method on the controller script sending the required vars
         if(attack && !m_character.dead)
         {
