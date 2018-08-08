@@ -32,6 +32,10 @@ public class MOMovementController : MonoBehaviour
     private bool m_Grounded;                                // Whether or not the character is grounded.
     [SerializeField] private LayerMask m_WhatIsGround;      // A mask determining what is ground to the character
 
+    // Jump smoothing data
+    public float fallMultiplier = 2.5f;
+    public float lowJumpMultiplier = 2f;
+
     // Magic Data
     [SerializeField] private float magicDamage;             // Base magic damage 
     [SerializeField] private int magicLevel;                // magicDamage multiplied by magicLevel
@@ -192,8 +196,24 @@ public class MOMovementController : MonoBehaviour
             }
         }
 
+        // TODO: Add raycast down and change only the animator (this should fix the landing animation)
+
         if (m_Anim != null)
             m_Anim.SetBool("grounded", m_Grounded);
+    }
+
+    protected virtual void FixedUpdate()
+    {
+        if (m_Rigidbody.velocity.y < 0)
+        {
+            m_Rigidbody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
+        }
+        else if (this.tag == "Player")
+        {
+            if (m_Rigidbody.velocity.y > 0 && !Input.GetButtonDown("Jump Button")) {
+                m_Rigidbody.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
+            }
+        }
     }
 
     private void LateUpdate()
@@ -269,7 +289,9 @@ public class MOMovementController : MonoBehaviour
             if (timerJ <= 0.0f && m_Grounded)
             {
                 //Debug.Log(scriptEntity.name + " jumping");
-                m_Rigidbody.AddForce(0, height, 0);
+                //m_Rigidbody.AddForce(0, height, 0);
+                m_Rigidbody.velocity = Vector3.up * height;
+
                 timerJ = 2.0f;
                 if (mounted)
                     mount.GetComponent<MountingController>().m_Anim.SetBool("jump", true);
@@ -370,7 +392,7 @@ public class MOMovementController : MonoBehaviour
                 {
                     // Mount attack (freeze for duration of attack)
                     mount.GetComponent<MountingController>().Attack();
-                    timerA = 2.2f;
+                    timerA = 2.3f;
                 }
             }
         }

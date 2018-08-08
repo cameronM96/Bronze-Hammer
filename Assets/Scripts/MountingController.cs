@@ -47,6 +47,7 @@ public class MountingController : MonoBehaviour
         {
             m_Anim.SetBool("attack", true);
             StartCoroutine(AttackDelay(mountedCharacter));
+            StartCoroutine(AttackOffTimer());
         }
     }
 
@@ -85,6 +86,12 @@ public class MountingController : MonoBehaviour
                 attack.GetComponent<MountAttack>().playerAttack = false;
             }
         }
+    }
+
+    IEnumerator AttackOffTimer()
+    {
+        yield return new WaitForSeconds(2.1f);
+        AttackOff();
     }
 
     public void AttackOff()
@@ -151,7 +158,6 @@ public class MountingController : MonoBehaviour
 
             GetComponent<Collider>().enabled = false;
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
