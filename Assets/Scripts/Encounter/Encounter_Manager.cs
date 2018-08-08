@@ -38,6 +38,8 @@ public class Encounter_Manager : MonoBehaviour {
         {
             child.GetComponent<MeshRenderer>().enabled = false;
         }
+
+        arrowIndicator.enabled = false;
     }
 
     private void Update()
