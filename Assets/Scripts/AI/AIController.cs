@@ -26,8 +26,8 @@ public class AIController : MOMovementController
     //private bool tooClose;
 
     public bool sprinting;
-    public float attackDistance = 2;
-    private float meleeAttackDistance;
+    public float attackDistance = 3;
+    [HideInInspector] public float meleeAttackDistance;
     private bool stop;
 
     // Use this for initialization

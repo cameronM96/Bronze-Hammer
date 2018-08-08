@@ -10,7 +10,7 @@ public class MountingController : MonoBehaviour
     [SerializeField] private bool ranged;
     [SerializeField] private GameObject attack;
     [SerializeField] private GameObject attackPoint;
-    [SerializeField] private float attackRange = 4;
+    [SerializeField] private float attackRange = 8;
 
     public bool isCurrentlyMounted;
     [SerializeField] private float mountDelay = 1f;
@@ -147,7 +147,7 @@ public class MountingController : MonoBehaviour
             rb = mountedCharacter.transform.parent.GetComponent<Rigidbody>();
 
             if (rider.tag == "Enemy")
-                rider.GetComponent<AIController>().attackDistance = attackRange;
+                rider.GetComponent<AIController>().meleeAttackDistance = attackRange;
 
             GetComponent<Collider>().enabled = false;
         }

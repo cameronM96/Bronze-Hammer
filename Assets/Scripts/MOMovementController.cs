@@ -448,6 +448,8 @@ public class MOMovementController : MonoBehaviour
             m_Anim.SetBool("mounted", false);
             mount.GetComponent<MountingController>().UnMounted();
             m_GroundCheck = GetComponentInParent<Transform>();
+            if (this.tag == "Enemy")
+                GetComponent<AIController>().meleeAttackDistance = GetComponent<AIController>().attackDistance;
         }
     }
 

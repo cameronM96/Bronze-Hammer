@@ -1116,8 +1116,14 @@ MonoBehaviour:
   attackTrigger:
   - {fileID: 65883968714614520}
   entityTurnSpeed: 10
+  shadowPrefab: {fileID: 0}
+  dead: 0
   attackCounter: 0
   freeze: 0
+  attackingAnim: 0
+  hurtAnim: 0
+  knockedDownAnim: 0
+  castingMagic: 0
   mounted: 0
   mount: {fileID: 0}
   m_GroundCheck: {fileID: 4388284722728262}
@@ -1137,7 +1143,8 @@ MonoBehaviour:
   attackTarget: {fileID: 0}
   moveSpeed: 3
   sprinting: 0
-  attackDistance: 2
+  attackDistance: 3
+  meleeAttackDistance: 0
 --- !u!114 &114570219183293028
 MonoBehaviour:
   m_ObjectHideFlags: 1
