@@ -40,7 +40,7 @@ public class AIBossController : MOMovementController
     private Vector3 targetDir;  // Direction of the Target relative to the AI.
 
     [SerializeField] private float moveSpeed = 5.0f; //the speed the AI will move
-    //[SerializeField] private float jumpHeight = 500.0f; //the height of the AI's jump
+    //[SerializeField] private float jumpHeight = 25.0f; //the height of the AI's jump
     private float hMov;
     private float vMov;
     //private bool jump;
@@ -55,7 +55,7 @@ public class AIBossController : MOMovementController
         gameObject.GetComponent<MOMovementController>().entityID = 2;
         base.Awake();
 
-        GetComponent<Animator>().runtimeAnimatorController = form1Animations;
+        //GetComponent<Animator>().runtimeAnimatorController = form1Animations;
         m_character = GetComponent<MOMovementController>();
 
         phase2 = false;
