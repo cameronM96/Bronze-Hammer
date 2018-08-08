@@ -13,7 +13,7 @@ public class TypingLetters : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        fullText = transform.GetChild(0).GetComponent<Text>().text;
+        fullText = GetComponent<Text>().text;
         displayTextBox = GetComponent<Text>();
         StartCoroutine(ShowText());
 	}
