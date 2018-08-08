@@ -167,34 +167,34 @@ public class AIBossController : MOMovementController
         }
 
         //use teleport ability
-        //if (distanceToPlayer <= teleportDistance && teleportTime <= 0.0f)
-        //{
-        //    int teleportLocationSelector = Random.Range(1, 5);
-        //    if (teleportLocationSelector == 1)
-        //    {
-        //        gameObject.transform.SetPositionAndRotation(teleportLocation1.transform.position, gameObject.transform.rotation);
-        //    }
-        //    else if (teleportLocationSelector == 2)
-        //    {
-        //        gameObject.transform.SetPositionAndRotation(teleportLocation2.transform.position, gameObject.transform.rotation);
+        if (distanceToPlayer <= teleportDistance && teleportTime <= 0.0f)
+        {
+            int teleportLocationSelector = Random.Range(1, 5);
+            if (teleportLocationSelector == 1)
+            {
+                gameObject.transform.SetPositionAndRotation(teleportLocation1.transform.position, gameObject.transform.rotation);
+            }
+            else if (teleportLocationSelector == 2)
+            {
+                gameObject.transform.SetPositionAndRotation(teleportLocation2.transform.position, gameObject.transform.rotation);
 
-        //    }
-        //    else if (teleportLocationSelector == 3)
-        //    {
-        //        gameObject.transform.SetPositionAndRotation(teleportLocation3.transform.position, gameObject.transform.rotation);
+            }
+            else if (teleportLocationSelector == 3)
+            {
+                gameObject.transform.SetPositionAndRotation(teleportLocation3.transform.position, gameObject.transform.rotation);
 
-        //    }
-        //    else if (teleportLocationSelector == 4)
-        //    {
-        //        gameObject.transform.SetPositionAndRotation(teleportLocation4.transform.position, gameObject.transform.rotation);
+            }
+            else if (teleportLocationSelector == 4)
+            {
+                gameObject.transform.SetPositionAndRotation(teleportLocation4.transform.position, gameObject.transform.rotation);
 
-        //    }
-        //    else if (teleportLocationSelector == 5)
-        //    {
-        //        gameObject.transform.SetPositionAndRotation(teleportLocation5.transform.position, gameObject.transform.rotation);
+            }
+            else if (teleportLocationSelector == 5)
+            {
+                gameObject.transform.SetPositionAndRotation(teleportLocation5.transform.position, gameObject.transform.rotation);
 
-        //    }
-        //    teleportTime = 10.0f;
-        //}
+            }
+            teleportTime = 10.0f;
+        }
     }
 }
