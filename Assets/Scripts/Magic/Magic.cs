@@ -21,7 +21,12 @@ public class Magic : MonoBehaviour {
             foreach (GameObject enemy in enemies)
             {
                 enemy.transform.parent.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-                enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevelMulitplier[magicLevel - 1]), true, 0);
+
+                bool knockback = true;
+                if (enemy.GetComponent<MOMovementController>().mounted)
+                    knockback = false;
+
+                enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevelMulitplier[magicLevel - 1]), knockback, 0);
                 enemy.GetComponent<MOMovementController>().freeze = true;
             }
         }
@@ -73,6 +78,7 @@ public class Magic : MonoBehaviour {
                 {
                     magicEffect = Instantiate(magicVisuals[magicLevel - 1], enemy.transform);
                     magicEffect.transform.parent = null;
+                    enemy.transform.parent.GetComponent<Rigidbody>().velocity = Vector3.up * 30;
                 }
                 //magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
                 //magicEffect.transform.parent = null;
