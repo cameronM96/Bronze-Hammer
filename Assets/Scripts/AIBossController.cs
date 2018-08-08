@@ -130,8 +130,10 @@ public class AIBossController : MOMovementController
         // Add a check for jumping
     }
 
-    private void FixedUpdate()
+    protected override void FixedUpdate()
     {
+        base.FixedUpdate();
+
         //call the method on the controller script sending the required vars
         if (attack && attack1Cooldown<=0.0f)
         {
