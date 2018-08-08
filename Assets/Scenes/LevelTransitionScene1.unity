@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -692,7 +692,7 @@ GameObject:
   - component: {fileID: 956359166}
   - component: {fileID: 956359165}
   m_Layer: 5
-  m_Name: CragText
+  m_Name: DisplayCragText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -707,7 +707,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.99997604, y: 0.99997604, z: 0.99997604}
-  m_Children: []
+  m_Children:
+  - {fileID: 1636245826}
   m_Father: {fileID: 2042670418}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -728,10 +729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.01
-  fullText: Crag pilage and KiLL for Life-Subtractor!                         Crag
-    go hOme to sHow gooD wurk!      wen Crag go HomE he no sEE LiVIng Life-Subtractor....HE
-    SEE DED LIFE-SUBTRACTOR!         Crag is Sad....                    CRAG IS ANGRY!                        Crag
-    find WhO do This!               Crag KiLL Who do This!!!!!!
+  fullText: 
 --- !u!114 &956359166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,10 +762,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Crag pilage and KiLL for Life-Subtractor!                         Crag go
-    hOme to sHow gooD wurk!      wen Crag go HomE he no sEE LiVIng Life-Subtractor....HE
-    SEE DED LIFE-SUBTRACTOR!         Crag is Sad....                    CRAG IS ANGRY!                        Crag
-    find WhO do This!               Crag KiLL Who do This!!!!!!
+  m_Text: Testing! Testing!
 --- !u!222 &956359167
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -842,6 +837,85 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1011994174}
+--- !u!1 &1212801121
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1212801122}
+  - component: {fileID: 1212801124}
+  - component: {fileID: 1212801123}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1212801122
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1212801121}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1586515498}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 355.1, y: 499}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1212801123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1212801121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.46226418, g: 0, b: 0.015550524, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: ba458c1184541476091009c1abe64a66, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Another successful raid was the perfect way to start up the day, at least
+    it should have been perfect...\n\n After going back to the castle, it was obvious
+    that something was wrong. The guards were gone and there was the distinct smell
+    of 'good' in the air.\n\nIt would appear in my absence, that someone bucked up
+    the courage to attack my leader.\n\nI swear, in the name of my true king Life-Subtractor,
+    I shall take revenge!\n\n They have no idea what they have brought upon themselves..."
+--- !u!222 &1212801124
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1212801121}
 --- !u!1 &1216532337
 GameObject:
   m_ObjectHideFlags: 0
@@ -891,6 +965,88 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1 &1272276162
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1272276163}
+  - component: {fileID: 1272276165}
+  - component: {fileID: 1272276164}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1272276163
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1272276162}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2009211591}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 355.1, y: 499}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1272276164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1272276162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.26455888, g: 0, b: 0.5943396, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: d4da5e4897ceb814480172e22cd2ff8d, type: 3}
+    m_FontSize: 18
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 195
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "A foul miasma made its self known upon my arrival home to report to Lord
+    Life-Subtractor.\n\nThe Dark semblance that once haunted this land was gone, and
+    in its place there was nought, save the unmistakable wretched presence of the
+    light. \n\nI blame only myself for leaving my Lord in the hands of incompetent
+    thugs who would allow tanyone to strike down the true ruler of this world. Perhaps
+    the waste left behind in the ruins may hint as to who would dare commit such a
+    transgression against us?\n\nUpon the everburning flames of the underworld, I
+    vow to engulf any who stood against Lord Life-Subtractor in a vortex or destruction
+    and misery..."
+--- !u!222 &1272276165
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1272276162}
 --- !u!1 &1321403840
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,7 +1088,7 @@ GameObject:
   - component: {fileID: 1586515499}
   - component: {fileID: 1586515501}
   m_Layer: 5
-  m_Name: EstocText
+  m_Name: DisplayEstocText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -947,7 +1103,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1212801122}
   m_Father: {fileID: 2042670418}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -988,12 +1145,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Another successful raid was the perfect way to start up the day, at least
-    it should have been perfect...\n\n After going back to the castle, it was obvious
-    that something was wrong. The guards were gone and there was the distinct smell
-    of 'good' in the air.\n\nIt would appear in my absence, that someone bucked up
-    the courage to attack my leader.\n\nI swear, in the name of my true king Life-Subtractor,
-    I shall take revenge!\n\n They have no idea what they have brought upon themselves..."
+  m_Text: 
 --- !u!222 &1586515500
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1012,13 +1164,84 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.01
-  fullText: Another successful raid was the perfect way to start up the day, at least
-    it should have been perfect...                                    After going
-    back to the castle, it was obvious that something was wrong. The guards were gone
-    and there was the distinct smell of 'good' in the air.                                      It
-    would appear in my absence, that someone bucked up the courage to attack my leader.        I
-    swear, in the name of my true king Life-Subtractor, I shall take revenge!                                                  They
-    have no idea what they have brought upon themselves...
+  fullText: 
+--- !u!1 &1636245825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1636245826}
+  - component: {fileID: 1636245828}
+  - component: {fileID: 1636245827}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1636245826
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1636245825}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.99997604, y: 0.99997604, z: 0.99997604}
+  m_Children: []
+  m_Father: {fileID: 956359164}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 355.1, y: 499}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1636245827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1636245825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0.4056604, b: 0.0068035554, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 58b647c5b2ec4184e9a07a561cdf0644, type: 3}
+    m_FontSize: 30
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "Crag pilage and KiLL for Life-Subtractor!                         \nCrag
+    go hOme to sHow gooD wurk!      \nwen Crag go HomE he no sEE LiVIng Life-Subtractor....\nHE
+    SEE DED LIFE-SUBTRACTOR!\nCrag is Sad....\n\nCRAG IS ANGRY! \n\nCrag find WhO
+    do This!\n\nCrag KiLL Who do This!!!!!!"
+--- !u!222 &1636245828
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1636245825}
 --- !u!1 &2009211590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,7 +1254,7 @@ GameObject:
   - component: {fileID: 2009211593}
   - component: {fileID: 2009211592}
   m_Layer: 5
-  m_Name: LilithText
+  m_Name: DisplayLilithText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1046,7 +1269,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.99997604, y: 0.99997604, z: 0.99997604}
-  m_Children: []
+  m_Children:
+  - {fileID: 1272276163}
   m_Father: {fileID: 2042670418}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1067,15 +1291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 0.01
-  fullText: A foul miasma made its self known upon my arrival home to report to Lord
-    Life-Subtractor.                                            The Dark semblance
-    that once haunted this land was gone, and in its place there was nought, save
-    the unmistakable wretched presence of the light.                                            I
-    blame only myself for leaving my Lord in the hands of incompetent thugs who would
-    allow tanyone to strike down the true ruler of this world. Perhaps the waste left
-    behind in the ruins may hint as to who would dare commit such a transgression
-    against us?  Upon the everburning flames of the underworld, I vow to engulf any
-    who stood against Lord Life-Subtractor in a vortex or destruction and misery...
+  fullText: 
 --- !u!114 &2009211593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1108,15 +1324,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "A foul miasma made its self known upon my arrival home to report to Lord
-    Life-Subtractor.\n\nThe Dark semblance that once haunted this land was gone, and
-    in its place there was nought, save the unmistakable wretched presence of the
-    light. \n\nI blame only myself for leaving my Lord in the hands of incompetent
-    thugs who would allow tanyone to strike down the true ruler of this world. Perhaps
-    the waste left behind in the ruins may hint as to who would dare commit such a
-    transgression against us?\n\nUpon the everburning flames of the underworld, I
-    vow to engulf any who stood against Lord Life-Subtractor in a vortex or destruction
-    and misery..."
+  m_Text: 
 --- !u!222 &2009211594
 CanvasRenderer:
   m_ObjectHideFlags: 0
