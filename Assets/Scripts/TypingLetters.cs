@@ -7,11 +7,14 @@ public class TypingLetters : MonoBehaviour {
 
     public float delay = 0.1f;
     public string fullText;
+    private Text displayTextBox;
     private string currentText = "";
 
 	// Use this for initialization
 	void Start ()
     {
+        fullText = GetComponent<Text>().text;
+        displayTextBox = GetComponent<Text>();
         StartCoroutine(ShowText());
 	}
 	
@@ -20,7 +23,7 @@ public class TypingLetters : MonoBehaviour {
         for(int i = 0; i < fullText.Length; i++)
         {
             currentText = fullText.Substring(0, i);
-            this.GetComponent<Text>().text = currentText;
+            displayTextBox.text = currentText;
             yield return new WaitForSeconds(delay);
         }
     }
