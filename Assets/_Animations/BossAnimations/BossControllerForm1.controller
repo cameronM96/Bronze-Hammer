@@ -118,9 +118,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hurt: 0
   knockback: 0
-  magic: 1
-  attack: 0
+  getUp: 0
+  magic: 0
+  attack: 1
+  attack3: 0
+  attack2: 1
   charge: 0
+  mount: 0
+--- !u!114 &114273669691721050
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c00e08cfba2a948a6d9e54173e98a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hurt: 0
+  knockback: 0
+  getUp: 1
+  magic: 0
+  attack: 0
+  attack3: 0
+  attack2: 0
+  charge: 0
+  mount: 0
+--- !u!114 &114339093274218302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20c00e08cfba2a948a6d9e54173e98a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hurt: 0
+  knockback: 0
+  getUp: 0
+  magic: 0
+  attack: 0
+  attack3: 0
+  attack2: 0
+  charge: 1
+  mount: 0
 --- !u!114 &114766567296014378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -134,9 +178,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hurt: 1
   knockback: 0
+  getUp: 0
   magic: 0
   attack: 0
+  attack3: 0
+  attack2: 0
   charge: 0
+  mount: 0
 --- !u!114 &114822257003568030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,9 +198,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hurt: 0
   knockback: 0
-  magic: 1
-  attack: 0
+  getUp: 0
+  magic: 0
+  attack: 1
+  attack3: 0
+  attack2: 0
   charge: 0
+  mount: 0
 --- !u!114 &114910126154026538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -166,9 +218,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hurt: 0
   knockback: 0
+  getUp: 0
   magic: 0
   attack: 1
+  attack3: 1
+  attack2: 0
   charge: 0
+  mount: 0
 --- !u!114 &114947644862934082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -182,9 +238,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hurt: 0
   knockback: 1
+  getUp: 0
   magic: 0
   attack: 0
+  attack3: 0
+  attack2: 0
   charge: 0
+  mount: 0
 --- !u!206 &206309408500953456
 BlendTree:
   m_ObjectHideFlags: 1
@@ -245,7 +305,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -311,7 +371,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -431,7 +491,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -485,7 +545,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -581,7 +641,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -674,7 +734,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -767,7 +827,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -791,7 +851,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -842,7 +902,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -938,7 +998,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.75
-  m_HasExitTime: 1
+  m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -1029,7 +1089,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101656539329177454}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114273669691721050}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1108,7 +1169,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101743373123523312}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 114339093274218302}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1447,7 +1509,7 @@ AnimatorStateMachine:
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -276, y: 312, z: 0}
-  m_EntryPosition: {x: 48, y: 468, z: 0}
+  m_EntryPosition: {x: 492, y: 312, z: 0}
   m_ExitPosition: {x: 288, y: 408, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: 1102936894011643842}
