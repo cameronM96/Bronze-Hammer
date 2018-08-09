@@ -17,7 +17,7 @@ public class AIController : MOMovementController
     private Vector3 moveDirection; // the direction the AI will be moved in relative to the camera.
     private Vector3 targetDir;  // Direction of the Target relative to the AI.
 
-    [SerializeField] private float moveSpeed = 7.0f; //the speed the AI will move
+    public float moveSpeed = 7.0f; //the speed the AI will move
     //[SerializeField] private float jumpHeight = 10.0f; //the height of the AI's jump
     private float hMov;
     private float vMov;

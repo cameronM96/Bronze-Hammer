@@ -5,14 +5,14 @@ using UnityEngine;
 public class MOMovementController : MonoBehaviour
 {
     private GameObject scriptEntity;
-    [SerializeField] public Collider[] attackTrigger;
+    public Collider[] attackTrigger;
+    public Collider chargeCollider;
     public float entityTurnSpeed = 10.0f;
     private float timerA = 0.0f;                            // Attack speed limiter
     private float timerC = 0.0f;                            // Resets attack timer
     private float timerJ = 0.0f;                            // Jump timer
     [SerializeField] private GameObject shadowPrefab;             
     private GameObject shadow;                                     // Shadow for a reference point when jumping  
-    private int shadowRayMask = 1 << 17;                           // https://docs.unity3d.com/Manual/Layers.html
     [HideInInspector] public bool dead = false;
     [HideInInspector] public int attackCounter;
 
@@ -22,6 +22,9 @@ public class MOMovementController : MonoBehaviour
     [HideInInspector] public bool hurtAnim = false;                 // Check if character is hurt
     [HideInInspector] public bool knockedDownAnim = false;          // Check if character is knocked down
     [HideInInspector] public bool castingMagic = false;             // Check if character is casting magic
+    [HideInInspector] public bool charging = false;                 // Check if character is charging
+    [HideInInspector] public bool knockback = false;                // Knocks the player back in fixedUpdate
+    [HideInInspector] public float knockbackDir = 0f;               // Determines direction the character should be knocked back.
 
     [HideInInspector] public bool mounted = false;          // Redirects animations to mount
     [HideInInspector] public GameObject mount;              // The mount gameobject
@@ -93,7 +96,7 @@ public class MOMovementController : MonoBehaviour
         {
             Vector3 origin = new Vector3(transform.parent.position.x, transform.parent.position.y + 1f, transform.parent.position.z);
             RaycastHit hit;
-            if (Physics.Raycast(origin, Vector3.down, out hit, Mathf.Infinity, shadowRayMask))
+            if (Physics.Raycast(origin, Vector3.down, out hit, Mathf.Infinity, m_WhatIsGround))
             {
                 shadow.transform.position = hit.point;
             }
@@ -115,7 +118,7 @@ public class MOMovementController : MonoBehaviour
                 // Reset players attacks
                 if (GetComponent<MOPlayerInputController>().playerCharacter == PlayerCharacters.Lilith)
                 {
-                    Debug.Log("Player attack reset");
+                    //Debug.Log("Player attack reset");
                     m_Anim.SetBool("attack", false);
                     attackTrigger[0].enabled = false;
                     attackTrigger[1].enabled = false;
@@ -130,7 +133,7 @@ public class MOMovementController : MonoBehaviour
                 {
                     if (attackTrigger[0].enabled == true)
                     {
-                        Debug.Log("Player attack reset");
+                        //Debug.Log("Player attack reset");
                         attackTrigger[0].enabled = false;
                         attackTrigger[0].gameObject.GetComponent<Attack>().attack2 = false;
                         attackTrigger[0].gameObject.GetComponent<Attack>().attack3 = false;
@@ -151,7 +154,7 @@ public class MOMovementController : MonoBehaviour
                 // Reset AI attacks
                 if (attackTrigger[0].enabled == true)
                 {
-                    Debug.Log("Player attack reset");
+                    //Debug.Log("Player attack reset");
                     attackTrigger[0].enabled = false;
                     attackTrigger[0].gameObject.GetComponent<Attack>().attack2 = false;
                     attackTrigger[0].gameObject.GetComponent<Attack>().attack3 = false;
@@ -198,7 +201,16 @@ public class MOMovementController : MonoBehaviour
 
         // TODO: Add raycast down and change only the animator (this should fix the landing animation)
 
-        if (m_Anim != null)
+        if (m_Rigidbody.velocity.y < 0 && !m_Grounded && m_Anim != null)
+        {
+            Vector3 origin = new Vector3(transform.parent.position.x, transform.parent.position.y + 1f, transform.parent.position.z);
+            RaycastHit hit;
+            if (Physics.Raycast(origin, Vector3.down, out hit, 5f, m_WhatIsGround))
+            {
+                m_Anim.SetBool("grounded", true);
+            }
+        }
+        else if (m_Anim != null)
         {
             m_Anim.SetBool("grounded", m_Grounded);
         }
@@ -206,20 +218,46 @@ public class MOMovementController : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        // Jump physics
         if (m_Rigidbody.velocity.y < 0)
         {
+            // If falling increase gravity to make them fall faster
             m_Rigidbody.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.fixedDeltaTime;
         }
         else if (this.tag == "Player")
         {
+            // If falling and not pressing jump button increase gravity to make them fall faster
             if (m_Rigidbody.velocity.y > 0 && !Input.GetButtonDown("Jump Button")) {
                 m_Rigidbody.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.fixedDeltaTime;
             }
+        }
+
+        // Execute Charge Mechanic
+        if (this.tag == "Player")
+        {
+            if (charging)
+            {
+                Charge();
+            }
+            else if (!charging && chargeCollider.enabled == true)
+            {
+                chargeCollider.enabled = false;
+                m_Rigidbody.velocity = Vector3.zero;
+            }
+        }
+
+        // Execute Knockback mechanic
+        if (knockback)
+        {
+            KnockBack(knockbackDir);
+            knockbackDir = 0;
+            knockback = false;
         }
     }
 
     private void LateUpdate()
     {
+        // Running animation
         Vector3 groundVelocity = m_Rigidbody.velocity;
         groundVelocity.y = 0f;
 
@@ -229,56 +267,59 @@ public class MOMovementController : MonoBehaviour
     // method is called when needed from an input script
     public void Move(Vector3 mov, float speed)
     {
-        if (!hurtAnim && !attackingAnim && !freeze && !knockedDownAnim && !dead && !castingMagic)
+        if (!attackingAnim && !freeze && !knockedDownAnim && !dead && !castingMagic && !charging)
         {
-            bool inAir = false;
-            if (this.gameObject.tag != "Player" && !m_Grounded)
+            if (this.tag == "Player" || !hurtAnim)
             {
-                inAir = true;
-            }
+                bool inAir = false;
+                if (this.gameObject.tag != "Player" && !m_Grounded)
+                {
+                    inAir = true;
+                }
 
-            //move the gameobject based on the vars from the input script
-            //scriptEntity.transform.parent.Translate(mov * speed * Time.deltaTime);
-            if (!inAir)
-            {
-                m_Rigidbody.velocity = new Vector3(mov.x * speed, m_Rigidbody.velocity.y, mov.z * speed);
+                //move the gameobject based on the vars from the input script
+                //scriptEntity.transform.parent.Translate(mov * speed * Time.deltaTime);
+                if (!inAir)
+                {
+                    m_Rigidbody.velocity = new Vector3(mov.x * speed, m_Rigidbody.velocity.y, mov.z * speed);
 
-                m_Audio.clip = m_AudioClips[0];
-                m_Audio.Play();
-                m_Audio.volume = 0.2f;
-            }
+                    m_Audio.clip = m_AudioClips[0];
+                    m_Audio.Play();
+                    m_Audio.volume = 0.2f;
+                }
 
-            if (mov.x < -0.2f && (mov.z < 0.2f && mov.z > -0.2f)) //left
-            {
-                entityRotation.Set(0, 270, 0);
-            }
-            else if (mov.x > 0.2f && (mov.z < 0.2f && mov.z > -0.2f))//right
-            {
-                entityRotation.Set(0, 90, 0);
-            }
-            else if (mov.z > 0.2f && (mov.x < 0.2f && mov.x > -0.2f))//up
-            {
-                entityRotation.Set(0, 0, 0);
-            }
-            else if (mov.z < -0.2f && (mov.x < 0.2f && mov.x > -0.2f))//down
-            {
-                entityRotation.Set(0, 180, 0);
-            }
-            else if (mov.x < -0.2f && mov.z > 0.2f)//up and left
-            {
-                entityRotation.Set(0, 315, 0);
-            }
-            else if (mov.x > 0.2f && mov.z > 0.2f)//up and right
-            {
-                entityRotation.Set(0, 45, 0);
-            }
-            else if (mov.x < -0.2f && mov.z < -0.2f)//down and left
-            {
-                entityRotation.Set(0, 225, 0);
-            }
-            else if (mov.x > 0.2f && mov.z < -0.2f)//down and right
-            {
-                entityRotation.Set(0, 135, 0);
+                if (mov.x < -0.2f && (mov.z < 0.2f && mov.z > -0.2f)) //left
+                {
+                    entityRotation.Set(0, 270, 0);
+                }
+                else if (mov.x > 0.2f && (mov.z < 0.2f && mov.z > -0.2f))//right
+                {
+                    entityRotation.Set(0, 90, 0);
+                }
+                else if (mov.z > 0.2f && (mov.x < 0.2f && mov.x > -0.2f))//up
+                {
+                    entityRotation.Set(0, 0, 0);
+                }
+                else if (mov.z < -0.2f && (mov.x < 0.2f && mov.x > -0.2f))//down
+                {
+                    entityRotation.Set(0, 180, 0);
+                }
+                else if (mov.x < -0.2f && mov.z > 0.2f)//up and left
+                {
+                    entityRotation.Set(0, 315, 0);
+                }
+                else if (mov.x > 0.2f && mov.z > 0.2f)//up and right
+                {
+                    entityRotation.Set(0, 45, 0);
+                }
+                else if (mov.x < -0.2f && mov.z < -0.2f)//down and left
+                {
+                    entityRotation.Set(0, 225, 0);
+                }
+                else if (mov.x > 0.2f && mov.z < -0.2f)//down and right
+                {
+                    entityRotation.Set(0, 135, 0);
+                }
             }
         }
     }
@@ -286,7 +327,7 @@ public class MOMovementController : MonoBehaviour
     //called from input controller 
     public void Jump(float height)
     {
-        if (!hurtAnim && !attackingAnim && !freeze && !knockedDownAnim && !dead && !castingMagic)
+        if (!hurtAnim && !attackingAnim && !freeze && !knockedDownAnim && !dead && !castingMagic && !charging)
         {
             if (timerJ <= 0.0f && m_Grounded)
             {
@@ -308,9 +349,6 @@ public class MOMovementController : MonoBehaviour
     {
         if (!hurtAnim && !freeze && !knockedDownAnim && !dead && !castingMagic)
         {
-            if (m_Grounded)
-                m_Rigidbody.velocity = new Vector3(0, 0, 0);
-
             // Debug.Log(scriptEntity.name + " attacking");
             if (timerA <= 0)
             {
@@ -330,7 +368,7 @@ public class MOMovementController : MonoBehaviour
                     else if (attackCounter >= 2)
                     {
                         // Combo finisher (third attack)
-                        Debug.Log("3 attack combo used");
+                        //Debug.Log("3 attack combo used");
                         attackCounter = 0;
                         m_Anim.SetBool("attack", true);
                         attackTrigger[0].enabled = true;
@@ -343,7 +381,7 @@ public class MOMovementController : MonoBehaviour
                         // Charge Attack
                         //Debug.Log("charge attack used");
                         m_Anim.SetBool("charge", true);
-                        attackTrigger[0].enabled = true;
+                        chargeCollider.enabled = true;
                         //Debug.Log("attack trigger for " + scriptEntity + " is active = " + attackTrigger.activeSelf);
                         //put knockback here
                     }
@@ -353,7 +391,7 @@ public class MOMovementController : MonoBehaviour
                         m_Anim.SetBool("attack", true);
                         
                         timerA = 0.25f;
-                        Debug.Log("Basic attack used, length is " + timerA);
+                        //Debug.Log("Basic attack used, length is " + timerA);
                         //attack animation and stuff here?
                         if (attackCounter == 1)
                         {
@@ -402,11 +440,8 @@ public class MOMovementController : MonoBehaviour
 
     public void BossAttack(int attackNumber)
     {
-        if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("hurt") && !m_Anim.GetBool("dead") && !freeze
-            && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Knocked Down") &&
-            !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up") && !dead)
+        if (!hurtAnim && !freeze && !knockedDownAnim && !dead && !castingMagic)
         {
-            m_Rigidbody.velocity = new Vector3(0, 0, 0);
             // Debug.Log(scriptEntity.name + " attacking");
             if (attackNumber == 1)
             {
@@ -459,11 +494,33 @@ public class MOMovementController : MonoBehaviour
         }
     }
 
-    public void KnockBack(float dir)
+    public void Charge()
+    {
+        // Make character move quicking left or right
+        // Determine direction
+        float mov;
+        if (entityRotation.y >= 0 && entityRotation.y <= 180)
+            mov = 1f;
+        else
+            mov = -1f;
+
+        // Find speed
+        float speed = 1f;
+        if (this.tag == "Player")
+            speed = GetComponent<MOPlayerInputController>().moveSpeed;
+        else if (this.tag == "Enemy")
+            speed = GetComponent<AIController>().moveSpeed;
+
+        // Execute physics part of charge (moving forward quickly)
+        m_Rigidbody.velocity = new Vector3(mov * speed * 2, m_Rigidbody.velocity.y, m_Rigidbody.velocity.z);
+    }
+
+    private void KnockBack(float dir)
     {
         // Knock back mechanic which sends this character flying backwards
+        //Debug.Log("Knockback enabled");
         m_Anim.SetBool("knockedDown", true);
-        m_Rigidbody.velocity = new Vector3(0, 0, 0);
+        knockedDownAnim = true;
 
         //Dis-mount character if knocked back
         if (mounted)
@@ -475,8 +532,8 @@ public class MOMovementController : MonoBehaviour
                 GetComponent<AIController>().meleeAttackDistance = GetComponent<AIController>().attackDistance;
         }
 
-        m_Rigidbody.AddForce((dir * 250), 250, 0);
-    
+        // Actually knockback enemy
+        m_Rigidbody.velocity = new Vector3((dir * 15), 10, 0);
     }
 
     public void Death()

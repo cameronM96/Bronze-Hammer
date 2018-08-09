@@ -10,6 +10,7 @@ public class TransitionSceneController : MonoBehaviour {
     [SerializeField] private GameObject estoc;
     [SerializeField] private GameObject lilith;
     [SerializeField] private GameObject crag;
+    [SerializeField] private Animator fadeScreen;
     private GameObject activeText;
 
     // Use this for initialization
@@ -20,6 +21,7 @@ public class TransitionSceneController : MonoBehaviour {
         estoc = transform.GetChild(1).gameObject;
         lilith = transform.GetChild(2).gameObject;
         crag = transform.GetChild(3).gameObject;
+        fadeScreen = transform.GetChild(4).GetComponent<Animator>();
 
         if (selectedPlayer != null)
         {
@@ -45,14 +47,8 @@ public class TransitionSceneController : MonoBehaviour {
         {
             if (Input.anyKeyDown)
             {
-                if (SceneManager.GetActiveScene().buildIndex == 8)
-                {
-                    SceneManager.LoadScene(0);
-                }
-                else
-                {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-                }
+                fadeScreen.SetBool("Skip", true);
+                StartCoroutine(LoadScene());
             }
         }
         else
@@ -67,6 +63,20 @@ public class TransitionSceneController : MonoBehaviour {
             }
 
             textFinished = activeText.GetComponent<TypingLetters>().finished;
+        }
+    }
+
+    IEnumerator LoadScene()
+    {
+        yield return new WaitForSeconds(3f);
+
+        if (SceneManager.GetActiveScene().buildIndex == 8)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 

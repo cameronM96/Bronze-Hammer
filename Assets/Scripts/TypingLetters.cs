@@ -16,11 +16,13 @@ public class TypingLetters : MonoBehaviour {
     {
         fullText = GetComponent<Text>().text;
         displayTextBox = GetComponent<Text>();
+        displayTextBox.text = "";
         StartCoroutine(ShowText());
 	}
 	
 	IEnumerator ShowText ()
     {
+        yield return new WaitForSeconds(1.5f);
         for(int i = 0; i < fullText.Length; i++)
         {
             currentText = fullText.Substring(0, i);

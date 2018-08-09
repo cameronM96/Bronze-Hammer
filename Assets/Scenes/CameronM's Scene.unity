@@ -4726,7 +4726,7 @@ Prefab:
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
       propertyPath: m_EncountersList.Array.data[0].waves.Array.data[0].rightSideEnemies.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
         type: 2}
@@ -7967,6 +7967,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4565176397173256, guid: c7989b1aa0e289740aae8746e6a01ba4, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -90
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c7989b1aa0e289740aae8746e6a01ba4, type: 2}
   m_IsPrefabParent: 0
@@ -7997,8 +8001,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec0e2b4b87ad3344a35aa655d6dcec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  estoc: 0
-  lilith: 1
+  estoc: 1
+  lilith: 0
   crag: 0
 --- !u!4 &1882735961
 Transform:

@@ -59,7 +59,10 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
         }
 
         if (charge)
+        {
             animator.SetBool("charge", false);
+            animator.gameObject.GetComponent<MOMovementController>().charging = true;
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -103,6 +106,12 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
             {
                 animator.gameObject.GetComponent<MOMovementController>().castingMagic = false;
             }
+        }
+
+        if (charge)
+        {
+            animator.gameObject.GetComponent<MOMovementController>().charging = false;
+            animator.gameObject.GetComponent<MOMovementController>().chargeCollider.enabled = false;
         }
     }
 
