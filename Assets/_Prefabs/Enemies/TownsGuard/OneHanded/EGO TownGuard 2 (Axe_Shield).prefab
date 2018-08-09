@@ -98,7 +98,6 @@ GameObject:
   - component: {fileID: 136981561593533222}
   - component: {fileID: 114538858311062024}
   - component: {fileID: 114363020110185854}
-  - component: {fileID: 136820552912742918}
   - component: {fileID: 82337061882094812}
   m_Layer: 11
   m_Name: Enemy 1@Sword And Shield Run
@@ -118,7 +117,7 @@ GameObject:
   - component: {fileID: 33496040068430770}
   - component: {fileID: 23398916178038374}
   - component: {fileID: 114172353812538444}
-  - component: {fileID: 65411436111374218}
+  - component: {fileID: 64877983804453144}
   m_Layer: 0
   m_Name: Axe
   m_TagString: Untagged
@@ -649,7 +648,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1353566493829694}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.161398, y: 1.8284083e-15, z: -82.344185}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 4365373207155778}
@@ -1080,18 +1079,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65411436111374218
-BoxCollider:
+--- !u!64 &64877983804453144
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1247384400019026}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 8, y: 13, z: 1}
-  m_Center: {x: 0, y: 18.9, z: 0}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: e4049e7c1c15fcc499e26de1c57d43e2, type: 3}
 --- !u!82 &82337061882094812
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1251,7 +1252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrigger:
-  - {fileID: 65411436111374218}
+  - {fileID: 64877983804453144}
   entityTurnSpeed: 10
   shadowPrefab: {fileID: 0}
   dead: 0
@@ -1284,19 +1285,6 @@ MonoBehaviour:
   sprinting: 0
   attackDistance: 3
   meleeAttackDistance: 0
---- !u!136 &136820552912742918
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1220866651382608}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 0.7
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!136 &136981561593533222
 CapsuleCollider:
   m_ObjectHideFlags: 1

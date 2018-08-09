@@ -142,7 +142,7 @@ GameObject:
   - component: {fileID: 33548781207118532}
   - component: {fileID: 23978113959062440}
   - component: {fileID: 114049381462012066}
-  - component: {fileID: 136573462861710982}
+  - component: {fileID: 64207064421829158}
   m_Layer: 0
   m_Name: Great_Mace
   m_TagString: Untagged
@@ -269,7 +269,6 @@ GameObject:
   - component: {fileID: 136242745909682760}
   - component: {fileID: 114718057906768164}
   - component: {fileID: 114719937390370844}
-  - component: {fileID: 136381449910459746}
   - component: {fileID: 82649332853213996}
   m_Layer: 11
   m_Name: Enemy 1
@@ -978,6 +977,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!64 &64207064421829158
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1397577905174468}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 29c986479d1a7f24a8ff0699070bdde9, type: 3}
 --- !u!82 &82649332853213996
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1122,7 +1135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrigger:
-  - {fileID: 136573462861710982}
+  - {fileID: 64207064421829158}
   entityTurnSpeed: 10
   shadowPrefab: {fileID: 0}
   dead: 0
@@ -1183,32 +1196,6 @@ CapsuleCollider:
   m_Height: 0.4
   m_Direction: 1
   m_Center: {x: 0, y: 0.2, z: 0}
---- !u!136 &136381449910459746
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1500903862990664}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 0.7
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.2, z: 0}
---- !u!136 &136573462861710982
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1397577905174468}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 5.5
-  m_Height: 12.6
-  m_Direction: 1
-  m_Center: {x: 0, y: 47, z: 0}
 --- !u!137 &137230195213712494
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

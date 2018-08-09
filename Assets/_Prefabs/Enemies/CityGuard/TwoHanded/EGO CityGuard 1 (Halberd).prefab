@@ -207,8 +207,8 @@ GameObject:
   - component: {fileID: 4686737114955200}
   - component: {fileID: 33421183026323884}
   - component: {fileID: 23676035274574458}
-  - component: {fileID: 65778303966321328}
   - component: {fileID: 114957771553452512}
+  - component: {fileID: 64720519932326194}
   m_Layer: 0
   m_Name: Halberd
   m_TagString: Untagged
@@ -977,8 +977,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65778303966321328
-BoxCollider:
+--- !u!64 &64720519932326194
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -986,9 +986,11 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.1, y: 12, z: 2}
-  m_Center: {x: 0.5, y: 50.18, z: 0}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: def897b9b9bb28945b1c846d718d858e, type: 3}
 --- !u!82 &82786856214212826
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1129,7 +1131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrigger:
-  - {fileID: 65778303966321328}
+  - {fileID: 64720519932326194}
   entityTurnSpeed: 10
   shadowPrefab: {fileID: 0}
   dead: 0

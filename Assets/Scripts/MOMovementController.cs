@@ -464,10 +464,9 @@ public class MOMovementController : MonoBehaviour
         // Knock back mechanic which sends this character flying backwards
         m_Anim.SetBool("knockedDown", true);
         m_Rigidbody.velocity = new Vector3(0, 0, 0);
-        m_Rigidbody.AddForce((dir * 250), 250, 0);
-    
+
         //Dis-mount character if knocked back
-        if(mounted)
+        if (mounted)
         {
             m_Anim.SetBool("mounted", false);
             mount.GetComponent<MountingController>().UnMounted();
@@ -475,6 +474,9 @@ public class MOMovementController : MonoBehaviour
             if (this.tag == "Enemy")
                 GetComponent<AIController>().meleeAttackDistance = GetComponent<AIController>().attackDistance;
         }
+
+        m_Rigidbody.AddForce((dir * 250), 250, 0);
+    
     }
 
     public void Death()

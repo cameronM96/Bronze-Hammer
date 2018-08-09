@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 33109575539891168}
   - component: {fileID: 23159702450863754}
   - component: {fileID: 114691836819217840}
-  - component: {fileID: 135763075953408532}
+  - component: {fileID: 64697006948170856}
   m_Layer: 0
   m_Name: Mace
   m_TagString: Untagged
@@ -641,7 +641,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1928420465225166}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.39, y: 1.6726615e-15, z: -75.89}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 4430361282411126}
@@ -1079,6 +1079,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!64 &64697006948170856
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1293209273893816}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 0ef4a53f57d3ed54f8632c4f7916f868, type: 3}
 --- !u!82 &82539765456529182
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1219,7 +1233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrigger:
-  - {fileID: 135763075953408532}
+  - {fileID: 64697006948170856}
   entityTurnSpeed: 10
   shadowPrefab: {fileID: 0}
   dead: 0
@@ -1271,18 +1285,6 @@ MonoBehaviour:
   attack3: 0
   attack2: 0
   m_Audio: {fileID: 0}
---- !u!135 &135763075953408532
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1293209273893816}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3.5
-  m_Center: {x: 0, y: 23.4, z: 0}
 --- !u!136 &136401157856285384
 CapsuleCollider:
   m_ObjectHideFlags: 1

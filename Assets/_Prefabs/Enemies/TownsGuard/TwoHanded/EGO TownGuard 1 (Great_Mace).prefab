@@ -400,7 +400,6 @@ GameObject:
   - component: {fileID: 136665351894624602}
   - component: {fileID: 114331032082407258}
   - component: {fileID: 114036344696750410}
-  - component: {fileID: 136504790191848890}
   - component: {fileID: 82228547265684382}
   m_Layer: 11
   m_Name: Enemy 1
@@ -450,7 +449,7 @@ GameObject:
   - component: {fileID: 33703983556677606}
   - component: {fileID: 23569719073022198}
   - component: {fileID: 114854173734965820}
-  - component: {fileID: 136475825886484464}
+  - component: {fileID: 64315110835844272}
   m_Layer: 0
   m_Name: Great_Mace
   m_TagString: Untagged
@@ -978,6 +977,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!64 &64315110835844272
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1924198569838058}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 29c986479d1a7f24a8ff0699070bdde9, type: 3}
 --- !u!82 &82228547265684382
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1118,7 +1131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrigger:
-  - {fileID: 0}
+  - {fileID: 64315110835844272}
   entityTurnSpeed: 10
   shadowPrefab: {fileID: 0}
   dead: 0
@@ -1170,32 +1183,6 @@ MonoBehaviour:
   attack3: 0
   attack2: 0
   m_Audio: {fileID: 0}
---- !u!136 &136475825886484464
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1924198569838058}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 5.5
-  m_Height: 12.6
-  m_Direction: 1
-  m_Center: {x: 0, y: 47, z: 0}
---- !u!136 &136504790191848890
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1871289408640560}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 0.7
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!136 &136665351894624602
 CapsuleCollider:
   m_ObjectHideFlags: 1

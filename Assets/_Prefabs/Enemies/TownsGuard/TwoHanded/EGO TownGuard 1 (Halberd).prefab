@@ -53,7 +53,6 @@ GameObject:
   - component: {fileID: 136576649585415556}
   - component: {fileID: 114601371703381804}
   - component: {fileID: 114627971653098870}
-  - component: {fileID: 136018195246060410}
   - component: {fileID: 82561591633554598}
   m_Layer: 11
   m_Name: Enemy 1
@@ -178,8 +177,8 @@ GameObject:
   - component: {fileID: 4632150304727944}
   - component: {fileID: 33820458138571658}
   - component: {fileID: 23034492118737846}
-  - component: {fileID: 65540366751151016}
   - component: {fileID: 114859271242409074}
+  - component: {fileID: 64062441482884042}
   m_Layer: 0
   m_Name: Halberd
   m_TagString: Untagged
@@ -978,18 +977,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65540366751151016
-BoxCollider:
+--- !u!64 &64062441482884042
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1397143814582324}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 5.1, y: 12, z: 2}
-  m_Center: {x: 0.5, y: 50.18, z: 0}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: def897b9b9bb28945b1c846d718d858e, type: 3}
 --- !u!82 &82561591633554598
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1115,7 +1116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrigger:
-  - {fileID: 65540366751151016}
+  - {fileID: 64062441482884042}
   entityTurnSpeed: 10
   shadowPrefab: {fileID: 0}
   dead: 0
@@ -1182,19 +1183,6 @@ MonoBehaviour:
   attack3: 0
   attack2: 0
   m_Audio: {fileID: 0}
---- !u!136 &136018195246060410
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1125831468666542}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 0.7
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!136 &136576649585415556
 CapsuleCollider:
   m_ObjectHideFlags: 1
