@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 33388793017318338}
   - component: {fileID: 23797842598088388}
   - component: {fileID: 114445644333107984}
-  - component: {fileID: 136801977614009898}
+  - component: {fileID: 64189226902160838}
   m_Layer: 0
   m_Name: Great_Mace
   m_TagString: Untagged
@@ -977,6 +977,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!64 &64189226902160838
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1583576811233952}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 29c986479d1a7f24a8ff0699070bdde9, type: 3}
 --- !u!82 &82338209571475554
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1102,7 +1116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrigger:
-  - {fileID: 136801977614009898}
+  - {fileID: 64189226902160838}
   entityTurnSpeed: 10
   shadowPrefab: {fileID: 0}
   dead: 0
@@ -1169,19 +1183,6 @@ MonoBehaviour:
   attack3: 0
   attack2: 0
   m_Audio: {fileID: 0}
---- !u!136 &136801977614009898
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1583576811233952}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 5.5
-  m_Height: 12.6
-  m_Direction: 1
-  m_Center: {x: 0, y: 47, z: 0}
 --- !u!136 &136832588891586394
 CapsuleCollider:
   m_ObjectHideFlags: 1

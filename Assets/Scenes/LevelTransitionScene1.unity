@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -585,6 +585,52 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
+--- !u!1001 &746224279
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4326745874448920, guid: 4de37d3dc7535234a952951cdcc8b0be, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 565.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326745874448920, guid: 4de37d3dc7535234a952951cdcc8b0be, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 353.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326745874448920, guid: 4de37d3dc7535234a952951cdcc8b0be, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326745874448920, guid: 4de37d3dc7535234a952951cdcc8b0be, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326745874448920, guid: 4de37d3dc7535234a952951cdcc8b0be, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326745874448920, guid: 4de37d3dc7535234a952951cdcc8b0be, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326745874448920, guid: 4de37d3dc7535234a952951cdcc8b0be, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4326745874448920, guid: 4de37d3dc7535234a952951cdcc8b0be, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1934561137739230, guid: 4de37d3dc7535234a952951cdcc8b0be, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 4de37d3dc7535234a952951cdcc8b0be, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &887707041
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,7 +743,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &956359164
 RectTransform:
   m_ObjectHideFlags: 0
@@ -729,6 +775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 0.01
   fullText: 
+  finished: 0
 --- !u!114 &956359166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,10 +808,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Crag pilage and KiLL for Life-Subtractor!                         \nCrag
-    go hOme to sHow gooD wurk!      \nwen Crag go HomE he no sEE LiVIng Life-Subtractor....\nHE
-    SEE DED LIFE-SUBTRACTOR!\nCrag is Sad....\n\nCRAG IS ANGRY! \n\nCrag find WhO
-    do This!\n\nCrag KiLL Who do This!!!!!!\n"
+  m_Text: "Crag pilage and KiLL for Life-Subtractor!\n\nCrag go hOme to sHow gooD
+    wurk!\n\nwen Crag go HomE he no sEE LiVIng Life-Subtractor....\n\nHE SEE DED LIFE-SUBTRACTOR!\n\nCrag
+    is Sad....\n\nCRAG IS ANGRY! \n\nCrag find WhO do This!\n\nCrag KiLL Who do This!!!!!!\n"
 --- !u!222 &956359167
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -990,7 +1036,7 @@ MonoBehaviour:
     that something was wrong. The guards were gone and there was the distinct smell
     of 'good' in the air.\n\nIt would appear in my absence, that someone bucked up
     the courage to attack my leader.\n\nI swear, in the name of my true king Life-Subtractor,
-    I shall take revenge!\n\n They have no idea what they have brought upon themselves..."
+    I shall take revenge!\n\nThey have no idea what they have brought upon themselves..."
 --- !u!222 &1586515500
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1010,6 +1056,105 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 0.01
   fullText: 
+  finished: 0
+--- !u!1 &1929751797
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1929751798}
+  - component: {fileID: 1929751800}
+  - component: {fileID: 1929751799}
+  - component: {fileID: 1929751802}
+  - component: {fileID: 1929751801}
+  m_Layer: 5
+  m_Name: FadeBlack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1929751798
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1929751797}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -355}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2042670418}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1929751799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1929751797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -98529514, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &1929751800
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1929751797}
+--- !u!225 &1929751801
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1929751797}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!95 &1929751802
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1929751797}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3139b9d2e1c05ec48a88018d8987088d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2009211590
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,7 +1172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2009211591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1059,6 +1204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delay: 0.01
   fullText: 
+  finished: 0
 --- !u!114 &2009211593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1116,6 +1262,7 @@ GameObject:
   - component: {fileID: 2042670418}
   - component: {fileID: 2042670420}
   - component: {fileID: 2042670419}
+  - component: {fileID: 2042670421}
   m_Layer: 5
   m_Name: Book
   m_TagString: Untagged
@@ -1137,6 +1284,7 @@ RectTransform:
   - {fileID: 1586515498}
   - {fileID: 2009211591}
   - {fileID: 956359164}
+  - {fileID: 1929751798}
   m_Father: {fileID: 887707045}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1178,6 +1326,21 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2042670417}
+--- !u!114 &2042670421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2042670417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dee50ef033c2dc4db47d4483ca68307, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textFinished: 0
+  estoc: {fileID: 0}
+  lilith: {fileID: 0}
+  crag: {fileID: 0}
 --- !u!1 &2122179720
 GameObject:
   m_ObjectHideFlags: 0

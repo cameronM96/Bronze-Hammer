@@ -527,8 +527,8 @@ GameObject:
   - component: {fileID: 4683513109308904}
   - component: {fileID: 33096955537639736}
   - component: {fileID: 23210495029293004}
-  - component: {fileID: 65207385532664526}
   - component: {fileID: 114232238005845270}
+  - component: {fileID: 64315282587508706}
   m_Layer: 0
   m_Name: Great_Axe
   m_TagString: Untagged
@@ -1152,18 +1152,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65207385532664526
-BoxCollider:
+--- !u!64 &64315282587508706
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1970087093625682}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 18.23, y: 20, z: 1.94}
-  m_Center: {x: 0, y: 40.9, z: 0}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 56fef1654319a5e4095a6b340bed1484, type: 3}
 --- !u!82 &82568538006944594
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1323,7 +1325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrigger:
-  - {fileID: 65207385532664526}
+  - {fileID: 64315282587508706}
   entityTurnSpeed: 10
   shadowPrefab: {fileID: 0}
   dead: 0

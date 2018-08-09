@@ -9,6 +9,7 @@ public class TypingLetters : MonoBehaviour {
     public string fullText;
     private Text displayTextBox;
     private string currentText = "";
+    [HideInInspector] public bool finished = false;
 
 	// Use this for initialization
 	void Start ()
@@ -26,5 +27,6 @@ public class TypingLetters : MonoBehaviour {
             displayTextBox.text = currentText;
             yield return new WaitForSeconds(delay);
         }
+        finished = true;
     }
 }

@@ -353,8 +353,8 @@ GameObject:
   - component: {fileID: 4908395699754904}
   - component: {fileID: 33353239738861860}
   - component: {fileID: 23057714805845190}
-  - component: {fileID: 65859619313715716}
   - component: {fileID: 114016216923251958}
+  - component: {fileID: 64847855505700162}
   m_Layer: 0
   m_Name: Great_Axe
   m_TagString: Untagged
@@ -374,7 +374,6 @@ GameObject:
   - component: {fileID: 136323070180018946}
   - component: {fileID: 114133111754899948}
   - component: {fileID: 114109697911436116}
-  - component: {fileID: 136812427312527830}
   - component: {fileID: 82777705566470960}
   m_Layer: 11
   m_Name: Enemy 1
@@ -978,18 +977,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &65859619313715716
-BoxCollider:
+--- !u!64 &64847855505700162
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1727513887019518}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 18.23, y: 20, z: 1.94}
-  m_Center: {x: 0, y: 40.9, z: 0}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 56fef1654319a5e4095a6b340bed1484, type: 3}
 --- !u!82 &82777705566470960
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1149,7 +1150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrigger:
-  - {fileID: 65859619313715716}
+  - {fileID: 64847855505700162}
   entityTurnSpeed: 10
   shadowPrefab: {fileID: 0}
   dead: 0
@@ -1193,19 +1194,6 @@ CapsuleCollider:
   m_Enabled: 1
   m_Radius: 0.1
   m_Height: 0.4
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.2, z: 0}
---- !u!136 &136812427312527830
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1744280295296806}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 0.7
   m_Direction: 1
   m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!137 &137140033707518850

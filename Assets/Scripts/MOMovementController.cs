@@ -28,7 +28,7 @@ public class MOMovementController : MonoBehaviour
 
     // Ground check data
     public Transform m_GroundCheck;                         // A position marking where to check if the player is grounded.
-    const float k_GroundedRadius = .01f;                    // Radius of the overlap circle to determine if grounded
+    const float k_GroundedRadius = .02f;                    // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;                                // Whether or not the character is grounded.
     [SerializeField] private LayerMask m_WhatIsGround;      // A mask determining what is ground to the character
 
@@ -199,7 +199,9 @@ public class MOMovementController : MonoBehaviour
         // TODO: Add raycast down and change only the animator (this should fix the landing animation)
 
         if (m_Anim != null)
+        {
             m_Anim.SetBool("grounded", m_Grounded);
+        }
     }
 
     protected virtual void FixedUpdate()
@@ -462,10 +464,9 @@ public class MOMovementController : MonoBehaviour
         // Knock back mechanic which sends this character flying backwards
         m_Anim.SetBool("knockedDown", true);
         m_Rigidbody.velocity = new Vector3(0, 0, 0);
-        m_Rigidbody.AddForce((dir * 250), 250, 0);
-    
+
         //Dis-mount character if knocked back
-        if(mounted)
+        if (mounted)
         {
             m_Anim.SetBool("mounted", false);
             mount.GetComponent<MountingController>().UnMounted();
@@ -473,6 +474,9 @@ public class MOMovementController : MonoBehaviour
             if (this.tag == "Enemy")
                 GetComponent<AIController>().meleeAttackDistance = GetComponent<AIController>().attackDistance;
         }
+
+        m_Rigidbody.AddForce((dir * 250), 250, 0);
+    
     }
 
     public void Death()

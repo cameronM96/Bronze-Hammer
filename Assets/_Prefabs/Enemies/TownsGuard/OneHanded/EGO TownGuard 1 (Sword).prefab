@@ -466,7 +466,6 @@ GameObject:
   - component: {fileID: 136563257930510220}
   - component: {fileID: 114435717050340346}
   - component: {fileID: 114249835466595174}
-  - component: {fileID: 136549496961090846}
   - component: {fileID: 82587121234905406}
   m_Layer: 11
   m_Name: Enemy 1@Sword And Shield Run
@@ -848,7 +847,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1311574417885848}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.946208, y: 1.7495211e-15, z: -78.79143}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 4552743408479750}
@@ -1090,7 +1089,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.19, y: 21, z: 1.02}
+  m_Size: {x: 4, y: 23, z: 2}
   m_Center: {x: 0.0000133141875, y: 18.1, z: 0.000026250258}
 --- !u!82 &82587121234905406
 AudioSource:
@@ -1284,19 +1283,6 @@ MonoBehaviour:
   sprinting: 0
   attackDistance: 3
   meleeAttackDistance: 0
---- !u!136 &136549496961090846
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1781925095676416}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 0.7
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!136 &136563257930510220
 CapsuleCollider:
   m_ObjectHideFlags: 1

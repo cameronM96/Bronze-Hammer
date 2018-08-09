@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 136356718731294830}
   - component: {fileID: 114712940061493696}
   - component: {fileID: 114021721652314084}
-  - component: {fileID: 136263741813966028}
   - component: {fileID: 82326776947737136}
   m_Layer: 11
   m_Name: Enemy 1@Sword And Shield Run
@@ -119,7 +118,7 @@ GameObject:
   - component: {fileID: 33213528026584484}
   - component: {fileID: 23111649961114496}
   - component: {fileID: 114436296004306888}
-  - component: {fileID: 135392273492341344}
+  - component: {fileID: 64978132071842162}
   m_Layer: 0
   m_Name: Mace
   m_TagString: Untagged
@@ -523,7 +522,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1121111852689202}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 18.48449, y: 1.7549845e-15, z: -79.037476}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 4160443575477672}
@@ -978,6 +977,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!64 &64978132071842162
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1265121562208384}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 0ef4a53f57d3ed54f8632c4f7916f868, type: 3}
 --- !u!82 &82326776947737136
 AudioSource:
   m_ObjectHideFlags: 1
@@ -1137,7 +1150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackTrigger:
-  - {fileID: 135392273492341344}
+  - {fileID: 64978132071842162}
   entityTurnSpeed: 10
   shadowPrefab: {fileID: 0}
   dead: 0
@@ -1170,31 +1183,6 @@ MonoBehaviour:
   sprinting: 0
   attackDistance: 3
   meleeAttackDistance: 0
---- !u!135 &135392273492341344
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1265121562208384}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 3.5
-  m_Center: {x: 0, y: 23.4, z: 0}
---- !u!136 &136263741813966028
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1084139845085510}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.3
-  m_Height: 0.7
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!136 &136356718731294830
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -33,13 +33,13 @@ public class MainMenu : MonoBehaviour {
 
     public void Level2()
     {
-        proceedToLevel.nextScene = 3;
+        proceedToLevel.nextScene = 4;
         SceneManager.LoadScene(1);
     }
 
     public void Level3()
     {
-        proceedToLevel.nextScene = 4;
+        proceedToLevel.nextScene = 6;
         SceneManager.LoadScene(1);
     }
 
