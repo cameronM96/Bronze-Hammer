@@ -57,22 +57,7 @@ public class AIController : MOMovementController
 
         //agent.destination = moveTarget.transform.position;
 
-        // Determine which direction to walk
-        if (moveTarget != null)
-        {
-            targetDir = (moveTarget.transform.position - enemy.transform.position).normalized;
-            hMov = targetDir.x;
-            vMov = targetDir.z;
-        }
-        else
-        {
-            hMov = 0;
-            vMov = 0;
-        }
-
-        //calculate movement relative to the camera
-        gameCameraForward = Vector3.Scale(gameCamera.forward, new Vector3(1, 0, 1)).normalized;
-        moveDirection = vMov * gameCameraForward + hMov * gameCamera.right;
+        Seek();
 
         // add steering for when there are other AI in the way
         float dist = Vector3.Distance(attackTarget.transform.position, enemy.transform.position);
@@ -118,6 +103,26 @@ public class AIController : MOMovementController
                 m_character.Move(moveDirection, moveSpeed);
             }
         }
+    }
+
+    void Seek()
+    {
+        // Seek Target
+        if (moveTarget != null)
+        {
+            targetDir = (moveTarget.transform.position - enemy.transform.position).normalized;
+            hMov = targetDir.x;
+            vMov = targetDir.z;
+        }
+        else
+        {
+            hMov = 0;
+            vMov = 0;
+        }
+
+        //calculate movement relative to the camera
+        gameCameraForward = Vector3.Scale(gameCamera.forward, new Vector3(1, 0, 1)).normalized;
+        moveDirection = vMov * gameCameraForward + hMov * gameCamera.right;
     }
 
     private void OnCollisionEnter(Collision collision)
