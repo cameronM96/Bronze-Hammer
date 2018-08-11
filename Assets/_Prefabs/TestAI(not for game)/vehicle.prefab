@@ -214,11 +214,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00854a0cf76bb41499c4a725f37c9ca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  r: 1.5
+  r: 3
   maxspeed: 30
   maxforce: 0.3
   SlowDownDistance: 10
-  radius: 3
+  radius: 5
+  arrival: 1
+  teleporter: 1
+  seekStrength: 0
+  seperateStrength: 2
+  followStrength: 1
+  leftConstraint: -80
+  rightConstraint: 80
+  topConstraint: 50
+  bottomConstraint: -50
+  buffer: 3
+  distanceZ: 10
+  distanceX: 10
 --- !u!135 &135668567127354244
 SphereCollider:
   m_ObjectHideFlags: 1
