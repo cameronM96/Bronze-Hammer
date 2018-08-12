@@ -64,6 +64,12 @@ public class TransitionSceneController : MonoBehaviour {
 
             textFinished = activeText.GetComponent<TypingLetters>().finished;
         }
+
+        if (Input.GetButton("Cancel"))
+        {
+            fadeScreen.SetBool("Skip", true);
+            StartCoroutine(LoadScene());
+        }
     }
 
     IEnumerator LoadScene()

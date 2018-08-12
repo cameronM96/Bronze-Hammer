@@ -26,6 +26,7 @@ public class PlayerHealth : MonoBehaviour {
     public PlayerLives playerLives;
     public bool addMana = false;
     private bool dead = false;
+    [SerializeField] private GameObject damageIndicator;
 
     private Animator m_Anim;
 
@@ -84,6 +85,11 @@ public class PlayerHealth : MonoBehaviour {
         if (health > 0 && !m_characterController.knockedDownAnim)
         {
             health -= damageTaken;
+            GameObject indicator = Instantiate(damageIndicator);
+            indicator.transform.position = this.transform.position;
+            indicator.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "" + damageTaken;
+            indicator.transform.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.red;
+
             if (health < 0)
                 health = 0;
 
@@ -137,6 +143,11 @@ public class PlayerHealth : MonoBehaviour {
 
         float manaleft = mana;
         int magiclevel = 0;
+
+        GameObject indicator = Instantiate(damageIndicator);
+        indicator.transform.position = this.transform.position;
+        indicator.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "" + manaValue;
+        indicator.transform.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.blue;
 
         // Set each bar relative to the manaPerLevel
         foreach (Image manabar in manaBars)

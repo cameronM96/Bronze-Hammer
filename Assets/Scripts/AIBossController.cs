@@ -25,12 +25,8 @@ public class AIBossController : MOMovementController
     public GameObject teleportLocation4;
     public GameObject teleportLocation5;
 
-    private float attack1Cooldown;//cooldown of the basic lightning wave attack
-
-    private float attack2Cooldown; //cooldown of the powerful magic attack
-
-    private float attack3Cooldown; //cooldown of the knockback sword attack
-    private float attack3Distance = 10; //the minimum distance the play muct be away to use attack 3
+    private float attackTimeLimiter;//limits the time between boss attacks
+    private int attackPicker;//randomly picks the attack the boss will perform
 
     private bool phase2; //bool of if the boss fight is in phase 1 or 2 
 
@@ -57,8 +53,10 @@ public class AIBossController : MOMovementController
 
         //GetComponent<Animator>().runtimeAnimatorController = form1Animations;
         m_character = GetComponent<MOMovementController>();
+        Debug.Log("m_character = " + m_character);
 
         phase2 = false;
+        attackTimeLimiter = 0.0f;
 
         // agent = GetComponentInParent<NavMeshAgent>();
 
@@ -76,20 +74,17 @@ public class AIBossController : MOMovementController
     // Update is called once per frame
     protected override void Update()
     {
-
         base.Update();
 
-        if (teleportTime < 0.0f)
+        if (teleportTime >= 0.0f)
         {
             teleportTime -= Time.deltaTime;
         }
-        if (attack1Cooldown < 0.0f)
+
+        if (attackTimeLimiter >= 0.0f)
         {
-            attack1Cooldown -= Time.deltaTime;
-        }
-        if (attack2Cooldown < 0.0f)
-        {
-            attack2Cooldown -= Time.deltaTime;
+            attackTimeLimiter -= Time.deltaTime;
+           // Debug.Log("attack time limiter = " + attackTimeLimiter);
         }
 
         //agent.destination = moveTarget.transform.position;
@@ -119,6 +114,7 @@ public class AIBossController : MOMovementController
             attackTarget.transform.position.z - enemy.transform.position.z > -0.2))
         {
             attack = true;
+           // Debug.Log("Attacking");
         }
         else
         {
@@ -134,30 +130,17 @@ public class AIBossController : MOMovementController
     {
         base.FixedUpdate();
 
-        //call the method on the controller script sending the required vars
-        if (attack && attack1Cooldown<=0.0f)
+        if (attack)
         {
-            // Make sure AI is facing the right directions first
-            this.transform.LookAt(attackTarget.transform);
-            m_character.Move(Vector3.zero);
-            m_character.BossAttack(1);
-            attack1Cooldown = 2.0f;
-        }
-        else if (attack && attack2Cooldown <=0.0f)
-        {
-            // Make sure AI is facing the right directions first
-            this.transform.LookAt(attackTarget.transform);
-            m_character.Move(Vector3.zero);
-            m_character.BossAttack(2);
-            attack2Cooldown = 10.0f;
-        }
-        else if (attack && attack3Cooldown<=0.0f &&attack3Distance<=distanceToPlayer)
-        {
-            // Make sure AI is facing the right directions first
-            this.transform.LookAt(attackTarget.transform);
-            m_character.Move(Vector3.zero);
-            m_character.BossAttack(3);
-            attack3Cooldown = 5.0f;
+            if (attackTimeLimiter <= 0)
+            {
+                Debug.Log("Calling attack player");
+                attackTimeLimiter = 4.0f;
+
+                attackPicker = Random.Range(1, 4);
+                Debug.Log("Randomised to " + attackPicker);
+                AttackPlayer(attackPicker);
+            }
         }
         else
         {
@@ -168,7 +151,7 @@ public class AIBossController : MOMovementController
         }
 
         //use teleport ability
-        if (distanceToPlayer <= teleportDistance && teleportTime <= 0.0f)
+        if (1 == 2)//distanceToPlayer <= teleportDistance && teleportTime <= 0.0f)
         {
             int teleportLocationSelector = Random.Range(1, 5);
             if (teleportLocationSelector == 1)
@@ -196,6 +179,39 @@ public class AIBossController : MOMovementController
 
             }
             teleportTime = 10.0f;
+        }
+    }
+
+    private void AttackPlayer(int attackNumber)
+    {
+        Debug.Log("Attack player called");
+
+        //call the method on the controller script sending the required vars
+        if (attackNumber ==1)
+        {
+            Debug.Log("Called attack 1");
+            // Make sure AI is facing the right directions first
+            this.transform.LookAt(attackTarget.transform);
+            m_character.Move(Vector3.zero);
+            m_character.BossAttack(1);
+
+        }
+        else if (attackNumber == 2)
+        {
+            Debug.Log("Called attack 2");
+            // Make sure AI is facing the right directions first
+            this.transform.LookAt(attackTarget.transform);
+            m_character.Move(Vector3.zero);
+            m_character.BossAttack(2);
+
+        }
+        else if (attackNumber == 3)
+        {
+            Debug.Log("Called attack 3");
+            // Make sure AI is facing the right directions first
+            this.transform.LookAt(attackTarget.transform);
+            m_character.Move(Vector3.zero);
+            m_character.BossAttack(3);
         }
     }
 }

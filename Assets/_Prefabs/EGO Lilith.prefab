@@ -1713,14 +1713,14 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
   maxHealth: 0
-  mana: 0
+  mana: 50
   manaBars:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   manaText: {fileID: 0}
-  manaPerLevel: 4b000000190000001900000019000000
+  manaPerLevel: 32000000320000001900000019000000
   level: {fileID: 0}
   currentMagicLevel: 0
   livesUI: {fileID: 0}
@@ -1730,6 +1730,8 @@ MonoBehaviour:
     type: 2}
   playerLives: {fileID: 0}
   addMana: 0
+  damageIndicator: {fileID: 1287268865810298, guid: 6d46f6e1a38b0a74bb599a71d2968fc5,
+    type: 2}
   m_AudioClips:
   - {fileID: 8300000, guid: fe18081d090812e44b5564aa37471f11, type: 3}
 --- !u!114 &114710610018921092

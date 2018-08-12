@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Health : MonoBehaviour
     [SerializeField] private AudioClip[] m_AudioClips;
     private bool dead = false;
     private MOMovementController m_characterController;
+    [SerializeField] private GameObject damageIndicator; 
 
     // Use this for initialization
     void Awake()
@@ -33,6 +35,11 @@ public class Health : MonoBehaviour
         if (gameObject.tag == "Boss")
         {
             bossHealth -= damageTaken;
+            GameObject indicator = Instantiate(damageIndicator);
+            indicator.transform.position = this.transform.position;
+            indicator.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "" + damageTaken;
+            indicator.transform.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.yellow;
+
             //update UI health
             if (bossHealth <= 0 && !dead)
             {
@@ -55,6 +62,9 @@ public class Health : MonoBehaviour
             if (!m_characterController.knockedDownAnim)
             {
                 health -= damageTaken;
+                GameObject indicator = Instantiate(damageIndicator);
+                indicator.transform.position = this.transform.position;
+                indicator.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "" + damageTaken;
                 //update UI health
                 if (health <= 0 && !dead)
                 {

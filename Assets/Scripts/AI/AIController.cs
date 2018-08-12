@@ -23,8 +23,9 @@ public class AIController : MOMovementController
     public float radius = 5;
 
     public bool arrival;                    // Enable arrival behaviour
-    public float seekStrength = 1;          // Stength of seek behaviour
-    public float seperateStrength = 2;      // Stength of seperate behaviour
+    public float seekStrength = 1;          // Strength of seek behaviour
+    public float seperateStrength = 2;      // Strength of seperate behaviour
+    public float avoidStrength = 0.5f;         // Strength of avoid behaviour
     //[SerializeField] private float jumpHeight = 10.0f; //the height of the AI's jump
     private float hMov;
     private float vMov;
@@ -125,14 +126,17 @@ public class AIController : MOMovementController
         Vector3 seperate = Separate(aiList);
         Vector3 seek = Seek(moveTarget.transform.position);
         //Vector3 follow = Follow(flow);
+        Vector3 avoid = Avoid(moveTarget, attackTarget);
 
         seperate *= seperateStrength;
         seek *= seekStrength;
         //follow *= followStrength;
+        avoid *= avoidStrength;
 
         ApplyForce(seperate);
         ApplyForce(seek);
         //ApplyForce(follow);
+        ApplyForce(avoid);
     }
 
     // Seek with arriving
@@ -243,9 +247,57 @@ public class AIController : MOMovementController
         return aiList;
     }
 
+    private Vector3 Avoid(GameObject moveT, GameObject attackT)
+    {
+        Vector3 desired;
+        float xDifference = attackT.transform.position.x - transform.position.x;
+        float zDifference = attackT.transform.position.z - transform.position.z;
+        float distance = Vector3.Distance(attackT.transform.position, transform.position);
+        if ((moveT.name == "LeftSide" && xDifference > 0) || (moveT.name == "RightSide" && xDifference < 0))
+        {
+            if (zDifference > 0)
+                desired = Vector3.forward;
+            else
+                desired = Vector3.back;
+        }
+        else
+        {
+            desired = Vector3.zero;
+        }
+
+        float d = desired.magnitude;            // Distance is the magnitude of the vector pointing towards target
+        desired.Normalize();
+
+        if (d < SlowDownDistance)
+        {
+            float m = Map(d, SlowDownDistance, 0, 0, moveSpeed);     // Map magnitude, slow down if close.
+            desired *= m;
+        }
+        else
+        {
+            desired *= moveSpeed;
+        }
+
+        Vector3 steer = desired - velocity;     // Reynold's formula for steering force.
+        if (steer.magnitude > maxforce)
+        {
+            steer.Normalize();
+            steer *= maxforce;
+        }
+        steer.y = 0;
+
+        return steer;                           // Using our physics model and applying the force to the
+                                                // Object's acceleration.
+    }
+
     static float Map(float value, float min, float max, float minSpeed, float MaxSpeed)
     {
         return (value - min) * (MaxSpeed - minSpeed) / (max - min) + minSpeed;
+    }
+
+    static float InverseMap(float value, float min, float max, float minSpeed, float MaxSpeed)
+    {
+        return (value - max) * (minSpeed - MaxSpeed) / (min - max) + MaxSpeed;
     }
 
     // Angle between 2 vectors in degrees
