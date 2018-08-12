@@ -90,11 +90,13 @@ public class MOPlayerInputController : MOMovementController
         //call the method on the controller script sending the required vars
         if (sprinting && (hMov != 0 || vMov != 0))
         {
-            Player.GetComponent<MOMovementController>().Move(moveDirection, moveSpeed*1.5f);
+            moveDirection *= moveSpeed * 1.5f;
+            Player.GetComponent<MOMovementController>().Move(moveDirection);
         }
         else if (!sprinting && (hMov != 0 || vMov != 0))
         {
-            Player.GetComponent<MOMovementController>().Move(moveDirection, moveSpeed);
+            moveDirection *= moveSpeed;
+            Player.GetComponent<MOMovementController>().Move(moveDirection);
         }
     }
 }

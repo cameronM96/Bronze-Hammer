@@ -265,7 +265,7 @@ public class MOMovementController : MonoBehaviour
     }
 
     // method is called when needed from an input script
-    public void Move(Vector3 mov, float speed)
+    public void Move(Vector3 mov)
     {
         if (!attackingAnim && !freeze && !knockedDownAnim && !dead && !castingMagic && !charging)
         {
@@ -281,7 +281,7 @@ public class MOMovementController : MonoBehaviour
                 //scriptEntity.transform.parent.Translate(mov * speed * Time.deltaTime);
                 if (!inAir)
                 {
-                    m_Rigidbody.velocity = new Vector3(mov.x * speed, m_Rigidbody.velocity.y, mov.z * speed);
+                    m_Rigidbody.velocity = new Vector3(mov.x, m_Rigidbody.velocity.y, mov.z);
 
                     m_Audio.clip = m_AudioClips[0];
                     m_Audio.Play();

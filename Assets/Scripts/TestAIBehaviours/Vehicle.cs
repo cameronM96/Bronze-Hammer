@@ -18,7 +18,9 @@ public class Vehicle : MonoBehaviour {
     //public bool StayWithInView;
     public bool teleporter;
     public float seekStrength = 1;
+    public float fleeStrength = 1;
     public float seperateStrength = 1;
+    public float cohesionStrength = 1;
     public float followStrength = 1;
     private FlowField flow;
 
@@ -79,15 +81,21 @@ public class Vehicle : MonoBehaviour {
     private void ApplyBehaviours (List<Vehicle> vehicles)
     {
         Vector3 seperate = Separate(vehicles);
+        Vector3 cohesion = Cohesion(vehicles);
         Vector3 seek = Seek(target.transform.position);
+        Vector3 flee = Flee(target.transform.position);
         Vector3 follow = Follow(flow);
 
         seperate *= seperateStrength;
+        cohesion *= cohesionStrength;
         seek *= seekStrength;
+        flee *= fleeStrength;
         follow *= followStrength;
 
         ApplyForce(seperate);
+        ApplyForce(cohesion);
         ApplyForce(seek);
+        ApplyForce(flee);
         ApplyForce(follow);
     }
 
@@ -116,6 +124,28 @@ public class Vehicle : MonoBehaviour {
         {
             desired *= maxspeed;
         }
+
+        Vector3 steer = desired - velocity;  // Reynold's formula for steering force.
+        if (steer.magnitude > maxforce)
+        {
+            steer.Normalize();
+            steer *= maxforce;
+        }
+        steer.y = 0;
+
+        return steer;                           // Using our physics model and applying the force to the
+                                                // Object's acceleration.
+    }
+
+    // Flee
+    private Vector3 Flee(Vector3 target)
+    {
+        Vector3 desired = transform.position - target;
+
+        float d = desired.magnitude;        // Distance is the magnitude of the vector pointing towards target
+        desired.Normalize();
+        
+        desired *= maxspeed;
 
         Vector3 steer = desired - velocity;  // Reynold's formula for steering force.
         if (steer.magnitude > maxforce)
@@ -158,6 +188,47 @@ public class Vehicle : MonoBehaviour {
             if ((d > 0) && (d < desiredSeparation))
             {
                 Vector3 diff = transform.position - v.transform.position;
+                diff.Normalize();
+                diff /= d;
+                sum += diff;
+                count++;
+            }
+        }
+
+        if (count > 0)
+        {
+            sum /= count;
+            sum.Normalize();
+            sum *= maxspeed;
+
+            Vector3 steer = sum - velocity;
+
+            if (steer.magnitude > maxforce)
+            {
+                steer.Normalize();
+                steer *= maxforce;
+            }
+            steer.y = 0;
+            return steer;
+        }
+        else
+        {
+            return new Vector3(0, 0, 0);
+        }
+    }
+
+    // Move away from surrounding vehicles
+    private Vector3 Cohesion(List<Vehicle> vehicles)
+    {
+        float desiredSeparation = r * 2;
+        Vector3 sum = Vector3.zero;
+        int count = 0;
+        foreach (Vehicle v in vehicles)
+        {
+            float d = Vector3.Distance(transform.position, v.transform.position);
+            if ((d > 0) && (d < desiredSeparation))
+            {
+                Vector3 diff = v.transform.position -  transform.position;
                 diff.Normalize();
                 diff /= d;
                 sum += diff;

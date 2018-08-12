@@ -139,7 +139,7 @@ public class AIBossController : MOMovementController
         {
             // Make sure AI is facing the right directions first
             this.transform.LookAt(attackTarget.transform);
-            m_character.Move(Vector3.zero, moveSpeed);
+            m_character.Move(Vector3.zero);
             m_character.BossAttack(1);
             attack1Cooldown = 2.0f;
         }
@@ -147,7 +147,7 @@ public class AIBossController : MOMovementController
         {
             // Make sure AI is facing the right directions first
             this.transform.LookAt(attackTarget.transform);
-            m_character.Move(Vector3.zero, moveSpeed);
+            m_character.Move(Vector3.zero);
             m_character.BossAttack(2);
             attack2Cooldown = 10.0f;
         }
@@ -155,7 +155,7 @@ public class AIBossController : MOMovementController
         {
             // Make sure AI is facing the right directions first
             this.transform.LookAt(attackTarget.transform);
-            m_character.Move(Vector3.zero, moveSpeed);
+            m_character.Move(Vector3.zero);
             m_character.BossAttack(3);
             attack3Cooldown = 5.0f;
         }
@@ -163,7 +163,8 @@ public class AIBossController : MOMovementController
         {
             // Prevent movement if an AI is too close
             //if (!tooClose)
-            m_character.Move(moveDirection, moveSpeed);
+            moveDirection *= moveSpeed;
+            m_character.Move(moveDirection);
         }
 
         //use teleport ability
