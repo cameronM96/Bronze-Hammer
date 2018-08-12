@@ -12,7 +12,7 @@ public class FlowField : MonoBehaviour {
     public GameObject arrowPrefab;
     private float startingValue = 0;
     private bool initialised = false;
-    public bool updateoff;
+    public bool updateOn;
     public float updateArrows = 0.2f;
     float timer = 0;
 
@@ -28,7 +28,7 @@ public class FlowField : MonoBehaviour {
 
     private void Update()
     {
-        if (!updateoff)
+        if (updateOn)
         {
             timer += Time.deltaTime;
 

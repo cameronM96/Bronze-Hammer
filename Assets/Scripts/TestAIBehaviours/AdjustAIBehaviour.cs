@@ -10,6 +10,10 @@ public class AdjustAIBehaviour : MonoBehaviour {
     public Slider seperateStrength;
     public Slider cohesionStrength;
     public Slider followStrength;
+    public Button resetButton;
+    public bool viewArrows;
+    public bool moveArrows;
+    public bool randomizeBehaviour;
 
     private GameObject[] vehicles;
 
@@ -22,16 +26,28 @@ public class AdjustAIBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        UpdateVehiclesBehaviour(FindVehicles());
+        StartCoroutine(WaitTillEndOfFrame());
 	}
 	
+    IEnumerator WaitTillEndOfFrame()
+    {
+        yield return new WaitForEndOfFrame();
+        UpdateVehiclesBehaviour(FindVehicles());
+    }
+
 	// Update is called once per frame
 	void Update ()
     {
         timer += Time.deltaTime;
 
         if (timer >= updateTimer)
+        {
+            if (randomizeBehaviour)
+                RandomizeBehaviour();
+
             UpdateVehiclesBehaviour(FindVehicles());
+            flowField.GetComponent<FlowField>().updateOn = moveArrows;
+        }
 	}
 
     private GameObject[] FindVehicles ()
@@ -53,17 +69,51 @@ public class AdjustAIBehaviour : MonoBehaviour {
 
         if (followStrength.value == 0)
         {
-            foreach (Transform arrow in flowField.transform)
+            if (flowField.transform.GetChild(0).gameObject.activeSelf)
             {
-                arrow.gameObject.SetActive(false);
+                foreach (Transform arrow in flowField.transform)
+                {
+                    arrow.gameObject.SetActive(false);
+                }
+            }
+        }
+        else if (viewArrows)
+        {
+            if (!flowField.transform.GetChild(0).gameObject.activeSelf)
+            {
+                foreach (Transform arrow in flowField.transform)
+                {
+                    arrow.gameObject.SetActive(true);
+                }
             }
         }
         else
         {
-            foreach (Transform arrow in flowField.transform)
+            if (flowField.transform.GetChild(0).gameObject.activeSelf)
             {
-                arrow.gameObject.SetActive(true);
+                foreach (Transform arrow in flowField.transform)
+                {
+                    arrow.gameObject.SetActive(false);
+                }
             }
+        }
+    }
+
+    void RandomizeBehaviour()
+    {
+        seekStrength.value += Random.Range(-0.1f, 0.1f);
+        fleeStrength.value += Random.Range(-0.1f, 0.1f);
+        seperateStrength.value += Random.Range(-0.1f, 0.1f);
+        cohesionStrength.value += Random.Range(-0.1f, 0.1f);
+        followStrength.value += Random.Range(-0.1f, 0.1f);
+    }
+
+    public void RemoveVehicles()
+    {
+        GameObject[] vehicles = FindVehicles();
+        foreach(GameObject vehicle in vehicles)
+        {
+            Destroy(vehicle.transform.parent.gameObject);
         }
     }
 }

@@ -283,28 +283,28 @@ public class Vehicle : MonoBehaviour {
         if (transform.position.x < leftConstraint - buffer)     // Teleport Left to right;
         {
             rb.isKinematic = true;
-            transform.position = new Vector3(rightConstraint, 0, transform.position.z);
+            transform.position = new Vector3(rightConstraint, 0, transform.position.z * -1f);
             rb.isKinematic = false;
         }
 
         if (transform.position.x > rightConstraint + buffer)    // Teleport right to left;
         {
             rb.isKinematic = true;
-            transform.position = new Vector3(leftConstraint, 0, transform.position.z);
+            transform.position = new Vector3(leftConstraint, 0, transform.position.z * -1f);
             rb.isKinematic = false;
         }
 
         if (transform.position.z > topConstraint + buffer)      // Teleport Top to bottom;
         {
             rb.isKinematic = true;
-            transform.position = new Vector3(transform.position.x, 0, bottomConstraint);
+            transform.position = new Vector3(transform.position.x * -1f, 0, bottomConstraint);
             rb.isKinematic = false;
         }
 
         if (transform.position.z < bottomConstraint - buffer)   // Teleport bottom to top
         {
             rb.isKinematic = true;
-            transform.position = new Vector3(transform.position.x, 0, topConstraint);
+            transform.position = new Vector3(transform.position.x * -1f, 0, topConstraint);
             rb.isKinematic = false;
         }
     }
