@@ -43,6 +43,11 @@ public class MainMenu : MonoBehaviour {
         SceneManager.LoadScene(1);
     }
 
+    public void Credits()
+    {
+        SceneManager.LoadScene(9);
+    }
+
     public void QuitGame()
     {
         Application.Quit();
