@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1152,8 +1152,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -1360.1}
-  m_SizeDelta: {x: 0, y: 2720.2}
+  m_AnchoredPosition: {x: 0, y: -2074.5}
+  m_SizeDelta: {x: 0, y: 4149}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &820536581
 MonoBehaviour:
@@ -1199,7 +1199,14 @@ MonoBehaviour:
     FX - Cartoon Particles by Synty Studios\r\n\nVoxel - Dungeon Pack v 1.0 by 3D.RINA\r\n\nVoxel
     Series - Dungeon Set by GIGA_STEVE\r\n\nVoxel Effects - Lightning by Swift Games\r\n\nSimple
     Smoke Set by Enjoy Life\r\n\nTextMesh Pro by Unity Technologies\r\n\nSkybox Series
-    Free by Avionx\r\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\tThank you for playing!"
+    Free by Avionx\r\n\n\n~~Images Used~~\n\nSemiDeadForestFloorTexture - https://www.google.com.au/search?biw=1366&bih=673&tbm=isch&sa=1&ei=hDlwW6zdKIv-8gW994PwBA&q=dead+forest+floor+texture&oq=dead+forest+floor+texture&gs_l=img.3...2534.3736.0.3918.8.7.0.0.0.0.211.402.0j1j1.2.0....0...1c.1.64.img..6.1.191...0i30k1j0i8i30k1.0.5n2xkMPuz7E#imgdii=fl6ee1j2VhDvwM:&imgrc=cfYInKaLhBJa8M:\n\nForest
+    Floor Texture - https://www.deviantart.com/bouvs/art/forest-floor-texture-626901754\n\nStone
+    Forest Floor Texture - https://www.textures.com/system/gallery/photos/Floors/Regular/37026/FloorsRegular0181_1_download600.jpg\n\nPixel
+    Grass - https://dtkp6g0samjql.cloudfront.net/uploads/photo/file/12539923/gallery_hero_40a17d97-5aad-46b1-8a67-6778890fa19a.jpg\n\nWater
+    Texture - https://blueblots.com/wp-content/uploads/2010/09/40-water-texture.jpg\n\nBlank
+    Book - http://www.atmchurch.org/wp-content/uploads/2015/08/open-blank-book.png\n\nDead
+    Forest Floor Texture - http://s3.amazonaws.com/texturemax_th/terrain/forest-floor-terrain/forest-floor-terrain_0030_01_S_enl.jpg\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\t\t\t\t\tThank
+    you for playing!"
 --- !u!222 &820536582
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1547,7 +1554,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 424445766}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.12556256
+  m_Size: 0.08604283
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
