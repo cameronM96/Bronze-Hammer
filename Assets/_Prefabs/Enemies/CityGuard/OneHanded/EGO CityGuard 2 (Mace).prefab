@@ -1119,6 +1119,8 @@ MonoBehaviour:
   bossHealth: 0
   m_AudioClips:
   - {fileID: 8300000, guid: fe18081d090812e44b5564aa37471f11, type: 3}
+  damageIndicator: {fileID: 1287268865810298, guid: 6d46f6e1a38b0a74bb599a71d2968fc5,
+    type: 2}
 --- !u!114 &114291495104450074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1132,6 +1134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackTrigger:
   - {fileID: 64512548180807006}
+  chargeCollider: {fileID: 0}
   entityTurnSpeed: 10
   shadowPrefab: {fileID: 0}
   dead: 0
@@ -1141,6 +1144,9 @@ MonoBehaviour:
   hurtAnim: 0
   knockedDownAnim: 0
   castingMagic: 0
+  charging: 0
+  knockback: 0
+  knockbackDir: 0
   mounted: 0
   mount: {fileID: 0}
   m_GroundCheck: {fileID: 4648934340439566}
@@ -1161,6 +1167,13 @@ MonoBehaviour:
   moveTarget: {fileID: 0}
   attackTarget: {fileID: 0}
   moveSpeed: 3
+  r: 1.5
+  maxforce: 0.1
+  SlowDownDistance: 10
+  radius: 5
+  arrival: 0
+  seekStrength: 1
+  seperateStrength: 2
   sprinting: 0
   attackDistance: 3
   meleeAttackDistance: 0

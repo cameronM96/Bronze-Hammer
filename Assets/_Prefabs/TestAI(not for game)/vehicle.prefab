@@ -237,8 +237,9 @@ MonoBehaviour:
   seekStrength: 0
   fleeStrength: 0
   seperateStrength: 0
-  cohesionStrength: 2
-  followStrength: 1
+  cohesionStrength: 0
+  followStrength: 0
+  avoidStrength: 0
   leftConstraint: -80
   rightConstraint: 80
   topConstraint: 50
@@ -246,6 +247,8 @@ MonoBehaviour:
   buffer: 3
   distanceZ: 10
   distanceX: 10
+  moveTarget: {fileID: 0}
+  rightSide: 0
 --- !u!135 &135668567127354244
 SphereCollider:
   m_ObjectHideFlags: 1

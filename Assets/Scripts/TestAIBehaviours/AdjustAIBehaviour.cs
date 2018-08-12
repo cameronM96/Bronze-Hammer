@@ -10,6 +10,7 @@ public class AdjustAIBehaviour : MonoBehaviour {
     public Slider seperateStrength;
     public Slider cohesionStrength;
     public Slider followStrength;
+    public Slider avoidStrength;
     public Button resetButton;
     public bool viewArrows;
     public bool moveArrows;
@@ -65,6 +66,7 @@ public class AdjustAIBehaviour : MonoBehaviour {
             v.seperateStrength = seperateStrength.value;
             v.cohesionStrength = cohesionStrength.value;
             v.followStrength = followStrength.value;
+            v.avoidStrength = avoidStrength.value;
         }
 
         if (followStrength.value == 0)
@@ -106,6 +108,7 @@ public class AdjustAIBehaviour : MonoBehaviour {
         seperateStrength.value += Random.Range(-0.1f, 0.1f);
         cohesionStrength.value += Random.Range(-0.1f, 0.1f);
         followStrength.value += Random.Range(-0.1f, 0.1f);
+        avoidStrength.value += Random.Range(-0.1f, 0.1f);
     }
 
     public void RemoveVehicles()

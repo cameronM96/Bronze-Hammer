@@ -5,9 +5,9 @@ using UnityEngine;
 public class Vehicle : MonoBehaviour {
 
     //Vector3 location;
-    Rigidbody rb;
-    Vector3 velocity;
-    Vector3 acceleration;
+    private Rigidbody rb;
+    private Vector3 velocity;
+    private Vector3 acceleration;
     public float r = 1.5f;
     public float maxspeed = 4;
     public float maxforce = 0.1f;
@@ -17,11 +17,12 @@ public class Vehicle : MonoBehaviour {
     public bool arrival;
     //public bool StayWithInView;
     public bool teleporter;
-    public float seekStrength = 1;
-    public float fleeStrength = 1;
-    public float seperateStrength = 1;
-    public float cohesionStrength = 1;
-    public float followStrength = 1;
+    public float seekStrength = 0;
+    public float fleeStrength = 0;
+    public float seperateStrength = 0;
+    public float cohesionStrength = 0;
+    public float followStrength = 0;
+    public float avoidStrength = 0f;         // Strength of avoid behaviour
     private FlowField flow;
 
     int mask = 1 << 11;            // https://docs.unity3d.com/Manual/Layers.html
@@ -34,14 +35,32 @@ public class Vehicle : MonoBehaviour {
     public float distanceZ = 10.0f;
     public float distanceX = 10.0f;
 
-    GameObject target;
+    private GameObject attackTarget;
+    [SerializeField] private GameObject moveTarget;
+    [HideInInspector] public bool rightSide;
 
 	// Use this for initialization
 	void Awake ()
     {
         rb = GetComponent<Rigidbody>();
-        target = GameObject.FindGameObjectWithTag("MousePoint");
+        attackTarget = GameObject.FindGameObjectWithTag("MousePoint");
         flow = GameObject.FindGameObjectWithTag("FlowField").GetComponent<FlowField>();
+
+        if (rightSide)
+        {
+            moveTarget = attackTarget.transform.GetChild(2).gameObject;
+        }
+        else
+        {
+            moveTarget = attackTarget.transform.GetChild(1).gameObject;
+        }
+
+        seekStrength = 0f;
+        fleeStrength = 0f;
+        seperateStrength = 0f;
+        cohesionStrength = 0f;
+        followStrength = 0f;
+        avoidStrength = 0f;
 
         //// using a specific distance
         //leftConstraint = Camera.main.ScreenToWorldPoint(new Vector3(0.0f, 0.0f, distanceZ)).x;
@@ -82,21 +101,29 @@ public class Vehicle : MonoBehaviour {
     {
         Vector3 seperate = Separate(vehicles);
         Vector3 cohesion = Cohesion(vehicles);
-        Vector3 seek = Seek(target.transform.position);
-        Vector3 flee = Flee(target.transform.position);
+        Vector3 seek = Seek(moveTarget.transform.position);
+        Vector3 flee = Flee(attackTarget.transform.position);
         Vector3 follow = Follow(flow);
+        Vector3 avoid = Avoid(moveTarget,attackTarget);
 
         seperate *= seperateStrength;
         cohesion *= cohesionStrength;
         seek *= seekStrength;
         flee *= fleeStrength;
         follow *= followStrength;
+        avoid *= avoidStrength;
 
         ApplyForce(seperate);
         ApplyForce(cohesion);
         ApplyForce(seek);
         ApplyForce(flee);
         ApplyForce(follow);
+        ApplyForce(avoid);
+    }
+
+    void ApplyForce(Vector3 force)
+    {
+        acceleration += force;
     }
 
     // Seek with arriving
@@ -133,6 +160,7 @@ public class Vehicle : MonoBehaviour {
         }
         steer.y = 0;
 
+        //Debug.Log("Seek: " + steer);
         return steer;                           // Using our physics model and applying the force to the
                                                 // Object's acceleration.
     }
@@ -273,9 +301,57 @@ public class Vehicle : MonoBehaviour {
         return steer;
     }
 
-    void ApplyForce(Vector3 force)
+    private Vector3 Avoid(GameObject moveT, GameObject attackT)
     {
-        acceleration += force;
+        Vector3 desired = Vector3.zero;
+        float xDifference = attackT.transform.position.x - transform.position.x;
+        //Debug.Log(xDifference);
+        float zDifference = attackT.transform.position.z - transform.position.z;
+        float zDistance = Mathf.Abs(attackT.transform.position.z - transform.position.z);
+        //Debug.Log(zDifference);
+        if ((moveT.name == "LeftSide" && xDifference < 0) || (moveT.name == "RightSide" && xDifference > 0))
+        {
+            if (zDistance < SlowDownDistance)
+            {
+                if (zDifference > 0)
+                    desired = Vector3.forward;
+                else
+                    desired = Vector3.back;
+
+                desired.Normalize();
+                
+                float value = 0;
+                if (zDistance != 0)
+                    value = SlowDownDistance / zDistance;
+                else
+                    value = SlowDownDistance / 0.001f;
+
+                float m = Map(value, 0, SlowDownDistance, 0, maxspeed);     // Map magnitude, slow down if close.
+                //Debug.Log(m);
+                desired *= m *-1;
+            }
+        }
+
+        Debug.Log("Avoid desired: " + desired);
+
+        if (desired != Vector3.zero)
+        {
+            Vector3 steer = desired - velocity;     // Reynold's formula for steering force.
+            if (steer.magnitude > maxforce)
+            {
+                steer.Normalize();
+                steer *= maxforce;
+            }
+            steer.y = 0;
+
+            Debug.Log("Avoid Steering: " + steer);
+            return steer;                           // Using our physics model and applying the force to the
+                                                    // Object's acceleration.
+        }
+        else
+        {
+            return Vector3.zero;
+        }
     }
 
     private void Teleport()
@@ -312,5 +388,10 @@ public class Vehicle : MonoBehaviour {
     static float Map (float value, float min, float max, float minSpeed, float MaxSpeed)
     {
         return (value - min) * (MaxSpeed - minSpeed) / (max - min) + minSpeed;
+    }
+
+    static float InverseMap(float value, float min, float max, float minSpeed, float MaxSpeed)
+    {
+        return minSpeed + (value - min) * (MaxSpeed - minSpeed) / (max - min);
     }
 }

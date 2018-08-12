@@ -54,12 +54,12 @@ public class MOPlayerInputController : MOMovementController
             Player.GetComponent<MOMovementController>().Magic();
         }
 
-        if (Input.GetKeyDown("left shift"))
+        if (Input.GetButtonDown("Sprint Button"))
         {
             sprinting = true;
             //Debug.Log("Sprinting");
         }
-        if (Input.GetKeyUp("left shift"))
+        if (Input.GetButtonUp("Sprint Button"))
         {
             sprinting = false;
             //Debug.Log("not sprinting");

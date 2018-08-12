@@ -7,6 +7,8 @@ public class MouseToScene : MonoBehaviour {
 
     public GameObject vehicle;
     private Vector3 mousePosition;
+    private bool rightside = false;
+    public bool onButtonDown;
 
 	// Update is called once per frame
 	void Update ()
@@ -27,14 +29,30 @@ public class MouseToScene : MonoBehaviour {
 
         this.transform.position = mousePosition;
 
-        if (Input.GetMouseButton(0) && hitFloor)
-            SpawnVehicle();
+        if (onButtonDown)
+        {
+            if (Input.GetMouseButtonDown(0) && hitFloor)
+            {
+                rightside = !rightside;
+                SpawnVehicle(rightside);
+            }
+        }
+        else
+        {
+            if (Input.GetMouseButton(0) && hitFloor)
+            {
+                rightside = !rightside;
+                SpawnVehicle(rightside);
+            }
+        }
 	}
 
-    void SpawnVehicle ()
+    void SpawnVehicle (bool rightSide)
     {
         GameObject newVehicle = Instantiate(vehicle, this.transform);
         newVehicle.transform.parent = null;
         newVehicle.transform.localScale = new Vector3(1, 1, 1);
+        //Debug.Log(rightSide);
+        newVehicle.GetComponent<Vehicle>().rightSide = rightSide;
     }
 }
