@@ -11,7 +11,12 @@ ModelImporter:
     2300000: fence2
     3300000: fence2
     4300000: fence2
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: fence2Mat
+    second: {fileID: 2100000, guid: d61e928c1e0535a43b92021d72ab8107, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
