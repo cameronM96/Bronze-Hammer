@@ -430,6 +430,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1720638174705856
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4005298520511136}
+  - component: {fileID: 136679961375770578}
+  - component: {fileID: 114189009908015584}
+  m_Layer: 0
+  m_Name: ChargeAttack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1785523830282852
 GameObject:
   m_ObjectHideFlags: 1
@@ -535,6 +552,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4005298520511136
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1720638174705856}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.44369966, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4852997383153492}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4031147839306670
 Transform:
   m_ObjectHideFlags: 1
@@ -929,7 +959,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1684925915496592}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -69.087, y: 0, z: 0.55}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 4852997383153492}
@@ -951,6 +981,7 @@ Transform:
   - {fileID: 4336792954005846}
   - {fileID: 4204963071101602}
   - {fileID: 4130725401266840}
+  - {fileID: 4005298520511136}
   m_Father: {fileID: 4843558499221920}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -1230,6 +1261,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114189009908015584
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1720638174705856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e98675305f01e5043813724c5b162f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 15
+  playerWeapon: 1
+  parentObject: {fileID: 0}
 --- !u!114 &114443134018894166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1261,6 +1306,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackTrigger:
   - {fileID: 64663247494701128}
+  chargeCollider: {fileID: 136679961375770578}
   entityTurnSpeed: 10
   shadowPrefab: {fileID: 1337607973668736, guid: 6b2479d4aaf2633438f4dfa5776e19ae,
     type: 2}
@@ -1271,6 +1317,9 @@ MonoBehaviour:
   hurtAnim: 0
   knockedDownAnim: 0
   castingMagic: 0
+  charging: 0
+  knockback: 0
+  knockbackDir: 0
   mounted: 0
   mount: {fileID: 0}
   m_GroundCheck: {fileID: 4843558499221920}
@@ -1361,10 +1410,23 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.1
+  m_Radius: 0.05
   m_Height: 0.5
   m_Direction: 1
   m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!136 &136679961375770578
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1720638174705856}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.1
+  m_Height: 0.35
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.25, z: 0.08}
 --- !u!137 &137769602057241148
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

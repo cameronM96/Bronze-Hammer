@@ -8,6 +8,7 @@ public class Encounter_Manager : MonoBehaviour {
 
     public static Encounter_Manager Instance = null;
     public static Camera_Follow camera_Instance;
+    public bool debugMode = false;
 
     public Transform rightSpawnPoint;
     public Transform leftSpawnPoint;
@@ -51,7 +52,8 @@ public class Encounter_Manager : MonoBehaviour {
             if (CheckForEnemies() == 0 && m_EncountersList[encounterIndex].waves.Length > 
                 m_EncountersList[encounterIndex].waveNumber) // -1 from length?
             {
-                DebugEncounters();
+                if (debugMode)
+                    DebugEncounters();
                 // Begin wave by spawning enemies
                 int z1 = 0;
                 int z2 = 0;

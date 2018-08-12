@@ -31,10 +31,12 @@ public class PlayerHealth : MonoBehaviour {
 
     private AudioSource m_Audio;
     [SerializeField] private AudioClip[] m_AudioClips;
+    private MOMovementController m_characterController;
 
     // Use this for initialization
     void Awake()
     {
+        m_characterController = GetComponent<MOMovementController>();
         characterNameUI.text = characterName;
         // Default Health
         maxHealth = health;
@@ -79,7 +81,7 @@ public class PlayerHealth : MonoBehaviour {
 
     public void TakeDamage(int damageTaken, bool knockedDown, float dir)
     {
-        if (health > 0 && !m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
+        if (health > 0 && !m_characterController.knockedDownAnim)
         {
             health -= damageTaken;
             if (health < 0)
@@ -93,7 +95,7 @@ public class PlayerHealth : MonoBehaviour {
                 dead = true;
                 playerLives.LoseLife();
                 livesUI.text = ("" + playerLives.lives);
-                GetComponent<MOMovementController>().Death();
+                m_characterController.Death();
 
                 if (playerLives.lives <= 0)
                 {
@@ -120,7 +122,9 @@ public class PlayerHealth : MonoBehaviour {
             }
             else if (knockedDown && health > 0)
             {
-                GetComponent<MOMovementController>().KnockBack(dir);
+                m_characterController.knockedDownAnim = true;
+                m_characterController.knockback = true;
+                m_characterController.knockbackDir = dir;
             }
         }
     }

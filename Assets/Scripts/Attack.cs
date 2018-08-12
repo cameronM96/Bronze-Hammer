@@ -9,7 +9,6 @@ public class Attack : MonoBehaviour
     public bool playerWeapon;
     [SerializeField] private bool crag = false;
     [SerializeField] private GameObject parentObject;
-    private Animator m_Anim;
     public bool attack3 = false;
     public bool attack2 = false;
 
@@ -24,7 +23,6 @@ public class Attack : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         parentObject = this.transform.root.GetChild(0).gameObject;
-        m_Anim = parentObject.GetComponent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,7 +35,7 @@ public class Attack : MonoBehaviour
                 if (attack3)
                 {
                     float dir = 0;
-                    if (other.transform.position.x > transform.parent.position.x)
+                    if (other.transform.position.x > parentObject.transform.position.x)
                     {
                         dir = 1;
                     }
@@ -46,10 +44,16 @@ public class Attack : MonoBehaviour
                         dir = -1;
                     }
 
+                    //Debug.Log("Dir = " + dir);
                     if (crag)
+                    {
                         other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier * 2, true, dir);
+                    }
                     else
+                    {
                         other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier, true, dir);
+                    }
+                    //Debug.Log("Target should have been knocked back");
                 }
                 else if (crag && attack2)
                 {
@@ -71,11 +75,10 @@ public class Attack : MonoBehaviour
         {
             if (other.gameObject.GetComponent<PlayerHealth>() && other.gameObject.tag == "Player")
             {
-                if (m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Attack3 (KNOCKBACK)") ||
-                    m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Dash Attack"))
+                if (attack3)
                 {
                     float dir = 0;
-                    if (other.transform.position.x > transform.parent.position.x)
+                    if (other.transform.position.x > parentObject.transform.position.x)
                     {
                         dir = 1;
                     }
@@ -85,6 +88,7 @@ public class Attack : MonoBehaviour
                     }
                     other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage * comboMultiplier, true, dir);
                     GetComponent<Collider>().enabled = false;
+                    Debug.Log("Target should have been knocked back");
                 }
                 else
                 {

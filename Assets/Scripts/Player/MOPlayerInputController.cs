@@ -14,7 +14,7 @@ public class MOPlayerInputController : MOMovementController
     private Transform gameCamera; // the transform of the main game camera
     private Vector3 gameCameraForward; //the forward vector of the main game camera
     private Vector3 moveDirection; // the direction the player will be moved in
-    [SerializeField] private float moveSpeed = 7.0f; //the speed the player will move
+    public float moveSpeed = 7.0f; //the speed the player will move
     [SerializeField] private float jumpHeight = 10f; //the height of the players jump
     private float hMov;
     private float vMov;
@@ -90,11 +90,13 @@ public class MOPlayerInputController : MOMovementController
         //call the method on the controller script sending the required vars
         if (sprinting && (hMov != 0 || vMov != 0))
         {
-            Player.GetComponent<MOMovementController>().Move(moveDirection, moveSpeed*1.5f);
+            moveDirection *= moveSpeed * 1.5f;
+            Player.GetComponent<MOMovementController>().Move(moveDirection);
         }
         else if (!sprinting && (hMov != 0 || vMov != 0))
         {
-            Player.GetComponent<MOMovementController>().Move(moveDirection, moveSpeed);
+            moveDirection *= moveSpeed;
+            Player.GetComponent<MOMovementController>().Move(moveDirection);
         }
     }
 }

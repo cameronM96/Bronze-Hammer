@@ -10,10 +10,12 @@ public class Health : MonoBehaviour
     private AudioSource m_Audio;
     [SerializeField] private AudioClip[] m_AudioClips;
     private bool dead = false;
+    private MOMovementController m_characterController;
 
     // Use this for initialization
     void Awake()
     {
+        m_characterController = GetComponent<MOMovementController>();
         if (gameObject.tag == "Boss")
         {
             bossHealth = 250;
@@ -43,13 +45,14 @@ public class Health : MonoBehaviour
             {
                 //Debug.Log(gameObject.name + " took " + damageTaken + " damage, Leaving them at " + health + " health");
                 m_Anim.SetBool("hurt", true);
+                GetComponent<MOMovementController>().hurtAnim = true;
                 m_Audio.clip = m_AudioClips[0];
                 m_Audio.Play();
             }
         }
         else
         {
-            if (!m_Anim.GetCurrentAnimatorStateInfo(0).IsName("Get Up"))
+            if (!m_characterController.knockedDownAnim)
             {
                 health -= damageTaken;
                 //update UI health
@@ -57,22 +60,25 @@ public class Health : MonoBehaviour
                 {
                     //Debug.Log(gameObject.name + " has died");
                     dead = true;
-                    GetComponent<MOMovementController>().Death();
+                    m_characterController.Death();
                     //go to game over screen or back to menu?
                 }
                 else if (!knockBack && health > 0)
                 {
                     //Debug.Log(gameObject.name + " took " + damageTaken + " damage, Leaving them at " + health + " health");
                     m_Anim.SetBool("hurt", true);
+                    GetComponent<MOMovementController>().hurtAnim = true;
                     m_Audio.clip = m_AudioClips[0];
                     m_Audio.Play();
                 }
                 else if (knockBack && health > 0)
                 {
-                    GetComponent<MOMovementController>().KnockBack(dir);
+                    //Debug.Log("Knocking back target");
+                    m_characterController.knockedDownAnim = true;
+                    m_characterController.knockback = true;
+                    m_characterController.knockbackDir = dir;
                 }
             }
         }
-
     }
 }
