@@ -9,6 +9,7 @@ public class Magic : MonoBehaviour {
     [SerializeField] private float[] magicLevelMulitplier;
     [SerializeField] private GameObject[] magicVisuals;
     private GameObject magicEffect;
+    public CameraShake cameraShake;
 
     public void CastMagic (GameObject caster, float magicDamage, int magicLevel, PlayerCharacters player)
     {
@@ -94,6 +95,7 @@ public class Magic : MonoBehaviour {
                 magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
                 magicEffect.transform.parent = null;
                 magicEffect.transform.position = CameraToGround(caster);
+                StartCoroutine(cameraShake.Shake(3f, .4f));
                 break;
             default:
                 break;
@@ -129,6 +131,7 @@ public class Magic : MonoBehaviour {
                 magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
                 magicEffect.transform.parent = null;
                 magicEffect.transform.position = CameraToGround(caster);
+                StartCoroutine(cameraShake.Shake(3f, .4f));
                 break;
             default:
                 break;
@@ -149,6 +152,7 @@ public class Magic : MonoBehaviour {
                 // Crete Level 1 spell visuals (on Player)
                 magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
                 magicEffect.transform.parent = null;
+                StartCoroutine(cameraShake.Shake(3f, .4f));
                 break;
             default:
                 break;
