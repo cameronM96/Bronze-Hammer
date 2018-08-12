@@ -34,6 +34,7 @@ public class Vehicle : MonoBehaviour {
     public float buffer = 1.0f; // set this so the spaceship disappears offscreen before re-appearing on other side
     public float distanceZ = 10.0f;
     public float distanceX = 10.0f;
+    public float angleOfApproach = 30;
 
     private GameObject attackTarget;
     [SerializeField] private GameObject moveTarget;
@@ -46,6 +47,24 @@ public class Vehicle : MonoBehaviour {
         attackTarget = GameObject.FindGameObjectWithTag("MousePoint");
         flow = GameObject.FindGameObjectWithTag("FlowField").GetComponent<FlowField>();
 
+        seekStrength = 0f;
+        fleeStrength = 0f;
+        seperateStrength = 0f;
+        cohesionStrength = 0f;
+        followStrength = 0f;
+        avoidStrength = 0f;
+
+        StartCoroutine(WaitTillEndOfFrame());
+        //// using a specific distance
+        //leftConstraint = Camera.main.ScreenToWorldPoint(new Vector3(0.0f, 0.0f, distanceZ)).x;
+        //rightConstraint = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0.0f, distanceZ)).x;
+        //topConstraint = Camera.main.ScreenToWorldPoint(new Vector3(distanceX, 0.0f, 0.0f)).z;
+        //bottomConstraint = Camera.main.ScreenToWorldPoint(new Vector3(distanceX, 0.0f, Screen.height)).x;
+    }
+
+    IEnumerator WaitTillEndOfFrame ()
+    {
+        yield return new WaitForEndOfFrame();
         if (rightSide)
         {
             moveTarget = attackTarget.transform.GetChild(2).gameObject;
@@ -54,19 +73,6 @@ public class Vehicle : MonoBehaviour {
         {
             moveTarget = attackTarget.transform.GetChild(1).gameObject;
         }
-
-        seekStrength = 0f;
-        fleeStrength = 0f;
-        seperateStrength = 0f;
-        cohesionStrength = 0f;
-        followStrength = 0f;
-        avoidStrength = 0f;
-
-        //// using a specific distance
-        //leftConstraint = Camera.main.ScreenToWorldPoint(new Vector3(0.0f, 0.0f, distanceZ)).x;
-        //rightConstraint = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0.0f, distanceZ)).x;
-        //topConstraint = Camera.main.ScreenToWorldPoint(new Vector3(distanceX, 0.0f, 0.0f)).z;
-        //bottomConstraint = Camera.main.ScreenToWorldPoint(new Vector3(distanceX, 0.0f, Screen.height)).x;
     }
 
     private void Update()
@@ -126,7 +132,7 @@ public class Vehicle : MonoBehaviour {
         acceleration += force;
     }
 
-    // Seek with arriving
+    // Seek target with arriving
     private Vector3 Seek(Vector3 target)
     {
         Vector3 desired = target - transform.position;
@@ -165,7 +171,7 @@ public class Vehicle : MonoBehaviour {
                                                 // Object's acceleration.
     }
 
-    // Flee
+    // Flee from target
     private Vector3 Flee(Vector3 target)
     {
         Vector3 desired = transform.position - target;
@@ -245,7 +251,7 @@ public class Vehicle : MonoBehaviour {
         }
     }
 
-    // Move away from surrounding vehicles
+    // Clump together with surrounding vehicles
     private Vector3 Cohesion(List<Vehicle> vehicles)
     {
         float desiredSeparation = r * 2;
@@ -304,35 +310,39 @@ public class Vehicle : MonoBehaviour {
     private Vector3 Avoid(GameObject moveT, GameObject attackT)
     {
         Vector3 desired = Vector3.zero;
-        float xDifference = attackT.transform.position.x - transform.position.x;
+        float xDifference = attackT.transform.position.x - transform.position.x;                // Used to determine which side of the target the vehicle is on in the z axis.
         //Debug.Log(xDifference);
-        float zDifference = attackT.transform.position.z - transform.position.z;
-        float zDistance = Mathf.Abs(attackT.transform.position.z - transform.position.z);
+        float zDifference = attackT.transform.position.z - transform.position.z;                // Used to determine which side of the target the vehicle is on in the z axis.
+        float zDistance = Mathf.Abs(attackT.transform.position.z - transform.position.z);       // Used to determine how far away from the target the vehicle is but only use the z axis.
         //Debug.Log(zDifference);
-        if ((moveT.name == "LeftSide" && xDifference < 0) || (moveT.name == "RightSide" && xDifference > 0))
+        Vector3 dir = transform.position - attackT.transform.position;
+        Vector3 origin = attackT.transform.right;
+        float rightSideAngle = Mathf.Abs(Vector3.Angle(origin,dir));        // Checks if vehicle is 45degrees from right vector of target.
+        float leftSideAngle = Mathf.Abs(Vector3.Angle(-origin, dir));       // Checks if vehicle is 45degrees from left vector of target.
+
+        if ((moveT.name == "LeftSide" && xDifference < 0 && rightSideAngle < angleOfApproach) ||
+            (moveT.name == "RightSide" && xDifference > 0 && leftSideAngle < angleOfApproach))
         {
-            if (zDistance < SlowDownDistance)
-            {
-                if (zDifference > 0)
-                    desired = Vector3.forward;
-                else
-                    desired = Vector3.back;
+            if (zDifference > 0)
+                desired = Vector3.forward;
+            else
+                desired = Vector3.back;
 
-                desired.Normalize();
-                
-                float value = 0;
-                if (zDistance != 0)
-                    value = SlowDownDistance / zDistance;
-                else
-                    value = SlowDownDistance / 0.001f;
+            desired.Normalize();
 
-                float m = Map(value, 0, SlowDownDistance, 0, maxspeed);     // Map magnitude, slow down if close.
-                //Debug.Log(m);
-                desired *= m *-1;
-            }
+            float value = 0;
+            if (zDistance != 0)
+                value = SlowDownDistance / zDistance;
+            else
+                value = SlowDownDistance / 0.001f;
+
+            float m = Map(value, 0, SlowDownDistance, 0, maxspeed);     // Map magnitude, slow down if close.
+                                                                        // Debug.Log(m);
+            desired *= m * -1;
+
         }
 
-        Debug.Log("Avoid desired: " + desired);
+        //Debug.Log("Avoid desired: " + desired);
 
         if (desired != Vector3.zero)
         {
@@ -344,7 +354,7 @@ public class Vehicle : MonoBehaviour {
             }
             steer.y = 0;
 
-            Debug.Log("Avoid Steering: " + steer);
+            //Debug.Log("Avoid Steering: " + steer);
             return steer;                           // Using our physics model and applying the force to the
                                                     // Object's acceleration.
         }

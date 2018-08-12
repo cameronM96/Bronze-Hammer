@@ -25,13 +25,14 @@ public class AIController : MOMovementController
     public bool arrival;                    // Enable arrival behaviour
     public float seekStrength = 1;          // Strength of seek behaviour
     public float seperateStrength = 2;      // Strength of seperate behaviour
-    public float avoidStrength = 0.5f;         // Strength of avoid behaviour
+    public float avoidStrength = 1.5f;         // Strength of avoid behaviour
     //[SerializeField] private float jumpHeight = 10.0f; //the height of the AI's jump
     private float hMov;
     private float vMov;
     //private bool jump;
     private bool attack;
     //private bool tooClose;
+    public float angleOfApproach = 30;
 
     public bool sprinting;
     public float attackDistance = 3;
@@ -249,45 +250,59 @@ public class AIController : MOMovementController
 
     private Vector3 Avoid(GameObject moveT, GameObject attackT)
     {
-        Vector3 desired;
-        float xDifference = attackT.transform.position.x - transform.position.x;
-        float zDifference = attackT.transform.position.z - transform.position.z;
-        float distance = Vector3.Distance(attackT.transform.position, transform.position);
-        if ((moveT.name == "LeftSide" && xDifference > 0) || (moveT.name == "RightSide" && xDifference < 0))
+        Vector3 desired = Vector3.zero;
+        float xDifference = attackT.transform.position.x - transform.position.x;                // Used to determine which side of the target the vehicle is on in the z axis.
+        //Debug.Log(xDifference);
+        float zDifference = attackT.transform.position.z - transform.position.z;                // Used to determine which side of the target the vehicle is on in the z axis.
+        float zDistance = Mathf.Abs(attackT.transform.position.z - transform.position.z);       // Used to determine how far away from the target the vehicle is but only use the z axis.
+        //Debug.Log(zDifference);
+        Vector3 dir = transform.position - attackT.transform.position;
+        Vector3 origin = attackT.transform.right;
+        float rightSideAngle = Mathf.Abs(Vector3.Angle(origin, dir));        // Checks if vehicle is 45degrees from right vector of target.
+        float leftSideAngle = Mathf.Abs(Vector3.Angle(-origin, dir));       // Checks if vehicle is 45degrees from left vector of target.
+
+        if ((moveT.name == "LeftSide" && xDifference < 0 && rightSideAngle < angleOfApproach) ||
+            (moveT.name == "RightSide" && xDifference > 0 && leftSideAngle < angleOfApproach))
         {
             if (zDifference > 0)
                 desired = Vector3.forward;
             else
                 desired = Vector3.back;
+
+            desired.Normalize();
+
+            float value = 0;
+            if (zDistance != 0)
+                value = SlowDownDistance / zDistance;
+            else
+                value = SlowDownDistance / 0.001f;
+
+            float m = Map(value, 0, SlowDownDistance, 0, moveSpeed/2);     // Map magnitude, slow down if close.
+                                                                        // Debug.Log(m);
+            desired *= m * -1;
+
+        }
+
+        //Debug.Log("Avoid desired: " + desired);
+
+        if (desired != Vector3.zero)
+        {
+            Vector3 steer = desired - velocity;     // Reynold's formula for steering force.
+            if (steer.magnitude > maxforce)
+            {
+                steer.Normalize();
+                steer *= maxforce;
+            }
+            steer.y = 0;
+
+            //Debug.Log("Avoid Steering: " + steer);
+            return steer;                           // Using our physics model and applying the force to the
+                                                    // Object's acceleration.
         }
         else
         {
-            desired = Vector3.zero;
+            return Vector3.zero;
         }
-
-        float d = desired.magnitude;            // Distance is the magnitude of the vector pointing towards target
-        desired.Normalize();
-
-        if (d < SlowDownDistance)
-        {
-            float m = Map(d, SlowDownDistance, 0, 0, moveSpeed);     // Map magnitude, slow down if close.
-            desired *= m;
-        }
-        else
-        {
-            desired *= moveSpeed;
-        }
-
-        Vector3 steer = desired - velocity;     // Reynold's formula for steering force.
-        if (steer.magnitude > maxforce)
-        {
-            steer.Normalize();
-            steer *= maxforce;
-        }
-        steer.y = 0;
-
-        return steer;                           // Using our physics model and applying the force to the
-                                                // Object's acceleration.
     }
 
     static float Map(float value, float min, float max, float minSpeed, float MaxSpeed)

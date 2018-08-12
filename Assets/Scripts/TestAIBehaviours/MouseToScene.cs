@@ -52,7 +52,7 @@ public class MouseToScene : MonoBehaviour {
         GameObject newVehicle = Instantiate(vehicle, this.transform);
         newVehicle.transform.parent = null;
         newVehicle.transform.localScale = new Vector3(1, 1, 1);
-        //Debug.Log(rightSide);
+        Debug.Log(rightSide);
         newVehicle.GetComponent<Vehicle>().rightSide = rightSide;
     }
 }
