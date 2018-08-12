@@ -60,6 +60,7 @@ public class FlowField : MonoBehaviour {
                 if (!initialised)
                 {
                     arrow = Instantiate(arrowPrefab);
+                    arrow.transform.parent = this.transform;
                 }
                 else
                 {

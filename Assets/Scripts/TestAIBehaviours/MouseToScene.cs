@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MouseToScene : MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class MouseToScene : MonoBehaviour {
     {
         int mask = 1 << 11;            // https://docs.unity3d.com/Manual/Layers.html
         mask = ~mask;
+        bool hitFloor = false;
 
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -19,11 +21,13 @@ public class MouseToScene : MonoBehaviour {
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
         {
             mousePosition = hit.point;
+            if (!EventSystem.current.IsPointerOverGameObject())
+                hitFloor = true;
         }
 
         this.transform.position = mousePosition;
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && hitFloor)
             SpawnVehicle();
 	}
 
