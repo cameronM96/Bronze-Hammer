@@ -440,6 +440,7 @@ public class MOMovementController : MonoBehaviour
 
     public void BossAttack(int attackNumber)
     {
+        Debug.Log("Boss Attack Called with attack "+ attackNumber);
         if (!hurtAnim && !freeze && !knockedDownAnim && !dead && !castingMagic)
         {
             // Debug.Log(scriptEntity.name + " attacking");
