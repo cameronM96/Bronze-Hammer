@@ -65,10 +65,7 @@ public class MOPlayerInputController : MOMovementController
             //Debug.Log("not sprinting");
         }
 
-        if (Input.GetButtonDown("Dismount Button"))
-        {
-            DisMount();
-        }
+        
     }
 
     //called once per physics update
@@ -81,6 +78,12 @@ public class MOPlayerInputController : MOMovementController
             // make player jump
             //Debug.Log("jump key pressed");
             Player.GetComponent<MOMovementController>().Jump(jumpHeight);
+        }
+
+        if (Input.GetButtonDown("Dismount Button"))
+        {
+            DisMount();
+            Player.GetComponent<MOMovementController>().Jump(jumpHeight/2);
         }
 
         //get the input for horizontal and vertical axis through unity controls

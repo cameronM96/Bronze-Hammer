@@ -107,6 +107,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114454902577298940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,6 +128,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114501012175934166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,6 +149,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114619222118386066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,6 +170,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114764654111447678
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,6 +191,7 @@ MonoBehaviour:
   attack2: 1
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114853402667059350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,6 +212,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114861704136776494
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,6 +233,7 @@ MonoBehaviour:
   attack2: 0
   charge: 1
   mount: 0
+  boss: 0
 --- !u!114 &114991070298773958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,6 +254,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!1101 &1101002791777227454
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1168,6 +1176,30 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &1101995342274941882
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: mounted
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 1102416947773093926}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.9578652
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &1102005221452129186
 AnimatorState:
   serializedVersion: 5
@@ -1366,7 +1398,8 @@ AnimatorState:
   m_Name: Mount/Riding
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: 1101995342274941882}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
