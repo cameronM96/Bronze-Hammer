@@ -451,12 +451,12 @@ public class MOMovementController : MonoBehaviour
             }
             else if (attackNumber == 2)
             {
-                attackTrigger[0].enabled = true;
+                attackTrigger[1].enabled = true;
                 m_Anim.SetBool("Attack 2", true);
             }
             else if (attackNumber == 3)
             {
-                attackTrigger[0].enabled = true;
+                attackTrigger[2].enabled = true;
                 m_Anim.SetBool("Attack 3", true);
             }
         }
