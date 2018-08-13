@@ -76,11 +76,21 @@ public class Attack : MonoBehaviour
                         other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, false, 0);
                         // Debug.Log(gameObject.transform.parent.name + " Hit the " + other.gameObject.name + " for " + attackDamage);
                     }
+                }
+            }
 
-                    if (other.tag == "Chicken")
-                    {
-                        other.transform.parent.gameObject.GetComponent<ChickenAI>().KickChicken();
-                    }
+            if (other.tag == "Chicken")
+            {
+                bool targethitbefore = false;
+                foreach (GameObject target in hitObjects)
+                {
+                    if (target == other.gameObject)
+                        targethitbefore = true;
+                }
+
+                if (!targethitbefore)
+                {
+                    other.transform.parent.gameObject.GetComponent<ChickenAI>().KickChicken();
                 }
             }
         }

@@ -171,13 +171,6 @@ public class PlayerHealth : MonoBehaviour {
         m_Audio.clip = m_AudioClips[1];
         m_Audio.Play();
 
-        //int manaSum = 0;
-        //foreach (Image manabar in manaBars)
-        //{
-        //    for (int i = 0; )
-        //    if (mana < )
-        //}
-
         // Set each bar relative to the manaPerLevel
         foreach (Image manabar in manaBars)
         {
@@ -214,7 +207,7 @@ public class PlayerHealth : MonoBehaviour {
             }
 
             // Update this manabar
-            manabar.fillAmount = currentMana / maxMana;
+            manabar.fillAmount = mana / totalMaxMana;
         }
 
         // Update Magic level

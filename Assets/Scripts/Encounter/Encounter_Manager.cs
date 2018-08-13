@@ -191,8 +191,9 @@ public class Encounter_Manager : MonoBehaviour {
         //TODO: Maybe change this so its triggered when an enemy is killed and not every frame. (for performance)
         GameObject[] enemiesInScene = GameObject.FindGameObjectsWithTag("Enemy");
         GameObject[] chickens = GameObject.FindGameObjectsWithTag("Chicken");
+        GameObject[] boss = GameObject.FindGameObjectsWithTag("Boss");
 
-        return (enemiesInScene.Length + chickens.Length);
+        return (enemiesInScene.Length + chickens.Length + boss.Length);
     }
 
     private void DebugEncounters()
