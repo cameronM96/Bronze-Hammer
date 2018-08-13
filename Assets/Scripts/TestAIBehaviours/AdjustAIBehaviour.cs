@@ -15,6 +15,7 @@ public class AdjustAIBehaviour : MonoBehaviour {
     public bool viewArrows;
     public bool moveArrows;
     public bool randomizeBehaviour;
+    public bool smoothAvoid;
 
     private GameObject[] vehicles;
 
@@ -69,6 +70,7 @@ public class AdjustAIBehaviour : MonoBehaviour {
             v.cohesionStrength = cohesionStrength.value;
             v.followStrength = followStrength.value;
             v.avoidStrength = avoidStrength.value;
+            v.SmoothAvoid = smoothAvoid;
         }
 
         if (followStrength.value == 0)

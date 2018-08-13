@@ -79,17 +79,25 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
 
                     if (attack2)
                     {
-                        switch (animator.gameObject.GetComponent<MOPlayerInputController>().playerCharacter)
+                        if (animator.gameObject.tag == "Player")
                         {
-                            // Use left hand if lilith otherwise use right
-                            case PlayerCharacters.Lilith:
-                                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].enabled = true;
-                                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].GetComponent<Attack>().attack2 = true;
-                                break;
-                            default:
-                                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].enabled = true;
-                                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack2 = true;
-                                break;
+                            switch (animator.gameObject.GetComponent<MOPlayerInputController>().playerCharacter)
+                            {
+                                // Use left hand if lilith otherwise use right
+                                case PlayerCharacters.Lilith:
+                                    animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].enabled = true;
+                                    animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].GetComponent<Attack>().attack2 = true;
+                                    break;
+                                default:
+                                    animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].enabled = true;
+                                    animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack2 = true;
+                                    break;
+                            }
+                        }
+                        else
+                        {
+                            animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].enabled = true;
+                            animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack2 = true;
                         }
                     }
                 }
@@ -126,15 +134,22 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
 
             if (attack2 && !boss)
             {
-                switch (animator.gameObject.GetComponent<MOPlayerInputController>().playerCharacter)
+                if (animator.gameObject.tag == "Player")
                 {
-                    // Use left hand if lilith otherwise use right
-                    case PlayerCharacters.Lilith:
-                        animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].enabled = false;
-                        break;
-                    default:
-                        animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].enabled = false;
-                        break;
+                    switch (animator.gameObject.GetComponent<MOPlayerInputController>().playerCharacter)
+                    {
+                        // Use left hand if lilith otherwise use right
+                        case PlayerCharacters.Lilith:
+                            animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].enabled = false;
+                            break;
+                        default:
+                            animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].enabled = false;
+                            break;
+                    }
+                }
+                else
+                {
+                    animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].enabled = false;
                 }
             }
         }

@@ -34,7 +34,8 @@ public class Vehicle : MonoBehaviour {
     public float buffer = 1.0f; // set this so the spaceship disappears offscreen before re-appearing on other side
     public float distanceZ = 10.0f;
     public float distanceX = 10.0f;
-    public float angleOfApproach = 30;
+    public float angleOfApproach = 45;
+    public bool SmoothAvoid;
 
     private GameObject attackTarget;
     [SerializeField] private GameObject moveTarget;
@@ -135,7 +136,32 @@ public class Vehicle : MonoBehaviour {
     // Seek target with arriving
     private Vector3 Seek(Vector3 target)
     {
-        Vector3 desired = target - transform.position;
+        Vector3 newTarget = target;
+        // Adjust target if they are inside the "Avoid" zone
+        if (SmoothAvoid)
+        {
+            float xDifference = attackTarget.transform.position.x - transform.position.x;                // Used to determine which side of the target the vehicle is on in the z axis.
+                                                                                                    //Debug.Log(xDifference);
+            float zDifference = attackTarget.transform.position.z - transform.position.z;                // Used to determine which side of the target the vehicle is on in the z axis.
+            float zDistance = Mathf.Abs(attackTarget.transform.position.z - transform.position.z);       // Used to determine how far away from the target the vehicle is but only use the z axis.
+                                                                                                    //Debug.Log(zDifference);
+            Vector3 dir = transform.position - attackTarget.transform.position;
+            Vector3 origin = attackTarget.transform.right;
+            float rightSideAngle = Mathf.Abs(Vector3.Angle(origin, dir));        // Checks if vehicle is 45degrees from right vector of target.
+            float leftSideAngle = Mathf.Abs(Vector3.Angle(-origin, dir));       // Checks if vehicle is 45degrees from left vector of target.
+
+            if (((moveTarget.name == "LeftSide" && xDifference < 0 && rightSideAngle < angleOfApproach) ||
+                (moveTarget.name == "RightSide" && xDifference > 0 && leftSideAngle < angleOfApproach)) &&
+                zDistance < r * 2)
+            {
+                if (zDifference > 0)
+                    newTarget -= new Vector3(0, 0, (r * 2) + 1f);
+                else
+                    newTarget += new Vector3(0, 0, (r * 2) + 1f);
+            }
+        }
+
+        Vector3 desired = newTarget - transform.position;
 
         float d = desired.magnitude;        // Distance is the magnitude of the vector pointing towards target
         desired.Normalize();
@@ -229,6 +255,20 @@ public class Vehicle : MonoBehaviour {
             }
         }
 
+        // Seperate from Player
+        //if (attackTarget != null)
+        //{
+        //    float d = Vector3.Distance(transform.position, attackTarget.transform.position);
+        //    if ((d > 0) && (d < desiredSeparation))
+        //    {
+        //        Vector3 diff = transform.position - attackTarget.transform.position;
+        //        diff.Normalize();
+        //        diff /= d;
+        //        sum += diff;
+        //        count++;
+        //    }
+        //}
+
         if (count > 0)
         {
             sum /= count;
@@ -320,8 +360,9 @@ public class Vehicle : MonoBehaviour {
         float rightSideAngle = Mathf.Abs(Vector3.Angle(origin,dir));        // Checks if vehicle is 45degrees from right vector of target.
         float leftSideAngle = Mathf.Abs(Vector3.Angle(-origin, dir));       // Checks if vehicle is 45degrees from left vector of target.
 
-        if ((moveT.name == "LeftSide" && xDifference < 0 && rightSideAngle < angleOfApproach) ||
-            (moveT.name == "RightSide" && xDifference > 0 && leftSideAngle < angleOfApproach))
+        if (((moveT.name == "LeftSide" && xDifference < 0 && rightSideAngle < angleOfApproach) ||
+            (moveT.name == "RightSide" && xDifference > 0 && leftSideAngle < angleOfApproach)) &&
+            zDistance < r*2)
         {
             if (zDifference > 0)
                 desired = Vector3.forward;
@@ -339,7 +380,6 @@ public class Vehicle : MonoBehaviour {
             float m = Map(value, 0, SlowDownDistance, 0, maxspeed);     // Map magnitude, slow down if close.
                                                                         // Debug.Log(m);
             desired *= m * -1;
-
         }
 
         //Debug.Log("Avoid desired: " + desired);
@@ -363,7 +403,7 @@ public class Vehicle : MonoBehaviour {
             return Vector3.zero;
         }
     }
-
+    
     private void Teleport()
     {
         if (transform.position.x < leftConstraint - buffer)     // Teleport Left to right;

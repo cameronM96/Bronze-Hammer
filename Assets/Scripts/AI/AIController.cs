@@ -16,7 +16,7 @@ public class AIController : MOMovementController
     public float moveSpeed = 7.0f;          //the speed the AI will move
     Vector3 velocity;
     Vector3 acceleration;
-    public float r = 1.5f;                  // Detection range
+    public float r = 3f;                  // Detection range
     public float maxforce = 0.1f;           // Acceleration rate
     public float SlowDownDistance = 10;     // Start slowing down when getting close to destination;
     int mask = 1 << 11 | 1 << 10;      // https://docs.unity3d.com/Manual/Layers.html, What to detect (AI and player only)
@@ -32,10 +32,11 @@ public class AIController : MOMovementController
     //private bool jump;
     private bool attack;
     //private bool tooClose;
-    public float angleOfApproach = 30;
+    public float angleOfApproach = 45;
+    public bool SmoothAvoid = true;
 
     public bool sprinting;
-    public float attackDistance = 3;
+    public float attackDistance = 4;
     [HideInInspector] public float meleeAttackDistance;
     private bool stop;
 
@@ -45,6 +46,13 @@ public class AIController : MOMovementController
         base.Awake();
 
         meleeAttackDistance = attackDistance;
+
+        r = 3f;
+        seekStrength = 1f;
+        seperateStrength = 2f;
+        avoidStrength = 1.5f;
+        SmoothAvoid = true;
+        angleOfApproach = 45;
 
         m_character = GetComponent<MOMovementController>();
 
@@ -80,7 +88,7 @@ public class AIController : MOMovementController
         float dist2 = Vector3.Distance(moveTarget.transform.position, enemy.transform.position);
         //Debug.Log(dist);
         // Attack if enemy is close enough and roughly the same z position AND facing the player
-        if (dist1 < meleeAttackDistance && dist2 < 0.2f)
+        if (dist1 < meleeAttackDistance && dist2 < 1f)
         {
             //Debug.Log("Attacking");
             attack = true;
@@ -140,10 +148,35 @@ public class AIController : MOMovementController
         ApplyForce(avoid);
     }
 
-    // Seek with arriving
+    // Seek target with arriving
     private Vector3 Seek(Vector3 target)
     {
-        Vector3 desired = target - transform.position;
+        Vector3 newTarget = target;
+        // Adjust target if they are inside the "Avoid" zone
+        if (SmoothAvoid)
+        {
+            float xDifference = attackTarget.transform.position.x - transform.parent.position.x;                // Used to determine which side of the target the vehicle is on in the z axis.
+                                                                                                                //Debug.Log(xDifference);
+            float zDifference = attackTarget.transform.position.z - transform.parent.position.z;                // Used to determine which side of the target the vehicle is on in the z axis.
+            float zDistance = Mathf.Abs(attackTarget.transform.position.z - transform.parent.position.z);       // Used to determine how far away from the target the vehicle is but only use the z axis.
+                                                                                                                //Debug.Log(zDifference);
+            Vector3 dir = transform.parent.position - attackTarget.transform.position;
+            Vector3 origin = attackTarget.transform.right;
+            float rightSideAngle = Mathf.Abs(Vector3.Angle(origin, dir));        // Checks if vehicle is 45degrees from right vector of target.
+            float leftSideAngle = Mathf.Abs(Vector3.Angle(-origin, dir));       // Checks if vehicle is 45degrees from left vector of target.
+
+            if (((moveTarget.name == "LeftSide" && xDifference < 0 && rightSideAngle < angleOfApproach) ||
+                (moveTarget.name == "RightSide" && xDifference > 0 && leftSideAngle < angleOfApproach)) &&
+                zDistance < r * 2)
+            {
+                if (zDifference > 0)
+                    newTarget -= new Vector3(0, 0, (r * 2) + 1f);
+                else
+                    newTarget += new Vector3(0, 0, (r * 2) + 1f);
+            }
+        }
+
+        Vector3 desired = newTarget - transform.parent.position;
 
         float d = desired.magnitude;        // Distance is the magnitude of the vector pointing towards target
         desired.Normalize();
@@ -174,6 +207,7 @@ public class AIController : MOMovementController
         }
         steer.y = 0;
 
+        //Debug.Log("Seek: " + steer);
         return steer;                           // Using our physics model and applying the force to the
                                                 // Object's acceleration.
     }
@@ -192,10 +226,10 @@ public class AIController : MOMovementController
         int count = 0;
         foreach (AIController ai in aiList)
         {
-            float d = Vector3.Distance(transform.position, ai.transform.position);
+            float d = Vector3.Distance(transform.parent.position, ai.transform.position);
             if ((d > 0) && (d < desiredSeparation))
             {
-                Vector3 diff = transform.position - ai.transform.position;
+                Vector3 diff = transform.parent.position - ai.transform.position;
                 diff.Normalize();
                 diff /= d;
                 sum += diff;
@@ -251,18 +285,19 @@ public class AIController : MOMovementController
     private Vector3 Avoid(GameObject moveT, GameObject attackT)
     {
         Vector3 desired = Vector3.zero;
-        float xDifference = attackT.transform.position.x - transform.position.x;                // Used to determine which side of the target the vehicle is on in the z axis.
+        float xDifference = attackT.transform.position.x - transform.parent.position.x;                // Used to determine which side of the target the vehicle is on in the z axis.
         //Debug.Log(xDifference);
-        float zDifference = attackT.transform.position.z - transform.position.z;                // Used to determine which side of the target the vehicle is on in the z axis.
-        float zDistance = Mathf.Abs(attackT.transform.position.z - transform.position.z);       // Used to determine how far away from the target the vehicle is but only use the z axis.
+        float zDifference = attackT.transform.position.z - transform.parent.position.z;                // Used to determine which side of the target the vehicle is on in the z axis.
+        float zDistance = Mathf.Abs(attackT.transform.position.z - transform.parent.position.z);       // Used to determine how far away from the target the vehicle is but only use the z axis.
         //Debug.Log(zDifference);
-        Vector3 dir = transform.position - attackT.transform.position;
+        Vector3 dir = transform.parent.position - attackT.transform.position;
         Vector3 origin = attackT.transform.right;
         float rightSideAngle = Mathf.Abs(Vector3.Angle(origin, dir));        // Checks if vehicle is 45degrees from right vector of target.
         float leftSideAngle = Mathf.Abs(Vector3.Angle(-origin, dir));       // Checks if vehicle is 45degrees from left vector of target.
 
-        if ((moveT.name == "LeftSide" && xDifference < 0 && rightSideAngle < angleOfApproach) ||
-            (moveT.name == "RightSide" && xDifference > 0 && leftSideAngle < angleOfApproach))
+        if (((moveT.name == "LeftSide" && xDifference < 0 && rightSideAngle < angleOfApproach) ||
+            (moveT.name == "RightSide" && xDifference > 0 && leftSideAngle < angleOfApproach)) &&
+            zDistance < r * 2)
         {
             if (zDifference > 0)
                 desired = Vector3.forward;

@@ -1786,6 +1786,7 @@ MonoBehaviour:
   viewArrows: 0
   moveArrows: 0
   randomizeBehaviour: 0
+  smoothAvoid: 0
   flowField: {fileID: 1422292777}
   numberOfVehicles: 0
   updateTimer: 1
@@ -3048,7 +3049,7 @@ Prefab:
     - target: {fileID: 114707032800666958, guid: 8b232388dcfcd0c4295f31737288ada8,
         type: 2}
       propertyPath: onButtonDown
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8b232388dcfcd0c4295f31737288ada8, type: 2}

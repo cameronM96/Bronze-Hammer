@@ -1276,8 +1276,11 @@ MonoBehaviour:
   arrival: 0
   seekStrength: 1
   seperateStrength: 2
+  avoidStrength: 1.5
+  angleOfApproach: 45
+  SmoothAvoid: 1
   sprinting: 0
-  attackDistance: 3
+  attackDistance: 5
   meleeAttackDistance: 0
 --- !u!114 &114997019046573014
 MonoBehaviour:

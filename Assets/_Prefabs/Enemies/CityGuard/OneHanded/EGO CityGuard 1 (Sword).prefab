@@ -1191,8 +1191,11 @@ MonoBehaviour:
   arrival: 0
   seekStrength: 1
   seperateStrength: 2
+  avoidStrength: 1.5
+  angleOfApproach: 45
+  SmoothAvoid: 1
   sprinting: 0
-  attackDistance: 3
+  attackDistance: 5
   meleeAttackDistance: 0
 --- !u!136 &136011398993739906
 CapsuleCollider:
