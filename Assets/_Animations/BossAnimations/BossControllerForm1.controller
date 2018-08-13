@@ -125,6 +125,7 @@ MonoBehaviour:
   attack2: 1
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114273669691721050
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -145,6 +146,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114339093274218302
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,6 +167,7 @@ MonoBehaviour:
   attack2: 0
   charge: 1
   mount: 0
+  boss: 0
 --- !u!114 &114766567296014378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,6 +188,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114822257003568030
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -205,6 +209,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114910126154026538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -225,6 +230,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114947644862934082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -245,6 +251,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!206 &206309408500953456
 BlendTree:
   m_ObjectHideFlags: 1
@@ -1244,7 +1251,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Walk
-  m_Speed: 1
+  m_Speed: -1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101854115874764802}
@@ -1273,7 +1280,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Dash
-  m_Speed: 1.5
+  m_Speed: -1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1101647583405327446}
