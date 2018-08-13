@@ -48,6 +48,9 @@ public class AIBossController : MOMovementController
 
     public bool sprinting;
 
+    public ParticleSystem attackOneEffect;
+    public ParticleSystem attackTwoEffect;
+
     // Use this for initialization
     protected override void Awake()
     {
@@ -74,11 +77,18 @@ public class AIBossController : MOMovementController
         attackTarget = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(WaitTillEndOfFrame());
 
+        teleportLocation1 = GameObject.Find("TP1");
+        teleportLocation2 = GameObject.Find("TP2");
+        teleportLocation3 = GameObject.Find("TP3");
+        teleportLocation4 = GameObject.Find("TP4");
+        teleportLocation5 = GameObject.Find("TP5");
+
+
         //set the game camera
         gameCamera = Camera.main.transform;
     }
 
-    IEnumerator WaitTillEndOfFrame ()
+    IEnumerator WaitTillEndOfFrame()
     {
         yield return new WaitForEndOfFrame();
         //set move target as boss doesn't need to surround, will need to change with multiple players
@@ -100,7 +110,7 @@ public class AIBossController : MOMovementController
         if (attackTimeLimiter >= 0.0f)
         {
             attackTimeLimiter -= Time.deltaTime;
-           // Debug.Log("attack time limiter = " + attackTimeLimiter);
+            // Debug.Log("attack time limiter = " + attackTimeLimiter);
         }
 
         //agent.destination = moveTarget.transform.position;
@@ -126,6 +136,7 @@ public class AIBossController : MOMovementController
         float dist1 = Vector3.Distance(attackTarget.transform.position, enemy.transform.position);
         float dist2 = Vector3.Distance(moveTarget.transform.position, enemy.transform.position);
         //Debug.Log(dist);
+
         // Attack if enemy is close enough and roughly the same z position AND facing the player
         if (dist1 < meleeAttackDistance)
         {
@@ -138,8 +149,6 @@ public class AIBossController : MOMovementController
         }
 
         distanceToPlayer = Vector3.Distance(moveTarget.transform.position, gameObject.transform.position);
-
-        // Add a check for jumping
     }
 
     protected override void FixedUpdate()
@@ -164,8 +173,9 @@ public class AIBossController : MOMovementController
             m_character.Move(moveDirection);
         }
 
-        if (m_health.bossHealth <= 375&&phase2 == false)
+        if (m_health.bossHealth <= 375 && phase2 == false)
         {
+            m_health.bossHealth = 750;
             phase2 = true;
         }
         //use teleport ability
@@ -216,6 +226,7 @@ public class AIBossController : MOMovementController
                 this.transform.LookAt(attackTarget.transform);
                 m_character.Move(Vector3.zero);
                 m_character.BossAttack(1);
+                attackOneEffect.Play();
 
             }
             else if (attackNumber == 2)
@@ -225,7 +236,7 @@ public class AIBossController : MOMovementController
                 this.transform.LookAt(attackTarget.transform);
                 m_character.Move(Vector3.zero);
                 m_character.BossAttack(2);
-
+                attackTwoEffect.Play();
             }
             else if (attackNumber == 3)
             {
