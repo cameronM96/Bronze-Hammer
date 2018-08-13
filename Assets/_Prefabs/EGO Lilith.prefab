@@ -947,7 +947,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1956872478430160}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -67.089, y: 0, z: 0.55}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children:
   - {fileID: 4923858487353770}
@@ -1735,6 +1735,7 @@ MonoBehaviour:
   hitIndicator: {fileID: 0}
   m_AudioClips:
   - {fileID: 8300000, guid: fe18081d090812e44b5564aa37471f11, type: 3}
+  - {fileID: 8300000, guid: 8ffb3159961846f4fad3eb572983f693, type: 3}
 --- !u!114 &114710610018921092
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1797,7 +1798,8 @@ MonoBehaviour:
   m_AudioClips:
   - {fileID: 8300000, guid: ff068c879163d35438860f8e69d2307a, type: 3}
   - {fileID: 8300000, guid: a1bedab2ed1dcd940a3d36ea32b0b233, type: 3}
-  - {fileID: 8300000, guid: 53a3de367afc4c744bdec4a8e69a2687, type: 3}
+  - {fileID: 8300000, guid: 1ca290ada8a10e2439c0ea805c398573, type: 3}
+  - {fileID: 8300000, guid: 81facf5e3a78e0c4b9119f018b10d040, type: 3}
   playerCharacter: 1
   Player: {fileID: 0}
   moveSpeed: 7

@@ -1145,7 +1145,8 @@ MonoBehaviour:
   m_AudioClips:
   - {fileID: 8300000, guid: ff068c879163d35438860f8e69d2307a, type: 3}
   - {fileID: 8300000, guid: a1bedab2ed1dcd940a3d36ea32b0b233, type: 3}
-  - {fileID: 8300000, guid: 53a3de367afc4c744bdec4a8e69a2687, type: 3}
+  - {fileID: 8300000, guid: e509605089aea3b41b3695d9eaa8091a, type: 3}
+  - {fileID: 8300000, guid: 81facf5e3a78e0c4b9119f018b10d040, type: 3}
   enemy: {fileID: 1105496031313118}
   moveTarget: {fileID: 0}
   attackTarget: {fileID: 0}
@@ -1161,7 +1162,7 @@ MonoBehaviour:
   angleOfApproach: 45
   SmoothAvoid: 1
   sprinting: 0
-  attackDistance: 8
+  attackDistance: 5
   meleeAttackDistance: 0
 --- !u!114 &114898515585487416
 MonoBehaviour:
@@ -1177,7 +1178,7 @@ MonoBehaviour:
   health: 100
   bossHealth: 0
   m_AudioClips:
-  - {fileID: 8300000, guid: fe18081d090812e44b5564aa37471f11, type: 3}
+  - {fileID: 8300000, guid: 2eeac90e5e0d22142931102c2e73df21, type: 3}
   damageIndicator: {fileID: 1287268865810298, guid: 6d46f6e1a38b0a74bb599a71d2968fc5,
     type: 2}
 --- !u!114 &114995784248586992

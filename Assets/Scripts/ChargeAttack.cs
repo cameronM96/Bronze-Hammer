@@ -45,6 +45,11 @@ public class ChargeAttack : MonoBehaviour {
                 other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, true, dir);
                 StartCoroutine(endCharge);
             }
+
+            if (other.tag == "Chicken")
+            {
+                other.transform.parent.gameObject.GetComponent<ChickenAI>().KickChicken();
+            }
         }
         else
         {
@@ -62,11 +67,6 @@ public class ChargeAttack : MonoBehaviour {
                 other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage, true, dir);
                 StartCoroutine(endCharge);
             }
-        }
-
-        if (other.tag == "Chicken")
-        {
-            other.transform.parent.gameObject.GetComponent<ChickenAI>().KickChicken();
         }
     }
 }

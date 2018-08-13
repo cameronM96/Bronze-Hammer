@@ -262,6 +262,18 @@ public class MOMovementController : MonoBehaviour
         groundVelocity.y = 0f;
 
         m_Anim.SetFloat("velocity", groundVelocity.magnitude);
+
+        if (groundVelocity.magnitude > 0.1f && m_Grounded)
+        {
+            m_Audio.clip = m_AudioClips[0];
+            m_Audio.volume = 0.7f;
+            m_Audio.Play();
+            m_Audio.loop = true;
+        }
+        else
+        {
+            m_Audio.loop = false;
+        }
     }
 
     // method is called when needed from an input script
@@ -282,10 +294,6 @@ public class MOMovementController : MonoBehaviour
                 if (!inAir)
                 {
                     m_Rigidbody.velocity = new Vector3(mov.x, m_Rigidbody.velocity.y, mov.z);
-
-                    m_Audio.clip = m_AudioClips[0];
-                    m_Audio.Play();
-                    m_Audio.volume = 0.2f;
                 }
 
                 if (mov.x < -0.2f && (mov.z < 0.2f && mov.z > -0.2f)) //left
@@ -480,8 +488,8 @@ public class MOMovementController : MonoBehaviour
 
                 // Animations and sounds
                 m_Audio.clip = m_AudioClips[1];
-                m_Audio.Play();
                 m_Audio.volume = 1f;
+                m_Audio.Play();
 
                 if (mounted)
                 {
@@ -523,6 +531,11 @@ public class MOMovementController : MonoBehaviour
         m_Anim.SetBool("knockedDown", true);
         knockedDownAnim = true;
 
+        // Sounds
+        m_Audio.clip = m_AudioClips[3];
+        m_Audio.volume = 1f;
+        m_Audio.Play();
+
         //Dis-mount character if knocked back
         DisMount();
 
@@ -559,9 +572,9 @@ public class MOMovementController : MonoBehaviour
         // Kill character
         m_Anim.SetBool("dead", true);
         m_Anim.SetBool("knockedDown", true);
-        m_Audio.clip = m_AudioClips[0];
-        m_Audio.Play();
+        m_Audio.clip = m_AudioClips[2];
         m_Audio.volume = 1f;
+        m_Audio.Play();
         this.gameObject.layer = 15;
         StartCoroutine(FallThroughFloor(5));
 

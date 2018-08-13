@@ -14,12 +14,14 @@ public class MountingController : MonoBehaviour
 
     public bool isCurrentlyMounted;
     [SerializeField] private float mountDelay = 1f;
+    private AudioSource m_Audio;
 
     // Use this for initialization
     void Awake()
     {
         isCurrentlyMounted = false;
         m_Anim.GetComponent<Animator>();
+        m_Audio = GetComponent<AudioSource>();
         //gameObject.transform.parent = null;
     }
 
@@ -53,6 +55,7 @@ public class MountingController : MonoBehaviour
 
     IEnumerator AttackDelay(GameObject rider)
     {
+        m_Audio.Play();
         float waitTimer = 0.7f;
         if (ranged)
             waitTimer = 1.04f;

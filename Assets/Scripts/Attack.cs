@@ -76,26 +76,29 @@ public class Attack : MonoBehaviour
         {
             if (other.gameObject.GetComponent<PlayerHealth>() && other.gameObject.tag == "Player")
             {
-                if (attack3)
+                if (!other.gameObject.GetComponent<MOMovementController>().charging)
                 {
-                    float dir = 0;
-                    if (other.transform.position.x > parentObject.transform.position.x)
+                    if (attack3)
                     {
-                        dir = 1;
+                        float dir = 0;
+                        if (other.transform.position.x > parentObject.transform.position.x)
+                        {
+                            dir = 1;
+                        }
+                        else
+                        {
+                            dir = -1;
+                        }
+                        other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage * comboMultiplier, true, dir);
+                        GetComponent<Collider>().enabled = false;
+                        Debug.Log("Target should have been knocked back");
                     }
                     else
                     {
-                        dir = -1;
+                        other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage, false, 0);
+                        GetComponent<Collider>().enabled = false;
+                        // Debug.Log(gameObject.transform.parent.name + " Hit the " + other.gameObject.name + " for " + attackDamage);
                     }
-                    other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage * comboMultiplier, true, dir);
-                    GetComponent<Collider>().enabled = false;
-                    Debug.Log("Target should have been knocked back");
-                }
-                else
-                {
-                    other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage, false , 0);
-                    GetComponent<Collider>().enabled = false;
-                    // Debug.Log(gameObject.transform.parent.name + " Hit the " + other.gameObject.name + " for " + attackDamage);
                 }
             }
         }

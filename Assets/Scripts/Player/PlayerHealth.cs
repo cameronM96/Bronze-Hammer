@@ -167,6 +167,10 @@ public class PlayerHealth : MonoBehaviour {
         indicator.transform.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.blue;
         StartCoroutine(FlashScreen(Color.blue));
 
+        // Sound
+        m_Audio.clip = m_AudioClips[1];
+        m_Audio.Play();
+
         // Set each bar relative to the manaPerLevel
         foreach (Image manabar in manaBars)
         {
