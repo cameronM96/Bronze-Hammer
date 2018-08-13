@@ -20,7 +20,7 @@ public class Health : MonoBehaviour
         m_characterController = GetComponent<MOMovementController>();
         if (gameObject.tag == "Boss")
         {
-            bossHealth = 250;
+            bossHealth = 750;
         }
         else
         {

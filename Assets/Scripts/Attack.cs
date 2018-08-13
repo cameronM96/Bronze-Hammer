@@ -30,7 +30,7 @@ public class Attack : MonoBehaviour
         //m_Audio.Play();
         if (playerWeapon)
         {
-            if (other.gameObject.GetComponent<Health>() && other.gameObject.tag == "Enemy")
+            if (other.gameObject.GetComponent<Health>() && (other.gameObject.tag == "Enemy"|| other.gameObject.tag == "Boss"))
             {
                 if (attack3)
                 {

@@ -107,6 +107,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114496632511237068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,6 +128,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114621072743825470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,6 +149,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114682690866407094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,6 +170,7 @@ MonoBehaviour:
   attack2: 0
   charge: 1
   mount: 0
+  boss: 0
 --- !u!114 &114766567296014378
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,6 +191,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114807778409018866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,6 +212,7 @@ MonoBehaviour:
   attack2: 1
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114947644862934082
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,6 +233,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!1101 &1101002819182390010
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1362,10 +1369,10 @@ AnimatorStateMachine:
     m_Position: {x: 36, y: -48, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102583391854805640}
-    m_Position: {x: 36, y: -120, z: 0}
+    m_Position: {x: 96, y: -192, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102402534599424976}
-    m_Position: {x: 264, y: -120, z: 0}
+    m_Position: {x: 372, y: -132, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1102382547490756804}
     m_Position: {x: -36, y: 168, z: 0}

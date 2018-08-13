@@ -13,6 +13,7 @@ public class AIBossController : MOMovementController
 
     private MOMovementController m_character;
     // private NavMeshAgent agent;
+    private Health m_health;
 
     private float distanceToPlayer; //how far the boss is from the player
 
@@ -56,6 +57,7 @@ public class AIBossController : MOMovementController
         //GetComponent<Animator>().runtimeAnimatorController = form1Animations;
         m_character = GetComponent<MOMovementController>();
         Debug.Log("m_character = " + m_character);
+        m_health = GetComponent<Health>();
 
         phase2 = false;
         attackTimeLimiter = 0.0f;
@@ -149,12 +151,9 @@ public class AIBossController : MOMovementController
             if (attackTimeLimiter <= 0)
             {
                 Debug.Log("Calling attack player");
-
-                attackTimeLimiter = 4.0f; //sets a 4 second delay for the boss before he can attack again (adjust as needed)
-
                 attackPicker = Random.Range(1, 4);
                 Debug.Log("Randomised to " + attackPicker);
-                AttackPlayer(attackPicker);
+                AttackPlayer(attackPicker, phase2);
             }
         }
         else
@@ -165,6 +164,10 @@ public class AIBossController : MOMovementController
             m_character.Move(moveDirection);
         }
 
+        if (m_health.bossHealth <= 375&&phase2 == false)
+        {
+            phase2 = true;
+        }
         //use teleport ability
         if (1 == 2)//distanceToPlayer <= teleportDistance && teleportTime <= 0.0f)
         {
@@ -197,32 +200,46 @@ public class AIBossController : MOMovementController
         }
     }
 
-    private void AttackPlayer(int attackNumber)
+    private void AttackPlayer(int attackNumber, bool isPhaseTwo)
     {
         Debug.Log("Attack player called");
 
-        //call the method on the controller script sending the required vars
-        if (attackNumber ==1)
+        if (!isPhaseTwo)
         {
-            Debug.Log("Called attack 1");
-            // Make sure AI is facing the right directions first
-            this.transform.LookAt(attackTarget.transform);
-            m_character.Move(Vector3.zero);
-            m_character.BossAttack(1);
+            attackTimeLimiter = 4.0f; //sets a 4 second delay for the boss before he can attack again (adjust as needed)
 
-        }
-        else if (attackNumber == 2)
-        {
-            Debug.Log("Called attack 2");
-            // Make sure AI is facing the right directions first
-            this.transform.LookAt(attackTarget.transform);
-            m_character.Move(Vector3.zero);
-            m_character.BossAttack(2);
+            //call the method on the controller script sending the required vars
+            if (attackNumber == 1)
+            {
+                Debug.Log("Called attack 1");
+                // Make sure AI is facing the right directions first
+                this.transform.LookAt(attackTarget.transform);
+                m_character.Move(Vector3.zero);
+                m_character.BossAttack(1);
 
+            }
+            else if (attackNumber == 2)
+            {
+                Debug.Log("Called attack 2");
+                // Make sure AI is facing the right directions first
+                this.transform.LookAt(attackTarget.transform);
+                m_character.Move(Vector3.zero);
+                m_character.BossAttack(2);
+
+            }
+            else if (attackNumber == 3)
+            {
+                Debug.Log("Called attack 3");
+                // Make sure AI is facing the right directions first
+                this.transform.LookAt(attackTarget.transform);
+                m_character.Move(Vector3.zero);
+                m_character.BossAttack(3);
+            }
         }
-        else if (attackNumber == 3)
+        else if (isPhaseTwo)
         {
-            Debug.Log("Called attack 3");
+            attackTimeLimiter = 3.0f; //sets a 4 second delay for the boss before he can attack again (adjust as needed)
+
             // Make sure AI is facing the right directions first
             this.transform.LookAt(attackTarget.transform);
             m_character.Move(Vector3.zero);
