@@ -524,17 +524,25 @@ public class MOMovementController : MonoBehaviour
         knockedDownAnim = true;
 
         //Dis-mount character if knocked back
+        DisMount();
+
+        // Actually knockback enemy
+        m_Rigidbody.velocity = new Vector3((dir * 15), 10, 0);
+    }
+
+    public void DisMount()
+    {
+        //Dis-mount character if knocked back
         if (mounted)
         {
             m_Anim.SetBool("mounted", false);
             mount.GetComponent<MountingController>().UnMounted();
+            mount = null;
             m_GroundCheck = GetComponentInParent<Transform>();
+            mounted = false;
             if (this.tag == "Enemy")
                 GetComponent<AIController>().meleeAttackDistance = GetComponent<AIController>().attackDistance;
         }
-
-        // Actually knockback enemy
-        m_Rigidbody.velocity = new Vector3((dir * 15), 10, 0);
     }
 
     public void Death()
