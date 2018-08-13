@@ -5076,7 +5076,12 @@ Prefab:
     - target: {fileID: 114473800044179350, guid: 4b838cfef8e66c14299fefc0b146984f,
         type: 2}
       propertyPath: m_AudioClips.Array.size
-      value: 3
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114828050421630426, guid: 4b838cfef8e66c14299fefc0b146984f,
+        type: 2}
+      propertyPath: m_AudioClips.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114473800044179350, guid: 4b838cfef8e66c14299fefc0b146984f,
         type: 2}
@@ -5154,7 +5159,7 @@ Prefab:
         type: 2}
       propertyPath: m_AudioClips.Array.data[2]
       value: 
-      objectReference: {fileID: 8300000, guid: 53a3de367afc4c744bdec4a8e69a2687, type: 3}
+      objectReference: {fileID: 8300000, guid: 07e2404ebabd97b45a74758a10733a6d, type: 3}
     - target: {fileID: 114009233420674214, guid: 4b838cfef8e66c14299fefc0b146984f,
         type: 2}
       propertyPath: attackDamage
@@ -5465,6 +5470,16 @@ Prefab:
       propertyPath: attackTrigger.Array.data[2]
       value: 
       objectReference: {fileID: 725879339}
+    - target: {fileID: 114473800044179350, guid: 4b838cfef8e66c14299fefc0b146984f,
+        type: 2}
+      propertyPath: m_AudioClips.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: 0c962b34a8dffe647ac1687ad3fac7c2, type: 3}
+    - target: {fileID: 114828050421630426, guid: 4b838cfef8e66c14299fefc0b146984f,
+        type: 2}
+      propertyPath: m_AudioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: fe18081d090812e44b5564aa37471f11, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4b838cfef8e66c14299fefc0b146984f, type: 2}
   m_IsPrefabParent: 0
