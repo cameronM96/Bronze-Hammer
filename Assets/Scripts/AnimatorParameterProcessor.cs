@@ -13,6 +13,7 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
     [SerializeField] bool attack2;
     [SerializeField] bool charge;
     [SerializeField] bool mount;
+    [SerializeField] bool boss;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -37,24 +38,48 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
             }
         }
 
-        if (attack)
+        if (boss)
         {
-            animator.SetBool("attack", false);
-            if (mount)
+            if (attack)
             {
-                if (animator.gameObject.GetComponent<MountingController>().mountedCharacter != null)
-                    animator.gameObject.GetComponent<MountingController>().mountedCharacter.GetComponent<MOMovementController>().attackingAnim = true;
-            }
-            else
-            {
-                //animator.SetBool("attack", false);
+                animator.SetBool("Attack 1", false);
                 animator.gameObject.GetComponent<MOMovementController>().attackingAnim = true;
+            }
 
-                if (attack3)
-                    animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack3 = true;
+            if (attack2)
+            {
+                animator.SetBool("Attack 2", false);
+                animator.gameObject.GetComponent<MOMovementController>().attackingAnim = true;
+            }
 
-                if (attack2)
-                    animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack2 = true;
+            if (attack3)
+            {
+                animator.SetBool("Attack 3", false);
+                animator.gameObject.GetComponent<MOMovementController>().attackingAnim = true;
+                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack3 = true;
+            }
+        }
+        else
+        {
+            if (attack)
+            {
+                animator.SetBool("attack", false);
+                if (mount)
+                {
+                    if (animator.gameObject.GetComponent<MountingController>().mountedCharacter != null)
+                        animator.gameObject.GetComponent<MountingController>().mountedCharacter.GetComponent<MOMovementController>().attackingAnim = true;
+                }
+                else
+                {
+                    //animator.SetBool("attack", false);
+                    animator.gameObject.GetComponent<MOMovementController>().attackingAnim = true;
+
+                    if (attack3)
+                        animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack3 = true;
+
+                    if (attack2)
+                        animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack2 = true;
+                }
             }
         }
 
@@ -80,12 +105,13 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
         }
         else
         {
-            animator.gameObject.GetComponent<MOMovementController>().attackingAnim = false;
+            if (!boss)
+                animator.gameObject.GetComponent<MOMovementController>().attackingAnim = false;
 
             if (attack3)
                 animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack3 = false;
 
-            if (attack2)
+            if (attack2 && !boss)
                 animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack2 = false;
         }
 

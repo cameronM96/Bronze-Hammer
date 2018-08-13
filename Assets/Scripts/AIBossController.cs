@@ -135,7 +135,8 @@ public class AIBossController : MOMovementController
             if (attackTimeLimiter <= 0)
             {
                 Debug.Log("Calling attack player");
-                attackTimeLimiter = 4.0f;
+
+                attackTimeLimiter = 4.0f; //sets a 4 second delay for the boss before he can attack again (adjust as needed)
 
                 attackPicker = Random.Range(1, 4);
                 Debug.Log("Randomised to " + attackPicker);
