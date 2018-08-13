@@ -16,7 +16,8 @@ public class Attack : MonoBehaviour
 
     private void Awake()
     {
-        StartCoroutine(InitialiseWaitTimer());
+        if (parentObject = null)
+            StartCoroutine(InitialiseWaitTimer());
     }
 
     IEnumerator InitialiseWaitTimer()
