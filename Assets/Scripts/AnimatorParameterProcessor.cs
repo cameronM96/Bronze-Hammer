@@ -44,12 +44,14 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
             {
                 animator.SetBool("Attack 1", false);
                 animator.gameObject.GetComponent<MOMovementController>().attackingAnim = true;
+                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].enabled = true;
             }
 
             if (attack2)
             {
                 animator.SetBool("Attack 2", false);
                 animator.gameObject.GetComponent<MOMovementController>().attackingAnim = true;
+                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[2].enabled = true;
             }
 
             if (attack3)
@@ -57,6 +59,7 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
                 animator.SetBool("Attack 3", false);
                 animator.gameObject.GetComponent<MOMovementController>().attackingAnim = true;
                 animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack3 = true;
+                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].enabled = true;
             }
         }
         else
