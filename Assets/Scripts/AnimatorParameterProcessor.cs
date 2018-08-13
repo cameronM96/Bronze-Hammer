@@ -126,8 +126,8 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
         }
         else
         {
-           
-                animator.gameObject.GetComponent<MOMovementController>().attackingAnim = false;
+            animator.gameObject.GetComponent<MOMovementController>().attackingAnim = false;
+            animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().hitObjects = new List<GameObject>();
 
             if (attack3)
                 animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack3 = false;
@@ -141,15 +141,19 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
                         // Use left hand if lilith otherwise use right
                         case PlayerCharacters.Lilith:
                             animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].enabled = false;
+                            animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].GetComponent<Attack>().hitObjects = new List<GameObject>();
+                            animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].GetComponent<Attack>().attack2 = false;
                             break;
                         default:
                             animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].enabled = false;
+                            animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack2 = false;
                             break;
                     }
                 }
                 else
                 {
                     animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].enabled = false;
+                    animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack2 = false;
                 }
             }
         }

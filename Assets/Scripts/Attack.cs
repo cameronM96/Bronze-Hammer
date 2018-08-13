@@ -13,6 +13,7 @@ public class Attack : MonoBehaviour
     public bool attack2 = false;
 
     [SerializeField] private AudioSource m_Audio;
+    [HideInInspector] public List<GameObject> hitObjects;
 
     private void Awake()
     {
@@ -31,53 +32,18 @@ public class Attack : MonoBehaviour
         //m_Audio.Play();
         if (playerWeapon)
         {
-            if (other.gameObject.GetComponent<Health>() && (other.gameObject.tag == "Enemy"|| other.gameObject.tag == "Boss"))
+            if (other.gameObject.GetComponent<Health>() && (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Boss"))
             {
-                if (attack3)
+                bool targethitbefore = false;
+                foreach (GameObject target in hitObjects)
                 {
-                    float dir = 0;
-                    if (other.transform.position.x > parentObject.transform.position.x)
-                    {
-                        dir = 1;
-                    }
-                    else
-                    {
-                        dir = -1;
-                    }
+                    if (target == other.gameObject)
+                        targethitbefore = true;
+                }
 
-                    //Debug.Log("Dir = " + dir);
-                    if (crag)
-                    {
-                        other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier * 2, true, dir);
-                    }
-                    else
-                    {
-                        other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier, true, dir);
-                    }
-                    //Debug.Log("Target should have been knocked back");
-                }
-                else if (crag && attack2)
+                if (!targethitbefore)
                 {
-                    other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier, false, 0);
-                }
-                else
-                {
-                    other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, false, 0);
-                    // Debug.Log(gameObject.transform.parent.name + " Hit the " + other.gameObject.name + " for " + attackDamage);
-                }
-            }
-
-            if (other.tag == "Chicken")
-            {
-                other.transform.parent.gameObject.GetComponent<ChickenAI>().KickChicken();
-            }
-        }
-        else
-        {
-            if (other.gameObject.GetComponent<PlayerHealth>() && other.gameObject.tag == "Player")
-            {
-                if (!other.gameObject.GetComponent<MOMovementController>().charging)
-                {
+                    hitObjects.Add(other.gameObject);
                     if (attack3)
                     {
                         float dir = 0;
@@ -89,15 +55,72 @@ public class Attack : MonoBehaviour
                         {
                             dir = -1;
                         }
-                        other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage * comboMultiplier, true, dir);
-                        GetComponent<Collider>().enabled = false;
-                        Debug.Log("Target should have been knocked back");
+
+                        //Debug.Log("Dir = " + dir);
+                        if (crag)
+                        {
+                            other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier * 2, true, dir);
+                        }
+                        else
+                        {
+                            other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier, true, dir);
+                        }
+                        //Debug.Log("Target should have been knocked back");
+                    }
+                    else if (crag && attack2)
+                    {
+                        other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier, false, 0);
                     }
                     else
                     {
-                        other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage, false, 0);
-                        GetComponent<Collider>().enabled = false;
+                        other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, false, 0);
                         // Debug.Log(gameObject.transform.parent.name + " Hit the " + other.gameObject.name + " for " + attackDamage);
+                    }
+
+                    if (other.tag == "Chicken")
+                    {
+                        other.transform.parent.gameObject.GetComponent<ChickenAI>().KickChicken();
+                    }
+                }
+            }
+        }
+        else
+        {
+            if (other.gameObject.GetComponent<PlayerHealth>() && other.gameObject.tag == "Player")
+            {
+                if (!other.gameObject.GetComponent<MOMovementController>().charging)
+                {
+                    bool targethitbefore = false;
+                    foreach (GameObject target in hitObjects)
+                    {
+                        if (target == other.gameObject)
+                            targethitbefore = true;
+                    }
+
+                    if (!targethitbefore)
+                    {
+                        hitObjects.Add(other.gameObject);
+                        if (attack3)
+                        {
+                            float dir = 0;
+                            if (other.transform.position.x > parentObject.transform.position.x)
+                            {
+                                dir = 1;
+                            }
+                            else
+                            {
+                                dir = -1;
+                            }
+                            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage * comboMultiplier, true, dir);
+                            GetComponent<Collider>().enabled = false;
+                            Debug.Log("Target should have been knocked back");
+                        }
+                        else
+                        {
+                            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(attackDamage, false, 0);
+                            GetComponent<Collider>().enabled = false;
+                            // Debug.Log(gameObject.transform.parent.name + " Hit the " + other.gameObject.name + " for " + attackDamage);
+                        }
                     }
                 }
             }

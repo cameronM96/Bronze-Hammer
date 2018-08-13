@@ -47,6 +47,7 @@ public class AIController : MOMovementController
 
         meleeAttackDistance = attackDistance;
 
+        radius = 5;
         r = 7f;
         seekStrength = 1f;
         seperateStrength = 1.5f;
@@ -271,8 +272,9 @@ public class AIController : MOMovementController
             {
                 // Check if the AI or player is inside it's field of view (90deg)
                 float angle = AngleBetween(this.transform.forward, hitColliders[i].transform.position);
+                float distance = Mathf.Abs(Vector3.Distance(transform.position, hitColliders[i].transform.position));
                 //Debug.Log(angle);
-                if (angle < 45 && angle > -45)
+                if (angle < 45 && angle > -45 || distance  < 2f)
                     aiList.Add(hitColliders[i].transform.GetComponent<AIController>());
             }
             i++;
