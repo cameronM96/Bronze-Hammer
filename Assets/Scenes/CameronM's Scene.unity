@@ -3332,6 +3332,10 @@ Prefab:
       propertyPath: ball
       value: 
       objectReference: {fileID: 1579593299}
+    - target: {fileID: 1610532694658636, guid: 66192b893e94471458dd1e2a85f1ae28, type: 2}
+      propertyPath: m_Name
+      value: GameCamera
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66192b893e94471458dd1e2a85f1ae28, type: 2}
   m_IsPrefabParent: 0
@@ -8459,6 +8463,36 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114797931888962316, guid: 659fd05b00e02ef4f999377221675792,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 114797931888962316, guid: 659fd05b00e02ef4f999377221675792,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114797931888962316, guid: 659fd05b00e02ef4f999377221675792,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114471537461480916, guid: 659fd05b00e02ef4f999377221675792,
+        type: 2}
+      propertyPath: m_EffectColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114471537461480916, guid: 659fd05b00e02ef4f999377221675792,
+        type: 2}
+      propertyPath: m_EffectColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114471537461480916, guid: 659fd05b00e02ef4f999377221675792,
+        type: 2}
+      propertyPath: m_EffectColor.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 659fd05b00e02ef4f999377221675792, type: 2}
   m_IsPrefabParent: 0
@@ -8774,8 +8808,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec0e2b4b87ad3344a35aa655d6dcec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  estoc: 0
-  lilith: 1
+  estoc: 1
+  lilith: 0
   crag: 0
 --- !u!4 &1882735961
 Transform:

@@ -41,6 +41,7 @@ public class PlayerHealth : MonoBehaviour {
     {
         m_characterController = GetComponent<MOMovementController>();
         characterNameUI.text = characterName;
+
         cameraShake = Camera.main.GetComponent<CameraShake>();
         // Default Health
         maxHealth = health;
@@ -71,6 +72,8 @@ public class PlayerHealth : MonoBehaviour {
 
         manaText.text = "" + mana + "/" + manaPerLevel[currentMagicLevel];
         level.text = "" + currentMagicLevel + "/" + manaPerLevel.Length;
+
+        AddMana(manaPerLevel[0]);
     }
 
     // Update is called once per frame

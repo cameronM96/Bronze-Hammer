@@ -1678,11 +1678,10 @@ MonoBehaviour:
   - 3
   - 5
   magicVisuals:
-  - {fileID: 1773606270382572, guid: 2b6ac34e39df8144faed24dba2eedb9f, type: 2}
+  - {fileID: 1489353345530664, guid: bf8b6df1792c3ee4b9a02932d6e960c5, type: 2}
   - {fileID: 1923563884989994, guid: 1689d4489d0f2784b8eeeb547f2e51c9, type: 2}
-  - {fileID: 0}
+  - {fileID: 1592661341472650, guid: 3ad50f94a656fec44aac78aaa8c126e0, type: 2}
   - {fileID: 1202410328381722, guid: 76b425dc150c5f540b20df7c1fe8d6eb, type: 2}
-  cameraShake: {fileID: 0}
 --- !u!114 &114300211533274074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1714,7 +1713,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
   maxHealth: 0
-  mana: 50
+  mana: 0
   manaBars:
   - {fileID: 0}
   - {fileID: 0}
@@ -1733,6 +1732,7 @@ MonoBehaviour:
   addMana: 0
   damageIndicator: {fileID: 1287268865810298, guid: 6d46f6e1a38b0a74bb599a71d2968fc5,
     type: 2}
+  hitIndicator: {fileID: 0}
   m_AudioClips:
   - {fileID: 8300000, guid: fe18081d090812e44b5564aa37471f11, type: 3}
 --- !u!114 &114710610018921092

@@ -1279,7 +1279,6 @@ MonoBehaviour:
   - {fileID: 1425738852213952, guid: 4f4648d3c5c4f1a4488bd7754be34bd1, type: 2}
   - {fileID: 1085845944956044, guid: 6052df2d9c93c5c45bbfce39a9eb4a98, type: 2}
   - {fileID: 1429339215974446, guid: 80de70b85af15e946938c7533db2f784, type: 2}
-  cameraShake: {fileID: 0}
 --- !u!114 &114119019841418536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1297,7 +1296,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   healthText: {fileID: 0}
   maxHealth: 0
-  mana: 50
+  mana: 0
   manaBars:
   - {fileID: 0}
   - {fileID: 0}
@@ -1315,6 +1314,7 @@ MonoBehaviour:
   addMana: 0
   damageIndicator: {fileID: 1287268865810298, guid: 6d46f6e1a38b0a74bb599a71d2968fc5,
     type: 2}
+  hitIndicator: {fileID: 0}
   m_AudioClips:
   - {fileID: 8300000, guid: fe18081d090812e44b5564aa37471f11, type: 3}
 --- !u!114 &114562743392479458
