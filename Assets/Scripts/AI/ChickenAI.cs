@@ -120,14 +120,14 @@ public class ChickenAI : MonoBehaviour {
             newGoal = hit.position;
         }
 
-        Debug.Log(newGoal);
+        //Debug.Log(newGoal);
         agent.SetDestination(newGoal);
     }
 
     // Run away (run off screen)
     private void Retreat (Vector3 origin)
     {
-        Debug.Log("Chicken Retreating");
+        //Debug.Log("Chicken Retreating");
         agent.isStopped = true;
         agent.ResetPath();
         Vector3 retreatPoint = Camera.main.transform.GetChild(4).transform.position;

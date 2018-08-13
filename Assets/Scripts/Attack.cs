@@ -16,7 +16,7 @@ public class Attack : MonoBehaviour
 
     private void Awake()
     {
-        if (parentObject = null)
+        if (parentObject == null || parentObject != this.transform.root.GetChild(0).gameObject)
             StartCoroutine(InitialiseWaitTimer());
     }
 

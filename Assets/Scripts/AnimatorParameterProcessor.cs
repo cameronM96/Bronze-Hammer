@@ -84,9 +84,11 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
                             // Use left hand if lilith otherwise use right
                             case PlayerCharacters.Lilith:
                                 animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].enabled = true;
+                                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].GetComponent<Attack>().attack2 = true;
                                 break;
                             default:
                                 animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].enabled = true;
+                                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack2 = true;
                                 break;
                         }
                     }
