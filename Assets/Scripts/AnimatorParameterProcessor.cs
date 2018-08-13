@@ -105,7 +105,7 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
         }
         else
         {
-            if (!boss)
+           
                 animator.gameObject.GetComponent<MOMovementController>().attackingAnim = false;
 
             if (attack3)
