@@ -107,6 +107,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114130227683852704
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,6 +128,7 @@ MonoBehaviour:
   attack2: 1
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114177512639040912
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -147,6 +149,7 @@ MonoBehaviour:
   attack2: 0
   charge: 1
   mount: 0
+  boss: 0
 --- !u!114 &114300374854455240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,6 +170,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114492601995829270
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,6 +191,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114564490445200262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,6 +212,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114766524757267162
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,6 +233,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114786345871921680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,6 +254,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!114 &114980921910829572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -267,6 +275,7 @@ MonoBehaviour:
   attack2: 0
   charge: 0
   mount: 0
+  boss: 0
 --- !u!1101 &1101002791777227454
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1718,7 +1727,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 12070913ec34efd4383e7bb2f6e7e108, type: 2}
+  m_Motion: {fileID: 7400000, guid: fd488a39dc666c44f8231a672ec22f69, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
