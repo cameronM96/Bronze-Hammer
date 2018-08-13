@@ -76,7 +76,7 @@ public class TransitionSceneController : MonoBehaviour {
     {
         yield return new WaitForSeconds(3f);
 
-        if (SceneManager.GetActiveScene().buildIndex == 8)
+        if (SceneManager.GetActiveScene().buildIndex == 9)
         {
             SceneManager.LoadScene(0);
         }
