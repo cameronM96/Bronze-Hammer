@@ -2138,6 +2138,11 @@ Prefab:
       propertyPath: cameraShake
       value: 
       objectReference: {fileID: 785817621}
+    - target: {fileID: 114635742806235890, guid: dc777fba01e64494c82a2e14381fb415,
+        type: 2}
+      propertyPath: hitIndicator
+      value: 
+      objectReference: {fileID: 1618776327}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dc777fba01e64494c82a2e14381fb415, type: 2}
   m_IsPrefabParent: 0
@@ -16971,7 +16976,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1188389438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16983,9 +16988,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec0e2b4b87ad3344a35aa655d6dcec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  estoc: 1
+  estoc: 0
   lilith: 0
-  crag: 0
+  crag: 1
 --- !u!4 &1188389439
 Transform:
   m_ObjectHideFlags: 0
@@ -17946,6 +17951,11 @@ Prefab:
       propertyPath: m_EncountersList.Array.data[0].waves.Array.data[1].rightSideEnemies.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.data[2].rightSideEnemies.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4380639367605570, guid: cf6971c61016ac54d8eeae98d2545fba, type: 2}
       propertyPath: m_LocalPosition.x
       value: -65.9
@@ -18277,6 +18287,12 @@ Prefab:
       propertyPath: arrowIndicator
       value: 
       objectReference: {fileID: 1420037221}
+    - target: {fileID: 114678129698359686, guid: cf6971c61016ac54d8eeae98d2545fba,
+        type: 2}
+      propertyPath: m_EncountersList.Array.data[3].waves.Array.data[2].rightSideEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 1350656275142640, guid: 59584c8aded91af429ebdae1011c6406,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cf6971c61016ac54d8eeae98d2545fba, type: 2}
   m_IsPrefabParent: 0
@@ -23398,6 +23414,12 @@ Transform:
   m_Father: {fileID: 1366615478}
   m_RootOrder: 154
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1618776327 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114741702249428364, guid: 659fd05b00e02ef4f999377221675792,
+    type: 2}
+  m_PrefabInternal: {fileID: 1126468910}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1 &1623747710
 GameObject:
   m_ObjectHideFlags: 0
@@ -24509,7 +24531,7 @@ Transform:
   m_GameObject: {fileID: 1718123612}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 198.8, y: 50.069176, z: -46.4}
-  m_LocalScale: {x: 19.1, y: 10, z: 62.9}
+  m_LocalScale: {x: 19.1, y: 10, z: 73.24279}
   m_Children: []
   m_Father: {fileID: 1285848465}
   m_RootOrder: 3
@@ -28398,6 +28420,11 @@ Prefab:
       propertyPath: cameraShake
       value: 
       objectReference: {fileID: 785817621}
+    - target: {fileID: 114494604020787888, guid: 66111ff122abfe243ac5de6e3b892f85,
+        type: 2}
+      propertyPath: hitIndicator
+      value: 
+      objectReference: {fileID: 1618776327}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 66111ff122abfe243ac5de6e3b892f85, type: 2}
   m_IsPrefabParent: 0
@@ -32032,6 +32059,11 @@ Prefab:
       propertyPath: cameraShake
       value: 
       objectReference: {fileID: 785817621}
+    - target: {fileID: 114119019841418536, guid: a2b8eedf097e32f448c7c31a8226c7a7,
+        type: 2}
+      propertyPath: hitIndicator
+      value: 
+      objectReference: {fileID: 1618776327}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2b8eedf097e32f448c7c31a8226c7a7, type: 2}
   m_IsPrefabParent: 0
