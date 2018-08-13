@@ -28,6 +28,8 @@ public class AIBossController : MOMovementController
     private float attackTimeLimiter;//limits the time between boss attacks
     private int attackPicker;//randomly picks the attack the boss will perform
 
+    [HideInInspector] public float meleeAttackDistance;
+
     private bool phase2; //bool of if the boss fight is in phase 1 or 2 
 
     private Transform gameCamera; // the transform of the main game camera
@@ -62,13 +64,25 @@ public class AIBossController : MOMovementController
 
         enemy = this.gameObject;
 
+        meleeAttackDistance = 6;
+
         //set move target as boss doesn't need to surround, will need to change with multiple players
         moveTarget = GameObject.FindGameObjectWithTag("Player");
         // This will need to change when there are multiple players
         attackTarget = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(WaitTillEndOfFrame());
 
         //set the game camera
         gameCamera = Camera.main.transform;
+    }
+
+    IEnumerator WaitTillEndOfFrame ()
+    {
+        yield return new WaitForEndOfFrame();
+        //set move target as boss doesn't need to surround, will need to change with multiple players
+        moveTarget = GameObject.FindGameObjectWithTag("Player");
+        // This will need to change when there are multiple players
+        attackTarget = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -107,14 +121,14 @@ public class AIBossController : MOMovementController
         moveDirection = vMov * gameCameraForward + hMov * gameCamera.right;
 
         // add steering for when there are other AI in the way
-
+        float dist1 = Vector3.Distance(attackTarget.transform.position, enemy.transform.position);
+        float dist2 = Vector3.Distance(moveTarget.transform.position, enemy.transform.position);
+        //Debug.Log(dist);
         // Attack if enemy is close enough and roughly the same z position AND facing the player
-        if ((attackTarget.transform.position - enemy.transform.position).magnitude < 2 &&
-            (attackTarget.transform.position.z - enemy.transform.position.z < 0.2 &&
-            attackTarget.transform.position.z - enemy.transform.position.z > -0.2))
+        if (dist1 < meleeAttackDistance)
         {
+            //Debug.Log("Attacking");
             attack = true;
-           // Debug.Log("Attacking");
         }
         else
         {
