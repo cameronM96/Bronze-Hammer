@@ -27,18 +27,21 @@ public class PlayerHealth : MonoBehaviour {
     public bool addMana = false;
     private bool dead = false;
     [SerializeField] private GameObject damageIndicator;
+    [SerializeField] private Image hitIndicator;
 
     private Animator m_Anim;
 
     private AudioSource m_Audio;
     [SerializeField] private AudioClip[] m_AudioClips;
     private MOMovementController m_characterController;
+    private CameraShake cameraShake;
 
     // Use this for initialization
     void Awake()
     {
         m_characterController = GetComponent<MOMovementController>();
         characterNameUI.text = characterName;
+        cameraShake = Camera.main.GetComponent<CameraShake>();
         // Default Health
         maxHealth = health;
         healthBar.fillAmount = 1;
@@ -89,6 +92,8 @@ public class PlayerHealth : MonoBehaviour {
             indicator.transform.position = this.transform.position;
             indicator.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "" + damageTaken;
             indicator.transform.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.red;
+            StartCoroutine(FlashScreen(Color.red));
+            StartCoroutine(cameraShake.Shake(0.4f,0.1f));
 
             if (health < 0)
                 health = 0;
@@ -135,6 +140,15 @@ public class PlayerHealth : MonoBehaviour {
         }
     }
 
+    IEnumerator FlashScreen(Color color)
+    {
+        hitIndicator.enabled = true;
+        color.a = 0.35f;
+        hitIndicator.color = color;
+        yield return new WaitForSeconds(0.4f);
+        hitIndicator.enabled = false;
+    }
+
     public void AddMana(int manaValue)
     {
         mana += manaValue;
@@ -148,6 +162,7 @@ public class PlayerHealth : MonoBehaviour {
         indicator.transform.position = this.transform.position;
         indicator.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "" + manaValue;
         indicator.transform.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.blue;
+        StartCoroutine(FlashScreen(Color.blue));
 
         // Set each bar relative to the manaPerLevel
         foreach (Image manabar in manaBars)

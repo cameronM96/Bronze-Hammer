@@ -9,7 +9,12 @@ public class Magic : MonoBehaviour {
     [SerializeField] private float[] magicLevelMulitplier;
     [SerializeField] private GameObject[] magicVisuals;
     private GameObject magicEffect;
-    public CameraShake cameraShake;
+    private CameraShake cameraShake;
+
+    private void Awake()
+    {
+        cameraShake = Camera.main.GetComponent<CameraShake>();
+    }
 
     public void CastMagic (GameObject caster, float magicDamage, int magicLevel, PlayerCharacters player)
     {
@@ -30,25 +35,29 @@ public class Magic : MonoBehaviour {
                 enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevelMulitplier[magicLevel - 1]), knockback, 0);
                 enemy.GetComponent<MOMovementController>().freeze = true;
             }
-        }
 
-        switch (player)
+            switch (player)
+            {
+                // Determine which character casted the magic
+                case PlayerCharacters.Estoc:
+                    EstocMagic(magicLevel, caster);
+                    break;
+                case PlayerCharacters.Lilith:
+                    LilithMagic(magicLevel, caster);
+                    break;
+                case PlayerCharacters.Crag:
+                    CragMagic(magicLevel, caster);
+                    break;
+                default:
+                    break;
+            }
+
+            StartCoroutine(FreezeEnemies(waitTimer));
+        }
+        else
         {
-            // Determine which character casted the magic
-            case PlayerCharacters.Estoc:
-                EstocMagic(magicLevel, caster);
-                break;
-            case PlayerCharacters.Lilith:
-                LilithMagic(magicLevel, caster);
-                break;
-            case PlayerCharacters.Crag:
-                CragMagic(magicLevel, caster);
-                break;
-            default:
-                break;
+            // No enemies Found
         }
-
-        StartCoroutine(FreezeEnemies(waitTimer));
     }
 
     // Freeze enemy timer 
@@ -83,19 +92,21 @@ public class Magic : MonoBehaviour {
                 }
                 //magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
                 //magicEffect.transform.parent = null;
+                StartCoroutine(cameraShake.Shake(5f, .1f));
                 break;
             case 2:
                 // Crete Level 2 spell visuals (Centre multiple)
                 magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
                 magicEffect.transform.parent = null;
                 magicEffect.transform.position = CameraToGround(caster);
+                StartCoroutine(cameraShake.Shake(5f, .2f));
                 break;
             case 3:
                 // Crete Level 3 spell visuals (Centre 1)
                 magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
                 magicEffect.transform.parent = null;
                 magicEffect.transform.position = CameraToGround(caster);
-                StartCoroutine(cameraShake.Shake(3f, .4f));
+                StartCoroutine(cameraShake.Shake(5f, .4f));
                 break;
             default:
                 break;
@@ -114,24 +125,27 @@ public class Magic : MonoBehaviour {
                     magicEffect = Instantiate(magicVisuals[magicLevel - 1], enemy.transform);
                     magicEffect.transform.parent = null;
                 }
+                StartCoroutine(cameraShake.Shake(5f, .1f));
                 break;
             case 2:
                 // Crete Level 1 spell visuals (on Player)
                 magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
                 magicEffect.transform.parent = null;
+                StartCoroutine(cameraShake.Shake(5f, .2f));
                 break;
             case 3:
                 // Crete Level 2 spell visuals (Centre)
                 magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
                 magicEffect.transform.parent = null;
                 magicEffect.transform.position = CameraToGround(caster);
+                StartCoroutine(cameraShake.Shake(5f, .4f));
                 break;
             case 4:
                 // Crete Level 2 spell visuals (Centre)
                 magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
                 magicEffect.transform.parent = null;
                 magicEffect.transform.position = CameraToGround(caster);
-                StartCoroutine(cameraShake.Shake(3f, .4f));
+                StartCoroutine(cameraShake.Shake(5f, .6f));
                 break;
             default:
                 break;
@@ -147,12 +161,13 @@ public class Magic : MonoBehaviour {
                 // Crete Level 1 spell visuals (on Player)
                 magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
                 magicEffect.transform.parent = null;
+                StartCoroutine(cameraShake.Shake(5f, .2f));
                 break;
             case 2:
                 // Crete Level 1 spell visuals (on Player)
                 magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
                 magicEffect.transform.parent = null;
-                StartCoroutine(cameraShake.Shake(3f, .4f));
+                StartCoroutine(cameraShake.Shake(5f, .5f));
                 break;
             default:
                 break;

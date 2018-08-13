@@ -78,7 +78,18 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
                         animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack3 = true;
 
                     if (attack2)
-                        animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack2 = true;
+                    {
+                        switch (animator.gameObject.GetComponent<MOPlayerInputController>().playerCharacter)
+                        {
+                            // Use left hand if lilith otherwise use right
+                            case PlayerCharacters.Lilith:
+                                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].enabled = true;
+                                break;
+                            default:
+                                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].enabled = true;
+                                break;
+                        }
+                    }
                 }
             }
         }
@@ -112,7 +123,18 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
                 animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack3 = false;
 
             if (attack2 && !boss)
-                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack2 = false;
+            {
+                switch (animator.gameObject.GetComponent<MOPlayerInputController>().playerCharacter)
+                {
+                    // Use left hand if lilith otherwise use right
+                    case PlayerCharacters.Lilith:
+                        animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].enabled = false;
+                        break;
+                    default:
+                        animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].enabled = false;
+                        break;
+                }
+            }
         }
 
         if (getUp)
