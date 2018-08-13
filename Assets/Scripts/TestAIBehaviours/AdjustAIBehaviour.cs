@@ -19,6 +19,7 @@ public class AdjustAIBehaviour : MonoBehaviour {
     private GameObject[] vehicles;
 
     public GameObject flowField;
+    public float numberOfVehicles;
 
     public float updateTimer = 1;
     private float timer = 0;
@@ -46,6 +47,7 @@ public class AdjustAIBehaviour : MonoBehaviour {
             if (randomizeBehaviour)
                 RandomizeBehaviour();
 
+            numberOfVehicles = FindVehicles().Length;
             UpdateVehiclesBehaviour(FindVehicles());
             flowField.GetComponent<FlowField>().updateOn = moveArrows;
         }
