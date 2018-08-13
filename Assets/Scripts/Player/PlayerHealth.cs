@@ -171,6 +171,13 @@ public class PlayerHealth : MonoBehaviour {
         m_Audio.clip = m_AudioClips[1];
         m_Audio.Play();
 
+        //int manaSum = 0;
+        //foreach (Image manabar in manaBars)
+        //{
+        //    for (int i = 0; )
+        //    if (mana < )
+        //}
+
         // Set each bar relative to the manaPerLevel
         foreach (Image manabar in manaBars)
         {
@@ -189,7 +196,7 @@ public class PlayerHealth : MonoBehaviour {
                 }
                 else
                 {
-                    manaText.text = "" + currentMana + "/" + manaPerLevel[magiclevel -1];
+                    manaText.text = "" + currentMana + "/" + manaPerLevel[magiclevel - 1];
                 }
             }
             else if (manaleft != 0)

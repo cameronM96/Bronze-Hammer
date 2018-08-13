@@ -40,24 +40,22 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
 
         if (boss)
         {
+            animator.gameObject.GetComponent<MOMovementController>().attackingAnim = true;
             if (attack)
             {
                 animator.SetBool("Attack 1", false);
-                animator.gameObject.GetComponent<MOMovementController>().attackingAnim = true;
                 animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].enabled = true;
             }
 
             if (attack2)
             {
                 animator.SetBool("Attack 2", false);
-                animator.gameObject.GetComponent<MOMovementController>().attackingAnim = true;
                 animator.gameObject.GetComponent<MOMovementController>().attackTrigger[2].enabled = true;
             }
 
             if (attack3)
             {
                 animator.SetBool("Attack 3", false);
-                animator.gameObject.GetComponent<MOMovementController>().attackingAnim = true;
                 animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack3 = true;
                 animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].enabled = true;
             }
@@ -126,6 +124,28 @@ public class AnimatorParameterProcessor : StateMachineBehaviour {
         {
             if (animator.gameObject.GetComponent<MountingController>().mountedCharacter != null)
                 animator.gameObject.GetComponent<MountingController>().mountedCharacter.GetComponent<MOMovementController>().attackingAnim = false;
+        }
+        else if (boss)
+        {
+            animator.gameObject.GetComponent<MOMovementController>().attackingAnim = false;
+            if (attack)
+            {
+                animator.SetBool("Attack 1", false);
+                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[1].enabled = false;
+            }
+
+            if (attack2)
+            {
+                animator.SetBool("Attack 2", false);
+                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[2].enabled = false;
+            }
+
+            if (attack3)
+            {
+                animator.SetBool("Attack 3", false);
+                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].GetComponent<Attack>().attack3 = false;
+                animator.gameObject.GetComponent<MOMovementController>().attackTrigger[0].enabled = false;
+            }
         }
         else
         {
