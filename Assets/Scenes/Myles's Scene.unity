@@ -514,6 +514,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 371037339}
+  - component: {fileID: 371037341}
   - component: {fileID: 371037340}
   m_Layer: 0
   m_Name: Attack 1 Collision
@@ -547,6 +548,26 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 7
   m_Center: {x: 0, y: 3, z: 0}
+--- !u!114 &371037341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 371037338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51daa11a8229bc54a9a30c4dbc5eca6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 25
+  comboMultiplier: 1
+  playerWeapon: 0
+  crag: 0
+  parentObject: {fileID: 0}
+  attack3: 0
+  attack2: 0
+  m_Audio: {fileID: 0}
+  hitObjects: []
 --- !u!114 &475040716 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114688516321254968, guid: 659fd05b00e02ef4f999377221675792,
@@ -1694,6 +1715,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 725879338}
+  - component: {fileID: 725879340}
   - component: {fileID: 725879339}
   m_Layer: 0
   m_Name: Attack 2 Collision
@@ -1727,6 +1749,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.75, y: 2.8, z: 2.84}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &725879340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 725879337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51daa11a8229bc54a9a30c4dbc5eca6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 25
+  comboMultiplier: 1
+  playerWeapon: 0
+  crag: 0
+  parentObject: {fileID: 0}
+  attack3: 0
+  attack2: 0
+  m_Audio: {fileID: 0}
+  hitObjects: []
 --- !u!198 &728988322 stripped
 ParticleSystem:
   m_PrefabParentObject: {fileID: 198668046844343858, guid: 30373e3e540abb044b0bb93f2e09058e,

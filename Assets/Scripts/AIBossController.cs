@@ -18,7 +18,7 @@ public class AIBossController : MOMovementController
     private float distanceToPlayer; //how far the boss is from the player
 
     private float teleportDistance = 10; //minimum distance for the boss to teleport away from the player
-    private float teleportTime; //cooldown of the teleport ability
+    private float teleportTime=20; //cooldown of the teleport ability
     //locations the boss can teleport to
     public GameObject teleportLocation1;
     public GameObject teleportLocation2;
