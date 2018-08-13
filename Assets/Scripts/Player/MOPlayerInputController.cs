@@ -64,6 +64,11 @@ public class MOPlayerInputController : MOMovementController
             sprinting = false;
             //Debug.Log("not sprinting");
         }
+
+        if (Input.GetButtonDown("Dismount Button"))
+        {
+            DisMount();
+        }
     }
 
     //called once per physics update
