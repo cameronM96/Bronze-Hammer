@@ -744,6 +744,7 @@ RectTransform:
   - {fileID: 142542507}
   - {fileID: 1906792630}
   - {fileID: 1719645305}
+  - {fileID: 1677918162}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1152,8 +1153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2074.4998}
-  m_SizeDelta: {x: 0, y: 4149}
+  m_AnchoredPosition: {x: 0, y: -2193.9}
+  m_SizeDelta: {x: 0, y: 4387.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &820536581
 MonoBehaviour:
@@ -1189,15 +1190,16 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\n\n\n\n~~~~~Bronze Hammer~~~~~\n\n\nCreated by \"Studio 181\"\n\n\n\n\n\n\n~~Programmers~~\n\nCameron
     Mullins\n\nMyles Okorn\n\n\n~~Designers~~\n\nStephen Cavaleri\n\nCameron Davis\n\nCharles
-    Lo Giudice\n\n\n~~Downloaded Assets~~\n\nMedieVox Cities FREE by [RANDOM ADJECTIVE]
-    STUDIOS\r\n\nMedieVox Farms FREE by [RANDOM ADJECTIVE] STUDIOS\r\n\nMedieVox Nature
-    FREE by [RANDOM ADJECTIVE] STUDIOS\r\n\n\u2018Pixel Font - Trip Five\u2019 by
-    PIXELMUSH\r\n\nHand Painted Stone Floor Pack by M-Assets\r\n\nPBR Cone Pack by
-    UCS\r\n\nHana Pixel Font by Mystery Corgi\r\n\nBubble Font (Free Version) by Jazz
-    Create Games\r\n\nMounts by Seri\u2019s voxel characters 01 - Dragon Free v1.0
-    by Daijiro Serizawa\n\r\nRPG Unitframes #1 - POWERFUL METAL by Wello Graphics\r\n\nSimple
-    FX - Cartoon Particles by Synty Studios\r\n\nVoxel - Dungeon Pack v 1.0 by 3D.RINA\r\n\nVoxel
-    Series - Dungeon Set by GIGA_STEVE\r\n\nVoxel Effects - Lightning by Swift Games\r\n\nSimple
+    Lo Giudice\n\n\n\n~~Animations~~\n\nRetrieved from Adobe Mixamo\n\n\n\n~~Downloaded
+    Assets~~\n\nMedieVox Cities FREE by [RANDOM ADJECTIVE] STUDIOS\r\n\nMedieVox Farms
+    FREE by [RANDOM ADJECTIVE] STUDIOS\r\n\nMedieVox Nature FREE by [RANDOM ADJECTIVE]
+    STUDIOS\r\n\n\u2018Pixel Font - Trip Five\u2019 by PIXELMUSH\r\n\nHand Painted
+    Stone Floor Pack by M-Assets\r\n\nPBR Cone Pack by UCS\r\n\nHana Pixel Font by
+    Mystery Corgi\r\n\nBubble Font (Free Version) by Jazz Create Games\r\n\nMounts
+    by Seri\u2019s voxel characters 01 - Dragon Free v1.0 by Daijiro Serizawa\n\r\nRPG
+    Unitframes #1 - POWERFUL METAL by Wello Graphics\r\n\nSimple FX - Cartoon Particles
+    by Synty Studios\r\n\nVoxel - Dungeon Pack v 1.0 by 3D.RINA\r\n\nVoxel Series
+    - Dungeon Set by GIGA_STEVE\r\n\nVoxel Effects - Lightning by Swift Games\r\n\nSimple
     Smoke Set by Enjoy Life\r\n\nTextMesh Pro by Unity Technologies\r\n\nSkybox Series
     Free by Avionx\r\n\n\n~~Images Used~~\n\nSemiDeadForestFloorTexture - https://www.google.com.au/search?biw=1366&bih=673&tbm=isch&sa=1&ei=hDlwW6zdKIv-8gW994PwBA&q=dead+forest+floor+texture&oq=dead+forest+floor+texture&gs_l=img.3...2534.3736.0.3918.8.7.0.0.0.0.211.402.0j1j1.2.0....0...1c.1.64.img..6.1.191...0i30k1j0i8i30k1.0.5n2xkMPuz7E#imgdii=fl6ee1j2VhDvwM:&imgrc=cfYInKaLhBJa8M:\n\nForest
     Floor Texture - https://www.deviantart.com/bouvs/art/forest-floor-texture-626901754\n\nStone
@@ -1554,8 +1556,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 424445767}
   m_HandleRect: {fileID: 424445766}
   m_Direction: 2
-  m_Value: 0.99999994
-  m_Size: 0.08604282
+  m_Value: 1
+  m_Size: 0.08174285
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1612,6 +1614,7 @@ MonoBehaviour:
   updateTimer: 0.01
   transitionDelay: 5
   startDelay: 4
+  fade: {fileID: 1677918164}
 --- !u!1001 &1087569294
 Prefab:
   m_ObjectHideFlags: 0
@@ -2351,6 +2354,104 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!1 &1677918161
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1677918162}
+  - component: {fileID: 1677918166}
+  - component: {fileID: 1677918165}
+  - component: {fileID: 1677918164}
+  - component: {fileID: 1677918163}
+  m_Layer: 5
+  m_Name: FadeBlack
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1677918162
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1677918161}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -136}
+  m_LocalScale: {x: 0.01096, y: 0.01096, z: 0.01096}
+  m_Children: []
+  m_Father: {fileID: 517511139}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -241.6, y: -196.4}
+  m_SizeDelta: {x: 317432.5, y: 230911.6}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1677918163
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1677918161}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!95 &1677918164
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1677918161}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 436a1dbb43f4dd741b8e45dfd77859bb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1677918165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1677918161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -98529514, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &1677918166
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1677918161}
 --- !u!1 &1684348776
 GameObject:
   m_ObjectHideFlags: 0

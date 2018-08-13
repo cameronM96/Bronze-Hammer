@@ -12,6 +12,7 @@ public class AutoScroll1 : MonoBehaviour {
     public float updateTimer = 1;
     public float transitionDelay = 5f;
     public float startDelay = 5f;
+    public Animator fade;
     private float timer = 0;
     private bool stop = true;
 
@@ -43,6 +44,7 @@ public class AutoScroll1 : MonoBehaviour {
             else
             {
                 stop = true;
+                fade.SetBool("Skip", true);
                 StartCoroutine(ReturnToMenu(transitionDelay));
             }
         }
