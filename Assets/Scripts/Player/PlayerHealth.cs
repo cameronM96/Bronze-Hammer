@@ -12,8 +12,8 @@ public class PlayerHealth : MonoBehaviour {
     [SerializeField] private Image healthBar;
     [SerializeField] private Text healthText;
     [SerializeField] private float maxHealth;
-    public int mana;
-    private int totalMaxMana = 0;
+    public float mana;
+    [SerializeField] private float totalMaxMana = 0;
     public Image[] manaBars;
     [SerializeField] private Text manaText;
     public int[] manaPerLevel;
@@ -171,6 +171,7 @@ public class PlayerHealth : MonoBehaviour {
         m_Audio.clip = m_AudioClips[1];
         m_Audio.Play();
 
+        float manaSoFar = 0;
         // Set each bar relative to the manaPerLevel
         foreach (Image manabar in manaBars)
         {
@@ -189,15 +190,24 @@ public class PlayerHealth : MonoBehaviour {
                 }
                 else
                 {
-                    manaText.text = "" + currentMana + "/" + manaPerLevel[magiclevel - 1];
+                    
                 }
+
+                manaSoFar += currentMana;
+
+                // Update this manabar
+                manabar.fillAmount = (manaSoFar / totalMaxMana);
             }
             else if (manaleft != 0)
             {
                 // All mana has been accounted for
                 currentMana = manaleft;
                 manaleft = 0;
-                manaText.text = "" + currentMana + "/" + manaPerLevel[magiclevel];
+
+                manaSoFar += currentMana;
+
+                // Update this manabar
+                manabar.fillAmount = (manaSoFar / totalMaxMana);
             }
             else
             {
@@ -206,11 +216,10 @@ public class PlayerHealth : MonoBehaviour {
                 manaleft = 0;
             }
 
-            // Update this manabar
-            manabar.fillAmount = mana / totalMaxMana;
         }
 
         // Update Magic level
+        manaText.text = "" + mana + "/" + totalMaxMana;
         level.text = "" + magiclevel + "/" + manaPerLevel.Length;
         currentMagicLevel = magiclevel;
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Magic : MonoBehaviour {
 
     private GameObject[] enemies;
+    private GameObject[] boss;
     [SerializeField] private float waitTimer;
     [SerializeField] private float[] magicLevelMulitplier;
     [SerializeField] private GameObject[] magicVisuals;
@@ -20,11 +21,25 @@ public class Magic : MonoBehaviour {
     {
         // Find all enemies
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        boss = GameObject.FindGameObjectsWithTag("Boss");
         
-        if (enemies != null)
+        if (enemies != null || boss != null)
         {
             // Deal damage to all enemies and freeze them for the duration of the spell
             foreach (GameObject enemy in enemies)
+            {
+                enemy.transform.parent.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+
+                bool knockback = true;
+                if (enemy.GetComponent<MOMovementController>().mounted)
+                    knockback = false;
+
+                enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevelMulitplier[magicLevel - 1]), knockback, 0);
+                enemy.GetComponent<MOMovementController>().freeze = true;
+            }
+
+            // Deal damage to all bosses and freeze them for the duration of the spell
+            foreach (GameObject enemy in boss)
             {
                 enemy.transform.parent.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
 
@@ -90,6 +105,13 @@ public class Magic : MonoBehaviour {
                     magicEffect.transform.parent = null;
                     enemy.transform.parent.GetComponent<Rigidbody>().velocity = Vector3.up * 30;
                 }
+                // Crete Level 1 spell visuals (all bosses)
+                foreach (GameObject enemy in boss)
+                {
+                    magicEffect = Instantiate(magicVisuals[magicLevel - 1], enemy.transform);
+                    magicEffect.transform.parent = null;
+                    enemy.transform.parent.GetComponent<Rigidbody>().velocity = Vector3.up * 30;
+                }
                 //magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
                 //magicEffect.transform.parent = null;
                 StartCoroutine(cameraShake.Shake(5f, .1f));
@@ -124,6 +146,12 @@ public class Magic : MonoBehaviour {
                 {
                     magicEffect = Instantiate(magicVisuals[magicLevel - 1], enemy.transform);
                     magicEffect.transform.parent = null;
+                }
+                foreach (GameObject enemy in boss)
+                {
+                    magicEffect = Instantiate(magicVisuals[magicLevel - 1], enemy.transform);
+                    magicEffect.transform.parent = null;
+                    enemy.transform.parent.GetComponent<Rigidbody>().velocity = Vector3.up * 30;
                 }
                 StartCoroutine(cameraShake.Shake(5f, .1f));
                 break;
