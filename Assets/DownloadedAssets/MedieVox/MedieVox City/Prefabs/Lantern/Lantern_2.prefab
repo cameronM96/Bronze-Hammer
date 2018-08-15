@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4446977575111772}
   - component: {fileID: 33430997445977688}
   - component: {fileID: 23452045848940526}
+  - component: {fileID: 65813295672984592}
   m_Layer: 0
   m_Name: Lantern_2
   m_TagString: Untagged
@@ -34,9 +35,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1873594089713304}
-  m_LocalRotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 58.22999, y: 0.025513442, z: 9.197064}
+  m_LocalScale: {x: 0.42519948, y: 0.42519948, z: 0.42519948}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -54,6 +55,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
   m_Materials:
   - {fileID: 2100000, guid: 248c8675de07462499ec70dac286696c, type: 2}
   m_StaticBatchInfo:
@@ -82,3 +84,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1873594089713304}
   m_Mesh: {fileID: 4300000, guid: 3ab94958084e8694da5a60c6e20faa77, type: 3}
+--- !u!65 &65813295672984592
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1873594089713304}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 1.1999998, y: 4.799999, z: 1.1999998}
+  m_Center: {x: -0.000015258789, y: 2.3999994, z: -0.000002861023}

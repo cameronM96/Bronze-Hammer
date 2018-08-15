@@ -82,8 +82,11 @@ public class MOPlayerInputController : MOMovementController
 
         if (Input.GetButtonDown("Dismount Button"))
         {
-            DisMount();
-            Player.GetComponent<MOMovementController>().Jump(jumpHeight/2);
+            if (GetComponent<MOMovementController>().mounted)
+            {
+                DisMount();
+                Player.GetComponent<MOMovementController>().Jump(jumpHeight / 2);
+            }
         }
 
         //get the input for horizontal and vertical axis through unity controls

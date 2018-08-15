@@ -31,7 +31,7 @@ public class PauseMenu : MonoBehaviour {
         PauseBackground.gameObject.SetActive(true);
         PauseBackground.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
         PauseBackground.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
-        PauseBackground.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+        PauseBackground.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
         eventSystem.SetSelectedGameObject(PauseBackground.transform.GetChild(0).GetChild(0).GetChild(0).gameObject);
         eventSystem.SetSelectedGameObject(PauseBackground.transform.GetChild(0).GetChild(0).GetChild(1).gameObject);
         Time.timeScale = 0f;
