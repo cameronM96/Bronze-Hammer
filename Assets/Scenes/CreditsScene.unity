@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1153,8 +1153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2193.9}
-  m_SizeDelta: {x: 0, y: 4387.8}
+  m_AnchoredPosition: {x: 0, y: -2365.55}
+  m_SizeDelta: {x: 0, y: 4731.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &820536581
 MonoBehaviour:
@@ -1191,15 +1191,17 @@ MonoBehaviour:
   m_Text: "\n\n\n\n~~~~~Bronze Hammer~~~~~\n\n\nCreated by \"Studio 181\"\n\n\n\n\n\n\n~~Programmers~~\n\nCameron
     Mullins\n\nMyles Okorn\n\n\n~~Designers~~\n\nStephen Cavaleri\n\nCameron Davis\n\nCharles
     Lo Giudice\n\n\n\n~~Animations~~\n\nRetrieved from Adobe Mixamo\n\n\n\n~~Downloaded
-    Assets~~\n\nMedieVox Cities FREE by [RANDOM ADJECTIVE] STUDIOS\r\n\nMedieVox Farms
-    FREE by [RANDOM ADJECTIVE] STUDIOS\r\n\nMedieVox Nature FREE by [RANDOM ADJECTIVE]
-    STUDIOS\r\n\n\u2018Pixel Font - Trip Five\u2019 by PIXELMUSH\r\n\nHand Painted
-    Stone Floor Pack by M-Assets\r\n\nPBR Cone Pack by UCS\r\n\nHana Pixel Font by
-    Mystery Corgi\r\n\nBubble Font (Free Version) by Jazz Create Games\r\n\nMounts
-    by Seri\u2019s voxel characters 01 - Dragon Free v1.0 by Daijiro Serizawa\n\r\nRPG
-    Unitframes #1 - POWERFUL METAL by Wello Graphics\r\n\nSimple FX - Cartoon Particles
-    by Synty Studios\r\n\nVoxel - Dungeon Pack v 1.0 by 3D.RINA\r\n\nVoxel Series
-    - Dungeon Set by GIGA_STEVE\r\n\nVoxel Effects - Lightning by Swift Games\r\n\nSimple
+    Assets~~\n\n'Female scream' from halloween female scream | Sound Effect by crister
+    romeger\n\n'male scream 1' fromSound Effects - Death Screams 2 by DrGarkng\n\n',ale
+    scream 2' from Mortal Kombat by Midway \n\nMedieVox Cities FREE by [RANDOM ADJECTIVE]
+    STUDIOS\r\n\nMedieVox Farms FREE by [RANDOM ADJECTIVE] STUDIOS\r\n\nMedieVox Nature
+    FREE by [RANDOM ADJECTIVE] STUDIOS\r\n\n\u2018Pixel Font - Trip Five\u2019 by
+    PIXELMUSH\r\n\nHand Painted Stone Floor Pack by M-Assets\r\n\nPBR Cone Pack by
+    UCS\r\n\nHana Pixel Font by Mystery Corgi\r\n\nBubble Font (Free Version) by Jazz
+    Create Games\r\n\nMounts by Seri\u2019s voxel characters 01 - Dragon Free v1.0
+    by Daijiro Serizawa\n\r\nRPG Unitframes #1 - POWERFUL METAL by Wello Graphics\r\n\nSimple
+    FX - Cartoon Particles by Synty Studios\r\n\nVoxel - Dungeon Pack v 1.0 by 3D.RINA\r\n\nVoxel
+    Series - Dungeon Set by GIGA_STEVE\r\n\nVoxel Effects - Lightning by Swift Games\r\n\nSimple
     Smoke Set by Enjoy Life\r\n\nTextMesh Pro by Unity Technologies\r\n\nSkybox Series
     Free by Avionx\r\n\n\n~~Images Used~~\n\nSemiDeadForestFloorTexture - https://www.google.com.au/search?biw=1366&bih=673&tbm=isch&sa=1&ei=hDlwW6zdKIv-8gW994PwBA&q=dead+forest+floor+texture&oq=dead+forest+floor+texture&gs_l=img.3...2534.3736.0.3918.8.7.0.0.0.0.211.402.0j1j1.2.0....0...1c.1.64.img..6.1.191...0i30k1j0i8i30k1.0.5n2xkMPuz7E#imgdii=fl6ee1j2VhDvwM:&imgrc=cfYInKaLhBJa8M:\n\nForest
     Floor Texture - https://www.deviantart.com/bouvs/art/forest-floor-texture-626901754\n\nStone
@@ -1556,8 +1558,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 424445767}
   m_HandleRect: {fileID: 424445766}
   m_Direction: 2
-  m_Value: 0.99999994
-  m_Size: 0.08174285
+  m_Value: 1
+  m_Size: 0.07625397
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2348,7 +2350,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1613006458}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -1200242548, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
