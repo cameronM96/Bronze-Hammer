@@ -17,14 +17,14 @@ public class AIBossController : MOMovementController
 
     private float distanceToPlayer; //how far the boss is from the player
 
-    private float teleportDistance = 10; //minimum distance for the boss to teleport away from the player
-    private float teleportTime=20; //cooldown of the teleport ability
-    //locations the boss can teleport to
-    public GameObject teleportLocation1;
-    public GameObject teleportLocation2;
-    public GameObject teleportLocation3;
-    public GameObject teleportLocation4;
-    public GameObject teleportLocation5;
+    //private float teleportDistance = 10; //minimum distance for the boss to teleport away from the player
+    //private float teleportTime=20; //cooldown of the teleport ability
+    ////locations the boss can teleport to
+    //public GameObject teleportLocation1;
+    //public GameObject teleportLocation2;
+    //public GameObject teleportLocation3;
+    //public GameObject teleportLocation4;
+    //public GameObject teleportLocation5;
 
     private float attackTimeLimiter;//limits the time between boss attacks
     private int attackPicker;//randomly picks the attack the boss will perform
@@ -77,11 +77,11 @@ public class AIBossController : MOMovementController
         attackTarget = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(WaitTillEndOfFrame());
 
-        teleportLocation1 = GameObject.Find("TP1");
-        teleportLocation2 = GameObject.Find("TP2");
-        teleportLocation3 = GameObject.Find("TP3");
-        teleportLocation4 = GameObject.Find("TP4");
-        teleportLocation5 = GameObject.Find("TP5");
+        //teleportLocation1 = GameObject.Find("TP1");
+        //teleportLocation2 = GameObject.Find("TP2");
+        //teleportLocation3 = GameObject.Find("TP3");
+        //teleportLocation4 = GameObject.Find("TP4");
+        //teleportLocation5 = GameObject.Find("TP5");
 
 
         //set the game camera
@@ -102,10 +102,10 @@ public class AIBossController : MOMovementController
     {
         base.Update();
 
-        if (teleportTime >= 0.0f)
-        {
-            teleportTime -= Time.deltaTime;
-        }
+        //if (teleportTime >= 0.0f)
+        //{
+        //    teleportTime -= Time.deltaTime;
+        //}
 
         if (attackTimeLimiter >= 0.0f)
         {
@@ -134,7 +134,7 @@ public class AIBossController : MOMovementController
 
         // add steering for when there are other AI in the way
         float dist1 = Vector3.Distance(attackTarget.transform.position, enemy.transform.position);
-        float dist2 = Vector3.Distance(moveTarget.transform.position, enemy.transform.position);
+       // float dist2 = Vector3.Distance(moveTarget.transform.position, enemy.transform.position);
         //Debug.Log(dist);
 
         // Attack if enemy is close enough and roughly the same z position AND facing the player
@@ -178,36 +178,36 @@ public class AIBossController : MOMovementController
             m_health.bossHealth = 750;
             phase2 = true;
         }
-        //use teleport ability
-        if (1 == 2)//distanceToPlayer <= teleportDistance && teleportTime <= 0.0f)
-        {
-            int teleportLocationSelector = Random.Range(1, 5);
-            if (teleportLocationSelector == 1)
-            {
-                gameObject.transform.SetPositionAndRotation(teleportLocation1.transform.position, gameObject.transform.rotation);
-            }
-            else if (teleportLocationSelector == 2)
-            {
-                gameObject.transform.SetPositionAndRotation(teleportLocation2.transform.position, gameObject.transform.rotation);
+        ////use teleport ability
+        //if (attack&&!phase2&&teleportTime<=0.0f)//distanceToPlayer <= teleportDistance && teleportTime <= 0.0f)
+        //{
+        //    int teleportLocationSelector = Random.Range(1, 5);
+        //    if (teleportLocationSelector == 1)
+        //    {
+        //        gameObject.transform.SetPositionAndRotation(teleportLocation1.transform.position, gameObject.transform.rotation);
+        //    }
+        //    else if (teleportLocationSelector == 2)
+        //    {
+        //        gameObject.transform.SetPositionAndRotation(teleportLocation2.transform.position, gameObject.transform.rotation);
 
-            }
-            else if (teleportLocationSelector == 3)
-            {
-                gameObject.transform.SetPositionAndRotation(teleportLocation3.transform.position, gameObject.transform.rotation);
+        //    }
+        //    else if (teleportLocationSelector == 3)
+        //    {
+        //        gameObject.transform.SetPositionAndRotation(teleportLocation3.transform.position, gameObject.transform.rotation);
 
-            }
-            else if (teleportLocationSelector == 4)
-            {
-                gameObject.transform.SetPositionAndRotation(teleportLocation4.transform.position, gameObject.transform.rotation);
+        //    }
+        //    else if (teleportLocationSelector == 4)
+        //    {
+        //        gameObject.transform.SetPositionAndRotation(teleportLocation4.transform.position, gameObject.transform.rotation);
 
-            }
-            else if (teleportLocationSelector == 5)
-            {
-                gameObject.transform.SetPositionAndRotation(teleportLocation5.transform.position, gameObject.transform.rotation);
+        //    }
+        //    else if (teleportLocationSelector == 5)
+        //    {
+        //        gameObject.transform.SetPositionAndRotation(teleportLocation5.transform.position, gameObject.transform.rotation);
 
-            }
-            teleportTime = 10.0f;
-        }
+        //    }
+        //    teleportTime = 10.0f;
+        //}
     }
 
     private void AttackPlayer(int attackNumber, bool isPhaseTwo)

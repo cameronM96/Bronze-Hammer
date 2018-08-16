@@ -159,7 +159,7 @@ public class AIController : MOMovementController
             float xDifference = attackTarget.transform.position.x - transform.parent.position.x;                // Used to determine which side of the target the vehicle is on in the z axis.
                                                                                                                 //Debug.Log(xDifference);
             float zDifference = attackTarget.transform.position.z - transform.parent.position.z;                // Used to determine which side of the target the vehicle is on in the z axis.
-            float zDistance = Mathf.Abs(attackTarget.transform.position.z - transform.parent.position.z);       // Used to determine how far away from the target the vehicle is but only use the z axis.
+            //float zDistance = Mathf.Abs(attackTarget.transform.position.z - transform.parent.position.z);       // Used to determine how far away from the target the vehicle is but only use the z axis.
                                                                                                                 //Debug.Log(zDifference);
             Vector3 dir = transform.parent.position - attackTarget.transform.parent.position;
             Vector3 origin = attackTarget.transform.parent.right;
