@@ -31,8 +31,9 @@ public class ChargeAttack : MonoBehaviour {
     {
         if (playerWeapon)
         {
-            if (other.gameObject.GetComponent<Health>() && other.gameObject.tag == "Enemy")
+            if (other.gameObject.GetComponent<Health>() && (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Boss"))
             {
+                bool knockBack = true;
                 float dir = 0;
                 if (other.transform.position.x > parentObject.transform.position.x)
                 {
@@ -42,7 +43,11 @@ public class ChargeAttack : MonoBehaviour {
                 {
                     dir = -1;
                 }
-                other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, true, dir);
+
+                if (other.gameObject.tag == "Boss")
+                    knockBack = false;
+
+                other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, knockBack, dir);
                 StartCoroutine(endCharge);
             }
 

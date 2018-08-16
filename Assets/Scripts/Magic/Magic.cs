@@ -43,11 +43,7 @@ public class Magic : MonoBehaviour {
             {
                 enemy.transform.parent.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
 
-                bool knockback = true;
-                if (enemy.GetComponent<MOMovementController>().mounted)
-                    knockback = false;
-
-                enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevelMulitplier[magicLevel - 1]), knockback, 0);
+                enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevelMulitplier[magicLevel - 1]), false, 0);
                 enemy.GetComponent<MOMovementController>().freeze = true;
             }
 
@@ -200,6 +196,11 @@ public class Magic : MonoBehaviour {
             default:
                 break;
         }
+    }
+
+    private void MagicPhysics(float xdir, float ydir)
+    {
+
     }
 
     private Vector3 CameraToGround (GameObject caster)

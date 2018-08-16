@@ -86,10 +86,8 @@ public class AIController : MOMovementController
         
         // add steering for when there are other AI in the way
         float dist1 = Vector3.Distance(attackTarget.transform.position, enemy.transform.position);
-        float dist2 = Vector3.Distance(moveTarget.transform.position, enemy.transform.position);
-        //Debug.Log(dist);
         // Attack if enemy is close enough and roughly the same z position AND facing the player
-        if (dist1 < meleeAttackDistance)
+        if (dist1 < meleeAttackDistance && !attackTarget.GetComponent<MOMovementController>().knockedDownAnim)
         {
             //Debug.Log("Attacking");
             attack = true;
@@ -122,7 +120,7 @@ public class AIController : MOMovementController
         }
         else
         {
-            if (!stop)
+            if (!stop && !attackTarget.GetComponent<MOMovementController>().knockedDownAnim)
             {
                 // Prevent movement if an AI is too close
                 //if (!tooClose)

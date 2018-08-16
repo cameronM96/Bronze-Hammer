@@ -5,14 +5,18 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    public int health;
+    public float health;
+    private float maxHealth;
     public int bossHealth;
     private Animator m_Anim;
     private AudioSource m_Audio;
     [SerializeField] private AudioClip[] m_AudioClips;
     private bool dead = false;
     private MOMovementController m_characterController;
-    [SerializeField] private GameObject damageIndicator; 
+    [SerializeField] private GameObject damageIndicator;
+    private GameObject gameUI;
+    private GameObject bossUI;
+    private Image bossHealthUI;
 
     // Use this for initialization
     void Awake()
@@ -21,6 +25,21 @@ public class Health : MonoBehaviour
         if (gameObject.tag == "Boss")
         {
             bossHealth = 750;
+            maxHealth = bossHealth;
+            gameUI = GameObject.FindGameObjectWithTag("GameUI");
+            foreach (Transform t in gameUI.transform)
+            {
+                if (t.tag == "Boss UI")
+                {
+                    bossUI = t.gameObject;
+                }
+            }
+            if (bossUI != null)
+            {
+                bossUI.SetActive(true);
+                bossHealthUI = bossUI.transform.GetChild(1).GetChild(1).GetComponentInChildren<Image>();
+                bossHealthUI.fillAmount = 1;
+            }
         }
         else
         {
@@ -39,6 +58,7 @@ public class Health : MonoBehaviour
             indicator.transform.position = this.transform.position;
             indicator.transform.GetChild(0).GetChild(0).GetComponent<Text>().text = "" + damageTaken;
             indicator.transform.GetChild(0).GetChild(0).GetComponent<Text>().color = Color.yellow;
+            bossHealthUI.fillAmount = bossHealth / maxHealth;
 
             //update UI health
             if (bossHealth <= 0 && !dead)
