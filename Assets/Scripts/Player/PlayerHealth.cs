@@ -146,7 +146,6 @@ public class PlayerHealth : MonoBehaviour {
     IEnumerator FlashScreen(Color color)
     {
         hitIndicator.enabled = true;
-        color.a = 0.31f;
         hitIndicator.color = color;
         yield return new WaitForSeconds(0.4f);
         hitIndicator.enabled = false;
