@@ -1153,8 +1153,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -2291.6}
-  m_SizeDelta: {x: 0, y: 4583.2}
+  m_AnchoredPosition: {x: 0, y: -6096.7}
+  m_SizeDelta: {x: 0, y: 12193.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &820536581
 MonoBehaviour:
@@ -1190,21 +1190,57 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "\n\n\n\n~~~~~Bronze Hammer~~~~~\n\n\nCreated by \"Studio 181\"\n\n\n\n\n\n\n~~Programmers~~\n\nCameron
     Mullins\n\nMyles Okorn\n\n\n~~Designers~~\n\nStephen Cavaleri\n\nCameron Davis\n\nCharles
-    Lo Giudice\n\n\n~~Audio~~\n\nSound effects created with BFXR\n\nLevel themes created
-    with Beepbop.com\n\n\n\n~~Animations~~\n\nRetrieved from Adobe Mixamo\n\n\n\n~~Downloaded
-    Assets~~\n\n'Female scream' from halloween female scream | Sound Effect by crister
-    romeger\n\n'male scream 1' fromSound Effects - Death Screams 2 by DrGarkng\n\n',ale
-    scream 2' from Mortal Kombat by Midway \n\nMedieVox Cities FREE by [RANDOM ADJECTIVE]
-    STUDIOS\r\n\nMedieVox Farms FREE by [RANDOM ADJECTIVE] STUDIOS\r\n\nMedieVox Nature
-    FREE by [RANDOM ADJECTIVE] STUDIOS\r\n\n\u2018Pixel Font - Trip Five\u2019 by
-    PIXELMUSH\r\n\nHand Painted Stone Floor Pack by M-Assets\r\n\nPBR Cone Pack by
-    UCS\r\n\nHana Pixel Font by Mystery Corgi\r\n\nBubble Font (Free Version) by Jazz
-    Create Games\r\n\nMounts by Seri\u2019s voxel characters 01 - Dragon Free v1.0
-    by Daijiro Serizawa\n\r\nRPG Unitframes #1 - POWERFUL METAL by Wello Graphics\r\n\nSimple
+    Lo Giudice\n\n\n\n~~Member Attributions~~\n\n-Cameron Mullins-\n\nPlayer/Enemy
+    Animation Controller\n\nCity Guard 1 model\n\nCity Guard 2 model\n\nTown Guard
+    1 model\n\nTown Guard 2 model\n\nKnight 1 model\n\nKnight 2 model\n\nGame HUD
+    programming\n\nAll Weapons models\n\nPlayer Movement Script\n\nAI Controller Scripts\n\nMagic
+    System Scripts\n\nMount Controller\n\nEncounter Tool\n\nHUD Scripts\n\nMenu Scripts\n\nCamera
+    Controller Scripts and Prefabs\n\nCombat System Scripts\n\nCharacter Select Script\n\nKing
+    Boss UI\n\n\n-Myles Okorn-\n\nBronze Hammer Voxel Logo \n\nKing Boss AI\n\nKing
+    Boss Animation Controller 1 & 2\n\nKing Boss Animations and Edits\n\nMovement
+    Controller Script\n\n\n-Stephen Cavaleri-\n\nEstoc-Slasher Player model\n\nLilith-Spellshade
+    Player model\n\nCrag-Rockhand Player model\n\nTown Level\n\nTown Barrel Model\n\nTown
+    Castle Model\n\nTown Flower Garden Model\n\nCharacter Select Script\n\nCharacter
+    Select Scene\n\nCharacter Select Dungeon background\n\nCharacter Select Character
+    Stories\n\nCharacter Stat Images\n\nMain Menu Audio Theme\n\nCharacter Select
+    Audio Theme\n\nTransition Screen Audio Theme\n\nTown Level Audio Theme\n\nPlayer
+    Animation Controller\n\nEstoc Animations and edits\n\nLilith Animations and Edits\n\nCrag
+    Animations and Edits\n\nAll Player and Enemy (Except king) weapon animations\n\nEstoc
+    Transition Screen Text\n\nLilith Transition Screen Text\n\nCrag Transition Screen
+    Text\n\nTransition Screen Animations\n\nTown Level menu Image\n\nCredits Scene
+    \n\nDragon Fire Breath Particle System\n\nDragon Fire Ball Particle System\n\nLilith's
+    magic hand Particle System\n\nLilith's Pentagram Particle System\n\n\n-Cameron
+    Davis-\n\nVoxel Chicken\n\nEnemy Animations\n\nTransition Screen Map\n\nForest
+    Level\n\nForest Level Audio Theme\n\nFlashing Arrow to Continue\n\nAx Shrine\n\nGili
+    Shrine\n\nTyris Shrine\n\nBlue Bird Model\n\nRed Bird Model\n\nGreen Bird Model\n\nDeer
+    Model\n\nMain Menu Background Image\n\nForest Level Main Menu Image\n\nFallen
+    Log Model\n\nAll Menu Audio Sounds\n\nEstoc Magic Particle Effects 1,2,3\n\nLilith
+    Magic Particle Effects 1,2,3,4\n\nCrag Magic Particle Effects 1,2\n\nFlowing Water
+    Particle Effect\n\n\n-Charles Lo Giudice-\n\nCastle Ruins Level\n\nVoxel House
+    in Ruin level\n\nVoxel Pillar model (Full/Half)\n\nVoxel Archway model\n\nVoxel
+    Fance model (Full/Broken)\n\nPause Menu design\n\nRuins Level Audio Theme\n\nCastle
+    Ruins Main Menu Image\n\n\n\n~~Audio~~\n\nSound effects created with BFXR\n\nLevel
+    themes created with www.Beepbox.co/\n\n'Female scream' from halloween female scream
+    | Sound Effect by crister romeger\n\n'male scream 1' fromSound Effects - Death
+    Screams 2 by DrGarkng\n\n'male scream 2' from Mortal Kombat by Midway \n\n'Dragon
+    Roar Audio' by frasbr - https://freesound.org/people/frasbr/sounds/145729/\n\n'Fire
+    Breathing Dragon' by CGEffex - https://freesound.org/people/CGEffex/sounds/94102/\n\n'Blunt
+    Force Impact' by jgriffie919 - https://freesound.org/people/jgriffie919/sounds/400176/\n\n'Fire
+    Ball Cast' by LiamG_SFX - https://freesound.org/people/LiamG_SFX/sounds/334234/\n\n'Fireball
+    Explosion' by Highpixel - https://freesound.org/people/HighPixel/sounds/431174/\n\n'Strong
+    Melee Swing' by SypherZent - https://freesound.org/people/SypherZent/sounds/420670/\n\n'SFXWalkGround3'
+    by dkiller2204 - https://freesound.org/people/dkiller2204/sounds/422980/\n\n\n\n~~Animations~~\n\nRetrieved
+    from Adobe Mixamo\n\n\n\n~~Downloaded Assets~~\n\nMedieVox Cities FREE by [RANDOM
+    ADJECTIVE] STUDIOS\r\n\nMedieVox Farms FREE by [RANDOM ADJECTIVE] STUDIOS\r\n\nMedieVox
+    Nature FREE by [RANDOM ADJECTIVE] STUDIOS\r\n\n\u2018Pixel Font - Trip Five\u2019
+    by PIXELMUSH\r\n\nHand Painted Stone Floor Pack by M-Assets\r\n\nPBR Cone Pack
+    by UCS\r\n\nHana Pixel Font by Mystery Corgi\r\n\nBubble Font (Free Version) by
+    Jazz Create Games\r\n\nMounts by Seri\u2019s voxel characters 01 - Dragon Free
+    v1.0 by Daijiro Serizawa\n\r\nRPG Unitframes #1 - POWERFUL METAL by Wello Graphics\r\n\nSimple
     FX - Cartoon Particles by Synty Studios\r\n\nVoxel - Dungeon Pack v 1.0 by 3D.RINA\r\n\nVoxel
     Series - Dungeon Set by GIGA_STEVE\r\n\nVoxel Effects - Lightning by Swift Games\r\n\nSimple
     Smoke Set by Enjoy Life\r\n\nTextMesh Pro by Unity Technologies\r\n\nSkybox Series
-    Free by Avionx\r\n\n\n~~Images Used~~\n\nSemiDeadForestFloorTexture - https://www.google.com.au/search?biw=1366&bih=673&tbm=isch&sa=1&ei=hDlwW6zdKIv-8gW994PwBA&q=dead+forest+floor+texture&oq=dead+forest+floor+texture&gs_l=img.3...2534.3736.0.3918.8.7.0.0.0.0.211.402.0j1j1.2.0....0...1c.1.64.img..6.1.191...0i30k1j0i8i30k1.0.5n2xkMPuz7E#imgdii=fl6ee1j2VhDvwM:&imgrc=cfYInKaLhBJa8M:\n\nForest
+    Free by Avionx\r\n\n\n\n~~Images Used~~\n\nSemiDeadForestFloorTexture - https://www.google.com.au/search?biw=1366&bih=673&tbm=isch&sa=1&ei=hDlwW6zdKIv-8gW994PwBA&q=dead+forest+floor+texture&oq=dead+forest+floor+texture&gs_l=img.3...2534.3736.0.3918.8.7.0.0.0.0.211.402.0j1j1.2.0....0...1c.1.64.img..6.1.191...0i30k1j0i8i30k1.0.5n2xkMPuz7E#imgdii=fl6ee1j2VhDvwM:&imgrc=cfYInKaLhBJa8M:\n\nForest
     Floor Texture - https://www.deviantart.com/bouvs/art/forest-floor-texture-626901754\n\nStone
     Forest Floor Texture - https://www.textures.com/system/gallery/photos/Floors/Regular/37026/FloorsRegular0181_1_download600.jpg\n\nPixel
     Grass - https://dtkp6g0samjql.cloudfront.net/uploads/photo/file/12539923/gallery_hero_40a17d97-5aad-46b1-8a67-6778890fa19a.jpg\n\nWater
@@ -1560,7 +1596,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 424445766}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.078531526
+  m_Size: 0.031039419
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
