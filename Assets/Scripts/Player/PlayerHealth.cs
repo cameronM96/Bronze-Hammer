@@ -138,7 +138,7 @@ public class PlayerHealth : MonoBehaviour {
             {
                 m_characterController.knockedDownAnim = true;
                 m_characterController.knockback = true;
-                m_characterController.knockbackDir = dir;
+                m_characterController.knockbackxDir = dir;
             }
         }
     }

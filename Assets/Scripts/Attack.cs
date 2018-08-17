@@ -59,21 +59,21 @@ public class Attack : MonoBehaviour
                         //Debug.Log("Dir = " + dir);
                         if (crag)
                         {
-                            other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier * 2, true, dir);
+                            other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier * 2, true, dir, 0);
                         }
                         else
                         {
-                            other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier, true, dir);
+                            other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier, true, dir, 0);
                         }
                         //Debug.Log("Target should have been knocked back");
                     }
                     else if (crag && attack2)
                     {
-                        other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier, false, 0);
+                        other.gameObject.GetComponent<Health>().TakeDamage(attackDamage * comboMultiplier, false, 0, 0);
                     }
                     else
                     {
-                        other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, false, 0);
+                        other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, false, 0, 0);
                         // Debug.Log(gameObject.transform.parent.name + " Hit the " + other.gameObject.name + " for " + attackDamage);
                     }
                 }

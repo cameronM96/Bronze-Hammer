@@ -24,7 +24,8 @@ public class MOMovementController : MonoBehaviour
     [HideInInspector] public bool castingMagic = false;             // Check if character is casting magic
     [HideInInspector] public bool charging = false;                 // Check if character is charging
     [HideInInspector] public bool knockback = false;                // Knocks the player back in fixedUpdate
-    [HideInInspector] public float knockbackDir = 0f;               // Determines direction the character should be knocked back.
+    [HideInInspector] public float knockbackxDir = 0f;               // Determines direction the character should be knocked back along x axis.
+    [HideInInspector] public float knockbackzDir = 0f;               // Determines direction the character should be knocked back along z axis.
 
     [HideInInspector] public bool mounted = false;          // Redirects animations to mount
     [HideInInspector] public GameObject mount;              // The mount gameobject
@@ -249,8 +250,9 @@ public class MOMovementController : MonoBehaviour
         // Execute Knockback mechanic
         if (knockback)
         {
-            KnockBack(knockbackDir);
-            knockbackDir = 0;
+            KnockBack(knockbackxDir, knockbackzDir);
+            knockbackxDir = 0;
+            knockbackzDir = 0;
             knockback = false;
         }
     }
@@ -524,7 +526,7 @@ public class MOMovementController : MonoBehaviour
         m_Rigidbody.velocity = new Vector3(mov * speed * 2, m_Rigidbody.velocity.y, m_Rigidbody.velocity.z);
     }
 
-    private void KnockBack(float dir)
+    private void KnockBack(float xdir, float zdir)
     {
         // Knock back mechanic which sends this character flying backwards
         //Debug.Log("Knockback enabled");
@@ -540,7 +542,7 @@ public class MOMovementController : MonoBehaviour
         DisMount();
 
         // Actually knockback enemy
-        m_Rigidbody.velocity = new Vector3((dir * 15), 10, 0);
+        m_Rigidbody.velocity = new Vector3((xdir * 15), 10, (zdir * 15));
     }
 
     public void DisMount()

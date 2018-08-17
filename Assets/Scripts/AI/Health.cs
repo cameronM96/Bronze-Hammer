@@ -24,7 +24,6 @@ public class Health : MonoBehaviour
         m_characterController = GetComponent<MOMovementController>();
         if (gameObject.tag == "Boss")
         {
-            bossHealth = 750;
             maxHealth = bossHealth;
             gameUI = GameObject.FindGameObjectWithTag("GameUI");
             foreach (Transform t in gameUI.transform)
@@ -41,15 +40,12 @@ public class Health : MonoBehaviour
                 bossHealthUI.fillAmount = 1;
             }
         }
-        else
-        {
-            health = 100;
-        }
+
         m_Anim = GetComponent<Animator>();
         m_Audio = GetComponent<AudioSource>();
     }
 
-    public void TakeDamage(int damageTaken, bool knockBack, float dir)
+    public void TakeDamage(int damageTaken, bool knockBack, float xdir, float zdir)
     {
         if (gameObject.tag == "Boss")
         {
@@ -106,7 +102,8 @@ public class Health : MonoBehaviour
                     //Debug.Log("Knocking back target");
                     m_characterController.knockedDownAnim = true;
                     m_characterController.knockback = true;
-                    m_characterController.knockbackDir = dir;
+                    m_characterController.knockbackxDir = xdir;
+                    m_characterController.knockbackzDir = zdir;
                 }
             }
         }

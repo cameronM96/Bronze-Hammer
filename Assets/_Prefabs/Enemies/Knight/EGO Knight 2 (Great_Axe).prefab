@@ -1298,6 +1298,7 @@ MonoBehaviour:
   attack3: 0
   attack2: 0
   m_Audio: {fileID: 0}
+  hitObjects: []
 --- !u!114 &114498473023429224
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1309,7 +1310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de2d4a4418ccf3246b3e3acb0198a296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 200
+  health: 180
   bossHealth: 0
   m_AudioClips:
   - {fileID: 8300000, guid: 2eeac90e5e0d22142931102c2e73df21, type: 3}
@@ -1340,7 +1341,8 @@ MonoBehaviour:
   castingMagic: 0
   charging: 0
   knockback: 0
-  knockbackDir: 0
+  knockbackxDir: 0
+  knockbackzDir: 0
   mounted: 0
   mount: {fileID: 0}
   m_GroundCheck: {fileID: 4346996796880948}

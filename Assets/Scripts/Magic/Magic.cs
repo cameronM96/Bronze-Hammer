@@ -25,39 +25,17 @@ public class Magic : MonoBehaviour {
         
         if (enemies != null || boss != null)
         {
-            // Deal damage to all enemies and freeze them for the duration of the spell
-            foreach (GameObject enemy in enemies)
-            {
-                enemy.transform.parent.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-
-                bool knockback = true;
-                if (enemy.GetComponent<MOMovementController>().mounted)
-                    knockback = false;
-
-                enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevelMulitplier[magicLevel - 1]), knockback, 0);
-                enemy.GetComponent<MOMovementController>().freeze = true;
-            }
-
-            // Deal damage to all bosses and freeze them for the duration of the spell
-            foreach (GameObject enemy in boss)
-            {
-                enemy.transform.parent.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-
-                enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevelMulitplier[magicLevel - 1]), false, 0);
-                enemy.GetComponent<MOMovementController>().freeze = true;
-            }
-
             switch (player)
             {
                 // Determine which character casted the magic
                 case PlayerCharacters.Estoc:
-                    EstocMagic(magicLevel, caster);
+                    EstocMagic(magicLevel, caster, magicDamage);
                     break;
                 case PlayerCharacters.Lilith:
-                    LilithMagic(magicLevel, caster);
+                    LilithMagic(magicLevel, caster, magicDamage);
                     break;
                 case PlayerCharacters.Crag:
-                    CragMagic(magicLevel, caster);
+                    CragMagic(magicLevel, caster, magicDamage);
                     break;
                 default:
                     break;
@@ -88,8 +66,52 @@ public class Magic : MonoBehaviour {
         }
     }
 
+    private void DealDamage (float magicDamage, int magicLevel, float xdir, float zdir)
+    {
+        // Deal damage to all enemies and freeze them for the duration of the spell
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevelMulitplier[magicLevel - 1]), true, xdir, zdir);
+            enemy.GetComponent<MOMovementController>().freeze = true;
+        }
+
+        // Deal damage to all bosses and freeze them for the duration of the spell
+        foreach (GameObject enemy in boss)
+        {
+            enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevelMulitplier[magicLevel - 1]), true, 0, 0);
+            enemy.GetComponent<MOMovementController>().freeze = true;
+        }
+    }
+
+    private void EstocLevel3Tornado (GameObject tornado)
+    {
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.GetComponentInParent<Rigidbody>().isKinematic = true;
+            enemy.GetComponent<Collider>().enabled = false;
+            float closestDist = 99999f;
+            Transform target = null;
+            foreach (Transform child in tornado.transform.GetChild(1))
+            {
+                float dist = Vector3.Distance(enemy.transform.position, child.position);
+                if (dist < closestDist)
+                {
+                    closestDist = dist;
+                    target = child;
+                }
+            }
+            enemy.transform.parent.parent = target;
+        }
+    }
+
+    private void CragLevel2Damage (GameObject enemy, float magicDamage, int magicLevel, float xdir, float zdir)
+    {
+        enemy.GetComponent<Health>().TakeDamage(Mathf.RoundToInt(magicDamage * magicLevelMulitplier[magicLevel - 1]), true, xdir, zdir);
+        enemy.GetComponent<MOMovementController>().freeze = true;
+    }
+
     // Estoc's spells
-    private void EstocMagic(int magicLevel, GameObject caster)
+    private void EstocMagic(int magicLevel, GameObject caster, float magicDamage)
     {
         switch (magicLevel)
         {
@@ -110,6 +132,7 @@ public class Magic : MonoBehaviour {
                 }
                 //magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
                 //magicEffect.transform.parent = null;
+                DealDamage(magicDamage, magicLevel, 0, 0);
                 StartCoroutine(cameraShake.Shake(5f, .1f));
                 break;
             case 2:
@@ -118,6 +141,7 @@ public class Magic : MonoBehaviour {
                 magicEffect.transform.parent = null;
                 magicEffect.transform.position = CameraToGround(caster);
                 StartCoroutine(cameraShake.Shake(5f, .2f));
+                DealDamage(magicDamage, magicLevel, 0, 0);
                 break;
             case 3:
                 // Crete Level 3 spell visuals (Centre 1)
@@ -125,6 +149,8 @@ public class Magic : MonoBehaviour {
                 magicEffect.transform.parent = null;
                 magicEffect.transform.position = CameraToGround(caster);
                 StartCoroutine(cameraShake.Shake(5f, .4f));
+                DealDamage(magicDamage, magicLevel, 0, 0);
+                EstocLevel3Tornado(magicEffect);
                 break;
             default:
                 break;
@@ -132,7 +158,7 @@ public class Magic : MonoBehaviour {
     }
 
     // Lilith's spells
-    private void LilithMagic(int magicLevel, GameObject caster)
+    private void LilithMagic(int magicLevel, GameObject caster, float magicDamage)
     {
         switch (magicLevel)
         {
@@ -149,6 +175,7 @@ public class Magic : MonoBehaviour {
                     magicEffect.transform.parent = null;
                     enemy.transform.parent.GetComponent<Rigidbody>().velocity = Vector3.up * 30;
                 }
+                DealDamage(magicDamage, magicLevel, 0, 0);
                 StartCoroutine(cameraShake.Shake(5f, .1f));
                 break;
             case 2:
@@ -156,6 +183,7 @@ public class Magic : MonoBehaviour {
                 magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
                 magicEffect.transform.parent = null;
                 StartCoroutine(cameraShake.Shake(5f, .2f));
+                DealDamage(magicDamage, magicLevel, 0, 0);
                 break;
             case 3:
                 // Crete Level 2 spell visuals (Centre)
@@ -163,6 +191,7 @@ public class Magic : MonoBehaviour {
                 magicEffect.transform.parent = null;
                 magicEffect.transform.position = CameraToGround(caster);
                 StartCoroutine(cameraShake.Shake(5f, .4f));
+                DealDamage(magicDamage, magicLevel, 0, 0);
                 break;
             case 4:
                 // Crete Level 2 spell visuals (Centre)
@@ -170,6 +199,7 @@ public class Magic : MonoBehaviour {
                 magicEffect.transform.parent = null;
                 magicEffect.transform.position = CameraToGround(caster);
                 StartCoroutine(cameraShake.Shake(5f, .6f));
+                DealDamage(magicDamage, magicLevel, 0, 0);
                 break;
             default:
                 break;
@@ -177,30 +207,47 @@ public class Magic : MonoBehaviour {
     }
 
     // Crag's spells
-    private void CragMagic(int magicLevel, GameObject caster)
+    private void CragMagic(int magicLevel, GameObject caster, float magicDamage)
     {
         switch (magicLevel)
         {
             case 1:
                 // Crete Level 1 spell visuals (on Player)
-                magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
                 magicEffect.transform.parent = null;
+                magicEffect.transform.position = caster.transform.position;
+                magicEffect.transform.localScale *= 2;
                 StartCoroutine(cameraShake.Shake(5f, .2f));
+                DealDamage(magicDamage, magicLevel, 0, 0);
                 break;
             case 2:
                 // Crete Level 1 spell visuals (on Player)
-                magicEffect = Instantiate(magicVisuals[magicLevel - 1], caster.transform);
+                magicEffect = Instantiate(magicVisuals[magicLevel - 1]);
                 magicEffect.transform.parent = null;
+                magicEffect.transform.position = caster.transform.position;
+                magicEffect.transform.localScale *= 2;
                 StartCoroutine(cameraShake.Shake(5f, .5f));
+                foreach (GameObject enemy in enemies)
+                {
+                    float dir = 0;
+                    if (enemy.transform.parent.position.x > transform.parent.position.x)
+                    {
+                        dir = 1;
+                    }
+                    else
+                    {
+                        dir = -1;
+                    }
+                    CragLevel2Damage(enemy, magicDamage, magicLevel, dir, 0);
+                }
+                foreach (GameObject enemy in boss)
+                {
+                    CragLevel2Damage(enemy, magicDamage, magicLevel, 0, 0);
+                }
                 break;
             default:
                 break;
         }
-    }
-
-    private void MagicPhysics(float xdir, float ydir)
-    {
-
     }
 
     private Vector3 CameraToGround (GameObject caster)

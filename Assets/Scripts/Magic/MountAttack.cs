@@ -25,7 +25,7 @@ public class MountAttack : MonoBehaviour {
                     dir = -1;
                 }
 
-                other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, true, dir);
+                other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, true, dir, 0);
                 // Debug.Log(gameObject.transform.parent.name + " Hit the " + other.gameObject.name + " for " + attackDamage);
             }
 

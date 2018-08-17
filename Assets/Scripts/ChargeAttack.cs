@@ -47,7 +47,7 @@ public class ChargeAttack : MonoBehaviour {
                 if (other.gameObject.tag == "Boss")
                     knockBack = false;
 
-                other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, knockBack, dir);
+                other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, knockBack, dir, 0);
                 StartCoroutine(endCharge);
             }
 

@@ -50,7 +50,7 @@ public class Projectile : MonoBehaviour {
             }
 
             // Deal damage and knock back target
-            other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, true, dir);
+            other.gameObject.GetComponent<Health>().TakeDamage(attackDamage, true, dir, 0);
             DestroySelf();
         }
 

@@ -10,7 +10,7 @@ public class OutOfMapTrigger : MonoBehaviour {
     {
         if (other.tag == "Enemy")
         {
-            other.gameObject.GetComponent<Health>().TakeDamage(damage, false, 0);
+            other.gameObject.GetComponent<Health>().TakeDamage(damage, false, 0, 0);
         }
 
         if (other.tag == "Player")
