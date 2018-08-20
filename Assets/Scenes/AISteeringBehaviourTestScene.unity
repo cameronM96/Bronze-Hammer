@@ -1073,7 +1073,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 614981006}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.9, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1784,7 +1784,7 @@ MonoBehaviour:
   avoidStrength: {fileID: 205730134}
   resetButton: {fileID: 998596193}
   viewArrows: 0
-  moveArrows: 0
+  moveArrows: 1
   randomizeBehaviour: 0
   smoothAvoid: 0
   flowField: {fileID: 1422292777}
@@ -3049,7 +3049,7 @@ Prefab:
     - target: {fileID: 114707032800666958, guid: 8b232388dcfcd0c4295f31737288ada8,
         type: 2}
       propertyPath: onButtonDown
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8b232388dcfcd0c4295f31737288ada8, type: 2}
