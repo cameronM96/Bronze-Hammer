@@ -41,12 +41,16 @@ public class Vehicle : MonoBehaviour {
     [SerializeField] private GameObject moveTarget;
     [HideInInspector] public bool rightSide;
 
+    Flock flockManager;
+
 	// Use this for initialization
 	void Awake ()
     {
         rb = GetComponent<Rigidbody>();
         attackTarget = GameObject.FindGameObjectWithTag("MousePoint");
         flow = GameObject.FindGameObjectWithTag("FlowField").GetComponent<FlowField>();
+        flockManager = GameObject.FindGameObjectWithTag("FlockManager").GetComponent<Flock>();
+        flockManager.AddBoid(this);
 
         seekStrength = 0f;
         fleeStrength = 0f;
@@ -302,10 +306,7 @@ public class Vehicle : MonoBehaviour {
             float d = Vector3.Distance(transform.position, v.transform.position);
             if ((d > 0) && (d < desiredSeparation))
             {
-                Vector3 diff = v.transform.position -  transform.position;
-                diff.Normalize();
-                diff /= d;
-                sum += diff;
+                sum += v.transform.position;
                 count++;
             }
         }
@@ -313,23 +314,30 @@ public class Vehicle : MonoBehaviour {
         if (count > 0)
         {
             sum /= count;
-            sum.Normalize();
-            sum *= maxspeed;
-
-            Vector3 steer = sum - velocity;
-
-            if (steer.magnitude > maxforce)
-            {
-                steer.Normalize();
-                steer *= maxforce;
-            }
-            steer.y = 0;
-            return steer;
+            return Seek1(sum);
         }
         else
         {
             return new Vector3(0, 0, 0);
         }
+    }
+
+    private Vector3 Seek1(Vector3 target)
+    {
+        Vector3 desired = target - transform.position;
+        desired.Normalize();
+        desired *= maxspeed;
+
+        Vector3 steer = desired - velocity;
+        if (steer.magnitude > maxforce)
+        {
+            steer.Normalize();
+            steer *= maxforce;
+        }
+
+        //Debug.Log("Seek: " + steer);
+        return steer;                           // Using our physics model and applying the force to the
+                                                // Object's acceleration.
     }
 
     private Vector3 Follow(FlowField flow)
@@ -401,6 +409,57 @@ public class Vehicle : MonoBehaviour {
         else
         {
             return Vector3.zero;
+        }
+    }
+
+    public void Flock(List<Vehicle> vehicles)
+    {
+        Vector3 sep = Separate(vehicles);
+        Vector3 ali = Align(vehicles);
+        Vector3 coh = Cohesion(vehicles);
+
+        sep *= 1.5f;
+        ali *= 1.0f;
+        coh *= 1.0f;
+
+        ApplyForce(sep);
+        ApplyForce(ali);
+        ApplyForce(coh);
+    }
+
+    Vector3 Align(List<Vehicle> vehicles)
+    {
+        float neightbordist = 15f;
+        Vector3 sum = new Vector3(0, 0);
+        int count = 0;
+        foreach (Vehicle boid in vehicles)
+        {
+            float d = Vector3.Distance(transform.position, boid.transform.position);
+            if ((d > 0) && (d < neightbordist))
+            {
+                sum += boid.velocity;
+                count++;
+            }
+        }
+
+        if (count > 0)
+        {
+            sum /= count;
+            sum.Normalize();
+            sum *= maxspeed;
+
+            Vector3 steer = sum - velocity;
+            if (steer.magnitude > maxforce)
+            {
+                steer.Normalize();
+                steer *= maxforce;
+            }
+            steer.y = 0;
+
+            return steer;
+        } else
+        {
+            return new Vector3(0, 0, 0);
         }
     }
     
